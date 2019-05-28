@@ -1,7 +1,7 @@
 <template>
    <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
       <div class="container-fluid">
-        <div class="d-flex align-items-center"><a href="index.html" class="navbar-brand py-1"><img src="img/logo.svg" alt="Directory logo"></a>
+        <div class="d-flex align-items-center"><a href="index.html" class="navbar-brand py-1"><img src="../assets/img/logo.svg" alt="Directory logo"></a>
           <form action="#" id="search" class="form-inline d-none d-sm-flex">
             <div class="input-label-absolute input-label-absolute-left input-reset input-expand ml-lg-2 ml-xl-3"> 
               <label for="search_search" class="label-absolute"><i class="fa fa-search"></i><span class="sr-only">What are you looking for?</span></label>
