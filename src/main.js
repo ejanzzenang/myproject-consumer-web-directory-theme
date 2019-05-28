@@ -1,45 +1,38 @@
 import Vue from 'vue'
 import App from './App.vue'
+import LoadScript from 'vue-plugin-load-script';
 
+Vue.use(LoadScript);
+
+// bootstrap
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// import 'bootstrap-select'
-// import 'core-js'
-// import 'jquery'
-// import 'leaflet'
-// import 'magnific-popup'
-// import 'nouislider'
-// import 'object-fit-images'
-// import 'popper.js'
-// import 'prismjs'
-// import 'smooth-scroll'
-// import 'swiper'
+// css
+require('@/assets/vendor/nouislider/nouislider.css')
+require('@/assets/vendor/magnific-popup/magnific-popup.css')
+require('@/assets/css/style.default.css')
+require('@/assets/css/custom.css')
+require('@/assets/img/favicon.png')
 
-// import Bootstrap from 'bootstrap'
-// import BootstrapSelect from 'bootstrap-select'
-// import CoreJS from 'core-js'
-// import jQuery from 'jquery'
-// import Leaflet from 'leaflet'
-// import Magnific from 'magnific-popup'
-// import Nouslider from 'nouislider'
-// import ObjectFit from 'object-fit-images'
-// import Popper from 'popper.js'
-// import Prism from 'prismjs'
-// import SmoothScroll from 'smooth-scroll'
-// import Swiper from 'swiper'
+/* eslint-disable */
+// As a global method
 
-// Vue.use(Bootstrap)
-// Vue.use(BootstrapSelect)
-// Vue.use(CoreJS)
-// Vue.use(jQuery)
-// Vue.use(Leaflet)
-// Vue.use(Magnific)
-// Vue.use(Nouslider)
-// Vue.use(ObjectFit)
-// Vue.use(Prism)
-// Vue.use(SmoothScroll)
-// Vue.use(Swiper)
+Vue.loadScript("https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js")
+.then(() => {
+    require("@/assets/vendor/object-fit-images/ofi.min.js")
+    require("@/assets/vendor/bootstrap/js/bootstrap.bundle.min.js")
+    require("@/assets/vendor/magnific-popup/jquery.magnific-popup.min.js")
+    require("@/assets/vendor/smooth-scroll/smooth-scroll.polyfills.min.js")
+    require("@/assets/vendor/bootstrap-select/js/bootstrap-select.min.js")
+    require("@/assets/js/theme.js")
+})
+.then(() => {
+    require("@/assets/vendor/jquery/jquery.min.js")
+})
+.catch(() => {
+  // Failed to fetch script
+});
 
 
 import router from './router'
