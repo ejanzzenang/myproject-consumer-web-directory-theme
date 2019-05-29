@@ -1,7 +1,7 @@
 <template>
    <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
       <div class="container-fluid">
-        <div class="d-flex align-items-center"><a href="index.html" class="navbar-brand py-1"><img src="../assets/img/logo.svg" alt="Directory logo"></a>
+        <div class="d-flex align-items-center"><a href="/" class="navbar-brand py-1"><img src="../assets/img/logo.svg" alt="Directory logo"></a>
           <form action="#" id="search" class="form-inline d-none d-sm-flex">
             <div class="input-label-absolute input-label-absolute-left input-reset input-expand ml-lg-2 ml-xl-3"> 
               <label for="search_search" class="label-absolute"><i class="fa fa-search"></i><span class="sr-only">What are you looking for?</span></label>
@@ -21,7 +21,7 @@
             </div>
           </form>
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown"><a id="homeDropdownMenuLink" href="index.html" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle active">
+            <li class="nav-item dropdown"><a id="homeDropdownMenuLink" href="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle active">
                  
                 Home</a>
               <div aria-labelledby="homeDropdownMenuLink" class="dropdown-menu"><a href="index.html" class="dropdown-item">Rooms</a><a href="index-2.html" class="dropdown-item">Restaurants</a></div>
@@ -79,8 +79,8 @@
                         <!-- Megamenu list-->
                         <h6 class="text-uppercase">User</h6>
                         <ul class="megamenu-list list-unstyled">
-                          <li class="megamenu-list-item"><a href="login.html" class="megamenu-list-link">Sign in   </a></li>
-                          <li class="megamenu-list-item"><a href="signup.html" class="megamenu-list-link">Sign up   </a></li>
+                          <li class="megamenu-list-item"><a href="/login" class="megamenu-list-link">Sign in   </a></li>
+                          <li class="megamenu-list-item"><a href="/signup" class="megamenu-list-link">Sign up   </a></li>
                           <li class="megamenu-list-item"><a href="user-booking-1.html" class="megamenu-list-link">Booking process - 4 pages <span class="badge badge-warning ml-1">New</span>   </a></li>
                           <li class="megamenu-list-item"><a href="user-grid.html" class="megamenu-list-link">Bookings &mdash; grid view <span class="badge badge-warning ml-1">New</span>   </a></li>
                           <li class="megamenu-list-item"><a href="user-booking-detail.html" class="megamenu-list-link">Booking detail <span class="badge badge-warning ml-1">New</span>   </a></li>
@@ -156,13 +156,11 @@
                 <h6 class="dropdown-header font-weight-normal">Components</h6><a href="docs/components-bootstrap.html" class="dropdown-item">Bootstrap </a><a href="docs/components-directory.html" class="dropdown-item">Theme </a>
               </div>
             </li>
-            <li class="nav-item"><a href="login.html" class="nav-link">Sign in</a></li>
-            <li class="nav-item"><a href="signup.html" class="nav-link">Sign up</a></li>
+            <li class="nav-item"><a href="/login" class="nav-link">Sign in</a></li>
+            <li class="nav-item"><a href="/signup" class="nav-link">Sign up</a></li>
             <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block"><a href="user-add-0.html" class="btn btn-primary">Add a listing</a></li>
           </ul>
         </div>
       </div>
     </nav>  
-
-
 </template>
