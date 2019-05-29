@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Navigation/>
+    <div class="navbar-margin"></div>
     <router-view/>
   </div>
 </template>
@@ -20,7 +21,10 @@ export default {
 
 <style type="text/css">
   #app {
-    text-align: center;
+    /*text-align: center;*/
+  }
+  .navbar-margin {
+    margin-bottom: 50px;
   }
 
   /*extra css*/
