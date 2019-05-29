@@ -1,18 +1,18 @@
 <template>
   <div class="home">
 
-    <Landing/>
+    <SearchBar/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Landing from '@/components/LandingPage.vue'
+import SearchBar from '@/components/SearchBar.vue'
 
 export default {
   name: 'home',
   components: {
-    Landing
+    SearchBar
   }
 }
 
