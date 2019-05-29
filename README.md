@@ -1,3 +1,4 @@
+
 # Set up Vue.js Frontend using a Theme
 ## Prerequsites
 
@@ -67,11 +68,8 @@ $ git push origin master
 ### Step 1.5: Test Vue Application Locally
 ```
 $ cd ~/environment/myproject-consumer-web
-$ npm run dev
+$ npm run serve
 ```
-You should see the following
-![](vue.png)
-
 
 ## Step 2: Setup Web Template (Bootstrap 4 - Directory Template)
 
@@ -79,7 +77,7 @@ You should see the following
 
 Install dependencies:
 
-In `myproject-consumer-web` add the following files into `package.json`
+In `myproject-consumer-web` add the following dependencies into `package.json`
 
 ```json
   "dependencies": {
@@ -103,7 +101,12 @@ $ npm install
 In `myproject-vuejs-web/src/main.js` add the following lines of code: 
 
 ```js
+/* eslint-disable */
+
+import Vue from 'vue'
+import App from './App.vue'
 import LoadScript from 'vue-plugin-load-script';
+
 Vue.use(LoadScript);
 
 // bootstrap
@@ -117,7 +120,6 @@ require('@/assets/css/style.default.css')
 require('@/assets/css/custom.css')
 require('@/assets/img/favicon.png')
 
-/* eslint-disable */
 // As a global method
 
 Vue.loadScript("https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js")
@@ -135,8 +137,6 @@ Vue.loadScript("https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.mi
 .catch(() => {
   // Failed to fetch script
 });
-....
-
 ```
 
 Final Version of `main.js`:
@@ -188,7 +188,7 @@ new Vue({
 }).$mount('#app')
 ```
 
-### Step 2.3: Import css dependencies to `App.vue`
+### Step 2.3: Import CSS dependencies to `App.vue`
 
 Add the following stylesheet imports inside the `<style>` tag of `App.vue`
 ```css
@@ -205,13 +205,21 @@ Final version of `App.vue`:
 ```html
 <template>
   <div id="app">
+    <Navigation/>
     <router-view/>
   </div>
 </template>
 
 <script type="text/javascript">
   // @ is an alias to /src
+import Navigation from '@/components/Navigation.vue'
 
+export default {
+  name: 'home',
+  components: {
+    Navigation
+  }
+}
 </script>
 
 
@@ -443,7 +451,58 @@ Add the following code in `Navigation.vue`:
     </nav>  
 </template>
 ```
-### Step 3.3: Test home page
+
+
+### Step 3.3: Add Navbar Margin
+Add the following under `<Navigation>` tag in  `App.vue`
+```html
+<div class="navbar-margin"></div>
+```
+Add the following code inside the `<style>` tag of `App.vue`
+```css
+ .navbar-margin {
+     margin-bottom: 50px;
+ }
+
+```
+Final Version of `App.vue`
+```html
+<template>
+  <div id="app">
+    <Navigation/>
+    <div class="navbar-margin"></div>
+    <router-view/>
+  </div>
+</template>
+
+<script type="text/javascript">
+  // @ is an alias to /src
+import Navigation from '@/components/Navigation.vue'
+
+export default {
+  name: 'home',
+  components: {
+    Navigation
+  }
+}
+</script>
+
+
+<style type="text/css">
+  .navbar-margin {
+    margin-bottom: 50px;
+  }
+
+  /*extra css*/
+  @import "https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700";
+  @import "https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700";
+  @import "https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css";
+  @import "https://use.fontawesome.com/releases/v5.8.1/css/all.css";
+
+</style>
+```
+
+### Step 3.4: Test current page
 
 In your browser, go to:  
 ```
@@ -453,6 +512,8 @@ You should see the ff:
 ![](home.png)
 
 ## Step 5: Set up Home Page
+
+### Step 5.1: Search Bar Component
 
 ## Step 6: Set up Login Page
 
