@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import Vue from 'vue'
 import App from './App.vue'
 import LoadScript from 'vue-plugin-load-script';
@@ -15,7 +17,6 @@ require('@/assets/css/style.default.css')
 require('@/assets/css/custom.css')
 require('@/assets/img/favicon.png')
 
-/* eslint-disable */
 // As a global method
 
 Vue.loadScript("https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js")
