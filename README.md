@@ -279,7 +279,7 @@ Add the following code in `Navigation.vue`:
 <template>
    <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
       <div class="container-fluid">
-        <div class="d-flex align-items-center"><a href="index.html" class="navbar-brand py-1"><img src="../assets/img/logo.svg" alt="Directory logo"></a>
+        <div class="d-flex align-items-center"><a href="/" class="navbar-brand py-1"><img src="../assets/img/logo.svg" alt="Directory logo"></a>
           <form action="#" id="search" class="form-inline d-none d-sm-flex">
             <div class="input-label-absolute input-label-absolute-left input-reset input-expand ml-lg-2 ml-xl-3"> 
               <label for="search_search" class="label-absolute"><i class="fa fa-search"></i><span class="sr-only">What are you looking for?</span></label>
@@ -299,7 +299,7 @@ Add the following code in `Navigation.vue`:
             </div>
           </form>
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown"><a id="homeDropdownMenuLink" href="index.html" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle active">
+            <li class="nav-item dropdown"><a id="homeDropdownMenuLink" href="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle active">
                  
                 Home</a>
               <div aria-labelledby="homeDropdownMenuLink" class="dropdown-menu"><a href="index.html" class="dropdown-item">Rooms</a><a href="index-2.html" class="dropdown-item">Restaurants</a></div>
@@ -357,8 +357,8 @@ Add the following code in `Navigation.vue`:
                         <!-- Megamenu list-->
                         <h6 class="text-uppercase">User</h6>
                         <ul class="megamenu-list list-unstyled">
-                          <li class="megamenu-list-item"><a href="login.html" class="megamenu-list-link">Sign in   </a></li>
-                          <li class="megamenu-list-item"><a href="signup.html" class="megamenu-list-link">Sign up   </a></li>
+                          <li class="megamenu-list-item"><a href="/login" class="megamenu-list-link">Sign in   </a></li>
+                          <li class="megamenu-list-item"><a href="/signup" class="megamenu-list-link">Sign up   </a></li>
                           <li class="megamenu-list-item"><a href="user-booking-1.html" class="megamenu-list-link">Booking process - 4 pages <span class="badge badge-warning ml-1">New</span>   </a></li>
                           <li class="megamenu-list-item"><a href="user-grid.html" class="megamenu-list-link">Bookings &mdash; grid view <span class="badge badge-warning ml-1">New</span>   </a></li>
                           <li class="megamenu-list-item"><a href="user-booking-detail.html" class="megamenu-list-link">Booking detail <span class="badge badge-warning ml-1">New</span>   </a></li>
@@ -434,15 +434,14 @@ Add the following code in `Navigation.vue`:
                 <h6 class="dropdown-header font-weight-normal">Components</h6><a href="docs/components-bootstrap.html" class="dropdown-item">Bootstrap </a><a href="docs/components-directory.html" class="dropdown-item">Theme </a>
               </div>
             </li>
-            <li class="nav-item"><a href="login.html" class="nav-link">Sign in</a></li>
-            <li class="nav-item"><a href="signup.html" class="nav-link">Sign up</a></li>
+            <li class="nav-item"><a href="/login" class="nav-link">Sign in</a></li>
+            <li class="nav-item"><a href="/signup" class="nav-link">Sign up</a></li>
             <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block"><a href="user-add-0.html" class="btn btn-primary">Add a listing</a></li>
           </ul>
         </div>
       </div>
-    </nav> 
+    </nav>  
 </template>
-
 ```
 ### Step 3.3: Test home page
 
@@ -457,7 +456,170 @@ You should see the ff:
 
 ## Step 6: Set up Login Page
 
+In `myproject-consumer-web/src/views/`
+create a file called : `Login.vue`
+
+Add the following snippet
+```html
+<template>
+    <div class="login">
+        <div class="container-fluid px-3">
+          <div class="row min-vh-100">
+            <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
+              <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
+                <div class="mb-5"><img src="img/logo-square.svg" alt="..." style="max-width: 4rem;" class="img-fluid mb-3">
+                  <h2>Welcome back</h2>
+                </div>
+                <form class="form-validate">
+                  <div class="form-group">
+                    <label for="loginUsername" class="form-label"> Email Address</label>
+                    <input name="loginUsername" id="loginUsername" type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email" class="form-control">
+                  </div>
+                  <div class="form-group mb-4">
+                    <div class="row">
+                      <div class="col">
+                        <label for="loginPassword" class="form-label"> Password</label>
+                      </div>
+                      <div class="col-auto"><a href="#" class="form-text small">Forgot password?</a></div>
+                    </div>
+                    <input name="loginPassword" id="loginPassword" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control">
+                  </div>
+                  <div class="form-group mb-4">
+                    <div class="custom-control custom-checkbox">
+                      <input id="loginRemember" type="checkbox" class="custom-control-input">
+                      <label for="loginRemember" class="custom-control-label text-muted"> <span class="text-sm">Remember me for 30 days</span></label>
+                    </div>
+                  </div>
+                  <!-- Submit-->
+                  <button class="btn btn-lg btn-block btn-primary">Sign in</button>
+                  <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
+                  <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
+                  <button class="btn btn btn-outline-muted btn-block btn-social mb-3"><i class="fa-2x fa-google fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Google</span></button>
+                  <hr class="my-4">
+                  <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="signup.html">Sign Up                </a></small></p>
+                </form><a href="index.html" class="close-absolute mr-md-5 mr-xl-6 pt-5"> 
+                  <svg class="svg-icon w-3rem h-3rem">
+                    <use xlink:href="#close-1"> </use>
+                  </svg></a>
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-6 col-xl-7 d-none d-md-block">
+              <!-- Image-->
+              <div style="background-image: url(img/photo/photo-1497436072909-60f360e1d4b1.jpg);" class="bg-cover h-100 mr-n3"></div>
+            </div>
+          </div>
+        </div>
+    </div>
+</template>
+
+
+<script>
+export default {
+  name: 'landing',
+  props: {
+    msg: String
+  }
+}
+</script>
+
+<style type="text/css">
+    
+    
+</style>
+```
+
+
+In `myproject-consumer-web/src/`
+
+Add the following snippet in `router.js`:
+
+```js
+{
+   path: '/about',
+   name: 'about',
+   // route level code-splitting
+   // this generates a separate chunk (about.[hash].js) for this route
+   // which is lazy-loaded when the route is visited.
+   component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+},
+{ 
+   //Added a route for login
+   path: '/login',
+   name: 'login',
+   component: () => import('./views/Login.vue')
+}
+```
+
 ## Step 7: Set up Signup Page
+
+In `myproject-consumer-web/src/views/`
+create a file called : `SignUp.vue`
+
+Add the following snippet
+```html
+<template>
+  <div class="signup">
+        <div class="container-fluid px-3">
+      <div class="row min-vh-100">
+        <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
+          <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
+            <div class="mb-4"><img src="img/logo-square.svg" alt="..." style="max-width: 4rem;" class="img-fluid mb-4">
+              <h2>Sign up</h2>
+              <p class="text-muted">His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table.</p>
+            </div>
+            <form class="form-validate">
+              <div class="form-group">
+                <label for="loginUsername" class="form-label"> Email Address</label>
+                <input name="loginUsername" id="loginUsername" type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="loginPassword" class="form-label"> Password</label>
+                <input name="loginPassword" id="loginPassword" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control">
+              </div>
+              <div class="form-group mb-4">
+                <label for="loginPassword2" class="form-label"> Confirm your password</label>
+                <input name="loginPassword2" id="loginPassword2" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-lg btn-block btn-primary">Sign up</button>
+              <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
+              <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
+              <button class="btn btn btn-outline-muted btn-block btn-social mb-3"><i class="fa-2x fa-google fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Google</span></button>
+              <hr class="my-4">
+              <p class="text-sm text-muted">By signing up you agree to Directory's <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</p>
+            </form><a href="index.html" class="close-absolute mr-md-5 mr-xl-6 pt-5"> 
+              <svg class="svg-icon w-3rem h-3rem">
+                <use xlink:href="#close-1"> </use>
+              </svg></a>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-6 col-xl-7 d-none d-md-block">
+          <!-- Image-->
+          <div style="background-image: url(img/photo/photo-1497436072909-60f360e1d4b1.jpg);" class="bg-cover h-100 mr-n3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+```
+
+
+In `myproject-consumer-web/src/`
+
+Add the following snippet in `router.js`:
+
+```js
+{
+  path: '/login',
+  name: 'login',
+  component: () => import('./views/Login.vue')
+},
+{
+  //Add sign up into routes
+  path: '/signup',
+  name: 'sigup',
+  component: () => import('./views/SignUp.vue')
+}
+```
 
 ## Step 8: Set up Detail Page
 
