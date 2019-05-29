@@ -3,10 +3,10 @@
     <section class="hero-home">
       <div class="swiper-container hero-slider">
         <div class="swiper-wrapper dark-overlay">
-          <div style="background-image:url('../assets/img/photo/photo-1501621965065-c6e1cf6b53e2.jpg')" class="swiper-slide"></div>
-          <div style="background-image:url('../assets/img/photo/photo-1519974719765-e6559eac2575.jpg')" class="swiper-slide"></div>
-          <div style="background-image:url('../assets/img/photo/photo-1490578474895-699cd4e2cf59.jpg')" class="swiper-slide"></div>
-          <div style="background-image:url('../assets/img/photo/photo-1534850336045-c6c6d287f89e.jpg')" class="swiper-slide"></div>
+          <div class="swiper-slide pic_1"></div>
+          <div class="swiper-slide pic_2"></div>
+          <div class="swiper-slide pic_3"></div>
+          <div class="swiper-slide pic_4"></div>
         </div>
       </div>
       <div class="container py-6 py-md-7 text-white z-index-20">
@@ -59,6 +59,22 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
+<style>
+  .pic_1 {
+    background:url('../assets/img/photo/photo-1501621965065-c6e1cf6b53e2.jpg') center;
+    background-size: cover
+  }
+  .pic_2 {
+    background:url('../assets/img/photo/photo-1519974719765-e6559eac2575.jpg') center;
+    background-size: cover
+  }
+  .pic_3 {
+    background:url('../assets/img/photo/photo-1490578474895-699cd4e2cf59.jpg') center;
+    background-size: cover
+  }
+  .pic_4 {
+    background:url('../assets/img/photo/photo-1534850336045-c6c6d287f89e.jpg') center;
+    background-size: cover
+  }
+  @import "https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css";
 </style>
