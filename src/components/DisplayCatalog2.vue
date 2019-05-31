@@ -22,7 +22,7 @@
                 <div class="card h-100 border-0 shadow">
                   <div class="card-img-top overflow-hidden gradient-overlay"> <img src="../assets/img/photo/photo-1484154218962-a197022b5858.jpg" alt="Modern, Well-Appointed Room" class="img-fluid"/><a href="detail-rooms.html" class="tile-link"></a>
                     <div class="card-img-overlay-bottom z-index-20">
-                      <div class="media text-white text-sm align-items-center"><img src="../assets/img/avatar/avatar-0.jpg" alt="Pamela" class="avatar avatar-border-white mr-2"/>
+                      <div class="media text-white text-sm align-items-center"><img src="/assets/img/avatar/avatar-0.jpg" alt="Pamela" class="avatar avatar-border-white mr-2"/>
                         <div class="media-body">Pamela</div>
                       </div>
                     </div>

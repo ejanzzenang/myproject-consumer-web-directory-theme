@@ -1,6 +1,6 @@
 <template>
 	<div class="display-catalog-1">
- 	<section class="py-6 bg-white">
+    <section class="py-6 bg-white">
       <div class="container">
         <div class="row mb-5">
           <div class="col-md-8">

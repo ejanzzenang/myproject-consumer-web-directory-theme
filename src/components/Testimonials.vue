@@ -1,6 +1,6 @@
 <template>
 	<div class="testimonials">
-		    <section class="py-7">
+    <section class="py-7">
       <div class="container">
         <div class="text-center">
           <p class="subtitle text-primary">Testimonials</p>

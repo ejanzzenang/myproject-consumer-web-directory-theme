@@ -1,10 +1,10 @@
-/* eslint-disable */
-
 import Vue from 'vue'
 import App from './App.vue'
 import LoadScript from 'vue-plugin-load-script';
-
+var Swiper = require('swiper');
 Vue.use(LoadScript);
+
+// var mySwiper = new Swiper('.swiper-container', { /* ... */ });
 
 // bootstrap
 import 'bootstrap';
@@ -34,7 +34,6 @@ Vue.loadScript("https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.mi
 .catch(() => {
   // Failed to fetch script
 });
-
 
 import router from './router'
 
