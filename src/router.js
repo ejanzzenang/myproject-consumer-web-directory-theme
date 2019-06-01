@@ -31,9 +31,29 @@ export default new Router({
       name: 'sigup',
       component: () => import('./views/SignUp.vue')
     },
-    
-
-
+    {
+      path: '/booking',
+      name: 'booking',
+      component: () => import('./views/Booking.vue'),
+      children: [
+      {
+        path: '',
+        component: () => import('./components/booking/Step1.vue'),
+      },
+      {
+        path: 'step2',
+        component: () => import('./components/booking/Step2.vue'),
+      },
+      {
+        path: 'step3',
+        component: () => import('./components/booking/Step3.vue'),
+      },
+      {
+        path: 'step4',
+        component: () => import('./components/booking/Step4.vue'),
+      }
+      ]
+    },
 
   ]
 })
