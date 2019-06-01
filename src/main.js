@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
 import LoadScript from 'vue-plugin-load-script';
-var Swiper = require('swiper');
 Vue.use(LoadScript);
 
 // var mySwiper = new Swiper('.swiper-container', { /* ... */ });
