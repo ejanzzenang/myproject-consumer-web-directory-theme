@@ -20,7 +20,6 @@ import DisplayCatalog2 from '@/components/DisplayCatalog2.vue'
 import Testimonials from '@/components/Testimonials.vue'
 import DisplayCatalog3 from '@/components/DisplayCatalog3.vue'
 import PhotoWheel from '@/components/PhotoWheel.vue'
-import Footer from '@/components/Footer.vue'
 
 export default {
   name: 'home',

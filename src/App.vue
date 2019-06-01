@@ -3,17 +3,21 @@
     <Navigation/>
     <div class="navbar-margin"></div>
     <router-view/>
+    <Footer/>
+
   </div>
 </template>
 
 <script type="text/javascript">
   // @ is an alias to /src
 import Navigation from '@/components/Navigation.vue'
+import Footer from '@/components/Footer.vue'
 
 export default {
   name: 'home',
   components: {
-    Navigation
+    Navigation,
+    Footer
   }
 }
 </script>
