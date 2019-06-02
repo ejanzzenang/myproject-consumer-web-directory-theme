@@ -1,14 +1,14 @@
 <template>
   <div class="searchbar">
     <section class="hero-home">
-      <div class="swiper-container hero-slider">
+      <swiper :options="swiperOption" class="hero-slider">
         <div class="swiper-wrapper dark-overlay">
-          <div class="swiper-slide pic_1"></div>
-          <div class="swiper-slide pic_2"></div>
-          <div class="swiper-slide pic_3"></div>
-          <div class="swiper-slide pic_4"></div>
+          <swiper-slide class="swiper-slide pic_1"></swiper-slide>
+          <swiper-slide class="swiper-slide pic_2"></swiper-slide>
+          <swiper-slide class="swiper-slide pic_3"></swiper-slide>
+          <swiper-slide class="swiper-slide pic_4"></swiper-slide>
         </div>
-      </div>
+      </swiper>
       <div class="container py-6 py-md-7 text-white z-index-20">
         <div class="row">
           <div class="col-xl-10">
@@ -52,20 +52,39 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .pic_1 {
-    background:url('../assets/img/photo/photo-1501621965065-c6e1cf6b53e2.jpg') center;
+    background: url('../assets/img/photo/photo-1501621965065-c6e1cf6b53e2.jpg') center;
     background-size: cover
   }
   .pic_2 {
-    background:url('../assets/img/photo/photo-1519974719765-e6559eac2575.jpg') center;
+    background: url('../assets/img/photo/photo-1519974719765-e6559eac2575.jpg') center;
     background-size: cover
   }
   .pic_3 {
-    background:url('../assets/img/photo/photo-1490578474895-699cd4e2cf59.jpg') center;
+    background: url('../assets/img/photo/photo-1490578474895-699cd4e2cf59.jpg') center;
     background-size: cover
   }
   .pic_4 {
-    background:url('../assets/img/photo/photo-1534850336045-c6c6d287f89e.jpg') center;
+    background: url('../assets/img/photo/photo-1534850336045-c6c6d287f89e.jpg') center;
     background-size: cover
   }
 
 </style>
+
+
+<script>
+  export default {
+    data() {
+      return {
+        swiperOption: {
+          el: '.hero-slider',
+          effect: 'fade',
+          speed: 2000,
+          allowTouchMove: false,
+          autoplay: {
+              delay: 2000,
+          },
+        }
+      }
+    }
+  }
+</script>
