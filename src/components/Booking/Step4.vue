@@ -12,7 +12,7 @@
             <div class="text-block">
               <p class="text-muted">Thank you for your booking, Ondrej. </p>
               <p class="text-muted mb-5">Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.</p>
-              <p class="text-center mb-5"><a href="user-booking-detail.html" class="btn btn-primary mx-2 mb-2"> <i class="far fa-file mr-2"></i>View your order</a><a href="#" class="btn btn-outline-muted mb-2">Or something else</a></p>
+              <p class="text-center mb-5"><a href="user-booking-detail.html" class="btn btn-primary mx-2 mb-2"> <i class="far fa-file mr-2"></i>View your order</a><router-link to="/" class="btn btn-outline-muted mb-2">Or something else</router-link/></p>
               <p class="mb-5 text-center"><img src="img/illustration/undraw_celebration_0jvk.svg" alt="" style="width: 400px;" class="img-fluid"></p>
             </div>
           </div>

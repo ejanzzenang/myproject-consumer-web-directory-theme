@@ -62,7 +62,7 @@
             <div class="row form-block flex-column flex-sm-row">
               <div class="col text-center text-sm-left"><a href="step2" class="btn btn-link text-muted"> <i class="fa-chevron-left fa mr-2"></i>Back</a>
               </div>
-              <div class="col text-center text-sm-right"><a href="step4" class="btn btn-primary px-3">
+              <div class="col text-center text-sm-right"><a href="confirmed" class="btn btn-primary px-3">
                    
                   Next step<i class="fa-chevron-right fa ml-2"></i></a></div>
             </div>
