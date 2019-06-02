@@ -20,10 +20,11 @@ export default {
     Footer
   }
 }
+
 </script>
 <style type="text/css">
   .navbar-margin {
-    margin-bottom: 50px;
+    margin-bottom: 70px;
   }
 
   /*extra css*/
