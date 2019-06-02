@@ -37,7 +37,7 @@ export default new Router({
       component: () => import('./views/Booking.vue'),
       children: [
       {
-        path: '',
+        path: 'step1',
         component: () => import('./components/booking/Step1.vue'),
       },
       {
