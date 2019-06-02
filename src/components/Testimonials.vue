@@ -75,28 +75,31 @@
     export default {
     data() {
       return {
-        swiperOption: {
-          slidesPerView: 2,
-          spaceBetween: 20,
-          roundLengths :true,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-            dynamicBullets: true
-          },
-          loop: true,
-          breakpoints: {  
-             1200 :{  
-               slidesPerView: 3
+        swiperOption:  {
+        slidesPerView: 2,
+        spaceBetween: 20,
+        loop: true,
+        roundLengths: true,
+        breakpoints: {
+            1200: {
+                slidesPerView: 3,
+                spaceBetween: 0
             },
-             991 :{  
-              slidesPerView : 2
+            991: {
+                slidesPerView: 2,
+                spaceBetween: 0
             },
-             565 :{  
-              slidesPerView :1
+            565: {
+                slidesPerView: 1
             }
-         },
-        }
+        },
+          // If we need pagination
+          pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+              dynamicBullets: true
+          },
+      }
       }
     }
   }
