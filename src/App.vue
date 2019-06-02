@@ -21,8 +21,6 @@ export default {
   }
 }
 </script>
-
-
 <style type="text/css">
   .navbar-margin {
     margin-bottom: 50px;

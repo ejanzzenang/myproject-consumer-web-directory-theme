@@ -16,10 +16,7 @@ export default new Router({
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component: () => import('./views/About.vue')
     },
     {
       path: '/login',
@@ -36,24 +33,34 @@ export default new Router({
       name: 'booking',
       component: () => import('./views/Booking.vue'),
       children: [
-      {
-        path: 'step1',
-        component: () => import('./components/booking/Step1.vue'),
-      },
-      {
-        path: 'step2',
-        component: () => import('./components/booking/Step2.vue'),
-      },
-      {
-        path: 'payment',
-        component: () => import('./components/booking/Step3.vue'),
-      },
-      {
-        path: 'confirmed',
-        component: () => import('./components/booking/Step4.vue'),
-      }
+        {
+          path: 'step1',
+          component: () => import('./components/booking/Step1.vue'),
+        },
+        {
+          path: 'step2',
+          component: () => import('./components/booking/Step2.vue'),
+        },
+        {
+          path: 'payment',
+          component: () => import('./components/booking/Step3.vue'),
+        },
+        {
+          path: 'confirmed',
+          component: () => import('./components/booking/Step4.vue'),
+        }
       ]
     },
-
+    {
+      path: '/products',
+      name: 'products',
+      component: () => import('./views/Products.vue'),
+      children: [
+        {
+          path: ':id',
+          component: () => import('./components/products/ProductDetail.vue'),
+        }
+      ] 
+    }
   ]
 })
