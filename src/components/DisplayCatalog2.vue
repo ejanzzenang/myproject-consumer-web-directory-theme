@@ -12,11 +12,9 @@
               See all deals<i class="fas fa-angle-double-right ml-2"></i></a></div>
         </div>
         <!-- Slider main container-->
-        <div data-swiper="{&quot;slidesPerView&quot;:4,&quot;spaceBetween&quot;:20,&quot;loop&quot;:true,&quot;roundLengths&quot;:true,&quot;breakpoints&quot;:{&quot;1200&quot;:{&quot;slidesPerView&quot;:3},&quot;991&quot;:{&quot;slidesPerView&quot;:2},&quot;565&quot;:{&quot;slidesPerView&quot;:1}},&quot;pagination&quot;:{&quot;el&quot;:&quot;.swiper-pagination&quot;,&quot;clickable&quot;:true,&quot;dynamicBullets&quot;:true}}" class="swiper-container swiper-container-mx-negative swiper-init">
-          <!-- Additional required wrapper-->
-          <div class="swiper-wrapper pb-5">
+        <swiper :options="swiperOption">
             <!-- Slides-->
-            <div class="swiper-slide h-auto px-2">
+            <swiper-slide class="h-auto px-2">
               <!-- place item-->
               <div data-marker-id="59c0c8e33b1527bfe2abaf92" class="w-100 h-100">
                 <div class="card h-100 border-0 shadow">
@@ -44,8 +42,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="swiper-slide h-auto px-2">
+            </swiper-slide>
+            <swiper-slide class="h-auto px-2">
               <!-- place item-->
               <div data-marker-id="59c0c8e322f3375db4d89128" class="w-100 h-100">
                 <div class="card h-100 border-0 shadow">
@@ -73,8 +71,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="swiper-slide h-auto px-2">
+            </swiper-slide>
+            <swiper-slide class="h-auto px-2">
               <!-- place item-->
               <div data-marker-id="59c0c8e3a31e62979bf147c9" class="w-100 h-100">
                 <div class="card h-100 border-0 shadow">
@@ -102,8 +100,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="swiper-slide h-auto px-2">
+            </swiper-slide>
+            <swiper-slide class="h-auto px-2">
               <!-- place item-->
               <div data-marker-id="59c0c8e3503eb77d487e8082" class="w-100 h-100">
                 <div class="card h-100 border-0 shadow">
@@ -131,8 +129,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="swiper-slide h-auto px-2">
+            </swiper-slide>
+            <swiper-slide class="h-auto px-2">
               <!-- place item-->
               <div data-marker-id="59c0c8e39aa2eed0626e485d" class="w-100 h-100">
                 <div class="card h-100 border-0 shadow">
@@ -160,8 +158,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="swiper-slide h-auto px-2">
+            </swiper-slide>
+            <swiper-slide class="h-auto px-2">
               <!-- place item-->
               <div data-marker-id="59c0c8e39aa2edasd626e485d" class="w-100 h-100">
                 <div class="card h-100 border-0 shadow">
@@ -189,12 +187,42 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <!-- If we need pagination-->
-          <div class="swiper-pagination"></div>
-        </div>
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
+
       </div>
     </section>		
 	</div>
 </template>
+
+<script>
+  export default {
+    data() {
+      return {
+        swiperOption: {
+          slidesPerView: 4,
+          spaceBetween: 20,
+          roundLengths :true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            dynamicBullets: true
+          },
+          loop: true,
+          breakpoints: {  
+             1200 :{  
+               slidesPerView: 3
+            },
+             991 :{  
+              slidesPerView : 2
+            },
+             565 :{  
+              slidesPerView :1
+            }
+         },
+        }
+      }
+    }
+  }
+</script>

@@ -7,11 +7,10 @@
           <h2 class="mb-5">Our dear customers said about us</h2>
         </div>
         <!-- Slider main container-->
-        <div class="swiper-container testimonials-slider testimonials">
+        <swiper :options="swiperOption" class="testimonials-slider testimonials">
           <!-- Additional required wrapper-->
-          <div class="swiper-wrapper pt-2 pb-5">
             <!-- Slides-->
-            <div class="swiper-slide px-3">
+            <swiper-slide class="px-3">
               <div class="testimonial card rounded-lg shadow border-0">
                 <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
                 <div class="text">
@@ -19,8 +18,8 @@
                   <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
                 </div>
               </div>
-            </div>
-            <div class="swiper-slide px-3">
+            </swiper-slide>
+            <swiper-slide class="px-3">
               <div class="testimonial card rounded-lg shadow border-0">
                 <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
                 <div class="text">
@@ -28,8 +27,8 @@
                   <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
                 </div>
               </div>
-            </div>
-            <div class="swiper-slide px-3">
+            </swiper-slide>
+            <swiper-slide class="px-3">
               <div class="testimonial card rounded-lg shadow border-0">
                 <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
                 <div class="text">
@@ -37,8 +36,8 @@
                   <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
                 </div>
               </div>
-            </div>
-            <div class="swiper-slide px-3">
+            </swiper-slide>
+            <swiper-slide class="px-3">
               <div class="testimonial card rounded-lg shadow border-0">
                 <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
                 <div class="text">
@@ -46,8 +45,8 @@
                   <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
                 </div>
               </div>
-            </div>
-            <div class="swiper-slide px-3">
+            </swiper-slide>
+            <swiper-slide class="px-3">
               <div class="testimonial card rounded-lg shadow border-0">
                 <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
                 <div class="text">
@@ -55,8 +54,8 @@
                   <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
                 </div>
               </div>
-            </div>
-            <div class="swiper-slide px-3">
+            </swiper-slide>
+            <swiper-slide class="px-3">
               <div class="testimonial card rounded-lg shadow border-0">
                 <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
                 <div class="text">
@@ -64,13 +63,41 @@
                   <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
                 </div>
               </div>
-            </div>
-          </div>
+            </swiper-slide>
           <div class="swiper-pagination"></div>
-        </div>
+        </swiper>
       </div>
     </section>
-
-
 	</div>
 </template>
+
+<script scoped>
+    export default {
+    data() {
+      return {
+        swiperOption: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+          roundLengths :true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            dynamicBullets: true
+          },
+          loop: true,
+          breakpoints: {  
+             1200 :{  
+               slidesPerView: 3
+            },
+             991 :{  
+              slidesPerView : 2
+            },
+             565 :{  
+              slidesPerView :1
+            }
+         },
+        }
+      }
+    }
+  }
+</script>
