@@ -1,4 +1,5 @@
 
+
 # Set up Vue.js Frontend using a Theme
 ## Prerequsites
 
@@ -205,19 +206,15 @@ Final version of `App.vue`:
 ```html
 <template>
   <div id="app">
-    <Navigation/>
     <router-view/>
   </div>
 </template>
 
 <script type="text/javascript">
   // @ is an alias to /src
-import Navigation from '@/components/Navigation.vue'
-
 export default {
   name: 'home',
   components: {
-    Navigation
   }
 }
 </script>
