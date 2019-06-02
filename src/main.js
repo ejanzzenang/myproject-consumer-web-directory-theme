@@ -1,8 +1,5 @@
 import Vue from 'vue'
 import App from './App.vue'
-import LoadScript from 'vue-plugin-load-script';
-Vue.use(LoadScript);
-
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 // require styles
@@ -23,21 +20,13 @@ require('@/assets/img/favicon.png')
 
 // As a global method
 
-Vue.loadScript("https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js")
-.then(() => {
-    require("@/assets/vendor/object-fit-images/ofi.min.js")
-    require("@/assets/vendor/bootstrap/js/bootstrap.bundle.min.js")
-    require("@/assets/vendor/magnific-popup/jquery.magnific-popup.min.js")
-    require("@/assets/vendor/smooth-scroll/smooth-scroll.polyfills.min.js")
-    require("@/assets/vendor/bootstrap-select/js/bootstrap-select.min.js")
-    require("@/assets/js/theme.js")
-})
-.then(() => {
-    require("@/assets/vendor/jquery/jquery.min.js")
-})
-.catch(() => {
-  // Failed to fetch script
-});
+require("@/assets/vendor/jquery/jquery.min.js")
+require("@/assets/vendor/object-fit-images/ofi.min.js")
+require("@/assets/vendor/bootstrap/js/bootstrap.bundle.min.js")
+require("@/assets/vendor/magnific-popup/jquery.magnific-popup.min.js")
+require("@/assets/vendor/smooth-scroll/smooth-scroll.polyfills.min.js")
+require("@/assets/vendor/bootstrap-select/js/bootstrap-select.min.js")
+require("@/assets/js/theme.js")
 
 import router from './router'
 
