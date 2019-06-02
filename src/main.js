@@ -3,6 +3,13 @@ import App from './App.vue'
 import LoadScript from 'vue-plugin-load-script';
 Vue.use(LoadScript);
 
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+
+// require styles
+import 'swiper/dist/css/swiper.css'
+Vue.use(VueAwesomeSwiper, /* { default global options } */)
+
+
 // bootstrap
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
