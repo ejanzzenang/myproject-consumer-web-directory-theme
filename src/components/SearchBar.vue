@@ -49,17 +49,8 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'landing',
-  props: {
-    msg: String
-  }
-}
-</script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
   .pic_1 {
     background:url('../assets/img/photo/photo-1501621965065-c6e1cf6b53e2.jpg') center;
     background-size: cover
@@ -76,5 +67,5 @@ export default {
     background:url('../assets/img/photo/photo-1534850336045-c6c6d287f89e.jpg') center;
     background-size: cover
   }
-  @import "https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css";
+
 </style>
