@@ -7,7 +7,6 @@
     <Testimonials/>
     <DisplayCatalog3/>
     <PhotoWheel/> 
-    <Footer/>
   </div>
 </template>
 
@@ -30,8 +29,7 @@ export default {
     DisplayCatalog2,
     Testimonials,
     DisplayCatalog3,
-    PhotoWheel,
-    Footer
+    PhotoWheel
   }
 }
 
