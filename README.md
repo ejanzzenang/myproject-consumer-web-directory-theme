@@ -32,7 +32,7 @@ $ vue --version
 | DETAIL       | http://[hostname]/products/<product_id> | Gets one product            |
 | SIGNIN       | http://[hostname]/login                 | Logs the user in            |
 | SIGNUP       | http://[hostname]/signup                | Signs up the user           |
-| BOOK-1       | http://[hostname]/booking/step1       | Booking Step 1              |
+| BOOK-1       | http://[hostname]/booking/step1         | Booking Step 1              |
 | BOOK-2       | http://[hostname]/booking/step1         | Booking Step 2              |
 | PAYMENT      | http://[hostname]/booking/payment       | Payment and Confirmation    |
 | CONFIRMATION | http://[hostname]/booking/confirmed     | Confirmed                   |
