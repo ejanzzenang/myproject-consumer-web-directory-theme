@@ -3,8 +3,6 @@ import App from './App.vue'
 import LoadScript from 'vue-plugin-load-script';
 Vue.use(LoadScript);
 
-// var mySwiper = new Swiper('.swiper-container', { /* ... */ });
-
 // bootstrap
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
