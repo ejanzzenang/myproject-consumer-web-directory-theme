@@ -45,11 +45,11 @@ export default new Router({
         component: () => import('./components/booking/Step2.vue'),
       },
       {
-        path: 'step3',
+        path: 'payment',
         component: () => import('./components/booking/Step3.vue'),
       },
       {
-        path: 'step4',
+        path: 'confirmed',
         component: () => import('./components/booking/Step4.vue'),
       }
       ]
