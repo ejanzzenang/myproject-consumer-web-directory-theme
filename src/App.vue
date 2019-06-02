@@ -24,9 +24,6 @@ export default {
 
 
 <style type="text/css">
-  #app {
-    /*text-align: center;*/
-  }
   .navbar-margin {
     margin-bottom: 50px;
   }
