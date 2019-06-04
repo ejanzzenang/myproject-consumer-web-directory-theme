@@ -1,26 +1,18 @@
 <template>
 	<div class="product">
-		<Products/>
-		<router-view/>	
+		<ProductIndex/>
+        <router-view/>	
 	</div>
 </template>
-<script>
-	
-// @ is an alias to /src
-import Products from '@/components/products'
 
+<script type="text/javascript">
+    import ProductIndex from '@/components/products'
 
-export default {
-name: 'products',
-	components: {
-		Products
-	}
-}
+    export default {
+    name: 'products',
+        components: {
+            ProductIndex
+        }
+    }
 
 </script>
-
-<style scoped>
-	
-
-
-</style>

@@ -2,7 +2,7 @@
 	<div class="products">
 		<h1>Product Catalog</h1>
 		<DisplayCatalog2/>
-		<DisplayCatalog3/>		
+		<DisplayCatalog3/>
 	</div>
 </template>
 
