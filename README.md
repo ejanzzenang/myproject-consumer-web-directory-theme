@@ -49,7 +49,6 @@ $ vue --version
 $ cd ~/environment/
 $ vue create myproject-consumer-web
 $ cd myproject-consumer-web
-$ npm run dev
 ```
 
 ### Step 1.2: Create a CodeCommit Repository
