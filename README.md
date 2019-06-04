@@ -1163,7 +1163,7 @@ Add the following code:
 In `myproject-consumer-web/src/components/`
 create a file called : `Testimonials.vue`
 Add the following code:
-```js
+```html
 <template>
   <div class="testimonials">
     <section class="py-7">
