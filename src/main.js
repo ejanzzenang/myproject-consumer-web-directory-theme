@@ -4,6 +4,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 Vue.use(VueAwesomeSwiper)
 
+// jQuery
 require("@/assets/vendor/jquery/jquery.min.js")
 
 // bootstrap
@@ -18,13 +19,11 @@ require('@/assets/css/custom.css')
 require('@/assets/img/favicon.png')
 
 // As a global method
-
 require("@/assets/vendor/object-fit-images/ofi.min.js")
 require("@/assets/vendor/bootstrap/js/bootstrap.bundle.min.js")
 require("@/assets/vendor/magnific-popup/jquery.magnific-popup.min.js")
 require("@/assets/vendor/smooth-scroll/smooth-scroll.polyfills.min.js")
 require("@/assets/vendor/bootstrap-select/js/bootstrap-select.min.js")
-
 
 import router from './router'
 
