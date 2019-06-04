@@ -14,6 +14,12 @@ $ npm -v
 6.7.0
 ```
 
+- node
+```
+$ node -v
+v12.2.0
+```
+
 - vue-cli
 ```
 $ npm install -g @vue/cli
