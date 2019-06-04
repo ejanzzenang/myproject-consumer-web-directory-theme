@@ -1361,8 +1361,8 @@ export default {
 ```
 
 Final Version of `router.js`
-* Important to note that router.js takes care of routing to `Home.vue`
-* Our page home page is accessible via `localhost:8080/`
+* Important to note that `router.js` takes care of routing to `Home.vue`
+* Our home page is accessible via `localhost:8080/`
 
 ```js
 import Vue from 'vue'
@@ -2625,7 +2625,7 @@ http://[hostname]/booking/confirmed
 ```
 
 Final version of `router.js`:
-```ja
+```js
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
