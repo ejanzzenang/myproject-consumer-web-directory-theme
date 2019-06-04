@@ -1,3 +1,4 @@
+
 # Set up Vue.js Frontend using a Theme
 ## Prerequsites
 
@@ -1565,30 +1566,22 @@ Add the following code:
 ```html
 <template>
   <div class="product">
-    <Products/>
-    <router-view/>  
+    <ProductIndex/>
+        <router-view/>  
   </div>
 </template>
-<script>
-  
-// @ is an alias to /src
-import Products from '@/components/products'
 
+<script type="text/javascript">
+    import ProductIndex from '@/components/products'
 
-export default {
-name: 'products',
-  components: {
-    Products
-  }
-}
+    export default {
+    name: 'products',
+        components: {
+            ProductIndex
+        }
+    }
 
 </script>
-
-<style scoped>
-  
-
-
-</style>
 
 ```
 
@@ -1613,7 +1606,7 @@ Add the following code:
   <div class="products">
     <h1>Product Catalog</h1>
     <DisplayCatalog2/>
-    <DisplayCatalog3/>    
+    <DisplayCatalog3/>
   </div>
 </template>
 
@@ -1625,8 +1618,8 @@ Add the following code:
 </style>
 
 <script type="text/javascript">
-  import DisplayCatalog2 from '@/components/DisplayCatalog2.vue'
-  import DisplayCatalog3 from '@/components/DisplayCatalog3.vue'
+import DisplayCatalog2 from '@/components/DisplayCatalog2.vue'
+import DisplayCatalog3 from '@/components/DisplayCatalog3.vue'
 
 
 export default {
@@ -1651,22 +1644,32 @@ Add the following code:
 <template>
   <div class="product-detail">
     <section>
-      <!-- Slider main container-->
-      <div class="swiper-container detail-slider slider-gallery">
         <!-- Additional required wrapper-->
-        <div class="swiper-wrapper">
+        <swiper :options="swiperOption">
           <!-- Slides-->
-          <div class="swiper-slide"><a href="../../assets/img/photo/photo-1426122402199-be02db90eb90.jpg" data-toggle="gallery-top" title="Our street"><img src="../../assets/img/photo/photo-1426122402199-be02db90eb90.jpg" alt="Our street" class="img-fluid"></a></div>
-          <div class="swiper-slide"><a href="../../assets/img/photo/photo-1512917774080-9991f1c4c750.jpg" data-toggle="gallery-top" title="Outside"><img src="../../assets/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="Outside" class="img-fluid"></a></div>
-          <div class="swiper-slide"><a href="../../assets/img/photo/photo-1494526585095-c41746248156.jpg" data-toggle="gallery-top" title="Rear entrance"><img src="../../assets/img/photo/photo-1494526585095-c41746248156.jpg" alt="Rear entrance" class="img-fluid"></a></div>
-          <div class="swiper-slide"><a href="../../assets/img/photo/photo-1484154218962-a197022b5858.jpg" data-toggle="gallery-top" title="Kitchen"><img src="../../assets/img/photo/photo-1484154218962-a197022b5858.jpg" alt="Kitchen" class="img-fluid"></a></div>
-          <div class="swiper-slide"><a href="../../assets/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" data-toggle="gallery-top" title="Bedroom"><img src="vimg/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="Bedroom" class="img-fluid"></a></div>
-          <div class="swiper-slide"><a href="../../assets/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" data-toggle="gallery-top" title="Bedroom"><img src="../../assets/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" alt="Bedroom" class="img-fluid"></a></div>
-        </div>
+          <swiper-slide>
+            <a href="../../assets/img/photo/photo-1426122402199-be02db90eb90.jpg" data-toggle="gallery-top" title="Our street"><img src="../../assets/img/photo/photo-1426122402199-be02db90eb90.jpg" alt="Our street" class="img-fluid"></a>
+          </swiper-slide>
+          <swiper-slide>
+            <a href="../../assets/img/photo/photo-1512917774080-9991f1c4c750.jpg" data-toggle="gallery-top" title="Outside"><img src="../../assets/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="Outside" class="img-fluid"></a>
+          </swiper-slide>
+          <swiper-slide>
+            <a href="../../assets/img/photo/photo-1494526585095-c41746248156.jpg" data-toggle="gallery-top" title="Rear entrance"><img src="../../assets/img/photo/photo-1494526585095-c41746248156.jpg" alt="Rear entrance" class="img-fluid"></a>
+          </swiper-slide>
+          <swiper-slide>
+            <a href="../../assets/img/photo/photo-1484154218962-a197022b5858.jpg" data-toggle="gallery-top" title="Kitchen"><img src="../../assets/img/photo/photo-1484154218962-a197022b5858.jpg" alt="Kitchen" class="img-fluid"></a>
+          </swiper-slide>
+          <swiper-slide>
+            <a href="../../assets/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" data-toggle="gallery-top" title="Bedroom"><img src="../../assets/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="Bedroom" class="img-fluid"></a>
+          </swiper-slide>
+          <swiper-slide>
+            <a href="../../assets/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" data-toggle="gallery-top" title="Bedroom"><img src="../../assets/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" alt="Bedroom" class="img-fluid"></a>
+          </swiper-slide>
+        </swiper>
         <div class="swiper-pagination swiper-pagination-white"></div>
         <div class="swiper-button-prev swiper-button-white"></div>
         <div class="swiper-button-next swiper-button-white"></div>
-      </div>
+
     </section>
     <div class="container py-5">
       <div class="row">
@@ -1872,197 +1875,44 @@ Add the following code:
         </div>
       </div>
     </div>
-    <div class="py-6 bg-gray-100"> 
-      <div class="container">
-        <h5 class="mb-0">Similar places</h5>
-        <p class="subtitle text-sm text-primary mb-4">You may also like         </p>
-        <!-- Slider main container-->
-        <div data-swiper="{&quot;slidesPerView&quot;:4,&quot;spaceBetween&quot;:20,&quot;loop&quot;:true,&quot;roundLengths&quot;:true,&quot;breakpoints&quot;:{&quot;1200&quot;:{&quot;slidesPerView&quot;:3},&quot;991&quot;:{&quot;slidesPerView&quot;:2},&quot;565&quot;:{&quot;slidesPerView&quot;:1}},&quot;pagination&quot;:{&quot;el&quot;:&quot;.swiper-pagination&quot;,&quot;clickable&quot;:true,&quot;dynamicBullets&quot;:true}}" class="swiper-container swiper-container-mx-negative swiper-init">
-          <!-- Additional required wrapper-->
-          <div class="swiper-wrapper pb-5">
-            <!-- Slides-->
-            <div class="swiper-slide h-auto px-2">
-              <!-- place item-->
-              <div data-marker-id="59c0c8e33b1527bfe2abaf92" class="w-100 h-100">
-                <div class="card h-100 border-0 shadow">
-                  <div class="card-img-top overflow-hidden gradient-overlay"> <img src="../../assets/img/photo/photo-1484154218962-a197022b5858.jpg" alt="Modern, Well-Appointed Room" class="img-fluid"/><a href="detail-rooms.html" class="tile-link"></a>
-                    <div class="card-img-overlay-bottom z-index-20">
-                      <div class="media text-white text-sm align-items-center"><img src="../../assets/img/avatar/avatar-0.jpg" alt="Pamela" class="avatar avatar-border-white mr-2"/>
-                        <div class="media-body">Pamela</div>
-                      </div>
-                    </div>
-                    <div class="card-img-overlay-top text-right"><a href="javascript: void();" class="card-fav-icon position-relative z-index-40"> 
-                        <svg class="svg-icon text-white">
-                          <use xlink:href="#heart-1"> </use>
-                        </svg></a></div>
-                  </div>
-                  <div class="card-body d-flex align-items-center">
-                    <div class="w-100">
-                      <h6 class="card-title"><a href="detail-rooms.html" class="text-decoration-none text-dark">Modern, Well-Appointed Room</a></h6>
-                      <div class="d-flex card-subtitle mb-3">
-                        <p class="flex-grow-1 mb-0 text-muted text-sm">Private room</p>
-                        <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i>
-                        </p>
-                      </div>
-                      <p class="card-text text-muted"><span class="h4 text-primary">$80</span> per night</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide h-auto px-2">
-              <!-- place item-->
-              <div data-marker-id="59c0c8e322f3375db4d89128" class="w-100 h-100">
-                <div class="card h-100 border-0 shadow">
-                  <div class="card-img-top overflow-hidden gradient-overlay"> <img src="../../assets/img/photo/photo-1426122402199-be02db90eb90.jpg" alt="Cute Quirky Garden apt, NYC adjacent" class="img-fluid"/><a href="detail-rooms.html" class="tile-link"></a>
-                    <div class="card-img-overlay-bottom z-index-20">
-                      <div class="media text-white text-sm align-items-center"><img src="../../assets/img/avatar/avatar-7.jpg" alt="John" class="avatar avatar-border-white mr-2"/>
-                        <div class="media-body">John</div>
-                      </div>
-                    </div>
-                    <div class="card-img-overlay-top text-right"><a href="javascript: void();" class="card-fav-icon position-relative z-index-40"> 
-                        <svg class="svg-icon text-white">
-                          <use xlink:href="#heart-1"> </use>
-                        </svg></a></div>
-                  </div>
-                  <div class="card-body d-flex align-items-center">
-                    <div class="w-100">
-                      <h6 class="card-title"><a href="detail-rooms.html" class="text-decoration-none text-dark">Cute Quirky Garden apt, NYC adjacent</a></h6>
-                      <div class="d-flex card-subtitle mb-3">
-                        <p class="flex-grow-1 mb-0 text-muted text-sm">Entire apartment</p>
-                        <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-gray-300">                                  </i>
-                        </p>
-                      </div>
-                      <p class="card-text text-muted"><span class="h4 text-primary">$121</span> per night</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide h-auto px-2">
-              <!-- place item-->
-              <div data-marker-id="59c0c8e3a31e62979bf147c9" class="w-100 h-100">
-                <div class="card h-100 border-0 shadow">
-                  <div class="card-img-top overflow-hidden gradient-overlay"> <img src="../../assets/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="Modern Apt - Vibrant Neighborhood!" class="img-fluid"/><a href="detail-rooms.html" class="tile-link"></a>
-                    <div class="card-img-overlay-bottom z-index-20">
-                      <div class="media text-white text-sm align-items-center"><img src="../../assets/img/avatar/avatar-8.jpg" alt="Julie" class="avatar avatar-border-white mr-2"/>
-                        <div class="media-body">Julie</div>
-                      </div>
-                    </div>
-                    <div class="card-img-overlay-top text-right"><a href="javascript: void();" class="card-fav-icon position-relative z-index-40"> 
-                        <svg class="svg-icon text-white">
-                          <use xlink:href="#heart-1"> </use>
-                        </svg></a></div>
-                  </div>
-                  <div class="card-body d-flex align-items-center">
-                    <div class="w-100">
-                      <h6 class="card-title"><a href="detail-rooms.html" class="text-decoration-none text-dark">Modern Apt - Vibrant Neighborhood!</a></h6>
-                      <div class="d-flex card-subtitle mb-3">
-                        <p class="flex-grow-1 mb-0 text-muted text-sm">Entire apartment</p>
-                        <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-gray-300">                                  </i><i class="fa fa-star text-gray-300">                                  </i>
-                        </p>
-                      </div>
-                      <p class="card-text text-muted"><span class="h4 text-primary">$75</span> per night</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide h-auto px-2">
-              <!-- place item-->
-              <div data-marker-id="59c0c8e3503eb77d487e8082" class="w-100 h-100">
-                <div class="card h-100 border-0 shadow">
-                  <div class="card-img-top overflow-hidden gradient-overlay"> <img src="../../assets/img/photo/photo-1494526585095-c41746248156.jpg" alt="Sunny Private Studio-Apartment" class="img-fluid"/><a href="detail-rooms.html" class="tile-link"></a>
-                    <div class="card-img-overlay-bottom z-index-20">
-                      <div class="media text-white text-sm align-items-center"><img src="../../assets/img/avatar/avatar-9.jpg" alt="Barbora" class="avatar avatar-border-white mr-2"/>
-                        <div class="media-body">Barbora</div>
-                      </div>
-                    </div>
-                    <div class="card-img-overlay-top text-right"><a href="javascript: void();" class="card-fav-icon position-relative z-index-40"> 
-                        <svg class="svg-icon text-white">
-                          <use xlink:href="#heart-1"> </use>
-                        </svg></a></div>
-                  </div>
-                  <div class="card-body d-flex align-items-center">
-                    <div class="w-100">
-                      <h6 class="card-title"><a href="detail-rooms.html" class="text-decoration-none text-dark">Sunny Private Studio-Apartment</a></h6>
-                      <div class="d-flex card-subtitle mb-3">
-                        <p class="flex-grow-1 mb-0 text-muted text-sm">Shared room</p>
-                        <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-gray-300">                                  </i>
-                        </p>
-                      </div>
-                      <p class="card-text text-muted"><span class="h4 text-primary">$93</span> per night</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide h-auto px-2">
-              <!-- place item-->
-              <div data-marker-id="59c0c8e39aa2eed0626e485d" class="w-100 h-100">
-                <div class="card h-100 border-0 shadow">
-                  <div class="card-img-top overflow-hidden gradient-overlay"> <img src="../../assets/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="Mid-Century Modern Garden Paradise" class="img-fluid"/><a href="detail-rooms.html" class="tile-link"></a>
-                    <div class="card-img-overlay-bottom z-index-20">
-                      <div class="media text-white text-sm align-items-center"><img src="../../assets/img/avatar/avatar-10.jpg" alt="Jack" class="avatar avatar-border-white mr-2"/>
-                        <div class="media-body">Jack</div>
-                      </div>
-                    </div>
-                    <div class="card-img-overlay-top text-right"><a href="javascript: void();" class="card-fav-icon position-relative z-index-40"> 
-                        <svg class="svg-icon text-white">
-                          <use xlink:href="#heart-1"> </use>
-                        </svg></a></div>
-                  </div>
-                  <div class="card-body d-flex align-items-center">
-                    <div class="w-100">
-                      <h6 class="card-title"><a href="detail-rooms.html" class="text-decoration-none text-dark">Mid-Century Modern Garden Paradise</a></h6>
-                      <div class="d-flex card-subtitle mb-3">
-                        <p class="flex-grow-1 mb-0 text-muted text-sm">Entire house</p>
-                        <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i>
-                        </p>
-                      </div>
-                      <p class="card-text text-muted"><span class="h4 text-primary">$115</span> per night</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide h-auto px-2">
-              <!-- place item-->
-              <div data-marker-id="59c0c8e39aa2edasd626e485d" class="w-100 h-100">
-                <div class="card h-100 border-0 shadow">
-                  <div class="card-img-top overflow-hidden gradient-overlay"> <img src="../../assets/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" alt="Brooklyn Life, Easy to Manhattan" class="img-fluid"/><a href="detail-rooms.html" class="tile-link"></a>
-                    <div class="card-img-overlay-bottom z-index-20">
-                      <div class="media text-white text-sm align-items-center"><img src="../../assets/img/avatar/avatar-11.jpg" alt="Stuart" class="avatar avatar-border-white mr-2"/>
-                        <div class="media-body">Stuart</div>
-                      </div>
-                    </div>
-                    <div class="card-img-overlay-top text-right"><a href="javascript: void();" class="card-fav-icon position-relative z-index-40"> 
-                        <svg class="svg-icon text-white">
-                          <use xlink:href="#heart-1"> </use>
-                        </svg></a></div>
-                  </div>
-                  <div class="card-body d-flex align-items-center">
-                    <div class="w-100">
-                      <h6 class="card-title"><a href="detail-rooms.html" class="text-decoration-none text-dark">Brooklyn Life, Easy to Manhattan</a></h6>
-                      <div class="d-flex card-subtitle mb-3">
-                        <p class="flex-grow-1 mb-0 text-muted text-sm">Private room</p>
-                        <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-gray-300">                                  </i>
-                        </p>
-                      </div>
-                      <p class="card-text text-muted"><span class="h4 text-primary">$123</span> per night</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- If we need pagination-->
-          <div class="swiper-pagination"></div>
-        </div>
-      </div>
+    <div class="py-6 bg-gray-100">
+          <DisplayCatalog2/>
     </div>
   </div>
 </template>
+<script type="text/javascript">
+  
+import DisplayCatalog2 from '@/components/DisplayCatalog2.vue'
+
+export default {
+    name: 'product-detail',
+    components: {
+      DisplayCatalog2,
+    },
+    data() {
+      return {
+        swiperOption: {
+            slidesPerView: 2,
+            spaceBetween: 0,
+            centeredSlides: true,
+            loop: true,
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                dynamicBullets: true
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+          }
+        }
+      }
+    }
+</script>
 ```
 
 ### Step 8.5: Configure `router.js` Component
@@ -2072,16 +1922,16 @@ In `myproject-consumer-web/src/router.js`
 Add the following snippet:
 ```js
 {
-      path: '/products',
-      name: 'products',
-      component: () => import('./views/Products.vue'),
-      children: [
-        {
-          path: ':id',
-          component: () => import('./components/products/ProductDetail.vue'),
-        }
-      ] 
-    }
+  path: '/products',
+  name: 'products',
+  component: () => import('./views/Products.vue'),
+},
+{
+  path: '/products/:id',
+  name: 'product_detail',
+  component: () => import('./components/products/ProductDetail.vue')
+
+}
 ```
 
 Final version of `router.js`:
@@ -2120,12 +1970,11 @@ export default new Router({
       path: '/products',
       name: 'products',
       component: () => import('./views/Products.vue'),
-      children: [
-        {
-          path: ':id',
-          component: () => import('./components/products/ProductDetail.vue'),
-        }
-      ] 
+    },
+    {
+      path: '/products/:id',
+      name: 'product_detail',
+      component: () => import('./components/products/ProductDetail.vue')
     }
   ]
 })
