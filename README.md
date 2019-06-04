@@ -1,4 +1,5 @@
 
+
 # Set up Vue.js Frontend using a Theme
 ## Prerequsites
 
@@ -78,7 +79,13 @@ $ npm run serve
 
 ## Step 2: Setup Web Template (Bootstrap 4 - Directory Template)
 
-### Step 2.1:  Install theme dependencies and node modules
+### Step 2.1 Copy the contents of assets folder into assets folder of `myproject-consumer-web`
+```bash
+$ cd myproject-consumer-web/scr/assets
+$ cp -R <source_dir>/assets/ myproject-consumer-web/src/assets
+```
+
+### Step 2.2:  Install theme dependencies and node modules
 Install dependencies:
 In `myproject-consumer-web` add the following dependencies into `package.json`
 
@@ -438,6 +445,7 @@ Add the following code in `Navigation.vue`:
 Add the following code into the `<template>` tag of `App.vue`
 ```html
 ...
+<div id="app">
 <Navigation/>
 <router-view/>
 ...
@@ -446,12 +454,12 @@ Add the following code into the `<template>` tag of `App.vue`
 In the `<script>` tag of `App.vue` add the following code: 
 
 ```js
-import Navigation from '@/components/Navigation.vue' <--- We import the footer from our components
+import Navigation from '@/components/Navigation.vue' <--- We import the Navigation from our components
 
 export default {
   name: 'home',
   components: {
-    Navigation <--- We add footer as a component
+    Navigation <--- We add Navigation as a component
   }
 }
 ```
