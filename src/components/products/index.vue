@@ -14,8 +14,8 @@
 </style>
 
 <script type="text/javascript">
-	import DisplayCatalog2 from '@/components/DisplayCatalog2.vue'
-	import DisplayCatalog3 from '@/components/DisplayCatalog3.vue'
+import DisplayCatalog2 from '@/components/DisplayCatalog2.vue'
+import DisplayCatalog3 from '@/components/DisplayCatalog3.vue'
 
 
 export default {
