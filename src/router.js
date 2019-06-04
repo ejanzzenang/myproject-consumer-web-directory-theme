@@ -55,12 +55,12 @@ export default new Router({
       path: '/products',
       name: 'products',
       component: () => import('./views/Products.vue'),
-      children: [
-        {
-          path: ':id',
-          component: () => import('./components/products/ProductDetail.vue'),
-        }
-      ] 
+    },
+    {
+      path: '/products/:id',
+      name: 'product_detail',
+      component: () => import('./components/products/ProductDetail.vue')
+
     }
   ]
 })
