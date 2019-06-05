@@ -1,5 +1,6 @@
 
 
+
 # Set up Vue.js Frontend using a Theme
 ## Prerequsites
 
@@ -81,7 +82,7 @@ $ npm run serve
 
 ### Step 2.1 Copy the contents of assets folder into assets folder of `myproject-consumer-web`
 ```bash
-$ cd myproject-consumer-web/scr/assets
+$ cd myproject-consumer-web/src/assets
 $ cp -R <source_dir>/assets/ myproject-consumer-web/src/assets
 ```
 
@@ -444,16 +445,20 @@ Add the following code in `Navigation.vue`:
 
 Add the following code into the `<template>` tag of `App.vue`
 ```html
-...
+
 <div id="app">
+... start ...
 <Navigation/>
 <router-view/>
-...
+... end ...
+</div>
 ```
 
 In the `<script>` tag of `App.vue` add the following code: 
 
-```js
+```html
+<script type="text/javascript">
+... start ...
 import Navigation from '@/components/Navigation.vue' <--- We import the Navigation from our components
 
 export default {
@@ -462,11 +467,17 @@ export default {
     Navigation <--- We add Navigation as a component
   }
 }
+... end ...
+</script>
 ```
 
 Add the following under `<Navigation>` tag in  `App.vue`
 ```html
+<Navigation/>
+... start ...
 <div class="navbar-margin"></div>
+... end ...
+<router-view/>
 ```
 Add the following code inside the `<style>` tag of `App.vue`
 ```css
@@ -558,13 +569,21 @@ Add the following code in `Footer.vue`:
 Add the following code into the `<template>` tag of `App.vue`
 ```html
 ...
-<router-view/>
-<Footer/>
+<div class="navbar-margin"></div>
+  ... start ...
+  <router-view/>
+  <Footer/>
+  ... end ...
+</div>
 ...
 ```
 In the `<script>` tag of `App.vue` add the following code: 
 
-```js
+```html
+<script type="text/javascript">
+// @ is an alias to /src
+... start ...
+import Navigation from '@/components/Navigation.vue'
 import Footer from '@/components/Footer.vue' <--- We import the footer from our components
 
 export default {
@@ -574,6 +593,8 @@ export default {
     Footer <--- We add footer as a component
   }
 }
+... end ...
+</script>
 ```
 
 Final Version of `App.vue`
@@ -614,6 +635,7 @@ export default {
 ```
 
 ## Step 5: Set up Home Page
+Set up the individual components for our home page.  
 
 ### Step 5.1: Set up Search Bar Component
 In `myproject-consumer-web/src/components/`
@@ -1295,6 +1317,7 @@ In the `<template>` tag of `Home.vue`
 ```html
 <template>
   <div class="home">
+   ... start ...
     <SearchBar/>
     <AboutProduct/>
     <DisplayCatalog1/>
@@ -1302,6 +1325,7 @@ In the `<template>` tag of `Home.vue`
     <Testimonials/>
     <DisplayCatalog3/>
     <PhotoWheel/> 
+    ... end ...
   </div>
 </template>
 ```
@@ -1311,6 +1335,7 @@ In the `<script>` tag of `Home.vue`
 ```html
 <script>
 // @ is an alias to /src
+... start ...
 import SearchBar from '@/components/SearchBar.vue'
 import AboutProduct from '@/components/AboutProduct.vue'
 import DisplayCatalog1 from '@/components/DisplayCatalog1.vue'
@@ -1331,7 +1356,7 @@ export default {
     PhotoWheel
   }
 }
-
+... end ...
 </script>
 ```
 
@@ -1375,7 +1400,7 @@ export default {
 ```
 
 Final Version of `router.js`
-* Important to note that `router.js` takes care of routing to `Home.vue`
+* Important to note that `router.js` takes care of routing to `Home.vue`. This was configured when we ran `vue add router`
 * Our home page is accessible via `localhost:8080/`
 
 ```js
@@ -1416,9 +1441,17 @@ Add the following snippet
           <div class="row min-vh-100">
             <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
               <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
-                <div class="mb-5"><img src="img/logo-square.svg" alt="..." style="max-width: 4rem;" class="img-fluid mb-3">
+                <div class="mb-5"><img src="../assets/img/logo-square.svg" alt="..." style="max-width: 4rem;" class="img-fluid mb-3">
                   <h2>Welcome back</h2>
                 </div>
+                <a href="/" class="close-absolute mr-md-5 mr-xl-6 pt-5"> 
+                  <svg class="svg-icon w-3rem h-3rem">
+                    <use xlink:href="#close-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" id="close-1" width="100%" height="100%">
+                      <path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10" d="M41.999 20.002l-22 22m22 0L20 20" stroke-linejoin="round" stroke-linecap="round" style="stroke:var(--layer1, #202020)"></path>
+                    </svg>
+                    </use>
+                  </svg></a>
                 <form class="form-validate">
                   <div class="form-group">
                     <label for="loginUsername" class="form-label"> Email Address</label>
@@ -1446,15 +1479,12 @@ Add the following snippet
                   <button class="btn btn btn-outline-muted btn-block btn-social mb-3"><i class="fa-2x fa-google fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Google</span></button>
                   <hr class="my-4">
                   <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="signup.html">Sign Up                </a></small></p>
-                </form><a href="index.html" class="close-absolute mr-md-5 mr-xl-6 pt-5"> 
-                  <svg class="svg-icon w-3rem h-3rem">
-                    <use xlink:href="#close-1"> </use>
-                  </svg></a>
+                </form>
               </div>
             </div>
-            <div class="col-md-4 col-lg-6 col-xl-7 d-none d-md-block">
+            <div class="col-md-4 col-lg-6 col-xl-7 bG">
               <!-- Image-->
-              <div style="background-image: url(img/photo/photo-1497436072909-60f360e1d4b1.jpg);" class="bg-cover h-100 mr-n3"></div>
+              
             </div>
           </div>
         </div>
@@ -1464,19 +1494,21 @@ Add the following snippet
 
 <script>
 export default {
-  name: 'landing',
+  name: 'login',
   props: {
     msg: String
   }
 }
 </script>
 
-<style type="text/css">
-    
+<style>
+    .bG {
+      background: url(../assets/img/photo/photo-1497436072909-60f360e1d4b1.jpg) center center;
+      background-size: cover;
+    }
     
 </style>
 ```
-
 
 In `myproject-consumer-web/src/`
 
@@ -1491,12 +1523,16 @@ Add the following snippet in `router.js`:
    // which is lazy-loaded when the route is visited.
    component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
 },
+
+... start ...
 { 
    //Added a route for login
    path: '/login',
    name: 'login',
    component: () => import('./views/Login.vue')
 }
+
+... end ...
 ```
 
 ## Step 7: Set up Signup Page
@@ -1512,7 +1548,7 @@ Add the following snippet
       <div class="row min-vh-100">
         <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
           <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
-            <div class="mb-4"><img src="img/logo-square.svg" alt="..." style="max-width: 4rem;" class="img-fluid mb-4">
+            <div class="mb-4"><img src="../assets/img/logo-square.svg" alt="..." style="max-width: 4rem;" class="img-fluid mb-4">
               <h2>Sign up</h2>
               <p class="text-muted">His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table.</p>
             </div>
@@ -1537,20 +1573,31 @@ Add the following snippet
               <p class="text-sm text-muted">By signing up you agree to Directory's <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</p>
             </form><a href="index.html" class="close-absolute mr-md-5 mr-xl-6 pt-5"> 
               <svg class="svg-icon w-3rem h-3rem">
-                <use xlink:href="#close-1"> </use>
-              </svg></a>
+                <use xlink:href="#close-1"> 
+
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" id="close-1" width="100%" height="100%">
+                      <path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10" d="M41.999 20.002l-22 22m22 0L20 20" stroke-linejoin="round" stroke-linecap="round" style="stroke:var(--layer1, #202020)"></path>
+                    </svg>
+                </use>
+              </svg>
+            </a>
           </div>
         </div>
-        <div class="col-md-4 col-lg-6 col-xl-7 d-none d-md-block">
-          <!-- Image-->
-          <div style="background-image: url(img/photo/photo-1497436072909-60f360e1d4b1.jpg);" class="bg-cover h-100 mr-n3"></div>
+        <div class="col-md-4 col-lg-6 col-xl-7 d-none d-md-block bG">
         </div>
       </div>
     </div>
   </div>
 </template>
-```
+<style scoped>
+  
+  .bG {
+      background: url(../assets/img/photo/photo-1497436072909-60f360e1d4b1.jpg) center center;
+      background-size: cover;
+    } 
 
+</style>
+```
 
 In `myproject-consumer-web/src/`
 
@@ -1558,29 +1605,40 @@ Add the following snippet in `router.js`:
 
 ```js
 {
-  path: '/login',
-  name: 'login',
-  component: () => import('./views/Login.vue')
+   path: '/about',
+   name: 'about',
+   // route level code-splitting
+   // this generates a separate chunk (about.[hash].js) for this route
+   // which is lazy-loaded when the route is visited.
+   component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
 },
+{ 
+   //Added a route for login
+   path: '/login',
+   name: 'login',
+   component: () => import('./views/Login.vue')
+},
+... start ...
 {
-  //Add sign up into routes
   path: '/signup',
   name: 'sigup',
   component: () => import('./views/SignUp.vue')
-}
+},
+
+... end ...
 ```
 
 ## Step 8: Set up Product Page
 
 ### Step 8.1: Set up `Products.vue` Component
-In  `src/views`  create a file called `Products.vue`
+In  `myproject-consumer-web/src/views`  create a file called `Products.vue`
 Add the following code:
 
 ```html
 <template>
   <div class="product">
     <ProductIndex/>
-        <router-view/>  
+    <router-view/>  
   </div>
 </template>
 
@@ -1593,13 +1651,12 @@ Add the following code:
             ProductIndex
         }
     }
-
 </script>
 
 ```
 
 ### Step 8.2: Set up `products` Folder
-In  `src/components`  folder create a folder called  `booking`
+In  `myproject-consumer-web/src/components`  folder create a folder called  `products`
 
 ```bash
 $ cd src/components
@@ -1610,7 +1667,7 @@ $ cd products
 ### Step 8.3: Product `index` Component
 Create a product index page by re-using `<DisplayCatalog2/>` and `<DisplayCatalog3/>` 
 
-In `myproject-consumer-web/src/views/product`
+In `myproject-consumer-web/src/views/products`
 create a file called : `index.vue`
 
 Add the following code:
@@ -1646,10 +1703,9 @@ name: 'products',
 </script>
 ```
 
-
 ### Step 8.4: ProductDetail Component
 
-In `myproject-consumer-web/src/views/product`
+In `myproject-consumer-web/src/views/products`
 create a file called : `ProductDetail.vue`
 
 Add the following code:
@@ -1935,6 +1991,17 @@ In `myproject-consumer-web/src/router.js`
 Add the following snippet:
 ```js
 {
+  path: '/login',
+  name: 'login',
+  component: () => import('./views/Login.vue')
+},
+{
+  path: '/signup',
+  name: 'sigup',
+  component: () => import('./views/SignUp.vue')
+},
+... start ..
+{
   path: '/products',
   name: 'products',
   component: () => import('./views/Products.vue'),
@@ -1945,6 +2012,7 @@ Add the following snippet:
   component: () => import('./components/products/ProductDetail.vue')
 
 }
+... end ...
 ```
 
 Final version of `router.js`:
@@ -2011,13 +2079,20 @@ In `Booking.vue`, copy the following code:
 In `myproject-consumer-web/src/`
 
 Add the following snippet in `router.js`:
-
 ```js
+{
+  path: '/products/:id',
+  name: 'product_detail',
+  component: () => import('./components/products/ProductDetail.vue')
+
+},
+... start ...
 {
     path: '/booking',
     name: 'booking',
     component: () => import('./views/Booking.vue'),
 }
+... end ...
 ```
 
 ### Step 9.2: Set up BookingPanel Component
@@ -2028,12 +2103,8 @@ $ mkdir booking
 $ cd booking
 ```
 In the `booking` folder, create a file called `BookingPanel.vue`
-```bash
-$ touch BookingPanel.vue
-```
-
 In `BookingPanel.vue` copy the following code:
-
+*Note that BookingPanel will be used as a child component for the succeeding steps.
 ```html
 <template>
   <div class="booking-panel">
@@ -2097,7 +2168,6 @@ In `BookingPanel.vue` copy the following code:
 In the `booking` folder, create a file called `Step1.vue`
 
 In `Step1.vue` copy the following code:
-*Note that `Step1.vue` imports BookingPanel as a child component
 ```html
 <template>
   <div class="booking-step1">
@@ -2440,21 +2510,13 @@ In `Step4.vue` copy the following code:
 
 In `myproject-consumer-web/src/`
 Add the following snippet in `router.js`:
-
-```js
-{
-    path: '/booking',
-    name: 'booking',
-    component: () => import('./views/Booking.vue'),
-}
-```
-
 under the path `/booking`, add a key called children that takes in a list of child paths:
 ```js
  {
       path: '/booking',
       name: 'booking',
       component: () => import('./views/Booking.vue'),
+  ... start ...
       children: [
         {
           path: 'step1',
@@ -2473,6 +2535,7 @@ under the path `/booking`, add a key called children that takes in a list of chi
           component: () => import('./components/booking/Step4.vue'),
         }
       ]
+        ... end ...
     }
 ``` 
 
@@ -2519,6 +2582,17 @@ export default new Router({
       component: () => import('./views/SignUp.vue')
     },
     {
+      path: '/products',
+      name: 'products',
+      component: () => import('./views/Products.vue'),
+    },
+    {
+      path: '/products/:id',
+      name: 'product_detail',
+      component: () => import('./components/products/ProductDetail.vue')
+
+    },
+    {
       path: '/booking',
       name: 'booking',
       component: () => import('./views/Booking.vue'),
@@ -2540,20 +2614,10 @@ export default new Router({
           component: () => import('./components/booking/Step4.vue'),
         }
       ]
-    },
-    {
-      path: '/products',
-      name: 'products',
-      component: () => import('./views/Products.vue'),
-      children: [
-        {
-          path: ':id',
-          component: () => import('./components/products/ProductDetail.vue'),
-        }
-      ] 
     }
   ]
 })
+
 ```
 
 
