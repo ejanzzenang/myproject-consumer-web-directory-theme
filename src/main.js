@@ -4,6 +4,9 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 Vue.use(VueAwesomeSwiper)
 
+import Axios from 'axios'
+Vue.prototype.$http = Axios;
+
 // jQuery
 require("@/assets/vendor/jquery/jquery.min.js")
 
