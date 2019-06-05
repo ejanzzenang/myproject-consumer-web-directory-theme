@@ -1,7 +1,7 @@
 <template>
 	<div class="products">
 		<h1>Product Catalog</h1>
-		<DisplayCatalog2/>
+		<DisplayProducts/>
 		<DisplayCatalog3/>
 	</div>
 </template>
@@ -14,14 +14,14 @@
 </style>
 
 <script type="text/javascript">
-import DisplayCatalog2 from '@/components/DisplayCatalog2.vue'
+import DisplayProducts from '@/components/products/DisplayProduct.vue'
 import DisplayCatalog3 from '@/components/DisplayCatalog3.vue'
 
 
 export default {
 name: 'products',
 	components: {
-		DisplayCatalog2,
+		DisplayProducts,
 		DisplayCatalog3
 	}
 }
