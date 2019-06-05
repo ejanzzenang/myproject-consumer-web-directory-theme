@@ -29,6 +29,17 @@ export default new Router({
       component: () => import('./views/SignUp.vue')
     },
     {
+      path: '/products',
+      name: 'products',
+      component: () => import('./views/Products.vue'),
+    },
+    {
+      path: '/products/:id',
+      name: 'product_detail',
+      component: () => import('./components/products/ProductDetail.vue')
+
+    },
+    {
       path: '/booking',
       name: 'booking',
       component: () => import('./views/Booking.vue'),
@@ -50,17 +61,6 @@ export default new Router({
           component: () => import('./components/booking/Step4.vue'),
         }
       ]
-    },
-    {
-      path: '/products',
-      name: 'products',
-      component: () => import('./views/Products.vue'),
-    },
-    {
-      path: '/products/:id',
-      name: 'product_detail',
-      component: () => import('./components/products/ProductDetail.vue')
-
     }
   ]
 })
