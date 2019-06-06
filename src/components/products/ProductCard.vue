@@ -3,7 +3,7 @@
     <div data-marker-id="59c0c8e33b1527bfe2abaf92" class="w-100 h-100">
       <div class="card h-100 border-0 shadow">
         <div class="card-img-top overflow-hidden gradient-overlay"> <img v-bind:src="product.image_url" v-bind:alt="product.name" class="img-fluid"/>
-          <router-link v-bind:to="product.product_id" class="tile-link"></router-link>
+          <router-link v-bind:to="{ name: 'product_detail', params: { product_id: product.product_id }}" class="tile-link"></router-link>
         </div>
         <div class="card-body d-flex align-items-center">
           <div class="w-100">
@@ -23,10 +23,11 @@
 <script>
  export default {
   name: 'product-card',
-  props: ['product'],
+  props: ['product'], 
   data(){
     return {
-      obj: this.product
+      obj: this.product,
+      product_id: this.product.product_id
     }
   }
 }
