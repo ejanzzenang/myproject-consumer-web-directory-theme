@@ -271,12 +271,16 @@ export default {
           const baseURI = 'http://localhost:5000/products/' + product_id;
           this.$http.get(baseURI)
           .then(result => {
-            this.products = result.data['products']; 
+            this.products = result.data['products'];
+            console.log(this.products); 
           })
           .catch(error =>{
             alert(error);
           })
         }
+      },
+      created: function(){
+        this.getProduct(this.route.params.product_id)
       }
   }
 </script>
