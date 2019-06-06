@@ -14,8 +14,8 @@
         </div>
         <!-- Slider main container-->
         <swiper :options="swiperOption">
-            <swiper-slide class="h-auto px-2" v-for="products in products">
-              <ProductCard v-bind:product="products"/>
+            <swiper-slide class="h-auto px-2" v-for="product in products" :key="product.product_id">
+              <ProductCard v-bind:product="product"/>
             </swiper-slide>
             <!-- Slides-->
             <div class="swiper-pagination" slot="pagination"></div>

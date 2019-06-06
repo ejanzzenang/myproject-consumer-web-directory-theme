@@ -54,8 +54,6 @@
               <li>Air Conditioning to keep you cool all summer!</li>
             </ul>
             <p class="text-muted font-weight-light">The apartment is surprisingly quiet for being in the heart of a vibrant, bustling neighborhood.</p>
-            <h6 class="mb-3">Interaction with guests</h6>
-            <p class="text-muted font-weight-light">We live in the two floors above the garden apartment so we are usually available to answer questions. The garden apartment is separate from our living space. We are happy to provide advice on local attractions, restaurants and transportation around the city. If there's anything you need please don't hesitate to ask!</p>
           </div>
           <div class="text-block">
             <h4 class="mb-4">Amenities</h4>
@@ -233,18 +231,18 @@
       </div>
     </div>
     <div class="py-6 bg-gray-100">
-          <DisplayCatalog2/>
+          <DisplayProduct/>
     </div>
 	</div>
 </template>
 <script type="text/javascript">
   
-import DisplayCatalog2 from '@/components/DisplayCatalog2.vue'
+import DisplayProduct from '@/components/products/DisplayProduct.vue'
 
 export default {
     name: 'product-detail',
     components: {
-      DisplayCatalog2,
+      DisplayProduct,
     },
     data() {
       return {
@@ -267,7 +265,19 @@ export default {
             },
           }
         }
+      },
+      methods: {
+      getProduct: function(product_id){
+          const baseURI = 'http://localhost:5000/products/' + product_id;
+          this.$http.get(baseURI)
+          .then(result => {
+            this.products = result.data['products']; 
+          })
+          .catch(error =>{
+            alert(error);
+          })
+        }
       }
-    }
+  }
 </script>
 
