@@ -108,7 +108,7 @@ after, run:
 $ npm install
 ```
 
-### Step 2.2: Import CSS and javascript dependencies to `main.js`
+### Step 2.3: Import CSS and javascript dependencies to `main.js`
 
 In `myproject-vuejs-web/src/main.js` add the following lines of code: 
 
@@ -182,7 +182,7 @@ new Vue({
 
 ```
 
-### Step 2.3: Import CSS dependencies to `App.vue`
+### Step 2.4: Import CSS dependencies to `App.vue`
 
 Add the following stylesheet imports inside the `<style>` tag of `App.vue`
 ```css
@@ -224,8 +224,54 @@ export default {
   @import "https://use.fontawesome.com/releases/v5.8.1/css/all.css";
 
 </style>
-
 ```
+
+### Step 2.5:  Set up ESLint for code consistency linting
+In the terminal run the following: 
+```
+$ npm install --save-dev eslint eslint-config-strongloop
+```
+
+In `myproject-vuejs-web/src` create  a file called: `.eslintrc.json`
+In `.eslintrc.json` add following:
+```json
+{
+    "extends": "strongloop",
+    "parser": "babel-eslint"
+}
+```
+
+In `myproject-vuejs-web/src` create a file called:  `.eslintignore`
+In the `.eslintignore` we specify directories we don't want to lint. In this case,  we don't need to lint our `assets` and `pages` folders.
+
+In `.eslintignore` add following relative paths:
+```json
+src/assets/**
+src/pages/**
+```
+
+In `myproject-vuejs-web/src` ,  `package.json` under 
+```json
+"scripts": {
+  ...
+  "lint": "vue-cli-service lint"
+  ...
+}
+```
+replace:
+```json
+"lint": "vue-cli-service lint"
+```
+with the following
+```json
+"lint": "eslint . --fix"
+```
+
+In the terminal you can now run the following command: 
+```bash
+$ npm run lint
+```
+*The above command will automatically fix spacing and report syntax errors.
 
 ## Step 3: Set up Router Plugin
 

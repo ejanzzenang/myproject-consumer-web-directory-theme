@@ -1,8 +1,8 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Vue from 'vue';
+import Router from 'vue-router';
+import Home from './views/Home.vue';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   mode: 'history',
@@ -11,22 +11,22 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
     },
     {
       path: '/about',
       name: 'about',
-      component: () => import('./views/About.vue')
+      component: () => import('./views/About.vue'),
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import('./views/Login.vue')
+      component: () => import('./views/Login.vue'),
     },
     {
       path: '/signup',
       name: 'sigup',
-      component: () => import('./views/SignUp.vue')
+      component: () => import('./views/SignUp.vue'),
     },
     {
       path: '/products',
@@ -37,7 +37,7 @@ export default new Router({
       path: '/products/:product_id',
       name: 'product_detail',
       component: () => import('./components/products/ProductDetail.vue'),
-      props: true
+      props: true,
 
     },
     {
@@ -60,8 +60,8 @@ export default new Router({
         {
           path: 'confirmed',
           component: () => import('./components/booking/Step4.vue'),
-        }
-      ]
-    }
-  ]
-})
+        },
+      ],
+    },
+  ],
+});

@@ -1,38 +1,38 @@
-import Vue from 'vue'
-import App from './App.vue'
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-import 'swiper/dist/css/swiper.css'
-Vue.use(VueAwesomeSwiper)
+import Vue from 'vue';
+import App from './App.vue';
+import VueAwesomeSwiper from 'vue-awesome-swiper';
+import 'swiper/dist/css/swiper.css';
+Vue.use(VueAwesomeSwiper);
 
-import Axios from 'axios'
+import Axios from 'axios';
 Vue.prototype.$http = Axios;
 
 // jQuery
-require("@/assets/vendor/jquery/jquery.min.js")
+require('@/assets/vendor/jquery/jquery.min.js');
 
 // bootstrap
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // css
-require('@/assets/vendor/nouislider/nouislider.css')
-require('@/assets/vendor/magnific-popup/magnific-popup.css')
-require('@/assets/css/style.default.css')
-require('@/assets/css/custom.css')
-require('@/assets/img/favicon.png')
+require('@/assets/vendor/nouislider/nouislider.css');
+require('@/assets/vendor/magnific-popup/magnific-popup.css');
+require('@/assets/css/style.default.css');
+require('@/assets/css/custom.css');
+require('@/assets/img/favicon.png');
 
 // As a global method
-require("@/assets/vendor/object-fit-images/ofi.min.js")
-require("@/assets/vendor/bootstrap/js/bootstrap.bundle.min.js")
-require("@/assets/vendor/magnific-popup/jquery.magnific-popup.min.js")
-require("@/assets/vendor/smooth-scroll/smooth-scroll.polyfills.min.js")
-require("@/assets/vendor/bootstrap-select/js/bootstrap-select.min.js")
+require('@/assets/vendor/object-fit-images/ofi.min.js');
+require('@/assets/vendor/bootstrap/js/bootstrap.bundle.min.js');
+require('@/assets/vendor/magnific-popup/jquery.magnific-popup.min.js');
+require('@/assets/vendor/smooth-scroll/smooth-scroll.polyfills.min.js');
+require('@/assets/vendor/bootstrap-select/js/bootstrap-select.min.js');
 
-import router from './router'
+import router from './router';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
   router,
-  render: h => h(App)
-}).$mount('#app')
+  render: h => h(App),
+}).$mount('#app');
