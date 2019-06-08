@@ -1,94 +1,18 @@
 <template>
 	<div class="product-detail">
-    <section>
-        <!-- Additional required wrapper-->
-        <swiper :options="swiperOption">
-          <!-- Slides-->
-          <swiper-slide>
-            <a href="../../assets/img/photo/photo-1426122402199-be02db90eb90.jpg" data-toggle="gallery-top" title="Our street"><img src="../../assets/img/photo/photo-1426122402199-be02db90eb90.jpg" alt="Our street" class="img-fluid"></a>
-          </swiper-slide>
-          <swiper-slide>
-            <a href="../../assets/img/photo/photo-1512917774080-9991f1c4c750.jpg" data-toggle="gallery-top" title="Outside"><img src="../../assets/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="Outside" class="img-fluid"></a>
-          </swiper-slide>
-          <swiper-slide>
-            <a href="../../assets/img/photo/photo-1494526585095-c41746248156.jpg" data-toggle="gallery-top" title="Rear entrance"><img src="../../assets/img/photo/photo-1494526585095-c41746248156.jpg" alt="Rear entrance" class="img-fluid"></a>
-          </swiper-slide>
-          <swiper-slide>
-            <a href="../../assets/img/photo/photo-1484154218962-a197022b5858.jpg" data-toggle="gallery-top" title="Kitchen"><img src="../../assets/img/photo/photo-1484154218962-a197022b5858.jpg" alt="Kitchen" class="img-fluid"></a>
-          </swiper-slide>
-          <swiper-slide>
-            <a href="../../assets/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" data-toggle="gallery-top" title="Bedroom"><img src="../../assets/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="Bedroom" class="img-fluid"></a>
-          </swiper-slide>
-          <swiper-slide>
-            <a href="../../assets/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" data-toggle="gallery-top" title="Bedroom"><img src="../../assets/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" alt="Bedroom" class="img-fluid"></a>
-          </swiper-slide>
-        </swiper>
-        <div class="swiper-pagination swiper-pagination-white"></div>
-        <div class="swiper-button-prev swiper-button-white"></div>
-        <div class="swiper-button-next swiper-button-white"></div>
-
-    </section>
     <div class="container py-5">
       <div class="row">
         <div class="col-lg-8"> 
           <div class="text-block">
-            <p class="text-primary"><i class="fa-map-marker-alt fa mr-1"></i> Brooklyn, New York</p>
-            <h1>Mid-Century Modern Garden Paradise</h1>
-            <p class="text-muted text-uppercase mb-4">Entire Apartment </p>
+            <h1>{{ product.name }}</h1>
+            <div class="text-block"><img  v-bind:src="product.image_url"></div>
             <ul class="list-inline text-sm mb-4">
               <li class="list-inline-item mr-3"><i class="fa fa-users mr-1 text-secondary"></i> 4 guests</li>
               <li class="list-inline-item mr-3"><i class="fa fa-door-open mr-1 text-secondary"></i> 1 bedroom</li>
               <li class="list-inline-item mr-3"><i class="fa fa-bed mr-1 text-secondary"></i> 3 beds</li>
               <li class="list-inline-item mr-3"><i class="fa fa-bath mr-1 text-secondary"></i> 1 bath</li>
             </ul>
-            <p class="text-muted font-weight-light">Our garden basement apartment is fully equipped with everything you need to enjoy your stay. Very comfortable for a couple but plenty of space for a small family. Close to many wonderful Brooklyn attractions and quick trip to Manhattan. </p>
-            <h6 class="mb-3">The space</h6>
-            <p class="text-muted font-weight-light">Welcome to Brooklyn! We are excited to share our wonderful neighborhood with you. Our modern apartment has a private entrance, fully equipped kitchen, and a very comfortable queen size bed. We are happy to accommodate additional guests with a single bed in the living room, another comfy mattress on the floor and can make arrangements for small children with a portable crib and highchair if requested. </p>
-            <p class="text-muted font-weight-light">Also in the apartment:</p>
-            <ul class="text-muted font-weight-light"> 
-              <li>TV with Netflix and DirectTVNow</li>
-              <li>Free WiFi</li>
-              <li>Gourmet Coffee/Tea making supplies</li>
-              <li>Fresh Sheets and Towels</li>
-              <li>Toaster, microwave, pots and pans and basic cooking needs like salt, pepper, sugar, and olive oil.</li>
-              <li>Air Conditioning to keep you cool all summer!</li>
-            </ul>
-            <p class="text-muted font-weight-light">The apartment is surprisingly quiet for being in the heart of a vibrant, bustling neighborhood.</p>
-          </div>
-          <div class="text-block">
-            <h4 class="mb-4">Amenities</h4>
-            <div class="row"> 
-              <div class="col-md-6">
-                <ul class="list-unstyled text-muted">
-                  <li class="mb-2"><i class="fa fa-wifi text-secondary w-1rem mr-3 text-center"></i> <span class="text-sm">Wifi</span></li>
-                  <li class="mb-2"><i class="fa fa-tv text-secondary w-1rem mr-3 text-center"></i> <span class="text-sm">Cable TV</span></li>
-                  <li class="mb-2"><i class="fa fa-snowflake text-secondary w-1rem mr-3 text-center"></i> <span class="text-sm">Air conditioning</span></li>
-                  <li class="mb-2"><i class="fa fa-thermometer-three-quarters text-secondary w-1rem mr-3 text-center"></i> <span class="text-sm">Heating</span></li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <ul class="list-unstyled text-muted">
-                  <li class="mb-2"><i class="fa fa-bath text-secondary w-1rem mr-3 text-center"></i><span class="text-sm">Toiletteries</span></li>
-                  <li class="mb-2"><i class="fa fa-utensils text-secondary w-1rem mr-3 text-center"></i><span class="text-sm">Equipped Kitchen</span></li>
-                  <li class="mb-2"><i class="fa fa-laptop text-secondary w-1rem mr-3 text-center"></i><span class="text-sm">Desk for work</span></li>
-                  <li class="mb-2"><i class="fa fa-tshirt text-secondary w-1rem mr-3 text-center"></i><span class="text-sm">Washing machine</span></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="text-block">
-            <h4 class="mb-0">Amenities alternative</h4>
-            <p class="subtitle text-sm text-primary mb-4">Alternative amenities display</p>
-            <ul class="list-inline">
-              <li class="list-inline-item mb-2"><span class="badge badge-pill badge-light p-3 text-muted font-weight-normal">Wifi</span></li>
-              <li class="list-inline-item mb-2"><span class="badge badge-pill badge-light p-3 text-muted font-weight-normal">Cable TV</span></li>
-              <li class="list-inline-item mb-2"><span class="badge badge-pill badge-light p-3 text-muted font-weight-normal">Air conditioning</span></li>
-              <li class="list-inline-item mb-2"><span class="badge badge-pill badge-light p-3 text-muted font-weight-normal">Heating</span></li>
-              <li class="list-inline-item mb-2"><span class="badge badge-pill badge-light p-3 text-muted font-weight-normal">Toiletteries</span></li>
-              <li class="list-inline-item mb-2"><span class="badge badge-pill badge-light p-3 text-muted font-weight-normal">Equipped Kitchen</span></li>
-              <li class="list-inline-item mb-2"><span class="badge badge-pill badge-light p-3 text-muted font-weight-normal">Desk for work</span></li>
-              <li class="list-inline-item mb-2"><span class="badge badge-pill badge-light p-3 text-muted font-weight-normal">Washing machine</span></li>
-            </ul>
+            <p class="text-muted font-weight-light">{{product.description}}</p>
           </div>
           <div class="text-block">
             <div class="media"><img src="../../assets/img/avatar/avatar-10.jpg" alt="Jack London" class="avatar avatar-lg mr-4">
@@ -98,12 +22,6 @@
                 <p class="text-muted text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                 <p class="text-sm"><a href="#">See Jack's 3 other listings <i class="fa fa-long-arrow-alt-right ml-2"></i></a></p>
               </div>
-            </div>
-          </div>
-          <div class="text-block">
-            <h5 class="mb-4">Listing location</h5>
-            <div class="map-wrapper-300 mb-3">
-              <div id="detailMap" class="h-100"></div>
             </div>
           </div>
           <div class="text-block">
@@ -197,7 +115,7 @@
         </div>
         <div class="col-lg-4">
           <div style="top: 100px;" class="p-4 shadow ml-lg-4 rounded sticky-top">
-            <p class="text-muted"><span class="text-primary h2">$120</span> per night</p>
+            <p class="text-muted"><span class="text-primary h2">Php. {{product.price}}</span> per night</p>
             <hr class="my-4">
             <form id="booking-form" method="get" action="#" autocomplete="off" class="form">
               <div class="form-group">
@@ -231,7 +149,7 @@
       </div>
     </div>
     <div class="py-6 bg-gray-100">
-          <DisplayProduct/>
+        <DisplayProduct/>
     </div>
 	</div>
 </template>
@@ -246,6 +164,7 @@ export default {
     },
     data() {
       return {
+        product: '',
         swiperOption: {
             slidesPerView: 2,
             spaceBetween: 0,
@@ -271,8 +190,8 @@ export default {
           const baseURI = 'http://localhost:5000/products/' + product_id;
           this.$http.get(baseURI)
           .then(result => {
-            this.products = result.data['products'];
-            console.log(this.products); 
+            this.product = result.data['products'];
+            console.log(this.product); 
           })
           .catch(error =>{
             alert(error);
@@ -280,7 +199,8 @@ export default {
         }
       },
       created: function(){
-        this.getProduct(this.route.params.product_id)
+        console.log(this.$route.params.product_id)
+        this.getProduct(this.$route.params.product_id)
       }
   }
 </script>

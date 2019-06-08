@@ -20,7 +20,6 @@
             <!-- Slides-->
             <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
-
       </div>
     </section>		
 	</div>

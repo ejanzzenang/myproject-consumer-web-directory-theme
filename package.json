@@ -35,7 +35,8 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended"
+      "eslint:recommended",
+      "strongloop"
     ],
     "rules": {},
     "parserOptions": {
