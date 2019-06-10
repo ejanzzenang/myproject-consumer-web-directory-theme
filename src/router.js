@@ -25,7 +25,7 @@ export default new Router({
     },
     {
       path: '/signup',
-      name: 'sigup',
+      name: 'signup',
       component: () => import('./views/SignUp.vue'),
     },
     {

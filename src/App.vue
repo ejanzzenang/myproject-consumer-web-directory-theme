@@ -1,10 +1,11 @@
 <template>
   <div id="app">
-    <Navigation/>
-    <div class="navbar-margin"></div>
+    <div class="show-nav" v-if="!['signup', 'login'].includes(this.$route.name)">
+      <Navigation/>
+      <div class="navbar-margin"></div>
+    </div>
     <router-view/>
-    <Footer/>
-
+    <Footer v-if="!['signup', 'login'].includes(this.$route.name)"/>
   </div>
 </template>
 
