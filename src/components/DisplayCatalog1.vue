@@ -12,7 +12,7 @@
               See all guides<i class="fas fa-angle-double-right ml-2"></i></a></div>
         </div>
         <div class="row">
-          <swiper :options="swiperOption" class="guides-slider">
+          <swiper v-bind:options="swiperOption" class="guides-slider">
               <swiper-slide class="h-auto px-2">
                 <div class="card card-poster gradient-overlay mb-4 mb-lg-0"><a href="category.html" class="tile-link"></a><img src="../assets/img/photo/new-york.jpg" alt="Card image" class="bg-image">
                   <div class="card-body overlay-content">
@@ -36,7 +36,7 @@
                     <p class="card-text text-sm">Dalí, Gaudí, Barrio Gotico</p>
                   </div>
                 </div>
-              </swiper-slide >
+              </swiper-slide>
               <swiper-slide class="h-auto px-2">
                 <div class="card card-poster gradient-overlay mb-4 mb-lg-0"><a href="category.html" class="tile-link"></a><img src="../assets/img/photo/prague.jpg" alt="Card image" class="bg-image">
                   <div class="card-body overlay-content">
@@ -44,7 +44,7 @@
                     <p class="card-text text-sm">City of hundred towers</p>
                   </div>
                 </div>
-              </swiper-slide >
+              </swiper-slide>
           </swiper>
         </div>
       </div>

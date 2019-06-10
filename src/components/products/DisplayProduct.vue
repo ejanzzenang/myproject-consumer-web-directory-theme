@@ -12,12 +12,10 @@
                
               See all deals<i class="fas fa-angle-double-right ml-2"></i></a></div>
         </div>
-        <!-- Slider main container-->
-        <swiper :options="swiperOption">
-            <swiper-slide class="h-auto px-2" v-for="product in products" :key="product.product_id">
+        <swiper v-bind:options="swiperOption">
+            <swiper-slide class="h-auto px-2" v-for="product in products" v-bind:key="product.product_id">
               <ProductCard v-bind:product="product"/>
             </swiper-slide>
-            <!-- Slides-->
             <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </div>

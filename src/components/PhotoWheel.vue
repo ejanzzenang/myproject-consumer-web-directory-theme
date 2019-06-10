@@ -2,7 +2,7 @@
     <section>
       <div class="container-fluid px-0">
         <div class="instagram-slider">
-        <swiper :options="swiperOption">
+        <swiper v-bind:options="swiperOption">
             <swiper-slide><img src="../assets/img/instagram/instagram-1.jpg" alt="" class="img-fluid hover-scale"></swiper-slide>
             <swiper-slide><img src="../assets/img/instagram/instagram-2.jpg" alt="" class="img-fluid hover-scale"></swiper-slide>
             <swiper-slide><img src="../assets/img/instagram/instagram-3.jpg" alt="" class="img-fluid hover-scale"></swiper-slide>

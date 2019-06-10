@@ -1,7 +1,7 @@
 <template>
   <div class="searchbar">
     <section class="hero-home">
-      <swiper :options="swiperOption" class="hero-slider">
+      <swiper v-bind:options="swiperOption" class="hero-slider">
         <div class="swiper-wrapper dark-overlay">
           <swiper-slide class="swiper-slide pic_1"></swiper-slide>
           <swiper-slide class="swiper-slide pic_2"></swiper-slide>

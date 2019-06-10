@@ -1,6 +1,6 @@
 <template>
-    <div class="booking-step2">
-	<div style="height: 8px; top: 71px;" class="progress rounded-0 sticky-top">
+  <div class="booking-step2">
+	  <div style="height: 8px; top: 71px;" class="progress rounded-0 sticky-top">
       <div role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" class="progress-bar"></div>
     </div>
     <section class="py-5">

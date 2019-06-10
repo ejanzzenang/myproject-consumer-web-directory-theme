@@ -11,7 +11,6 @@
               See all articles<i class="fas fa-angle-double-right ml-2"></i></a></div>
         </div>
         <div class="row">
-          <!-- blog item-->
           <div class="col-lg-4 col-sm-6 mb-4">
             <div class="card shadow border-0 h-100"><a href="post.html"><img src="../assets/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="..." class="img-fluid card-img-top"/></a>
               <div class="card-body"><a href="#" class="text-uppercase text-muted text-sm letter-spacing-2">Travel </a>
@@ -21,7 +20,6 @@
               </div>
             </div>
           </div>
-          <!-- blog item-->
           <div class="col-lg-4 col-sm-6 mb-4">
             <div class="card shadow border-0 h-100"><a href="post.html"><img src="../assets/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="..." class="img-fluid card-img-top"/></a>
               <div class="card-body"><a href="#" class="text-uppercase text-muted text-sm letter-spacing-2">Living </a>
@@ -31,7 +29,6 @@
               </div>
             </div>
           </div>
-          <!-- blog item-->
           <div class="col-lg-4 col-sm-6 mb-4">
             <div class="card shadow border-0 h-100"><a href="post.html"><img src="../assets/img/photo/photo-1482463084673-98272196658a.jpg" alt="..." class="img-fluid card-img-top"/></a>
               <div class="card-body"><a href="#" class="text-uppercase text-muted text-sm letter-spacing-2">Travel </a>

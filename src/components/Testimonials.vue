@@ -6,10 +6,7 @@
           <p class="subtitle text-primary">Testimonials</p>
           <h2 class="mb-5">Our dear customers said about us</h2>
         </div>
-        <!-- Slider main container-->
-        <swiper :options="swiperOption" class="testimonials-slider testimonials">
-          <!-- Additional required wrapper-->
-            <!-- Slides-->
+        <swiper v-bind:options="swiperOption" class="testimonials-slider testimonials">
             <swiper-slide class="px-3">
               <div class="testimonial card rounded-lg shadow border-0">
                 <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>

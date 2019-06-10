@@ -11,7 +11,6 @@
           </form>
         </div>
         <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
-        <!-- Navbar Collapse -->
         <div id="navbarCollapse" class="collapse navbar-collapse">
           <form action="#" id="searchcollapsed" class="form-inline mt-4 mb-2 d-sm-none">
             <div class="input-label-absolute input-label-absolute-left input-reset w-100">
@@ -26,20 +25,17 @@
                 Home</a>
               <div aria-labelledby="homeDropdownMenuLink" class="dropdown-menu"><a href="index.html" class="dropdown-item">Rooms</a><a href="index-2.html" class="dropdown-item">Restaurants</a></div>
             </li>
-            <!-- Megamenu-->
             <li class="nav-item dropdown position-static"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Template</a>
               <div class="dropdown-menu megamenu py-lg-0">
                 <div class="row">
                   <div class="col-lg-9">
                     <div class="row p-3 pr-lg-0 pl-lg-5 pt-lg-5">
                       <div class="col-lg-3">
-                        <!-- Megamenu list-->
                         <h6 class="text-uppercase">Homepage</h6>
                         <ul class="megamenu-list list-unstyled">
                           <li class="megamenu-list-item"><a href="index.html" class="megamenu-list-link">Rooms   </a></li>
                           <li class="megamenu-list-item"><a href="index-2.html" class="megamenu-list-link">Restaurants   </a></li>
                         </ul>
-                        <!-- Megamenu list-->
                         <h6 class="text-uppercase">Restaurants</h6>
                         <ul class="megamenu-list list-unstyled">
                           <li class="megamenu-list-item"><a href="category.html" class="megamenu-list-link">Category - Map on the top   </a></li>
@@ -49,7 +45,6 @@
                         </ul>
                       </div>
                       <div class="col-lg-3">
-                        <!-- Megamenu list-->
                         <h6 class="text-uppercase">Rooms</h6>
                         <ul class="megamenu-list list-unstyled">
                           <li class="megamenu-list-item"><a href="category-rooms.html" class="megamenu-list-link">Category - Map on the top   </a></li>
@@ -57,7 +52,6 @@
                           <li class="megamenu-list-item"><a href="category-3-rooms.html" class="megamenu-list-link">Category - no map   </a></li>
                           <li class="megamenu-list-item"><a href="detail-rooms.html" class="megamenu-list-link">Room detail   </a></li>
                         </ul>
-                        <!-- Megamenu list-->
                         <h6 class="text-uppercase">Blog</h6>
                         <ul class="megamenu-list list-unstyled">
                           <li class="megamenu-list-item"><a href="blog.html" class="megamenu-list-link">Blog   </a></li>
@@ -65,7 +59,6 @@
                         </ul>
                       </div>
                       <div class="col-lg-3">
-                        <!-- Megamenu list-->
                         <h6 class="text-uppercase">Pages</h6>
                         <ul class="megamenu-list list-unstyled">
                           <li class="megamenu-list-item"><a href="contact.html" class="megamenu-list-link">Contact   </a></li>
@@ -76,7 +69,6 @@
                         </ul>
                       </div>
                       <div class="col-lg-3">
-                        <!-- Megamenu list-->
                         <h6 class="text-uppercase">User</h6>
                         <ul class="megamenu-list list-unstyled">
                           <li class="megamenu-list-item"><a href="/login" class="megamenu-list-link">Sign in   </a></li>
@@ -85,7 +77,6 @@
                           <li class="megamenu-list-item"><a href="user-grid.html" class="megamenu-list-link">Bookings &mdash; grid view <span class="badge badge-warning ml-1">New</span>   </a></li>
                           <li class="megamenu-list-item"><a href="user-booking-detail.html" class="megamenu-list-link">Booking detail <span class="badge badge-warning ml-1">New</span>   </a></li>
                         </ul>
-                        <!-- Megamenu list-->
                         <h6 class="text-uppercase">Host</h6>
                         <ul class="megamenu-list list-unstyled">
                           <li class="megamenu-list-item"><a href="user-add-0.html" class="megamenu-list-link">Add new listing - 6 pages   </a></li>
@@ -144,7 +135,6 @@
                 </div>
               </div>
             </li>
-            <!-- /Megamenu end-->
             <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a>
             </li>
             <li class="nav-item dropdown"><a id="docsDropdownMenuLink" href="index.html" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle ">

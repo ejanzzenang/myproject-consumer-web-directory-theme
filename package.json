@@ -38,7 +38,7 @@
       "eslint:recommended",
       "strongloop"
     ],
-    "rules": {},
+    "parser": "babel-eslint",
     "parserOptions": {
       "parser": "babel-eslint"
     }

@@ -1,5 +1,4 @@
 <template class="product-card">
-    <!-- place item-->
     <div data-marker-id="59c0c8e33b1527bfe2abaf92" class="w-100 h-100">
       <div class="card h-100 border-0 shadow">
         <div class="card-img-top overflow-hidden gradient-overlay"> <img v-bind:src="product.image_url" v-bind:alt="product.name" class="img-fluid"/>
