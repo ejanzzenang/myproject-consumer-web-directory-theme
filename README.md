@@ -1,6 +1,7 @@
 
 
 
+
 # Set up Vue.js Frontend using a Theme
 ## Prerequsites
 
@@ -191,7 +192,38 @@ Add the following stylesheet imports inside the `<style>` tag of `App.vue`
  @import "https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700";
  @import "https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css";
  @import "https://use.fontawesome.com/releases/v5.8.1/css/all.css";
+```
 
+Add svg rendering to `App.vue`
+In the `<script>` tag of `App.vue` add the following code"
+```js
+
+export default {
+  name: 'home',
+  components: {
+  }
+}
+... start ...
+,
+  created(){
+     function injectSvgSprite(path) {
+          var ajax = new XMLHttpRequest();
+          ajax.open("GET", path, true);
+          ajax.send();
+          ajax.onload = function(e) {
+            var div = document.createElement("div");
+            div.className = 'd-none';
+            div.innerHTML = ajax.responseText;
+            document.body.insertBefore(div, document.body.childNodes[0]);
+          }
+      }    
+      // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
+      // use your own URL in production, please :)
+      // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
+      //- injectSvgSprite('icons/orion-svg-sprite.svg'); 
+      injectSvgSprite('https://demo.bootstrapious.com/directory/1-1/icons/orion-svg-sprite.svg'); 
+  }
+... end ...
 ```
 
 Final version of `App.vue`:
@@ -199,25 +231,46 @@ Final version of `App.vue`:
 ```html
 <template>
   <div id="app">
-    <div class="navbar-margin"></div>
+    <div class="show-nav" v-if="!['signup', 'login'].includes(this.$route.name)">
+      <Navigation/>
+      <div class="navbar-margin"></div>
+    </div>
     <router-view/>
+    <Footer v-if="!['signup', 'login'].includes(this.$route.name)"/>
   </div>
 </template>
 
 <script type="text/javascript">
   // @ is an alias to /src
+import Navigation from '@/components/Navigation.vue'
+import Footer from '@/components/Footer.vue'
+
 export default {
   name: 'home',
   components: {
+  },
+  created(){
+     function injectSvgSprite(path) {
+          var ajax = new XMLHttpRequest();
+          ajax.open("GET", path, true);
+          ajax.send();
+          ajax.onload = function(e) {
+            var div = document.createElement("div");
+            div.className = 'd-none';
+            div.innerHTML = ajax.responseText;
+            document.body.insertBefore(div, document.body.childNodes[0]);
+          }
+      }    
+      // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
+      // use your own URL in production, please :)
+      // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
+      //- injectSvgSprite('icons/orion-svg-sprite.svg'); 
+      injectSvgSprite('https://demo.bootstrapious.com/directory/1-1/icons/orion-svg-sprite.svg'); 
   }
 }
 
 </script>
 <style type="text/css">
-  .navbar-margin {
-    margin-bottom: 70px;
-  }
-
   /*extra css*/
   @import "https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700";
   @import "https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700";
@@ -248,6 +301,7 @@ In `.eslintignore` add following relative paths:
 ```json
 src/assets/**
 src/pages/**
+dist/**
 ```
 
 In `myproject-vuejs-web/src` ,  `package.json` under 
@@ -494,7 +548,10 @@ Add the following code into the `<template>` tag of `App.vue`
 
 <div id="app">
 ... start ...
-<Navigation/>
+<div class="show-nav" v-if="!['signup', 'login'].includes(this.$route.name)">
+  <Navigation/>
+  <div class="navbar-margin"></div>
+</div>
 <router-view/>
 ... end ...
 </div>
@@ -517,13 +574,6 @@ export default {
 </script>
 ```
 
-Add the following under `<Navigation>` tag in  `App.vue`
-```html
-<Navigation/>
-... start ...
-<div class="navbar-margin"></div>
-... end ...
-<router-view/>
 ```
 Add the following code inside the `<style>` tag of `App.vue`
 ```css
@@ -618,7 +668,7 @@ Add the following code into the `<template>` tag of `App.vue`
 <div class="navbar-margin"></div>
   ... start ...
   <router-view/>
-  <Footer/>
+  <Footer v-if="!['signup', 'login'].includes(this.$route.name)"/>
   ... end ...
 </div>
 ...
@@ -647,11 +697,12 @@ Final Version of `App.vue`
 ```html
 <template>
   <div id="app">
-    <Navigation/>
-    <div class="navbar-margin"></div>
+    <div class="show-nav" v-if="!['signup', 'login'].includes(this.$route.name)">
+      <Navigation/>
+      <div class="navbar-margin"></div>
+    </div>
     <router-view/>
-    <Footer/>
-
+    <Footer v-if="!['signup', 'login'].includes(this.$route.name)"/>
   </div>
 </template>
 
@@ -665,19 +716,41 @@ export default {
   components: {
     Navigation,
     Footer
+  },
+  created(){
+     function injectSvgSprite(path) {
+          var ajax = new XMLHttpRequest();
+          ajax.open("GET", path, true);
+          ajax.send();
+          ajax.onload = function(e) {
+            var div = document.createElement("div");
+            div.className = 'd-none';
+            div.innerHTML = ajax.responseText;
+            document.body.insertBefore(div, document.body.childNodes[0]);
+          }
+      }    
+      // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
+      // use your own URL in production, please :)
+      // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
+      //- injectSvgSprite('icons/orion-svg-sprite.svg'); 
+      injectSvgSprite('https://demo.bootstrapious.com/directory/1-1/icons/orion-svg-sprite.svg'); 
   }
 }
+
 </script>
 <style type="text/css">
   .navbar-margin {
-    margin-bottom: 50px;
+    margin-bottom: 70px;
   }
 
   /*extra css*/
   @import "https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700";
   @import "https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700";
   @import "https://use.fontawesome.com/releases/v5.8.1/css/all.css";
+
 </style>
+
+
 ```
 
 ## Step 5: Set up Home Page
