@@ -2,13 +2,13 @@
     <div data-marker-id="59c0c8e33b1527bfe2abaf92" class="w-100 h-100">
       <div class="card h-100 border-0 shadow">
         <div class="card-img-top overflow-hidden gradient-overlay"> <img v-bind:src="product.image_url" v-bind:alt="product.name" class="img-fluid"/>
-          <router-link v-bind:to="{ name: 'product_detail' , params: { product_id: product.id } }" class="tile-link">
+          <router-link v-bind:to="{name: 'product_detail', params: {product_id: product.id}}" class="tile-link">
           </router-link>
         </div>
         <div class="card-body d-flex align-items-center">
           <div class="w-100">
             <h6 class="card-title">
-              <router-link v-bind:to="{ name: 'product_detail' , params: { product_id: product.id }}" class="tile-link">
+              <router-link v-bind:to="{name: 'product_detail', params: {product_id: product.id}}" class="tile-link">
               </router-link>
             {{product.name}}
             </h6>
