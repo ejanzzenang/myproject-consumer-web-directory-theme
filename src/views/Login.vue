@@ -9,12 +9,9 @@
                 </div>
                 <a href="/" class="close-absolute mr-md-5 mr-xl-6 pt-5"> 
                   <svg class="svg-icon w-3rem h-3rem">
-                    <use xlink:href="#close-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" id="close-1" width="100%" height="100%">
-                      <path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10" d="M41.999 20.002l-22 22m22 0L20 20" stroke-linejoin="round" stroke-linecap="round" style="stroke:var(--layer1, #202020)"></path>
-                    </svg>
-                    </use>
-                  </svg></a>
+                    <use xlink:href="#close-1"> </use>
+                  </svg>
+                </a>
                 <form class="form-validate">
                   <div class="form-group">
                     <label for="loginUsername" class="form-label"> Email Address</label>
@@ -39,9 +36,7 @@
                   <button class="btn btn-lg btn-block btn-primary">Sign in</button>
                   <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
                   <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
-                  <button class="btn btn btn-outline-muted btn-block btn-social mb-3"><i class="fa-2x fa-google fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Google</span></button>
-                  <hr class="my-4">
-                  <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="signup.html">Sign Up                </a></small></p>
+                  <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="/signup">Sign Up                </a></small></p>
                 </form>
               </div>
             </div>
