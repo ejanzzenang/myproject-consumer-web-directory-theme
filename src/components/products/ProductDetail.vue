@@ -121,7 +121,7 @@
               <div class="form-group">
                 <label for="bookingDate" class="form-label">Your stay *</label>
                 <div class="datepicker-container datepicker-container-right">
-                  <input type="text" name="bookingDate" id="bookingDate" placeholder="Choose your dates" required="required" class="form-control">
+                  <date-range-picker v-model="range" id="bookingDate" placeholder="Choose your dates" required="required" class="form-control"/>
                 </div>
               </div>
               <div class="form-group mb-4">
@@ -182,7 +182,8 @@ export default {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
-          }
+          },
+          range: ["01/09/2018", "01/10/2018"]
         }
       },
       methods: {

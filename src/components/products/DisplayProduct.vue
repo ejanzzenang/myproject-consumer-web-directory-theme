@@ -8,9 +8,6 @@
             <p class="subtitle text-secondary">Hurry up, these are expiring soon.</p>
             <h2>Last minute deals</h2>
           </div>
-          <div class="col-md-4 d-lg-flex align-items-center justify-content-end"><a href="category.html" class="text-muted text-sm">
-               
-              See all deals<i class="fas fa-angle-double-right ml-2"></i></a></div>
         </div>
         <swiper v-bind:options="swiperOption">
             <swiper-slide class="h-auto px-2" v-for="product in products" v-bind:key="product.id">

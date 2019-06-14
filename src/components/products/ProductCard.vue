@@ -30,9 +30,7 @@
   props: ['product'], 
   data(){
     return {
-      obj: this.product,
-      product_id: this.product.product_id
-    }
+      obj: this.product,    }
   }
 }
 </script>
