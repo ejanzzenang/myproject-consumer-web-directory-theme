@@ -21,7 +21,7 @@
                 <label for="loginPassword2" class="form-label"> Confirm your password</label>
                 <input name="loginPassword2" id="loginPassword2" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control">
               </div>
-              <button type="submit" class="btn btn-lg btn-block btn-primary">Sign up</button>
+              <button type="submit" id="signup" class="btn btn-lg btn-block btn-primary">Sign up</button>
               <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
               <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
               <hr class="my-4">
@@ -41,8 +41,6 @@
   </div>
 </template>
 
-
-
 <style scoped>
   
   .bG {
@@ -51,3 +49,61 @@
     } 
 
 </style>
+
+
+<script>
+
+  import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
+
+  export default {
+    name: 'signup',
+    data() {
+      return { 
+      }
+    },
+    mounted() {
+      
+      var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;  // example: 'us-east-1_abcd12345'
+      var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; // example: 'abcd12345abcd12345abcd12345'
+
+      $(document).on('click', '#signup', function(event) {
+        event.preventDefault();
+
+        var poolData = {
+          UserPoolId : cognitoUserPoolId,
+          ClientId : cognitoUserPoolClientId
+        };
+        var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+
+        var attributeList = [];
+
+
+        var email = document.getElementById('loginUsername').value;
+        var pw = document.getElementById('loginPassword').value;
+        var confirmPw = document.getElementById('loginPassword2').value;
+        var dataEmail = {
+            Name : 'email',
+            Value : email
+        };
+
+        var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
+
+        attributeList.push(attributeEmail);
+
+        if (pw === confirmPw) {
+          userPool.signUp(email, pw, attributeList, null, function(err, result){
+              if (err) {
+                  alert(err.message);
+                  return;
+              }
+              localStorage.setItem('email', email);
+              alert("Successfully signed up!!")
+              window.location.replace('/products');
+          });
+        } else {
+          alert('Passwords do not match.')
+        }
+      });
+    }
+  }
+</script>
