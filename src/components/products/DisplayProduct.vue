@@ -23,7 +23,7 @@
 <script>
 
   import ProductCard from '@/components/products/ProductCard.vue'
-
+  import data from '@/assets/json/boracay.json'
   export default {
     name: "display-product",
     components: {
@@ -31,7 +31,7 @@
     },
     data() {
       return {
-        products: null, 
+        products: data, 
         swiperOption: {
           slidesPerView: 3,
           spaceBetween: 20,
@@ -69,7 +69,8 @@
       }
     },
     created: function(){
-      this.getProducts()
+      
+      // this.getProducts()
     }
   }
 </script>

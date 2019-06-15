@@ -156,6 +156,7 @@
 <script type="text/javascript">
   
 import DisplayProduct from '@/components/products/DisplayProduct.vue'
+import data from '@/assets/json/boracay.json'
 
 export default {
     name: 'product-detail',
@@ -165,6 +166,7 @@ export default {
     data() {
       return {
         product: '',
+        products: data,
         swiperOption: {
             slidesPerView: 2,
             spaceBetween: 0,
@@ -197,11 +199,24 @@ export default {
           .catch(error =>{
             alert(error);
           })
+      },
+      getProductLocal: function(product_id){
+        return new Promise((resolve, reject) =>{
+            this.products.forEach(function(el){
+              if(el.id === product_id){
+                resolve(el)
+              }
+            })
+          })
         }
       },
       created: function(){
         console.log(this.$route.params.product_id)
-        this.getProduct(this.$route.params.product_id)
+        this.getProductLocal(this.$route.params.product_id)
+        .then(data =>{
+          this.product = data
+        })
+
       }
   }
 </script>
