@@ -2,6 +2,7 @@
 
 
 
+
 # Set up Vue.js Frontend using a Theme
 ## Prerequsites
 
@@ -3193,6 +3194,82 @@ We use `axios` to send a `http` `GET` request to get a product with given its id
         this.getProduct(this.$route.params.product_id)
       }
 ```
+
+
+## Step 10: Integrate Login and Sign up with AWS Cognito
+
+##
+Install the dependencies for AWS Cognito:
+```bash
+npm install --save aws-sdk
+npm install --save amazon-cognito-identity-js
+```
+
+In `src/views/SignUp.vue` add the following code below the `<style>` tag:
+```html
+<script>
+
+  import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
+
+  export default {
+    name: 'signup',
+    data() {
+      return { 
+      }
+    },
+    mounted() {
+      
+      var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;  // example: 'us-east-1_abcd12345'
+      var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; // example: 'abcd12345abcd12345abcd12345'
+
+      $(document).on('click', '#signup', function(event) {
+        event.preventDefault();
+
+        var poolData = {
+          UserPoolId : cognitoUserPoolId,
+          ClientId : cognitoUserPoolClientId
+        };
+        var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+
+        var attributeList = [];
+
+
+        var email = document.getElementById('loginUsername').value;
+        var pw = document.getElementById('loginPassword').value;
+        var confirmPw = document.getElementById('loginPassword2').value;
+        var dataEmail = {
+            Name : 'email',
+            Value : email
+        };
+
+        var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
+
+        attributeList.push(attributeEmail);
+
+        if (pw === confirmPw) {
+          userPool.signUp(email, pw, attributeList, null, function(err, result){
+              if (err) {
+                  alert(err.message);
+                  return;
+              }
+              localStorage.setItem('email', email);
+              alert("Successfully signed up!!")
+              window.location.replace('/products');
+          });
+        } else {
+          alert('Passwords do not match.')
+        }
+      });
+    }
+  }
+</script>
+```
+
+In root folder of the project create the following `.env` file:
+```bash
+VUE_APP_USER_POOL_ID=<REPLACE_ME_COGNITO_USER_POOL_ID>
+VUE_APP_USER_POOL_CLIENT_ID=<REPLACE_ME_USER_POOL_CLIENT_ID>
+``` 
 
 
 ### (Optional) Clean up
