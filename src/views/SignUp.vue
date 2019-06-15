@@ -98,7 +98,7 @@
               }
               localStorage.setItem('email', email);
               alert("Successfully signed up!!")
-              window.location.replace('/products');
+              window.location.replace('/confirm');
           });
         } else {
           alert('Passwords do not match.')
