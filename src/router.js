@@ -33,7 +33,6 @@ export default new Router({
       name: 'confirm',
       component: () => import('./views/Confirm.vue'),
     },
-
     {
       path: '/products',
       name: 'products',
