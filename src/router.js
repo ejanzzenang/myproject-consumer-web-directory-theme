@@ -29,6 +29,12 @@ export default new Router({
       component: () => import('./views/SignUp.vue'),
     },
     {
+      path: '/confirm',
+      name: 'confirm',
+      component: () => import('./views/Confirm.vue'),
+    },
+
+    {
       path: '/products',
       name: 'products',
       component: () => import('./views/Products.vue'),
