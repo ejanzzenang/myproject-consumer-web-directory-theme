@@ -20,12 +20,10 @@
 		opacity: 0.7;
 	}
 
-
 </style>
 
 <script>
 	import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
-
   	export default {
     name: 'confirm',
     data() {
