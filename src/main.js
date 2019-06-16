@@ -1,5 +1,10 @@
 import Vue from 'vue';
 import App from './App.vue';
+
+import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
+Vue.use(Vuex);
+
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import 'swiper/dist/css/swiper.css';
 Vue.use(VueAwesomeSwiper);
@@ -36,7 +41,24 @@ import router from './router';
 
 Vue.config.productionTip = false;
 
+const store = new Vuex.Store({
+  plugins: [createPersistedState()],
+  state: {
+    loggedIn: false,
+  },
+  mutations: {
+    login(state){
+      state.loggedIn = true;
+    },
+    logout(state){
+      state.loggedIn = false;
+    },
+  },
+
+});
+
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app');
