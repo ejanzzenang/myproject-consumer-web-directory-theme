@@ -26,16 +26,9 @@
                     </div>
                     <input name="loginPassword" id="loginPassword" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control">
                   </div>
-                  <div class="form-group mb-4">
-                    <div class="custom-control custom-checkbox">
-                      <input id="loginRemember" type="checkbox" class="custom-control-input">
-                      <label for="loginRemember" class="custom-control-label text-muted"> <span class="text-sm">Remember me for 30 days</span></label>
-                    </div>
-                  </div>
-                  <!-- Submit-->
                   <button class="btn btn-lg btn-block btn-primary">Sign in</button>
                   <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
-                  <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
+                  <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect<span class="d-none d-sm-inline">with Facebook</span></button>
                   <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="/signup">Sign Up</a></small></p>
                 </form>
               </div>
@@ -45,8 +38,6 @@
         </div>
     </div>
 </template>
-
-
 <script>
 
 import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
@@ -63,16 +54,19 @@ export default {
 
     var configString = localStorage.getItem("awsConfig");
     var config = JSON.parse(configString);
+    
+    var navigate = this.$router;
+    var store = this.$store
+
     if(config != null) {
       refreshAWSCredentials();
       loggedInDisplay();
     }
 
     function loggedInDisplay() {
-      // $("#logInButton").addClass("d-none");
-      // $("#logOutButton").removeClass("d-none");
-      window.location.replace('/');
-      // alert("We are logged in!!")
+      //changes the value of store to loggedIn
+      store.commit('login')
+      navigate.push('/')
     }
 
     function initializeStorage() {
@@ -157,7 +151,6 @@ export default {
 
           loggedInDisplay();
         },
-
         onFailure: function(err) {
           alert(err.message);
         },
