@@ -13,34 +13,34 @@
             </div>
           </form>
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown"><a id="homeDropdownMenuLink" href="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle active">
-                 
-                Home</a>
-              <div aria-labelledby="homeDropdownMenuLink" class="dropdown-menu"><a href="index.html" class="dropdown-item">Rooms</a><a href="index-2.html" class="dropdown-item">Restaurants</a></div>
-            </li>
-            </li>
-            <li class="nav-item"><a id="logInButton" href="/login" class="nav-link">Sign in</a></li>
+            <li class="nav-item"><a id="homeDropdownMenuLink" href="/" class="nav-link">Home</a></li>
+            <li class="nav-item"><a id="logInButton" href="/login" class="nav-link" v-if="!loggedIn">Sign in</a></li>
             <li class="nav-item"><a href="/signup" class="nav-link">Sign up</a></li>
-            <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block"><button id="logOutButton" class="btn btn-primary">Logout</button></li>
+            <li class="nav-item"><a id="logInButton" href="/products" class="nav-link">Products</a></li>
+            <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block" v-if="loggedIn"><button id="logOutButton" class="btn btn-primary">Logout</button></li>
           </ul>
         </div>
       </div>
     </nav>  
 </template>
-
-
 <script>
-
 export default {
   name: 'navigation',
+  data(){
+    return {
+      loggedIn: this.$store.state.loggedIn
+    }
+  },
   mounted(){
+    var store = this.$store
+    
     $(document).on('click', '#logOutButton', function(event) {
-      console.log("logged out")
-      localStorage.clear();
-      document.location.reload();
-      
+        console.log("logged out")
+        localStorage.clear();
+        store.commit('logout')
+        document.location.reload();
     }); 
-  } 
+  }
 } 
 
 </script>
