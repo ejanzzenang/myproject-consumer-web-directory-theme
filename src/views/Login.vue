@@ -38,6 +38,15 @@
         </div>
     </div>
 </template>
+
+<style>
+    .bG {
+      background: url(../assets/img/photo/photo-1497436072909-60f360e1d4b1.jpg) center center;
+      background-size: cover;
+    }
+    
+</style>
+
 <script>
 
 import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
@@ -207,11 +216,3 @@ export default {
   }
 }
 </script>
-
-<style>
-    .bG {
-      background: url(../assets/img/photo/photo-1497436072909-60f360e1d4b1.jpg) center center;
-      background-size: cover;
-    }
-    
-</style>
