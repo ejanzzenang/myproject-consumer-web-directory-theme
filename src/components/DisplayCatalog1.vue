@@ -11,7 +11,9 @@
         <div class="row">
           <swiper v-bind:options="swiperOption" class="guides-slider">
               <swiper-slide class="h-auto px-2" v-for="city in cities" v-bind:key="city.name">
-                <div class="card card-poster gradient-overlay mb-4 mb-lg-0"><a href="category.html" class="tile-link"></a><img v-bind:src="city.image_url" v-bind:alt="city.name" class="bg-image">
+                <div class="card card-poster gradient-overlay mb-4 mb-lg-0"><a href="category.html" class="tile-link"></a>
+                  <img v-bind:src="city.image_url" v-bind:alt="city.name" class="bg-image">
+                  <!-- <img src="../assets/img/photo/coron.jpg" class="bg-image"> -->
                   <div class="card-body overlay-content">
                     <h6 class="card-title text-shadow text-uppercase">{{city.name}}</h6>
                     <p class="card-text text-sm">{{city.description}}</p>
@@ -26,38 +28,39 @@
 </template>
 
 <script scoped>
+
   export default {
     data() {
       return {
         swiperOption: {
-          slidesPerView: 6,
+          slidesPerView: 5,
           spaceBetween: 15,
           loop: true
         },
         cities: [
           {
             "name" : "Boracay",
-            "image_url" : "https://via.placeholder.com/600X900",
+            "image_url" :  require('../assets/img/photo/boracay.jpg'),
             "description" : "Boracay is .." 
           },
           {
             "name" : "Baguio",
-            "image_url" : "https://via.placeholder.com/600X900",
+            "image_url" : require('../assets/img/photo/baguio.jpg'),
             "description" : "Baguio is .." 
           },
           {
             "name" : "Coron",
-            "image_url" : "https://via.placeholder.com/600X900",
+            "image_url" : require('../assets/img/photo/coron.jpg'),
             "description" : "Coron is .." 
           },
           {
             "name" : "Tagaytay",
-            "image_url" : "https://via.placeholder.com/600X900",
+            "image_url" : require('../assets/img/photo/tagaytay.jpg'),
             "description" : "Tagaytay is .." 
           },
           {
             "name" : "La Union",
-            "image_url" : "https://via.placeholder.com/600X900",
+            "image_url" : require('../assets/img/photo/la-union.jpg'),
             "description" : "La Union is .." 
           }
         ]
