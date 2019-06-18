@@ -4,7 +4,7 @@
           <div class="row min-vh-100">
             <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
               <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
-                <div class="mb-5"><img src="../assets/img/logo-square.svg" alt="..." style="max-width: 4rem;" class="img-fluid mb-3">
+                <div class="mb-5"><img src="../assets/img/logo.png" alt="..." style="max-width: 10rem;" class="img-fluid mb-3">
                   <h2>Welcome back</h2>
                 </div>
                 <a href="/" class="close-absolute mr-md-5 mr-xl-6 pt-5"> 
@@ -55,8 +55,10 @@ import * as AWS from 'aws-sdk';
 export default {
   name: 'login',
   mounted(){
-    var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;  // example: 'us-east-1_abcd12345'
-    var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; // example: 
+    // var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;  // example: 'us-east-1_abcd12345'
+    // var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; // example: 
+    var cognitoUserPoolId = 'ap-southeast-1_GUM0JtMJC';  // example: 'us-east-1_abcd12345'
+    var cognitoUserPoolClientId = '5hvshfmgob5beudv0ukdj0ej'; // example: 
     var awsRegion = 'ap-southeast-1';
 
     initializeStorage();

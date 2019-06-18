@@ -4,9 +4,8 @@
       <div class="row min-vh-100">
         <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
           <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
-            <div class="mb-4"><img src="../assets/img/logo-square.svg" alt="..." style="max-width: 4rem;" class="img-fluid mb-4">
+            <div class="mb-4"><img src="../assets/img/logo.png" alt="..." style="max-width: 10rem;" class="img-fluid mb-4">
               <h2>Sign up</h2>
-              <p class="text-muted">His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table.</p>
             </div>
             <form class="form-validate">
               <div class="form-group">
@@ -58,8 +57,10 @@
     name: 'signup',
     mounted() {
       
-      var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;  // example: 'us-east-1_abcd12345'
-      var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; // example: 'abcd12345abcd12345abcd12345'
+      // var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;  // example: 'us-east-1_abcd12345'
+      // var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; // example: 'abcd12345abcd12345abcd12345'
+      var cognitoUserPoolId = 'ap-southeast-1_GUM0JtMJC';  // example: 'us-east-1_abcd12345'
+      var cognitoUserPoolClientId = '5hvshfmgob5beudv0ukdj0ej'; // example: 
       var navigate = this.$router;
 
       $(document).on('click', '#signup', function(event) {
