@@ -1,7 +1,7 @@
 <template>
    <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
       <div class="container-fluid">
-        <div class="d-flex align-items-center"><a href="/" class="navbar-brand py-1"><img src="../assets/img/logo.svg" alt="Directory logo"></a>
+        <div class="d-flex align-items-center"><a href="/" class="navbar-brand py-1"><img src="../assets/img/logo.png" alt="Directory logo"></a>
         </div>
         <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
         <div id="navbarCollapse" class="collapse navbar-collapse">
@@ -16,7 +16,7 @@
             <li class="nav-item"><a id="homeDropdownMenuLink" href="/" class="nav-link">Home</a></li>
             <li class="nav-item"><a id="logInButton" href="/login" class="nav-link" v-if="!loggedIn">Sign in</a></li>
             <li class="nav-item"><a href="/signup" class="nav-link">Sign up</a></li>
-            <li class="nav-item"><a id="logInButton" href="/products" class="nav-link">Products</a></li>
+            <li class="nav-item"><a id="logInButton" href="/products" class="nav-link">Activities</a></li>
             <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block" v-if="loggedIn"><button id="logOutButton" class="btn btn-primary">Logout</button></li>
           </ul>
         </div>
