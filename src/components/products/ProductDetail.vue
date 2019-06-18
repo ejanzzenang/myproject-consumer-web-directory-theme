@@ -15,24 +15,9 @@
             <p class="text-muted font-weight-light">{{product.description}}</p>
           </div>
           <div class="text-block">
-            <div class="media"><img src="../../assets/img/avatar/avatar-10.jpg" alt="Jack London" class="avatar avatar-lg mr-4">
-              <div class="media-body">
-                <p> <span class="text-muted text-uppercase text-sm">Hosted by </span><br><strong>Jack London</strong></p>
-                <p class="text-muted text-sm mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
-                <p class="text-muted text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                <p class="text-sm"><a href="#">See Jack's 3 other listings <i class="fa fa-long-arrow-alt-right ml-2"></i></a></p>
-              </div>
-            </div>
-          </div>
-          <div class="text-block">
             <h5 class="mb-4">Gallery</h5>
             <div class="row gallery mb-3 ml-n1 mr-n1">
-              <div class="col-lg-4 col-6 px-1 mb-2"><a href="../../assets/img/photo/photo-1426122402199-be02db90eb90.jpg" data-fancybox="gallery" title="Our street"><img src="../../assets/img/photo/photo-1426122402199-be02db90eb90.jpg" alt="..." class="img-fluid"></a></div>
-              <div class="col-lg-4 col-6 px-1 mb-2"><a href="../../assets/img/photo/photo-1512917774080-9991f1c4c750.jpg" data-fancybox="gallery" title="Outside"><img src="../../assets/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="..." class="img-fluid"></a></div>
-              <div class="col-lg-4 col-6 px-1 mb-2"><a href="../../assets/img/photo/photo-1494526585095-c41746248156.jpg" data-fancybox="gallery" title="Rear entrance"><img src="../../assets/img/photo/photo-1494526585095-c41746248156.jpg" alt="..." class="img-fluid"></a></div>
-              <div class="col-lg-4 col-6 px-1 mb-2"><a href="../../assets/img/photo/photo-1484154218962-a197022b5858.jpg" data-fancybox="gallery" title="Kitchen"><img src="../../assets/img/photo/photo-1484154218962-a197022b5858.jpg" alt="..." class="img-fluid"></a></div>
-              <div class="col-lg-4 col-6 px-1 mb-2"><a href="../../assets/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" data-fancybox="gallery" title="Bedroom"><img src="../../assets/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="..." class="img-fluid"></a></div>
-              <div class="col-lg-4 col-6 px-1 mb-2"><a href="../../assets/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" data-fancybox="gallery" title="Bedroom"><img src="../../assets/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" alt="..." class="img-fluid"></a></div>
+              <div class="col-lg-4 col-6 px-1 mb-2"><a href="../../assets/img/photo/photo-1426122402199-be02db90eb90.jpg" data-fancybox="gallery" title="Our street"><img v-bind:src="product.image_url" alt="..." class="img-fluid"></a></div>
             </div>
           </div>
           <div class="text-block">
@@ -121,7 +106,7 @@
               <div class="form-group">
                 <label for="bookingDate" class="form-label">Your stay *</label>
                 <div class="datepicker-container datepicker-container-right">
-                  <date-range-picker v-model="range" id="bookingDate" placeholder="Choose your dates" required="required" class="form-control"/>
+                  <date-range-picker v-model="myDate" :options="options" id="bookingDate" placeholder="Choose your dates" required="required" class="form-control"/>
                 </div>
               </div>
               <div class="form-group mb-4">
@@ -135,10 +120,9 @@
                 </select>
               </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">Book your stay</button>
+                <button type="submit" class="btn btn-primary btn-block">Book</button>
               </div>
             </form>
-            <p class="text-muted text-sm text-center">Some additional text can be also placed here.</p>
             <hr class="my-4">
             <div class="text-center">
               <p> <a href="#" class="text-secondary text-sm"> <i class="fa fa-heart"></i> Bookmark This Listing</a></p>
@@ -148,20 +132,16 @@
         </div>
       </div>
     </div>
-    <div class="py-6 bg-gray-100">
-        <DisplayProduct/>
-    </div>
 	</div>
 </template>
 <script type="text/javascript">
   
-import DisplayProduct from '@/components/products/DisplayProduct.vue'
 import data from '@/assets/json/boracay.json'
+import moment from 'moment'
 
 export default {
     name: 'product-detail',
     components: {
-      DisplayProduct,
     },
     data() {
       return {
@@ -185,7 +165,12 @@ export default {
                 prevEl: '.swiper-button-prev',
             },
           },
-          range: ["01/09/2018", "01/10/2018"]
+        myDate: "06/10/2019",
+        options: {
+          singleDatePicker: true,
+          minYear: 2019,
+          maxYear: +moment().format("YYYY")
+        }
         }
       },
       methods: {
