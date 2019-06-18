@@ -32,8 +32,11 @@
     },
     mounted() {
       
-      var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;  // example: 'us-east-1_abcd12345'
-      var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; // example: 'abcd12345abcd12345abcd12345'
+      // var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;  // example: 'us-east-1_abcd12345'
+      // var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; // example: 'abcd12345abcd12345abcd12345'
+
+  		var cognitoUserPoolId = 'ap-southeast-1_GUM0JtMJC';  // example: 'us-east-1_abcd12345'
+    	var cognitoUserPoolClientId = '5hvshfmgob5beudv0ukdj0ej'; // example: 
 
       $(document).on('click', '.btn-primary', function(event) {
 	    event.preventDefault();
