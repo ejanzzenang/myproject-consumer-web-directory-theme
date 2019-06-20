@@ -6,12 +6,6 @@
           <div class="text-block">
             <h1>{{ product.name }}</h1>
             <div class="text-block"><img  v-bind:src="product.image_url"></div>
-            <ul class="list-inline text-sm mb-4">
-              <li class="list-inline-item mr-3"><i class="fa fa-users mr-1 text-secondary"></i> 4 guests</li>
-              <li class="list-inline-item mr-3"><i class="fa fa-door-open mr-1 text-secondary"></i> 1 bedroom</li>
-              <li class="list-inline-item mr-3"><i class="fa fa-bed mr-1 text-secondary"></i> 3 beds</li>
-              <li class="list-inline-item mr-3"><i class="fa fa-bath mr-1 text-secondary"></i> 1 bath</li>
-            </ul>
             <p class="text-muted font-weight-light">{{product.description}}</p>
           </div>
           <div class="text-block">
@@ -100,7 +94,7 @@
         </div>
         <div class="col-lg-4">
           <div style="top: 100px;" class="p-4 shadow ml-lg-4 rounded sticky-top">
-            <p class="text-muted"><span class="text-primary h2">Php. {{product.price}}</span> per night</p>
+            <p class="text-muted"><span class="text-primary h2">Php. {{product.price}}</span> person</p>
             <hr class="my-4">
             <form id="booking-form" method="get" action="#" autocomplete="off" class="form">
               <div class="form-group">
