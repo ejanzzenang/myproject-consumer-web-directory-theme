@@ -53,7 +53,7 @@
         <div class="container">
           <div class="row align-items-center">
             <div class="col-md-6 text-center text-md-left">
-              <p class="text-sm mb-md-0">&copy; 2019 Your company.  All rights reserved.</p>
+              <p class="text-sm mb-md-0">&copy; 2019 Hetchly.  All rights reserved.</p>
             </div>
             <div class="col-md-6">
               <ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-right">
