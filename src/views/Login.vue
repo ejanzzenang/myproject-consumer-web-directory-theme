@@ -4,7 +4,7 @@
           <div class="row min-vh-100">
             <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
               <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
-                <div class="mb-5"><img src="../assets/img/logo.png" alt="..." style="max-width: 10rem;" class="img-fluid mb-3">
+                <div class="mb-5"><img src="../assets/img/hetchly-logo.svg" alt="..." style="max-width: 10rem;" class="img-fluid mb-3">
                   <h2>Welcome back</h2>
                 </div>
                 <a href="/" class="close-absolute mr-md-5 mr-xl-6 pt-5"> 

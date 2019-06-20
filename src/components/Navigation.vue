@@ -1,7 +1,7 @@
 <template>
    <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
       <div class="container-fluid">
-        <div class="d-flex align-items-center"><a href="/" class="navbar-brand py-1"><img src="../assets/img/logo.png" alt="Directory logo"></a>
+        <div class="d-flex align-items-center"><a href="/" class="navbar-brand py-1"><img src="../assets/img/hetchly-logo.svg" alt="Directory logo"></a>
         </div>
         <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
         <div id="navbarCollapse" class="collapse navbar-collapse">

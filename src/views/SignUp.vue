@@ -4,7 +4,7 @@
       <div class="row min-vh-100">
         <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
           <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
-            <div class="mb-4"><img src="../assets/img/logo.png" alt="..." style="max-width: 10rem;" class="img-fluid mb-4">
+            <div class="mb-4"><img src="../assets/img/hetchly-logo.svg" alt="..." style="max-width: 10rem;" class="img-fluid mb-4">
               <h2>Sign up</h2>
             </div>
             <form class="form-validate">
