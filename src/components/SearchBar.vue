@@ -25,15 +25,21 @@
                       <input type="text" name="location" placeholder="Boracay" id="location" class="form-control border-0 shadow-0">
                     </div>
                   </div>
-                  <div class="col-lg-3 d-flex align-items-center form-group no-divider">
-                    <select title="Categories" data-style="btn-form-control" class="selectpicker">
-                      <option value="small">Air</option>
-                      <option value="medium">Land</option>
-                      <option value="large">Sea</option>
-                    </select>
-                  </div>
-                  <div class="col-lg-2">
-                    <button type="submit" class="btn btn-primary btn-block rounded-xl h-100">Search </button>
+
+                  <div class="col-lg-5">
+                    <div class="row">
+                       <div class="col-lg-5">
+                        <button type="submit" class="btn btn-primary btn-block rounded-xl h-100">Search</button>
+                      </div>
+
+                      <div class="or justify-content-center col-lg-1">or</div>
+
+                     <div class="col-lg-6">
+                      <a href="/signup">
+                       <button  type=button class="btn btn-primary btn-block rounded-xl h-100">Get a Pass</button>
+                      </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </form>
@@ -51,6 +57,13 @@
     background: url('../assets/img/photo/banner-2.jpg') center;
     background-size: cover
   }
+
+  .or {
+    color:#868E96;
+    margin-bottom:0px;
+    text-align: center;
+  }
+
 </style>
 
 

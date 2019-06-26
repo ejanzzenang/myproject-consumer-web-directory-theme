@@ -52,18 +52,22 @@ export default new Router({
       children: [
         {
           path: 'step1',
+          name: 'step1',
           component: () => import('./components/booking/Step1.vue'),
         },
         {
           path: 'step2',
+          name: 'step2',
           component: () => import('./components/booking/Step2.vue'),
         },
         {
           path: 'payment',
+          name: 'payment',
           component: () => import('./components/booking/Step3.vue'),
         },
         {
           path: 'confirmed',
+          name: 'confirmed',
           component: () => import('./components/booking/Step4.vue'),
         },
       ],
