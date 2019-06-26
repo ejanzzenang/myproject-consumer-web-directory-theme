@@ -15,7 +15,7 @@
             </div>
           </div>
           <div class="text-block">
-            <p class="subtitle text-sm text-primary">Reviews    </p>
+            <p class="subtitle text-sm text-primary">Reviews</p>
             <h5 class="mb-4">Listing Reviews </h5>
             <div class="media d-block d-sm-flex review">
               <div class="text-md-center mr-4 mr-xl-5"><img src="../../assets/img/avatar/avatar-8.jpg" alt="Padmé Amidala" class="d-block avatar avatar-xl p-2 mb-2"><span class="text-uppercase text-muted text-sm">Dec 2018</span></div>
@@ -114,7 +114,8 @@
                 </select>
               </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">Book</button>
+              <router-link v-bind:to="{name: 'step1', params: {products: products}}"><button type="button" class="btn btn-primary btn-block">Book</button>
+              </router-link>
               </div>
             </form>
             <hr class="my-4">
