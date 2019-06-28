@@ -43,7 +43,7 @@ export default {
 </script>
 <style type="text/css">
   .navbar-margin {
-    margin-bottom: 70px;
+    margin-bottom: 72px;
   }
 
   /*extra css*/

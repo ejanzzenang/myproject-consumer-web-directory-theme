@@ -9,10 +9,19 @@
         <swiper v-bind:options="swiperOption" class="testimonials-slider testimonials">
             <swiper-slide class="px-3">
               <div class="testimonial card rounded-lg shadow border-0">
-                <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
+                <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-1.jpg" alt="..." class="img-fluid"></div>
                 <div class="text">
                   <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
+                  <p class="testimonial-text">Amazing travel experience. Hassle free. Great service.</p><strong>Jessica Watson</strong>
+                </div>
+              </div>
+            </swiper-slide>
+            <swiper-slide class="px-3">
+              <div class="testimonial card rounded-lg shadow border-0">
+                <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-2.jpg" alt="..." class="img-fluid"></div>
+                <div class="text">
+                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                  <p class="testimonial-text">Strongly recommended. Would definitely book tours again.</p><strong>John Smith</strong>
                 </div>
               </div>
             </swiper-slide>
@@ -21,43 +30,16 @@
                 <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
                 <div class="text">
                   <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
+                  <p class="testimonial-text">Enjoyable experience. There are plenty of activites to choose from.</p><strong>Emily Dickson</strong>
                 </div>
               </div>
             </swiper-slide>
             <swiper-slide class="px-3">
               <div class="testimonial card rounded-lg shadow border-0">
-                <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
+                <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-4.jpg" alt="..." class="img-fluid"></div>
                 <div class="text">
                   <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide class="px-3">
-              <div class="testimonial card rounded-lg shadow border-0">
-                <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                <div class="text">
-                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide class="px-3">
-              <div class="testimonial card rounded-lg shadow border-0">
-                <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                <div class="text">
-                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide class="px-3">
-              <div class="testimonial card rounded-lg shadow border-0">
-                <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                <div class="text">
-                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
+                  <p class="testimonial-text">Hassle free booking. What you see is what you get. I would highly recommend!</p><strong>James Apples</strong>
                 </div>
               </div>
             </swiper-slide>

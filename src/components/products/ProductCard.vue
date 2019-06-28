@@ -17,7 +17,7 @@
               <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i>
               </p>
             </div>
-            <p class="card-text text-muted"><span class="h4 text-primary">Php. {{product.price}}</span> per night</p>
+            <p class="card-text text-muted"><span class="h4 text-primary">Php. {{product.price}} </span>person</p>
           </div>
         </div>
       </div>
@@ -30,7 +30,8 @@
   props: ['product'], 
   data(){
     return {
-      obj: this.product,    }
+      obj: this.product,    
+    } 
   }
 }
 </script>

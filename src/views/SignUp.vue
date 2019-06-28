@@ -4,9 +4,8 @@
       <div class="row min-vh-100">
         <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
           <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
-            <div class="mb-4"><img src="../assets/img/logo-square.svg" alt="..." style="max-width: 4rem;" class="img-fluid mb-4">
+            <div class="mb-4"><img src="../assets/img/hetchly-logo.svg" alt="..." style="max-width: 10rem;" class="img-fluid mb-4">
               <h2>Sign up</h2>
-              <p class="text-muted">His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table.</p>
             </div>
             <form class="form-validate">
               <div class="form-group">
@@ -21,7 +20,7 @@
                 <label for="loginPassword2" class="form-label"> Confirm your password</label>
                 <input name="loginPassword2" id="loginPassword2" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control">
               </div>
-              <button type="submit" class="btn btn-lg btn-block btn-primary">Sign up</button>
+              <button type="submit" id="signup" class="btn btn-lg btn-block btn-primary">Sign up</button>
               <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
               <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
               <hr class="my-4">
@@ -41,8 +40,6 @@
   </div>
 </template>
 
-
-
 <style scoped>
   
   .bG {
@@ -51,3 +48,59 @@
     } 
 
 </style>
+
+
+<script>
+  import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
+
+  export default {
+    name: 'signup',
+    mounted() {
+      
+      // var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;  // example: 'us-east-1_abcd12345'
+      // var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; // example: 'abcd12345abcd12345abcd12345'
+      var cognitoUserPoolId = 'ap-southeast-1_GUM0JtMJC';  // example: 'us-east-1_abcd12345'
+      var cognitoUserPoolClientId = '5hvshfmgob5beudv0ukdj0ej'; // example: 
+      var navigate = this.$router;
+
+      $(document).on('click', '#signup', function(event) {
+        event.preventDefault();
+
+        var poolData = {
+          UserPoolId : cognitoUserPoolId,
+          ClientId : cognitoUserPoolClientId
+        };
+        var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+
+        var attributeList = [];
+
+
+        var email = document.getElementById('loginUsername').value;
+        var pw = document.getElementById('loginPassword').value;
+        var confirmPw = document.getElementById('loginPassword2').value;
+        var dataEmail = {
+            Name : 'email',
+            Value : email
+        };
+
+        var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
+
+        attributeList.push(attributeEmail);
+
+        if (pw === confirmPw) {
+          userPool.signUp(email, pw, attributeList, null, function(err, result){
+              if (err) {
+                  alert(err.message);
+                  return;
+              }
+              localStorage.setItem('email', email);
+              alert("Successfully signed up!!")
+              navigate.push('/confirm');
+          });
+        } else {
+          alert('Passwords do not match.')
+        }
+      });
+    }
+  }
+</script>
