@@ -72,5 +72,42 @@ export default new Router({
         },
       ],
     },
+    {
+      path: '/user',
+      name: 'user',
+      component: () => import('./views/User.vue'),
+      children: [
+        {
+          path: 'step0',
+          name: 'user-step0',
+          component: () => import('./components/user_info/Step0.vue'),
+        },
+        {
+          path: 'step1',
+          name: 'user-step1',
+          component: () => import('./components/user_info/Step1.vue'),
+        },
+        {
+          path: 'step2',
+          name: 'user-step2',
+          component: () => import('./components/user_info/Step2.vue'),
+        },
+        {
+          path: 'step3',
+          name: 'user-step3',
+          component: () => import('./components/user_info/Step3.vue'),
+        },
+        {
+          path: 'step4',
+          name: 'user-step4',
+          component: () => import('./components/user_info/Step4.vue'),
+        },
+        {
+          path: 'step5',
+          name: 'user-step5',
+          component: () => import('./components/user_info/Step5.vue'),
+        },
+      ],
+    },
   ],
 });
