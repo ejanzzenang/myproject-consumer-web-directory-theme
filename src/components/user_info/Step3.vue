@@ -149,7 +149,7 @@
             <div class="col text-center text-sm-left"><router-link to="step2" class="btn btn-link text-muted"><i class="fa-chevron-left fa mr-2"></i>Back</router-link>
             </div>
             <div class="col text-center text-sm-right"><router-link to="step4" class="btn btn-primary px-3">Next step<i class="fa-chevron-right fa ml-2"></i></router-link></div>
-          </div>
+        </div>
         </form>
       </div>
     </section>
