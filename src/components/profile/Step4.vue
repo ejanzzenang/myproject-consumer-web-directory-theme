@@ -9,7 +9,7 @@
 	        <h1 class="h2 mb-5">Your Profile has been updated!</h1>
 	        <p class="mb-5"><img src="../../assets/img/illustration/undraw_celebration_0jvk.svg" alt="" style="width: 400px;" class="img-fluid"></p>
 	        <p class="text-muted mb-5">Thank you, Ondrej. Your profile has been updated!</p>
-	        <p class="mb-5"><a href="#" class="btn btn-primary mr-2 mb-2">View Profile</a><a href="#" class="btn btn-outline-muted mb-2">Home</a></p>
+	        <p class="mb-5"><router-link to="/profile/1" class="btn btn-primary mr-2 mb-2">View Profile</router-link><router-link to="/" class="btn btn-outline-muted mb-2">Home</router-link></p>
 	      </div>
 	    </section>
 	</div>
