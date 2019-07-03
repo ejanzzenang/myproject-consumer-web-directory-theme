@@ -75,7 +75,7 @@ export default new Router({
     {
       path: '/profile',
       name: 'profile',
-      component: () => import('./views/User.vue'),
+      component: () => import('./views/Profile.vue'),
       children: [
         {
           path: 'step0',
@@ -103,6 +103,13 @@ export default new Router({
           component: () => import('./components/profile/Step4.vue'),
         },
       ],
+    },
+    {
+      path: '/profile/:user_id',
+      name: 'user-profile',
+      component: () => import('./components/profile/MyProfile.vue'),
+      props: true,
+
     },
   ],
 });
