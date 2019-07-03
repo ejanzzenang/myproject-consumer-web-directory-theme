@@ -78,14 +78,24 @@
         var email = document.getElementById('loginUsername').value;
         var pw = document.getElementById('loginPassword').value;
         var confirmPw = document.getElementById('loginPassword2').value;
+        
         var dataEmail = {
             Name : 'email',
             Value : email
         };
 
+        var dataFirstName = {
+             Name : 'custom:first_name',
+             Value : ''
+        }
+
         var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
 
         attributeList.push(attributeEmail);
+
+        var attributeFirstName = new AmazonCognitoIdentity.CognitoUserAttribute(dataFirstName);
+
+        attributeList.push(attributeFirstName);
 
         if (pw === confirmPw) {
           userPool.signUp(email, pw, attributeList, null, function(err, result){
