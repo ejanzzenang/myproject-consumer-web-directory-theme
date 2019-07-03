@@ -16,19 +16,19 @@
             <div class="col-lg-7 ml-auto">
               <div class="form-group">
                 <label for="form_city" class="form-label">First Name *</label>
-                <input name="name" id="form_city" class="form-control">
+                <input name="name" id="form_city" class="form-control" ref="first_name">
               </div>
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="form_city" class="form-label">Middle Name</label>
-                    <input name="name" id="form_city" class="form-control">
+                    <input name="name" id="form_city" class="form-control" ref="middle_name">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="form_state" class="form-label">Last Name *</label>
-                    <input name="name" id="form_state" class="form-control">
+                    <input name="name" id="form_state" class="form-control" ref="last_name">
                   </div>
                 </div>
               </div>
@@ -539,10 +539,10 @@
             </div>
           </div>
           <div class="row form-block flex-column flex-sm-row">
-            <div class="col text-center text-sm-left"><router-link to="step0" class="btn btn-link   text-muted"><i class="fa-chevron-left fa mr-2"></i>Back</router-link>
+            <div class="col text-center text-sm-left"><router-link to="step0"><button class="btn btn-link text-muted"><i class="fa-chevron-left fa mr-2"></i>Back</button></router-link>
             </div>
             <div class="col text-center text-sm-right">
-              <router-link to="step2" class="btn btn-primary px-3">Next step<i class="fa-chevron-right fa ml-2"></i></router-link>
+              <router-link to="step2"><button class="btn btn-primary px-3" v-on:click="updateUser">Next step<i class="fa-chevron-right fa ml-2"></i></button></router-link>
             </div>
           </div>
         </form>
@@ -551,6 +551,9 @@
 	</div>
 </template>
 <script>
+  import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
+  import * as AWS from 'aws-sdk';
+
   import moment from 'moment'
 
   export default {
@@ -559,15 +562,88 @@
       },
       data() {
         return {
-          myDate: "06/10/2019",
-          options: {
-              singleDatePicker: true,
-              minYear: 2019,
-              maxYear: +moment().format("YYYY")
-            }
+        myDate: "06/10/2019",
+        options: {
+            singleDatePicker: true,
+            minYear: 2019,
+            maxYear: +moment().format("YYYY")
           }
         }
+      },
+      methods: {
+        updateUser: function(){
+            var attributeList = []  
+
+            // var input_list = [
+            //   {
+            //     Name: 'first_name',
+            //     Value: this.$refs.first_name.value 
+            //   },
+            //   {
+            //     Name: 'last_name',
+            //     Value: this.$refs.last_name.value 
+            //   },
+            //   {
+            //     Name: 'middle_name',
+            //     Value: this.$refs.middle_name.value 
+            //   }
+            // ];
+            
+            // input_list.forEach(function(element){
+            //     attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(element));
+            // })
+
+            var attribute = {
+                Name : 'custom:first_name',
+                Value : this.$refs.first_name.value 
+            };
+            var attribute = new AmazonCognitoIdentity.CognitoUserAttribute(attribute);
+            attributeList.push(attribute);
+                
+            // console.log(input_list)
+            console.log(attributeList)
+
+            var cognitoUserPoolId = 'ap-southeast-1_GUM0JtMJC';  // example: 'us-east-1_abcd12345'
+            var cognitoUserPoolClientId = '5hvshfmgob5beudv0ukdj0ej'; // example: 
+
+            var data = { 
+              UserPoolId : cognitoUserPoolId,
+              ClientId : cognitoUserPoolClientId
+            };
+
+            var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+            var cognitoUser = userPool.getCurrentUser();
+
+
+             if (cognitoUser != null) {
+                cognitoUser.getSession(function(err, session) {
+                    if (err) {
+                        alert(err);
+                        return;
+                    }
+                    console.log('session validity: ' + session.isValid());
+                });
+            }
+
+            cognitoUser.updateAttributes(attributeList, function(err, result) {
+                if (err) {
+                    console.log(err);
+                    alert(err);
+                    return;
+                }
+                console.log('call result: ' + result);
+            });
+        },
+        printData: function(){
+            console.log(this.$refs.first_name.value)
+            console.log(this.$refs.last_name.value)
+            console.log(this.$refs.middle_name.value)
+        }
+      }
     }
+
+
+
 
 
 
