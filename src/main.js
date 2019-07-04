@@ -23,7 +23,7 @@ require('@/assets/vendor/jquery/jquery.min.js');
 import 'bootstrap';
 import 'bootstrap-select/dist/js/bootstrap-select.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 // css
 require('@/assets/vendor/nouislider/nouislider.css');
 require('@/assets/vendor/magnific-popup/magnific-popup.css');
