@@ -74,7 +74,6 @@
 
         var attributeList = [];
 
-
         var email = document.getElementById('loginUsername').value;
         var pw = document.getElementById('loginPassword').value;
         var confirmPw = document.getElementById('loginPassword2').value;
@@ -84,18 +83,60 @@
             Value : email
         };
 
-        var dataFirstName = {
-             Name : 'custom:first_name',
-             Value : ''
-        }
+        var custom_fields = 
+          [
+            {
+               Name : 'custom:first_name',
+               Value : ''
+            },
+            {
+               Name : 'custom:middle_name',
+               Value : ''
+            },
+            {
+               Name : 'custom:last_name',
+               Value : ''
+            },
+            {
+               Name : 'custom:gender',
+               Value : ''
+            },
+            {
+               Name : 'custom:birth_date',
+               Value : ''
+            },
+            {
+               Name : 'custom:country_of_residence',
+               Value : ''
+            },
+            {
+               Name : 'custom:country_of_birth',
+               Value : ''
+            },
+            {
+               Name : 'custom:occupation',
+               Value : ''
+            },
+            {
+               Name : 'custom:first_name',
+               Value : ''
+            },
+            {
+               Name : 'custom:locality',
+               Value : ''
+            },
+            {
+               Name : 'custom:civil_status',
+               Value : ''
+            }
+          ]
 
         var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
-
         attributeList.push(attributeEmail);
 
-        var attributeFirstName = new AmazonCognitoIdentity.CognitoUserAttribute(dataFirstName);
-
-        attributeList.push(attributeFirstName);
+        custom_fields.forEach(function(element){
+          attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(element));
+        });
 
         if (pw === confirmPw) {
           userPool.signUp(email, pw, attributeList, null, function(err, result){
