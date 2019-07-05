@@ -16,19 +16,19 @@
             <div class="col-lg-7 ml-auto">
               <div class="form-group">
                 <label for="form_city" class="form-label">First Name *</label>
-                <input name="name" id="form_city" class="form-control" ref="first_name">
+                <input name="name" id="form_city" class="form-control" ref="first_name" required>
               </div>
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="form_city" class="form-label">Middle Name</label>
-                    <input name="name" id="form_city" class="form-control" ref="middle_name">
+                    <input name="name" id="form_city" class="form-control" ref="middle_name" required>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="form_state" class="form-label">Last Name *</label>
-                    <input name="name" id="form_state" class="form-control" ref="last_name">
+                    <input name="name" id="form_state" class="form-control" ref="last_name" required>
                   </div>
                 </div>
               </div>
@@ -273,16 +273,9 @@
         }
       },
       created: function() {
-        // $("#form_country_of_birth").selectpicker("render");
-        // $("#country_of_residence").selectpicker("render");
         this.getCountriesList()
-      },
-      mounted: function(){
-        $("#form_country_of_birth").selectpicker("render");
-        $("#country_of_residence").selectpicker("render");
-        $('#form_country_of_birth').click(e => e.stopPropagation());
-        $('#country_of_residence').click(e => e.stopPropagation());
       }
+
     }
 </script>
 
