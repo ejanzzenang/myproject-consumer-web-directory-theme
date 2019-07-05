@@ -24,7 +24,7 @@
                   </div>
                 </div>
               </div>
-	            <p class="mb-5 mb-lg-0"><router-link to="step1" class="btn btn-primary px-3">Next step<i class="fa-chevron-right fa ml-2"></i></router-link></p>
+	            <p class="mb-5 mb-lg-0"><router-link to="step1"><button class="btn btn-primary px-3">Next step<i class="fa-chevron-right fa ml-2"></i></button></router-link></p>
 	          </div>
 	          <div class="col-lg-5 ml-auto d-flex align-items-center"><img src="../../assets/img/illustration/undraw_celebration_0jvk.svg" alt="" style="width: 400px;" class="img-fluid"></div>
 	        </div>
@@ -34,7 +34,19 @@
 </template>
 <script>
 	
+export default {
+      name: 'profile-step0',
+      components: {
+      },
+      data() {
+        return {
+          
+         }
+      },
+      methods: {
 
+      }
+    }
 	
 </script>
 
