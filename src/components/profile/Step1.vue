@@ -6,8 +6,8 @@
       <section class="py-5">
       <div class="container">
         <p class="subtitle text-primary">Fill up your information</p>
-        <h1 class="h2 mb-5"> Basic information <span class="text-muted float-right">Step 1</span>      </h1>
-        <form>
+        <h1 class="h2 mb-5"> Basic information <span class="text-muted float-right">Step 1</span></h1>
+        <form id="step1-form" action="/profile/step2">
           <div class="row form-block">
             <div class="col-lg-4">
               <h4>Basic</h4>
@@ -38,15 +38,15 @@
                   <div class="form-group">
                   <label class="form-label">Gender *</label>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="gender_0" name="gender" class="custom-control-input" value="Male" v-model="gender">
+                    <input type="radio" id="gender_0" name="gender" class="custom-control-input" value="Male" v-model="gender" required>
                     <label for="gender_0" class="custom-control-label">Male</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="gender_1" name="gender" class="custom-control-input" value="Female" v-model="gender">
+                    <input type="radio" id="gender_1" name="gender" class="custom-control-input" value="Female" v-model="gender" required>
                     <label for="gender_1" class="custom-control-label">Female</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="gender_2" name="gender" class="custom-control-input" value="Others" v-model="gender">
+                    <input type="radio" id="gender_2" name="gender" class="custom-control-input" value="Others" v-model="gender" required>
                     <label for="gender_2" class="custom-control-label">Others</label>
                   </div>
                   </div>
@@ -55,7 +55,7 @@
                   <div class="form-group">
                     <label for="birthdate" class="form-label">Birth Date *</label>
                     <div class="datepicker-container datepicker-container-right">
-                      <date-range-picker v-model="myDate" :options="options" id="bookingDate" placeholder="Choose your dates" required="required" class="form-control"/>
+                      <date-range-picker v-model="myDate" :options="options" id="bookingDate" placeholder="Choose your dates" required='required' class="form-control"/>
                     </div>
                   </div>
                 </div>
@@ -70,16 +70,16 @@
             </div>
             <div class="col-lg-7 ml-auto">
               <div class="form-group">
-                <label for="form_country" class="form-label">Country of Residence *</label>
-                <select name="country" id="form_country_of_residence" data-style="btn-selectpicker" title=" " data-live-search="true" class="selectpicker form-control" v-model="country_of_residence">
+                <label for="form_country_of_residence" class="form-label">Country of Residence *</label>
+                <select name="country" id="form_country_of_residence" data-style="btn-selectpicker" title=" " data-live-search="true" class="selectpicker form-control" v-model="country_of_residence" required>
                   <option v-for="country in country_list" v-bind:value="country.name">{{ country.name }}</option>
                 </select>
               </div>
               <div class="row">
               <div class="col-md-6"> 
             <div class="form-group">
-                <label for="form_country" class="form-label">Country of Birth *</label>
-                <select name="country" id="form_country_of_birth" data-style="btn-selectpicker" title=" " data-live-search="true" class="selectpicker form-control" v-model="country_of_birth">
+                <label for="form_country_of_birth" class="form-label">Country of Birth *</label>
+                <select name="country" id="form_country_of_birth" data-style="btn-selectpicker" title=" " data-live-search="true" class="selectpicker form-control" v-model="country_of_birth" required>
                    <option v-for="country in country_list" v-bind:value="country.name">{{ country.name }}</option>
                 </select>
               </div>
@@ -87,7 +87,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="form_state" class="form-label">Occupation *</label>
-                    <input name="name" id="form_state" class="form-control" ref="occupation">
+                    <input name="name" id="form_state" class="form-control" ref="occupation" required>
                   </div>
                 </div>
               </div>
@@ -97,48 +97,48 @@
                   <div class="form-group">
                   <label class="form-label">Locality</label>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="locality_0" name="locality" class="custom-control-input" v-model="locality" value="Foreign">
+                    <input type="radio" id="locality_0" name="locality" class="custom-control-input" v-model="locality" value="Foreign" required>
                     <label for="locality_0" class="custom-control-label">Foreign</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="locality_1" name="locality" class="custom-control-input" v-model="locality" value="Local">
+                    <input type="radio" id="locality_1" name="locality" class="custom-control-input" v-model="locality" value="Local" required>
                     <label for="locality_1" class="custom-control-label">Local</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="locality_2" name="locality" class="custom-control-input" v-model="locality" value="Aklanon">
+                    <input type="radio" id="locality_2" name="locality" class="custom-control-input" v-model="locality" value="Aklanon" required>
                     <label for="locality_2" class="custom-control-label">Aklanon</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="locality_3" name="locality" class="custom-control-input" v-model="locality" value="Non-Aklanon">
+                    <input type="radio" id="locality_3" name="locality" class="custom-control-input" v-model="locality" value="Non-Aklanon" required>
                     <label for="locality_3" class="custom-control-label">Non-Aklanon</label>
                   </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                  <label class="form-label">Civil Status</label>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" id="civil_status_0" name="civil_status" class="custom-control-input" v-model="civil_status">
-                    <label for="civil_status_0" class="custom-control-label">Senior Citizen</label>
-                  </div>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" id="civil_status_1" name="civil_status" class="custom-control-input" v-model="civil_status">
-                    <label for="civil_status_1" class="custom-control-label">Adult</label>
-                  </div>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" id="civil_status_2" name="civil_status" class="custom-control-input" v-model="civil_status">
-                    <label for="civil_status_2" class="custom-control-label">Child of 12 Years Old or Below</label>
-                  </div>
+                    <label class="form-label">Civil Status</label>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" id="civil_status_0" name="civil_status" class="custom-control-input" v-model="civil_status" required>
+                      <label for="civil_status_0" class="custom-control-label">Senior Citizen</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" id="civil_status_1" name="civil_status" class="custom-control-input" v-model="civil_status" required>
+                      <label for="civil_status_1" class="custom-control-label">Adult</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" id="civil_status_2" name="civil_status" class="custom-control-input" v-model="civil_status" required>
+                      <label for="civil_status_2" class="custom-control-label">Child of 12 Years Old or Below</label>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="row form-block flex-column flex-sm-row">
-            <div class="col text-center text-sm-left"><router-link to="step0"><button class="btn btn-link text-muted"><i class="fa-chevron-left fa mr-2"></i>Back</button></router-link>
+            <div class="col text-center text-sm-left"><a href="/profile/step0" class="btn btn-link text-muted"><i class="fa-chevron-left fa mr-2"></i>Back</a>
             </div>
             <div class="col text-center text-sm-right">
-              <router-link to="step2"><button class="btn btn-primary px-3" v-on:click="updateUser">Next step<i class="fa-chevron-right fa ml-2"></i></button></router-link>
+              <button type="submit" class="btn btn-primary px-3" v-on:click="updateUser">Next step<i class="fa-chevron-right fa ml-2"></i></button>
             </div>
           </div>
         </form>
@@ -265,6 +265,7 @@
             console.log(this.$refs.occupation.value)
             console.log(this.locality)
             console.log(this.civil_status)
+
         },
         getCountriesList: function() {
           this.$http.get('https://restcountries.eu/rest/v1/all').then(result=> {
