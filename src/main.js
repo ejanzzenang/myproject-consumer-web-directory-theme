@@ -22,7 +22,7 @@ require('@/assets/vendor/jquery/jquery.min.js');
 // bootstrap
 import 'bootstrap';
 import 'bootstrap-select/dist/js/bootstrap-select.min.js';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 // css
 require('@/assets/vendor/nouislider/nouislider.css');
