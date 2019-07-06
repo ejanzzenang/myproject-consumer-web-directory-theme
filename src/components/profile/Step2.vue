@@ -6,8 +6,8 @@
     <section class="py-5">
       <div class="container">
         <p class="subtitle text-primary">Fill up your information</p>
-        <h1 class="h2 mb-5">Travel Information<span class="text-muted float-right">Step 2</span>      </h1>
-        <form>
+        <h1 class="h2 mb-5">Travel Information<span class="text-muted float-right">Step 2</span></h1>
+        <form id='form-step2' action='/profile/step3'>
           <div class="row form-block">
             <div class="col-lg-4">
               <h4>Travel Information</h4>
@@ -19,15 +19,15 @@
                   <div class="form-group">
                   <label class="form-label">Mode of Travel</label>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="locality_0" name="locality" class="custom-control-input">
+                    <input type="radio" id="locality_0" name="locality" class="custom-control-input" required>
                     <label for="locality_0" class="custom-control-label">Air</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="locality_1" name="locality" class="custom-control-input">
+                    <input type="radio" id="locality_1" name="locality" class="custom-control-input" required>
                     <label for="locality_1" class="custom-control-label">Land</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="locality_2" name="locality" class="custom-control-input">
+                    <input type="radio" id="locality_2" name="locality" class="custom-control-input" required>
                     <label for="locality_2" class="custom-control-label">Sea</label>
                   </div>
                   </div>
@@ -36,27 +36,27 @@
                   <div class="form-group">
                   <label class="form-label">Purpose of Travel</label>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="purpose_of_travel_0" name="purpose_of_travel" class="custom-control-input">
+                    <input type="radio" id="purpose_of_travel_0" name="purpose_of_travel" class="custom-control-input" required>
                     <label for="purpose_of_travel_0" class="custom-control-label">Holiday</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="purpose_of_travel_1" name="purpose_of_travel" class="custom-control-input">
+                    <input type="radio" id="purpose_of_travel_1" name="purpose_of_travel" class="custom-control-input" required>
                     <label for="purpose_of_travel_1" class="custom-control-label">Visit Friend of Relative</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="purpose_of_travel_2" name="purpose_of_travel" class="custom-control-input">
+                    <input type="radio" id="purpose_of_travel_2" name="purpose_of_travel" class="custom-control-input" required>
                     <label for="purpose_of_travel_2" class="custom-control-label">Government Mission</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="purpose_of_travel_3" name="purpose_of_travel" class="custom-control-input">
+                    <input type="radio" id="purpose_of_travel_3" name="purpose_of_travel" class="custom-control-input" required>
                     <label for="purpose_of_travel_3" class="custom-control-label">Incentive</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="purpose_of_travel_4" name="purpose_of_travel" class="custom-control-input">
+                    <input type="radio" id="purpose_of_travel_4" name="purpose_of_travel" class="custom-control-input" required>
                     <label for="purpose_of_travel_4" class="custom-control-label">Business</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="purpose_of_travel_5" name="purpose_of_travel" class="custom-control-input">
+                    <input type="radio" id="purpose_of_travel_5" name="purpose_of_travel" class="custom-control-input" required>
                     <label for="purpose_of_travel_5" class="custom-control-label">Other</label>
                   </div>
                   </div>
@@ -66,13 +66,13 @@
                 <div class="col-md-6">
                   <div class="form-group">
                   <label class="form-label">Number of Visits to Boracay *</label>
-                  <input name="name" id="visits" class="form-control">
+                  <input name="name" id="visits" class="form-control" required>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                   <label class="form-label">Intended Length of Stay (Nights) *</label>
-                  <input name="name" id="form_city" class="form-control">
+                  <input name="name" id="form_city" class="form-control" required>
                   </div>
                 </div>
               </div>
@@ -81,12 +81,12 @@
                   <div class="form-group">
                   <label class="form-label">Package Tour *</label>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="locality_0" name="locality" class="custom-control-input">
-                    <label for="locality_0" class="custom-control-label">Yes</label>
+                    <input type="radio" id="tour_0" name="tour" class="custom-control-input" required>
+                    <label for="tour_0" class="custom-control-label">Yes</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="locality_1" name="locality" class="custom-control-input">
-                    <label for="locality_1" class="custom-control-label">No</label>
+                    <input type="radio" id="tour_1" name="tour" class="custom-control-input" required>
+                    <label for="tour_1" class="custom-control-label">No</label>
                   </div>
                   </div>
                 </div>
@@ -100,31 +100,30 @@
             </div>
             <div class="col-lg-7 ml-auto">
              <div class="form-group mb-5">
-                <label for="form_neighbourhood" class="form-label">Resort/Cottage Name/Address of Relative or Friend/Other</label>
-                <textarea name="name" id="form_neighbourhood" rows="2" aria-describedby="hoodHelp" class="form-control"></textarea><small id="hoodHelp" class="form-text text-muted mt-2">Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.    </small>
+                <label for="form_neighbourhood" class="form-label">Resort/Cottage Name/Address of Relative or Friend/Other *</label>
+                <textarea name="name" id="form_neighbourhood" rows="2" aria-describedby="hoodHelp" class="form-control" required></textarea><small id="hoodHelp" class="form-text text-muted mt-2">Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.</small>
             </div>
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="form_city" class="form-label">Place Visited before Boracay *</label>
-                    <input name="name" id="form_city" class="form-control">
+                    <input name="name" id="form_city" class="form-control" required>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="form_state" class="form-label">Place Visited after Boracay *</label>
-                    <input name="name" id="form_state" class="form-control">
+                    <input name="name" id="form_state" class="form-control" required>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
 
           <div class="row form-block flex-column flex-sm-row">
-            <div class="col text-center text-sm-left"><router-link to="step1" class="btn btn-link text-muted"><i class="fa-chevron-left fa mr-2"></i>Back</router-link>
+            <div class="col text-center text-sm-left"><a href="/profile/step1" class="btn btn-link text-muted"><i class="fa-chevron-left fa mr-2"></i>Back</a>
             </div>
-            <div class="col text-center text-sm-right"><router-link to="step3" class="btn btn-primary px-3">Next step<i class="fa-chevron-right fa ml-2"></i></router-link></div>
+            <div class="col text-center text-sm-right"><button type='submit' class="btn btn-primary px-3">Next step<i class="fa-chevron-right fa ml-2"></i></button></div>
           </div>
         </form>
       </div>
