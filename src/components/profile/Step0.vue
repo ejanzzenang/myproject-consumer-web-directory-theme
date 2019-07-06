@@ -5,7 +5,7 @@
 	    </div>
 		<section class="py-5 py-lg-7">
 	      <div class="container">
-       		<form id="residency" action='/profile/step1'>
+       		<form id="residency" @submit.prevent="validateBeforeSubmit">
 		        <div class="row">
 		          <div class="col-lg-5">
 		            <p class="subtitle text-primary">COMPLETE YOUR PROFILE</p>
@@ -15,18 +15,21 @@
 	                <div class="col-md-12">
 	                  <div class="form-group">
 	                  <div class="custom-control custom-radio">
-	                    <input type="radio" id="residency_0" name="locality" class="custom-control-input" required>
+	                    <input type="radio" id="residency_0" name="residency" class="custom-control-input" v-validate="'required'">
 	                    <label for="residency_0" class="custom-control-label">I am a Philippine Resident</label>
 	                  </div>
 	                  <div class="custom-control custom-radio">
-	                    <input type="radio" id="residency_1" name="locality" class="custom-control-input required">
+	                    <input type="radio" id="residency_1" name="residency" class="custom-control-input" v-validate="'required'">
 	                    <label for="residency_1" class="custom-control-label">I am a Non-Philippine Resident</label>
+                    	<div v-show="errors.has('residency')" class="error" role="alert">
+      						{{"* " + errors.first('residency') }}
+    					</div>
 	                  </div>
 
 	                  </div>
 	                </div>
 	              </div>
-		            <p class="mb-5 mb-lg-0"><button type='submit' class="btn btn-primary px-3">Next step<i class="fa-chevron-right fa ml-2"></i></button></p>
+		            <p class="mb-5 mb-lg-0"><button class="btn btn-primary px-3">Next step<i class="fa-chevron-right fa ml-2"></i></button></p>
 		          </div>
 		          <div class="col-lg-5 ml-auto d-flex align-items-center"><img src="../../assets/img/illustration/undraw_celebration_0jvk.svg" alt="" style="width: 400px;" class="img-fluid"></div>
 		        </div>
@@ -47,8 +50,19 @@ export default {
          }
       },
       methods: {
+	    validateBeforeSubmit() {
+	      this.$validator.validateAll().then((result) => {
+	        if (result) {
 
-      }
+	          // eslint-disable-next-line
+	          this.$router.push('/profile/step1')
+	          return;
+	        }
+
+	        alert('Correct the errors!');
+	      });
+	    }
+	  }
     }
 	
 </script>
