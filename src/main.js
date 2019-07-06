@@ -15,26 +15,25 @@ Vue.prototype.$http = Axios;
 import DateRangePicker from '@gravitano/vue-date-range-picker';
 Vue.use(DateRangePicker);
 
+import VeeValidate from 'vee-validate';
+Vue.use(VeeValidate);
 
 // jQuery
 require('@/assets/vendor/jquery/jquery.min.js');
 
 // bootstrap
 import 'bootstrap';
-import 'bootstrap-select/dist/js/bootstrap-select.min.js';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 // css
 require('@/assets/vendor/nouislider/nouislider.css');
 require('@/assets/vendor/magnific-popup/magnific-popup.css');
 require('@/assets/css/style.default.css');
 require('@/assets/css/custom.css');
-require('@/assets/img/favicon.png');
 
 // As a global method
-require('@/assets/vendor/object-fit-images/ofi.min.js');
-require('@/assets/vendor/magnific-popup/jquery.magnific-popup.min.js');
-require('@/assets/vendor/smooth-scroll/smooth-scroll.polyfills.min.js');
+// require('@/assets/vendor/object-fit-images/ofi.min.js');
+// require('@/assets/vendor/magnific-popup/jquery.magnific-popup.min.js');
+// require('@/assets/vendor/smooth-scroll/smooth-scroll.polyfills.min.js');
 
 import router from './router';
 
