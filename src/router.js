@@ -111,5 +111,12 @@ export default new Router({
       props: true,
 
     },
+    {
+      path: '/forgot',
+      name: 'forgot',
+      component: () => import('./views/ForgotPassword.vue'),
+      props: true,
+
+    },
   ],
 });
