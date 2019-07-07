@@ -265,7 +265,8 @@ ul {
 .v-select {
   position: relative;
   width: 100%;
-  height: 30px;
+  /*height: 30px;*/
+  height:calc(1.6em + 0.75rem + 2px);
   cursor: pointer;
 
   &.disabled {
@@ -295,11 +296,12 @@ ul {
   width: 100%;
   text-align: right;
   white-space: nowrap;
+  /*height:1rem;*/
   /*border: 1px solid transparent;*/
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   font-family: inherit, sans-serif;
-  line-height: 1.6;
+  line-height: 1.5;
   border-radius: 0.4rem;
   transition: background-color, border-color, box-shadow, 0.15s ease-in-out;
   cursor: pointer;
