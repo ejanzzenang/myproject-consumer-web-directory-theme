@@ -269,7 +269,7 @@
                     console.log('session validity: ' + session.isValid());
                 });
             }
-
+            
             cognitoUser.updateAttributes(attributeList, function(err, result) {
                 if (err) {
                     console.log(err);
