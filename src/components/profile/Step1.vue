@@ -40,8 +40,8 @@
                   <div class="form-group">
                   <label class="form-label">Gender *</label>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="gender_0" name="gender" class="custom-control-input" value="Male" v-model="gender" >
-                    <label for="gender_0" class="custom-control-label" v-validate="'required'">Male</label>
+                    <input type="radio" id="gender_0" name="gender" class="custom-control-input" value="Male" v-model="gender" v-validate="'required'">
+                    <label for="gender_0" class="custom-control-label">Male</label>
                   </div>
                   <div class="custom-control custom-radio">
                     <input type="radio" id="gender_1" name="gender" class="custom-control-input" value="Female" v-model="gender" v-validate="'required'">
@@ -51,15 +51,14 @@
                     <input type="radio" id="gender_2" name="gender" class="custom-control-input" value="Others" v-model="gender" v-validate="'required'">
                     <label for="gender_2" class="custom-control-label">Others</label>
                   </div>
-                   <div v-show="errors.has('gender')" class="error">{{ errors.first('gender') }}</div>
                   </div>
+                  <div v-show="errors.has('gender')" class="error">{{ errors.first('gender') }}</div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="birthdate" class="form-label">Birth Date *</label>
                     <div class="datepicker-container datepicker-container-right">
-                      <date-range-picker name="birth_date" v-model="myDate" :options="options" id="bookingDate" placeholder="Choose your dates" required='required' class="form-control" v-validate="'required'"/>
-                      <div v-show="errors.has('birth_date')" class="error">{{ errors.first('birth_date') }}</div>
+                      <date-range-picker name="birth_date" v-model="birth_date" :options="options" id="bookingDate" placeholder="Choose your dates" required='required' class="form-control"/>
                     </div>
                   </div>
                 </div>
@@ -75,74 +74,83 @@
             <div class="col-lg-7 ml-auto">
               <div class="form-group">
                 <label for="form_country_of_residence" class="form-label">Country of Residence *</label>
-                <!-- <select name="country" id="form_country_of_residence" data-style="btn-selectpicker" title=" " data-live-search="true" class="selectpicker form-control" v-model="country_of_residence" >
+<!--                 <select name="country" id="form_country_of_residence" data-style="btn-selectpicker" title=" " data-live-search="true" class="selectpicker form-control" v-model="country_of_residence" >
                   <option v-for="country in country_list" v-bind:value="country.name">{{ country.name }}</option>
                 </select> -->
                  <v-select :options="country_list" 
                            :searchable="true"
                            :labelTitle="'<select a country>'" 
-                           :v-model="country_of_residence"
+                           v-model="country_of_residence"
+                           v-validate:country_of_residence="'required'"
                            name='country_of_residence'/>
+                  <div v-show="errors.has('country_of_residence')" class="error">{{ errors.first('country_of_residence') }}</div>
               </div>
-              <div class="row">
+            <div class="row">
               <div class="col-md-6"> 
-            <div class="form-group">
-                <label for="form_country_of_birth" class="form-label">Country of Birth *</label>
-                <v-select class="bootstrap-select"
-                          :options="country_list" 
-                          :searchable="true" 
-                          :labelTitle="'<select a country>'"
-                          :v-model="country_of_residence"/>
-              </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="form_state" class="form-label">Occupation *</label>
-                    <input name="name" id="form_state" class="form-control" ref="occupation" >
-                  </div>
+                <div class="form-group">
+                    <label for="form_country_of_birth" class="form-label">Country of Birth *</label>
+                    <v-select class="bootstrap-select"
+                              :options="country_list" 
+                              :searchable="true" 
+                              :labelTitle="'<select a country>'"
+                              v-model="country_of_birth"
+                              v-validate:country_of_birth="'required'"
+                              name='country_of_birth'/>
+                    <div v-show="errors.has('country_of_birth')" class="error">{{ errors.first('country_of_birth') }}</div>
                 </div>
               </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="form_state" class="form-label">Occupation *</label>
+                  <input name="occupation" id="form_state" class="form-control" ref="occupation" v-model="occupation" v-validate="'required'">
+                   <div v-show="errors.has('occupation')" class="error">{{ errors.first('occupation') }}</div>
+                </div>
+              </div>
+            </div>
 
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                  <label class="form-label">Locality</label>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" id="locality_0" name="locality" class="custom-control-input" v-model="locality" value="Foreign" >
-                    <label for="locality_0" class="custom-control-label">Foreign</label>
-                  </div>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" id="locality_1" name="locality" class="custom-control-input" v-model="locality" value="Local" >
-                    <label for="locality_1" class="custom-control-label">Local</label>
-                  </div>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" id="locality_2" name="locality" class="custom-control-input" v-model="locality" value="Aklanon" >
-                    <label for="locality_2" class="custom-control-label">Aklanon</label>
-                  </div>
-                  <div class="custom-control custom-radio">
-                    <input type="radio" id="locality_3" name="locality" class="custom-control-input" v-model="locality" value="Non-Aklanon" >
-                    <label for="locality_3" class="custom-control-label">Non-Aklanon</label>
-                  </div>
-                  </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                <label class="form-label">Locality</label>
+                <div class="custom-control custom-radio">
+                  <input type="radio" id="locality_0" name="locality" class="custom-control-input" v-model="locality" value="Foreign" v-validate="'required'">
+                  <label for="locality_0" class="custom-control-label">Foreign</label>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label class="form-label">Civil Status</label>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" id="civil_status_0" name="civil_status" class="custom-control-input" v-model="civil_status" >
-                      <label for="civil_status_0" class="custom-control-label">Senior Citizen</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" id="civil_status_1" name="civil_status" class="custom-control-input" v-model="civil_status" >
-                      <label for="civil_status_1" class="custom-control-label">Adult</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" id="civil_status_2" name="civil_status" class="custom-control-input" v-model="civil_status" >
-                      <label for="civil_status_2" class="custom-control-label">Child of 12 Years Old or Below</label>
-                    </div>
-                  </div>
+                <div class="custom-control custom-radio">
+                  <input type="radio" id="locality_1" name="locality" class="custom-control-input" v-model="locality" value="Local" v-validate="'required'">
+                  <label for="locality_1" class="custom-control-label">Local</label>
                 </div>
+                <div class="custom-control custom-radio">
+                  <input type="radio" id="locality_2" name="locality" class="custom-control-input" v-model="locality" value="Aklanon" v-validate="'required'">
+                  <label for="locality_2" class="custom-control-label">Aklanon</label>
+                </div>
+                <div class="custom-control custom-radio">
+                  <input type="radio" id="locality_3" name="locality" class="custom-control-input" v-model="locality" value="Non-Aklanon" v-validate="'required'">
+                  <label for="locality_3" class="custom-control-label">Non-Aklanon</label>
+                </div>
+                </div>
+               <div v-show="errors.has('locality')" class="error">{{ errors.first('locality') }}</div>
               </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                <label class="form-label">Civil Status</label>
+                <div class="custom-control custom-radio">
+                  <input type="radio" id="civil_status_0" name="civil_status" class="custom-control-input" v-model="civil_status" value="Senior Citizen" v-validate="'required'">
+                  <label for="civil_status_0" class="custom-control-label">Senior Citizen</label>
+                </div>
+                <div class="custom-control custom-radio">
+                  <input type="radio" id="civil_status_1" name="civil_status" class="custom-control-input" v-model="civil_status" value="Adult" v-validate="'required'">
+                  <label for="civil_status_1" class="custom-control-label">Adult</label>
+                </div>
+                <div class="custom-control custom-radio">
+                  <input type="radio" id="civil_status_2" name="civil_status" class="custom-control-input" v-model="civil_status" value="Child of 12" v-validate="'required'">
+                  <label for="civil_status_2" class="custom-control-label">Child of 12 Years Old or Below</label>
+                </div>
+
+                </div>
+               <div v-show="errors.has('civil_status')" class="error">{{ errors.first('civil_status') }}</div>
+              </div>
+            </div>
             </div>
           </div>
           <div class="row form-block flex-column flex-sm-row">
@@ -170,7 +178,7 @@
       },
       data() {
         return {
-          myDate: '06/10/2019',
+          birth_date: '06/10/2019',
           first_name: '',
           middle_name: '',
           last_name: '', 
@@ -181,7 +189,6 @@
           country_of_birth: '',
           occupation: '',
           country_of_residence: '',
-          selectedValue: null,
           options: {
               singleDatePicker: true,
               minYear: 2019,
@@ -213,7 +220,7 @@
                 },
                 {
                    Name : 'custom:birth_date',
-                   Value : this.myDate
+                   Value : this.birth_date
                 },
                 {
                    Name : 'custom:country_of_residence',
@@ -273,13 +280,14 @@
             });
         },
         printData: function(){
-            console.log(this.$refs.first_name.value)
-            console.log(this.$refs.last_name.value)
-            console.log(this.$refs.middle_name.value)
+            console.log(this.first_name)
+            console.log(this.last_name)
+            console.log(this.middle_name)
             console.log(this.gender)
+            console.log(this.birth_date)
             console.log(this.country_of_birth)
             console.log(this.country_of_residence)
-            console.log(this.$refs.occupation.value)
+            console.log(this.occupation)
             console.log(this.locality)
             console.log(this.civil_status)
 
@@ -300,10 +308,11 @@
         validateBeforeSubmit() {
         this.$validator.validateAll().then((result) => {
           if (result) {
-
+            console.log(result)
             // eslint-disable-next-line
             this.$router.push('/profile/step2')
-            this.updateUser()
+            // this.updateUser()
+            this.printData()
             return;
           }
 
