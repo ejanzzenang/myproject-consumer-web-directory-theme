@@ -3,7 +3,6 @@
     <SearchBar/>
     <DisplayCatalog1/>
     <DisplayProducts/>
-    <Testimonials/>
     <PhotoWheel/> 
   </div>
 </template>
@@ -13,7 +12,6 @@
 import SearchBar from '@/components/SearchBar.vue'
 import DisplayCatalog1 from '@/components/DisplayCatalog1.vue'
 import DisplayProducts from '@/components/products/DisplayProduct.vue'
-import Testimonials from '@/components/Testimonials.vue'
 import PhotoWheel from '@/components/PhotoWheel.vue'
 
 export default {
@@ -22,7 +20,6 @@ export default {
     SearchBar, 
     DisplayCatalog1,
     DisplayProducts,
-    Testimonials,
     PhotoWheel
   }
 }
