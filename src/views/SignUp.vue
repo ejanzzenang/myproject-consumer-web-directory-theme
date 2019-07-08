@@ -7,29 +7,28 @@
             <div class="mb-4"><img src="../assets/img/hetchly-logo.svg" alt="..." style="max-width: 10rem;" class="img-fluid mb-4">
               <h2>Sign up</h2>
             </div>
-            <form class="form-validate">
               <div class="form-group">
-                <label for="loginUsername" class="form-label"> Email Address</label>
-                <input name="loginUsername" id="loginUsername" type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email" class="form-control">
+                <label for="loginUsername" class="form-label">Email Address</label>
+                <input name="loginUsername" id="loginUsername" type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email" class="form-control" v-model="email_address">
               </div>
               <div class="form-group">
-                <label for="loginPassword" class="form-label"> Password</label>
-                <input name="loginPassword" id="loginPassword" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control">
+                <label for="loginPassword" class="form-label">Password</label>
+                <input name="loginPassword" id="loginPassword" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control" v-model="password">
               </div>
               <div class="form-group mb-4">
-                <label for="loginPassword2" class="form-label"> Confirm your password</label>
-                <input name="loginPassword2" id="loginPassword2" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control">
+                <label for="loginPassword2" class="form-label">Confirm your password</label>
+                <input name="loginPassword2" id="loginPassword2" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control" v-model="confirmPw">
               </div>
-              <button type="submit" id="signup" class="btn btn-lg btn-block btn-primary">Sign up</button>
+              <button @click="signUpUser" id="signup" class="btn btn-lg btn-block btn-primary">Sign up</button>              
               <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
-              <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
+              <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"></i>Connect<span class="d-none d-sm-inline">with Facebook</span></button>
+              <p class="text-center"><small class="text-muted text-center">Have an account? <router-link to="/login">Log in</router-link></small></p>
               <hr class="my-4">
               <p class="text-sm text-muted">By signing up you agree to Directory's <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</p>
-            </form>
-            <a href="/" class="close-absolute mr-md-5 mr-xl-6 pt-5"> 
+              <router-link to="/" class="close-absolute mr-md-5 mr-xl-6 pt-5"> 
               <svg class="svg-icon w-3rem h-3rem">
-                <use xlink:href="#close-1"> </use>
-              </svg></a>
+                <use xlink:href="#close-1"></use>
+              </svg></router-link>
             </a>
           </div>
         </div>
@@ -41,117 +40,103 @@
 </template>
 
 <style scoped>
-  
   .bG {
       background: url(../assets/img/photo/photo-1497436072909-60f360e1d4b1.jpg) center center;
       background-size: cover;
     } 
-
 </style>
-
 
 <script>
   import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
 
   export default {
     name: 'signup',
-    mounted() {
-      
-      // var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;  // example: 'us-east-1_abcd12345'
-      // var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; // example: 'abcd12345abcd12345abcd12345'
-      var cognitoUserPoolId = 'ap-southeast-1_GUM0JtMJC';  // example: 'us-east-1_abcd12345'
-      var cognitoUserPoolClientId = '5hvshfmgob5beudv0ukdj0ej'; // example: 
-      var navigate = this.$router;
-
-      $(document).on('click', '#signup', function(event) {
-        event.preventDefault();
+    data(){
+      return {
+        email_address: '',
+        password: '',
+        confirmPw: ''
+      }
+    },
+    methods: {
+      signUpUser: function(){
+        var cognitoUserPoolId = 'ap-southeast-1_GUM0JtMJC'; 
+        var cognitoUserPoolClientId = '5hvshfmgob5beudv0ukdj0ej'; 
+        var navigate = this.$router;
 
         var poolData = {
           UserPoolId : cognitoUserPoolId,
           ClientId : cognitoUserPoolClientId
         };
+
         var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
         var attributeList = [];
-
-        var email = document.getElementById('loginUsername').value;
-        var pw = document.getElementById('loginPassword').value;
-        var confirmPw = document.getElementById('loginPassword2').value;
         
         var dataEmail = {
             Name : 'email',
-            Value : email
+            Value : this.email_address
         };
 
-        var custom_fields = 
-          [
-            {
-               Name : 'custom:first_name',
-               Value : ''
-            },
-            {
-               Name : 'custom:middle_name',
-               Value : ''
-            },
-            {
-               Name : 'custom:last_name',
-               Value : ''
-            },
-            {
-               Name : 'custom:gender',
-               Value : ''
-            },
-            {
-               Name : 'custom:birth_date',
-               Value : ''
-            },
-            {
-               Name : 'custom:country_of_residence',
-               Value : ''
-            },
-            {
-               Name : 'custom:country_of_birth',
-               Value : ''
-            },
-            {
-               Name : 'custom:occupation',
-               Value : ''
-            },
-            {
-               Name : 'custom:first_name',
-               Value : ''
-            },
-            {
-               Name : 'custom:locality',
-               Value : ''
-            },
-            {
-               Name : 'custom:civil_status',
-               Value : ''
-            }
-          ]
+        var custom_fields = [
+            // Step1
+            'custom:first_name',
+            'custom:middle_name',
+            'custom:last_name',
+            'custom:gender',
+            'custom:birth_date',
+            'custom:country_of_residence',
+            'custom:country_of_birth',
+            'custom:occupation',
+            'custom:locality',
+            'custom:civil_status',
+            // Step2
+            'custom:mode_of_travel', 
+            'custom:purpose_of_travel', 
+            'custom:num_visits_bora', 
+            'custom:len_stay_bora', 
+            'custom:package_tour', 
+            'custom:address_bora', 
+            'custom:place_vis_bef_bora', 
+            'custom:dest_after_bora'
+        ]
 
-        var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
-        attributeList.push(attributeEmail);
+          var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
+          attributeList.push(attributeEmail);
 
-        custom_fields.forEach(function(element){
-          attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(element));
-        });
-
-        if (pw === confirmPw) {
-          userPool.signUp(email, pw, attributeList, null, function(err, result){
-              if (err) {
-                  alert(err.message);
-                  return;
+          custom_fields.forEach(function(element){
+            attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(
+              {
+                Name: element,
+                Value: ''
               }
-              localStorage.setItem('email', email);
-              alert("Successfully signed up!!")
-              navigate.push('/confirm');
+            ));
           });
-        } else {
-          alert('Passwords do not match.')
-        }
-      });
+
+          if (this.password === this.confirmPw) {
+            console.log(this.email_address)
+            console.log(this.password)
+
+            var email = this.email_address;
+            var password = this.password;
+
+            userPool.signUp(email, password, attributeList, null, function(err, result){
+                if (err) {
+                    console.log(err.message)
+                    alert(err.message);
+                    return;
+                }
+                localStorage.setItem('email', email);
+                alert("Successfully signed up!!")
+                navigate.push('/confirm');
+            });
+          } else {
+            alert('Passwords do not match.')
+          }
+      }
+    },
+    mounted() {
+      
     }
   }
 </script>
