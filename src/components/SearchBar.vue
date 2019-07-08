@@ -10,8 +10,8 @@
         <div class="row">
           <div class="col-xl-10">
             <div class="text-center text-lg-left">
-              <p class="subtitle letter-spacing-4 mb-2 text-secondary text-shadow">Discover and Book</p>
-              <h1 class="display-3 font-weight-bold text-shadow">Amazing Experiences</h1>
+              <p class="subtitle letter-spacing-4 mb-2 text-secondary text-shadow">Philippine Tourists</p>
+              <h1 class="display-3 font-weight-bold text-shadow">Register Here</h1>
             </div>
             <div class="search-bar mt-5 p-3 p-lg-1 pl-lg-4">
               <form action="#">
@@ -36,7 +36,7 @@
 
                      <div class="col-lg-6">
                       <a href="/signup">
-                       <button  type=button class="btn btn-primary btn-block rounded-xl h-100">Get a Pass</button>
+                       <button  type=button class="btn btn-primary btn-block rounded-xl h-100">Register</button>
                       </a>
                       </div>
                     </div>
