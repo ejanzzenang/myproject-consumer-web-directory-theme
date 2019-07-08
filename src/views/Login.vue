@@ -22,7 +22,7 @@
                       <div class="col">
                         <label for="loginPassword" class="form-label"> Password</label>
                       </div>
-                      <div class="col-auto"><a href="#" class="form-text small">Forgot password?</a></div>
+                      <div class="col-auto"><router-link to="forgot" class="form-text small">Forgot password?</router-link></div>
                     </div>
                     <input name="loginPassword" id="loginPassword" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control">
                   </div>
