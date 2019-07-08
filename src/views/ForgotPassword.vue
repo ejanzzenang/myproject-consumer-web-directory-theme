@@ -6,16 +6,63 @@
  			<form @submit.prevent="validateBeforeSubmit">
 		        <div class="form-group">
 		          <label for="email">Email Address</label>
-		          <input type="text" class="form-control" id="email" placeholder="Enter email address" name="email" v-model="email" v-validate="'required|email'">
-            	<div v-show="errors.has('email')" class="error-white" role="alert">
+<!-- 		          <input type="text" class="form-control" id="email" placeholder="Enter email address" name="email" v-model="email" v-validate="'required|email'"> -->
+		          <input type="text" class="form-control" id="email" placeholder="Enter email address" name="email" v-model="email">
+<!--             	<div v-show="errors.has('email')" class="error-white" role="alert">
       						{{"* " + errors.first('email') }}
-    					</div>
+    					</div> -->
 
 		        </div>
-		        <button type="submit" class="btn btn-primary">Confirm</button>
+		        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#verfication_modal" @click="sendVerification">Confirm</button>
 		      </form>
 	      </div>
 	    </section>
+	    			<!-- Modal -->
+		  <div class="modal fade" id="verfication_modal" role="dialog">
+		    <div class="modal-dialog">
+		      <!-- Modal content-->
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        </div>
+		        <div class="modal-body">
+		        	<p>A verification code has been sent to your email.</p>
+		        	<label for="verfication_code"><h4>Verification Code:</h4></label>
+		          <input type="text" name="verfication_code" class="form-control" v-model="verification_code">
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-link text-muted" data-dismiss="modal">Close</button>
+		          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#password_modal" data-dismiss="modal">Confirm</button>
+		        </div>
+		      </div>
+		      
+		    </div>
+		  </div>
+	     <!-- Modal -->
+		  <div class="modal fade" id="password_modal" role="dialog">
+		    <div class="modal-dialog">
+		      <!-- Modal content-->
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        </div>
+		        <div class="modal-body">
+		        	<p>Please enter your new password.</p>
+		        	<label for="password"><h4>Password:</h4></label>
+		          <input type="password" name="password" class="form-control" v-model="password">
+		          <label for="confirm_password"><h4>Confirm Password:</h4></label>
+		          <input type="password" name="confirm_password" class="form-control" v-model="confirm_password">
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-link text-muted" data-dismiss="modal">Close</button>
+		          <button type="button" class="btn btn-primary" data-dismiss="modal" @click="confirmNewPassword">Confirm</button>
+		        </div>
+		      </div>
+		      
+		    </div>
+		  </div>
+
+
 	</div>
 </template>
 
@@ -31,14 +78,18 @@
     name: 'forgotPassword',
     data() {
       return { 
-      	email: ''
+      	email: '',
+      	verification_code: '',
+      	password: '',
+      	confirm_password: ''
       }
     },
     methods: {
 	    sendVerification: function(){
-
+	    	// works
+	    	console.log("works")
 	    	var navigate = this.$router
-      	var cognitoUserPoolId = 'ap-southeast-1_GUM0JtMJC';  // example: 'us-east-1_abcd12345'
+      		var cognitoUserPoolId = 'ap-southeast-1_GUM0JtMJC';  // example: 'us-east-1_abcd12345'
 	    	var cognitoUserPoolClientId = '5hvshfmgob5beudv0ukdj0ej'; // example: 
 
 	    	var poolData = {
@@ -57,26 +108,53 @@
 		    cognitoUser.forgotPassword({
 		        onSuccess: function (result) {
 		            console.log('call result: ' + result);
-		           	navigate.push("/")
+		           	// navigate.push("/")
 		        },
 		        onFailure: function(err) {
 
 		            alert(err.message);
-		        },
-		        inputVerificationCode() {
-		            var verificationCode = prompt('Please input verification code ' ,'');
-		            var newPassword = prompt('Enter new password ' ,'');
-		            
-		            cognitoUser.confirmPassword(verificationCode, newPassword, this);
+
 		        }
 		    });
+      },
+      confirmNewPassword: function(){
+      		var cognitoUserPoolId = 'ap-southeast-1_GUM0JtMJC';  // example: 'us-east-1_abcd12345'
+	    	var cognitoUserPoolClientId = '5hvshfmgob5beudv0ukdj0ej'; // example: 
+
+	    	var poolData = {
+		      UserPoolId : cognitoUserPoolId,
+		      ClientId : cognitoUserPoolClientId
+		    };
+
+	    	var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+		    
+		    var userData = {
+		        Username : this.email,
+		        Pool : userPool
+		    };
+
+		    var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+		    
+		    var code = this.verification_code
+		    var pass = this.password
+
+		    cognitoUser.confirmPassword(code, pass, {
+	            onFailure(err) {
+	                alert(err.message);
+	            },
+	            onSuccess() {
+        		    alert("Success!");
+	            },
+	        });
+    		console.log("Password Confirmed")
+
       },
       validateBeforeSubmit: function(){
 			  this.$validator.validateAll().then((result) => {
 			    if (result) {
 
 			      // eslint-disable-next-line
-			      this.sendVerification()
+			      // this.sendVerification()
 			      return;
 			    }
 
