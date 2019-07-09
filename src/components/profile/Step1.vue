@@ -196,15 +196,15 @@
             var input_list = 
               [
                 {
-                   Name : 'custom:first_name',
+                   Name : 'given_name',
                    Value : this.first_name
                 },
                 {
-                   Name : 'custom:middle_name',
+                   Name : 'middle_name',
                    Value : this.middle_name
                 },
                 {
-                   Name : 'custom:last_name',
+                   Name : 'family_name',
                    Value : this.last_name
                 },
                 {
@@ -241,8 +241,8 @@
                 attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(element));
             });
   
-            var cognitoUserPoolId = 'ap-southeast-1_GUM0JtMJC';  // example: 'us-east-1_abcd12345'
-            var cognitoUserPoolClientId = '5hvshfmgob5beudv0ukdj0ej'; // example: 
+            var cognitoUserPoolId = 'ap-southeast-1_jYdvhdSZb'; 
+            var cognitoUserPoolClientId = '5gn9uui9lqbgsioioen085cr56'; 
   
             var data = { 
               UserPoolId : cognitoUserPoolId,

@@ -60,8 +60,8 @@
     },
     methods: {
       signUpUser: function(){
-        var cognitoUserPoolId = 'ap-southeast-1_GUM0JtMJC'; 
-        var cognitoUserPoolClientId = '5hvshfmgob5beudv0ukdj0ej'; 
+        var cognitoUserPoolId = 'ap-southeast-1_jYdvhdSZb'; 
+        var cognitoUserPoolClientId = '5gn9uui9lqbgsioioen085cr56'; 
         var navigate = this.$router;
 
         var poolData = {
@@ -80,9 +80,9 @@
 
         var custom_fields = [
             // Step1
-            'custom:first_name',
-            'custom:middle_name',
-            'custom:last_name',
+            'family_name',
+            'given_name',
+            'middle_name',
             'custom:gender',
             'custom:birth_date',
             'custom:country_of_residence',
@@ -98,7 +98,15 @@
             'custom:package_tour', 
             'custom:address_bora', 
             'custom:place_vis_bef_bora', 
-            'custom:dest_after_bora'
+            'custom:dest_after_bora',
+            // Step3
+            'custom:passport_number', 
+            'custom:passport_place_issue', 
+            'custom:passport_exp_date', 
+            'custom:f_country_region', 
+            'custom:f_city_state', 
+            'custom:f_address_1', 
+            'custom:f_address_2'
         ]
 
           var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
