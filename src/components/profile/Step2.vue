@@ -18,46 +18,48 @@
                 <div class="form-group">
                   <label class="form-label">Mode of Travel *</label>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="mode_of_travel_0" name="mode_of_travel" class="custom-control-input" v-model="mode_of_travel" value="Air">
+                    <input type="radio" id="mode_of_travel_0" name="mode_of_travel" class="custom-control-input" v-model="mode_of_travel" value="Air" v-validate="'required'">
                     <label for="mode_of_travel_0" class="custom-control-label">Air</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="mode_of_travel_1" name="mode_of_travel" class="custom-control-input" v-model="mode_of_travel" value="Land">
+                    <input type="radio" id="mode_of_travel_1" name="mode_of_travel" class="custom-control-input" v-model="mode_of_travel" value="Land" v-validate="'required'">
                     <label for="mode_of_travel_1" class="custom-control-label">Land</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="mode_of_travel_2" name="mode_of_travel" class="custom-control-input" v-model="mode_of_travel" value="Sea">
+                    <input type="radio" id="mode_of_travel_2" name="mode_of_travel" class="custom-control-input" v-model="mode_of_travel" value="Sea" v-validate="'required'">
                     <label for="mode_of_travel_2" class="custom-control-label">Sea</label>
                   </div>
+                  <div v-show="errors.has('mode_of_travel')" class="error">{{ errors.first('mode_of_travel') }}</div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="form-label">Purpose of Travel *</label>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="purpose_of_travel_0" name="purpose_of_travel" class="custom-control-input" v-model="purpose_of_travel" value="Holiday">
+                    <input type="radio" id="purpose_of_travel_0" name="purpose_of_travel" class="custom-control-input" v-model="purpose_of_travel" value="Holiday" v-validate="'required'">
                     <label for="purpose_of_travel_0" class="custom-control-label">Holiday</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="purpose_of_travel_1" name="purpose_of_travel" class="custom-control-input" v-model="purpose_of_travel" value="Visit Friend/Relative">
+                    <input type="radio" id="purpose_of_travel_1" name="purpose_of_travel" class="custom-control-input" v-model="purpose_of_travel" value="Visit Friend/Relative" v-validate="'required'">
                     <label for="purpose_of_travel_1" class="custom-control-label">Visit Friend/Relative</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="purpose_of_travel_2" name="purpose_of_travel" class="custom-control-input" v-model="purpose_of_travel" value="Government Mission">
+                    <input type="radio" id="purpose_of_travel_2" name="purpose_of_travel" class="custom-control-input" v-model="purpose_of_travel" value="Government Mission" v-validate="'required'">
                     <label for="purpose_of_travel_2" class="custom-control-label">Government Mission</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="purpose_of_travel_3" name="purpose_of_travel" class="custom-control-input" v-model="purpose_of_travel" value="Incentive">
+                    <input type="radio" id="purpose_of_travel_3" name="purpose_of_travel" class="custom-control-input" v-model="purpose_of_travel" value="Incentive" v-validate="'required'">
                     <label for="purpose_of_travel_3" class="custom-control-label">Incentive</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="purpose_of_travel_4" name="purpose_of_travel" class="custom-control-input" v-model="purpose_of_travel" value="Business">
+                    <input type="radio" id="purpose_of_travel_4" name="purpose_of_travel" class="custom-control-input" v-model="purpose_of_travel" value="Business" v-validate="'required'">
                     <label for="purpose_of_travel_4" class="custom-control-label">Business</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="purpose_of_travel_5" name="purpose_of_travel" class="custom-control-input" v-model="purpose_of_travel" value="Other">
+                    <input type="radio" id="purpose_of_travel_5" name="purpose_of_travel" class="custom-control-input" v-model="purpose_of_travel" value="Other" v-validate="'required'">
                     <label for="purpose_of_travel_5" class="custom-control-label">Other</label>
                   </div>
+                <div v-show="errors.has('purpose_of_travel')" class="error">{{ errors.first('purpose_of_travel') }}</div>
                 </div>
               </div>
             </div>
@@ -65,13 +67,15 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="form-label">Number of Visits to Boracay *</label>
-                  <input name="name" id="visits" class="form-control" required>
+                  <input name="num_visits_bora" id="visits" class="form-control" v-model="num_visits_bora" v-validate="'required'">
+                  <div v-show="errors.has('num_visits_bora')" class="error">{{ errors.first('num_visits_bora') }}</div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="form-label">Intended Length of Stay (Nights) *</label>
-                  <input name="name" id="form_city" class="form-control" required>
+                  <label class="form-label" >Intended Length of Stay (Nights) *</label>
+                  <input name="len_stay_bora" id="form_city" class="form-control" v-model="len_stay_bora" v-validate="'required'">
+                <div v-show="errors.has('len_stay_bora')" class="error">{{ errors.first('len_stay_bora') }}</div>
                 </div>
               </div>
             </div>
@@ -80,13 +84,14 @@
                 <div class="form-group">
                   <label class="form-label">Package Tour *</label>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="tour_0" name="tour" class="custom-control-input" required>
-                    <label for="tour_0" class="custom-control-label">Yes</label>
+                    <input type="radio" id="package_tour_0" name="package_tour" class="custom-control-input" v-model="package_tour" value="Yes" v-validate="'required'">
+                    <label for="package_tour_0" class="custom-control-label">Yes</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="tour_1" name="tour" class="custom-control-input" required>
-                    <label for="tour_1" class="custom-control-label">No</label>
+                    <input type="radio" id="package_tour_1" name="package_tour" class="custom-control-input" v-model="package_tour" value="No" v-validate="'required'">
+                    <label for="package_tour_1" class="custom-control-label">No</label>
                   </div>
+                <div v-show="errors.has('package_tour')" class="error">{{ errors.first('package_tour') }}</div>
                 </div>
               </div>
             </div>
@@ -99,20 +104,24 @@
           </div>
           <div class="col-lg-7 ml-auto">
             <div class="form-group mb-5">
-              <label for="form_neighbourhood" class="form-label">Resort/Cottage Name/Address of Relative or Friend/Other *</label>
-              <textarea name="name" id="form_neighbourhood" rows="2" aria-describedby="hoodHelp" class="form-control" required></textarea><small id="hoodHelp" class="form-text text-muted mt-2">Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.</small>
+              <label for="address_borac" class="form-label">Resort/Cottage Name/Address of Relative or Friend/Other *</label>
+              <textarea name="address_bora" id="address_bora" rows="2" aria-describedby="hoodHelp" class="form-control" v-model="address_bora" v-validate:address_bora="'required'"></textarea>
+              <div v-show="errors.has('address_bora')" class="error">{{ errors.first('address_bora') }}</div>
+              <small id="hoodHelp" class="form-text text-muted mt-2">Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame.</small>
+              
             </div>
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="form_city" class="form-label">Place Visited before Boracay *</label>
-                  <input name="name" id="form_city" class="form-control" required>
+                  <label for="form_city" class="form-label">Place Visited before Boracay </label>
+                  <input name="name" id="form_city" class="form-control" v-model="place_vis_bef_bora">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="form_state" class="form-label">Place Visited after Boracay *</label>
-                  <input name="name" id="form_state" class="form-control" required>
+                  <label for="form_state" class="form-label">Destination after Boracay *</label>
+                  <input name="destination_after_boracay" id="form_state" class="form-control" v-model="dest_after_bora" v-validate="'required'">
+                  <div v-show="errors.has('destination_after_boracay')" class="error">{{ errors.first('destination_after_boracay') }}</div>
                 </div>
               </div>
             </div>
@@ -122,7 +131,9 @@
           <div class="col text-center text-sm-left">
             <router-link to="step1" class="btn btn-link text-muted"><i class="fa-chevron-left fa mr-2"></i>Back</router-link>
           </div>
-          <div class="col text-center text-sm-right"><button type='submit' class="btn btn-primary px-3">Next step<i class="fa-chevron-right fa ml-2"></i></button></div>
+          <div class="col text-center text-sm-right">
+            <router-link to="step3"><button @click="updateUser" class="btn btn-primary px-3">Next step<i class="fa-chevron-right fa ml-2"></i></button></router-link>
+          </div>
         </div>
       </div>
     </section>
@@ -131,83 +142,83 @@
 <script>
   import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
   import * as AWS from 'aws-sdk';
-  import VSelect from '@/components/custom/vue-bootstrap-select.vue'
   import moment from 'moment'
   
   export default {
       name: 'profile-step2',
       components: {
-        VSelect
       },
       data() {
         return {
           mode_of_travel: '',
-          purpose_of_travel : ''
+          purpose_of_travel : '',
+          num_visits_bora: '',
+          len_stay_bora: '',
+          package_tour: '',
+          address_bora: '',
+          place_vis_bef_bora: '',
+          dest_after_bora: ''
         }
       },
       methods: {
         updateUser: function(){
             var attributeList = []  
-  
+            console.log('Updating user...')
             var input_list = 
               [
                 {
-                   Name : 'custom:first_name',
-                   Value : this.first_name
+                   Name : 'custom:mode_of_travel',
+                   Value : this.mode_of_travel
                 },
                 {
-                   Name : 'custom:middle_name',
-                   Value : this.middle_name
+                   Name : 'custom:purpose_of_travel',
+                   Value : this.purpose_of_travel
                 },
                 {
-                   Name : 'custom:last_name',
-                   Value : this.last_name
+                   Name : 'custom:num_visits_bora',
+                   Value : this.num_visits_bora
                 },
                 {
-                   Name : 'custom:gender',
-                   Value : this.gender
+                   Name : 'custom:len_stay_bora',
+                   Value : this.len_stay_bora
                 },
                 {
-                   Name : 'custom:birth_date',
-                   Value : this.birth_date
+                   Name : 'custom:package_tour',
+                   Value : this.package_tour
                 },
                 {
-                   Name : 'custom:country_of_residence',
-                   Value : this.country_of_residence
+                   Name : 'custom:address_bora',
+                   Value : this.address_bora
                 },
                 {
-                   Name : 'custom:country_of_birth',
-                   Value : this.country_of_birth
+                   Name : 'custom:place_vis_bef_bora',
+                   Value : this.place_vis_bef_bora
                 },
                 {
-                   Name : 'custom:occupation',
-                   Value : this.occupation
-                },
-                {
-                   Name : 'custom:locality',
-                   Value : this.locality
-                },
-                {
-                   Name : 'custom:civil_status',
-                   Value : this.civil_status                
+                   Name : 'custom:dest_after_bora',
+                   Value : this.dest_after_bora
                 }
               ]
+
+            console.log(input_list)
                 
             input_list.forEach(function(element){
                 attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(element));
             });
   
-            var cognitoUserPoolId = 'ap-southeast-1_GUM0JtMJC';  // example: 'us-east-1_abcd12345'
-            var cognitoUserPoolClientId = '5hvshfmgob5beudv0ukdj0ej'; // example: 
+            var cognitoUserPoolId = 'ap-southeast-1_jYdvhdSZb'; 
+            var cognitoUserPoolClientId = '5gn9uui9lqbgsioioen085cr56'; 
   
             var data = { 
               UserPoolId : cognitoUserPoolId,
               ClientId : cognitoUserPoolClientId
             };
-  
+            
+            console.log('Getting cognito user')
             var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
             var cognitoUser = userPool.getCurrentUser();
-  
+            
+            console.log(cognitoUser)
   
             if (cognitoUser != null) {
                 cognitoUser.getSession(function(err, session) {
@@ -229,34 +240,15 @@
             });
         },
         printData: function(){
-            console.log(this.first_name)
-            console.log(this.last_name)
-            console.log(this.middle_name)
-            console.log(this.gender)
-            console.log(this.birth_date)
-            console.log(this.country_of_birth)
-            console.log(this.country_of_residence)
-            console.log(this.occupation)
-            console.log(this.locality)
-            console.log(this.civil_status)
-  
-        },
-        getCountriesList: function() {
-          this.$http.get('https://restcountries.eu/rest/v1/all').then(result=> {
-            result.data
-            var temp = []
-  
-            result.data.forEach(function(element){
-              temp.push(element.name)
-            })
-  
-            this.country_list = temp
-  
-          })
-        },
-      },
-      created: function() {
-        this.getCountriesList()
+            console.log(this.mode_of_travel)
+            console.log(this.purpose_of_travel)
+            console.log(this.num_visits_bora)
+            console.log(this.len_stay_bora)
+            console.log(this.package_tour)
+            console.log(this.address_bora)
+            console.log(this.place_vis_bef_bora)
+            console.log(this.dest_after_bora)  
+        }
       },
       beforeRouteLeave(to, from, next) {
         //validates all fields
