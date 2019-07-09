@@ -89,8 +89,8 @@
 	    	// works
 	    	console.log("works")
 	    	var navigate = this.$router
-      		var cognitoUserPoolId = 'ap-southeast-1_GUM0JtMJC';  // example: 'us-east-1_abcd12345'
-	    	var cognitoUserPoolClientId = '5hvshfmgob5beudv0ukdj0ej'; // example: 
+        	var cognitoUserPoolId = 'ap-southeast-1_jYdvhdSZb'; 
+            var cognitoUserPoolClientId = '5gn9uui9lqbgsioioen085cr56'; 
 
 	    	var poolData = {
 		      UserPoolId : cognitoUserPoolId,
@@ -118,8 +118,8 @@
 		    });
       },
       confirmNewPassword: function(){
-      		var cognitoUserPoolId = 'ap-southeast-1_GUM0JtMJC';  // example: 'us-east-1_abcd12345'
-	    	var cognitoUserPoolClientId = '5hvshfmgob5beudv0ukdj0ej'; // example: 
+        	var cognitoUserPoolId = 'ap-southeast-1_jYdvhdSZb'; 
+            var cognitoUserPoolClientId = '5gn9uui9lqbgsioioen085cr56'; 
 
 	    	var poolData = {
 		      UserPoolId : cognitoUserPoolId,
