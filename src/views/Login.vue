@@ -8,11 +8,11 @@
               <img src="../assets/img/hetchly-logo.svg" alt="..." style="max-width: 10rem;" class="img-fluid mb-3">
               <h2>Welcome back</h2>
             </div>
-            <a href="/" class="close-absolute mr-md-5 mr-xl-6 pt-5">
+            <router-link to="/" class="close-absolute mr-md-5 mr-xl-6 pt-5">
               <svg class="svg-icon w-3rem h-3rem">
                 <use xlink:href="#close-1"> </use>
               </svg>
-            </a>
+            </router-link>
             <form class="form-validate" id="loginForm">
               <div class="form-group">
                 <label for="loginUsername" class="form-label"> Email Address</label>
@@ -31,9 +31,9 @@
               </div>
               <button class="btn btn-lg btn-block btn-primary">Sign in</button>
               <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
-              <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect<span class="d-none d-sm-inline">with Facebook</span></button>
-              <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="/signup">Sign Up</a></small></p>
             </form>
+            <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
+            <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="/signup">Sign Up</a></small></p>
           </div>
         </div>
         <div class="col-md-4 col-lg-6 col-xl-7 bG"></div>
@@ -50,19 +50,64 @@
 <script>
   import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
   import * as AWS from 'aws-sdk';
+  var cognitoUserPoolId = 'ap-southeast-1_jYdvhdSZb';
+  var cognitoUserPoolClientId = '5gn9uui9lqbgsioioen085cr56';
+  var awsRegion = 'ap-southeast-1';
 
   export default {
     name: 'login',
     methods: {
-      
+      initializeStorage() {
+        var identityPoolId = cognitoUserPoolId;
+        var userPoolId = cognitoUserPoolId;
+        var clientId = cognitoUserPoolClientId;
+        var loginPrefix = 'cognito-idp.' + awsRegion + '.amazonaws.com/' + identityPoolId;
+
+        localStorage.setItem('identityPoolId', identityPoolId);
+        localStorage.setItem('userPoolId', userPoolId);
+        localStorage.setItem('clientId', clientId);
+        localStorage.setItem('loginPrefix', loginPrefix);
+      },
+      refreshAWSCredentials() {
+
+        var userPoolId = localStorage.getItem('userPoolId');
+        var clientId = localStorage.getItem('clientId');
+        var identityPoolId = localStorage.getItem('identityPoolId');
+        var loginPrefix = localStorage.getItem('loginPrefix');
+
+        var poolData = {
+          UserPoolId: userPoolId, // Your user pool id here
+          ClientId: clientId // Your client id here
+        }
+        var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+        var cognitoUser = userPool.getCurrentUser();
+
+        if (cognitoUser != null) {
+          cognitoUser.getSession(function(err, result) {
+            if (result) {
+              console.log('You are now logged in.');
+              cognitoUser.refreshSession(result.getRefreshToken(), function(err, result) {
+
+                if (err) { //throw err;
+                  console.log('In the err: ' + err);
+                } else {
+                  localStorage.setItem('awsConfig', JSON.stringify(AWS.config));
+                  var sessionTokens = {
+                    IdToken: result.getIdToken(),
+                    AccessToken: result.getAccessToken(),
+                    RefreshToken: result.getRefreshToken()
+                  };
+                  localStorage.setItem("sessionTokens", JSON.stringify(sessionTokens));
+                }
+              });
+            }
+          });
+        }
+      }
     },
     mounted() {
 
-      var cognitoUserPoolId = 'ap-southeast-1_jYdvhdSZb';
-      var cognitoUserPoolClientId = '5gn9uui9lqbgsioioen085cr56';
-      var awsRegion = 'ap-southeast-1';
-
-      initializeStorage();
+      this.initializeStorage();
 
       var configString = localStorage.getItem("awsConfig");
       var config = JSON.parse(configString);
@@ -79,18 +124,6 @@
         //changes the value of store to loggedIn
         store.commit('login')
         navigate.push('/')
-      }
-
-      function initializeStorage() {
-        var identityPoolId = cognitoUserPoolId;
-        var userPoolId = cognitoUserPoolId;
-        var clientId = cognitoUserPoolClientId;
-        var loginPrefix = 'cognito-idp.' + awsRegion + '.amazonaws.com/' + identityPoolId;
-
-        localStorage.setItem('identityPoolId', identityPoolId);
-        localStorage.setItem('userPoolId', userPoolId);
-        localStorage.setItem('clientId', clientId);
-        localStorage.setItem('loginPrefix', loginPrefix);
       }
 
       function loginUser() {
@@ -166,45 +199,6 @@
           },
 
         });
-      }
-
-      function refreshAWSCredentials() {
-
-        var userPoolId = localStorage.getItem('userPoolId');
-        var clientId = localStorage.getItem('clientId');
-        var identityPoolId = localStorage.getItem('identityPoolId');
-        var loginPrefix = localStorage.getItem('loginPrefix');
-
-        var poolData = {
-          UserPoolId: userPoolId, // Your user pool id here
-          ClientId: clientId // Your client id here
-        }
-        var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-        var cognitoUser = userPool.getCurrentUser();
-
-        if (cognitoUser != null) {
-          cognitoUser.getSession(function(err, result) {
-            if (result) {
-              console.log('You are now logged in.');
-              cognitoUser.refreshSession(result.getRefreshToken(), function(err, result) {
-
-                if (err) { //throw err;
-                  console.log('In the err: ' + err);
-                } else {
-                  localStorage.setItem('awsConfig', JSON.stringify(AWS.config));
-                  var sessionTokens = {
-                    IdToken: result.getIdToken(),
-                    AccessToken: result.getAccessToken(),
-                    RefreshToken: result.getRefreshToken()
-                  };
-                  localStorage.setItem("sessionTokens", JSON.stringify(sessionTokens));
-
-                }
-              });
-
-            }
-          });
-        }
       }
 
       $("#loginForm").submit(function(event) {
