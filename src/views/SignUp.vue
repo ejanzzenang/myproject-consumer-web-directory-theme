@@ -21,7 +21,7 @@
               </div>
               <button @click="signUpUser" id="signup" class="btn btn-lg btn-block btn-primary">Sign up</button>              
               <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
-              <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"></i>Connect<span class="d-none d-sm-inline">with Facebook</span></button>
+              <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
               <p class="text-center"><small class="text-muted text-center">Have an account? <router-link to="/login">Log in</router-link></small></p>
               <hr class="my-4">
               <p class="text-sm text-muted">By signing up you agree to Directory's <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</p>
