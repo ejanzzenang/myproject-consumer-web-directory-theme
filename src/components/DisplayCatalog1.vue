@@ -44,24 +44,24 @@
             "description" : "Boracay is .." 
           },
           {
-            "name" : "Baguio",
-            "image_url" : require('../assets/img/photo/baguio.jpg'),
-            "description" : "Baguio is .." 
+            "name" : "Panglaw",
+            "image_url" : require('../assets/img/photo/panglaw.jpg'),
+            "description" : "Panglaw is .." 
           },
           {
-            "name" : "Coron",
+            "name" : "Palawan",
             "image_url" : require('../assets/img/photo/coron.jpg'),
-            "description" : "Coron is .." 
+            "description" : "Palawan is .." 
           },
           {
-            "name" : "Tagaytay",
-            "image_url" : require('../assets/img/photo/tagaytay.jpg'),
-            "description" : "Tagaytay is .." 
+            "name" : "Batanes",
+            "image_url" : require('../assets/img/photo/batanes.jpg'),
+            "description" : "Batanes is .." 
           },
           {
-            "name" : "La Union",
-            "image_url" : require('../assets/img/photo/la-union.jpg'),
-            "description" : "La Union is .." 
+            "name" : "Bohol",
+            "image_url" : require('../assets/img/photo/bohol.jpg'),
+            "description" : "Bohol is .." 
           }
         ]
       }
