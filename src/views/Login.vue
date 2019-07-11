@@ -16,7 +16,7 @@
             <form class="form-validate" id="loginForm">
               <div class="form-group">
                 <label for="loginUsername" class="form-label"> Email Address</label>
-                <input name="loginUsername" id="loginUsername" type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email" class="form-control">
+                <input name="loginUsername" id="loginUsername" type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email" class="form-control" v-model="email">
               </div>
               <div class="form-group mb-4">
                 <div class="row">
@@ -27,7 +27,7 @@
                     <router-link to="forgot" class="form-text small">Forgot password?</router-link>
                   </div>
                 </div>
-                <input name="loginPassword" id="loginPassword" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control">
+                <input name="loginPassword" id="loginPassword" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control" v-model="password">
               </div>
               <button class="btn btn-lg btn-block btn-primary">Sign in</button>
               <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
@@ -56,6 +56,12 @@
 
   export default {
     name: 'login',
+    data(){
+      return {
+        email: '',
+        password: ''
+      }
+    },
     methods: {
       initializeStorage() {
         var identityPoolId = cognitoUserPoolId;
@@ -69,7 +75,6 @@
         localStorage.setItem('loginPrefix', loginPrefix);
       },
       refreshAWSCredentials() {
-
         var userPoolId = localStorage.getItem('userPoolId');
         var clientId = localStorage.getItem('clientId');
         var identityPoolId = localStorage.getItem('identityPoolId');
