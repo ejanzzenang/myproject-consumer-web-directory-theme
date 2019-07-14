@@ -17,13 +17,10 @@
             </div>
             <div class="mb-4">
               <label for="form_guests" class="form-label">Guests</label>
-              <select name="guests" id="form_guests" data-style="btn-selectpicker" title=" " class="selectpicker form-control">
-                <option value="guests_0">1</option>
-                <option value="guests_1">2</option>
-                <option value="guests_2">3</option>
-                <option value="guests_3">4</option>
-                <option value="guests_4">5</option>
-              </select>
+              <v-select class="bootstrap-select"
+                      :options="guests_list" 
+                      v-model="guests"
+                      name='guests'/>
             </div>
             <div class="pb-4">
               <div id="moreFilters" class="collapse">
@@ -84,23 +81,30 @@
 <script>
   import ProductCard2 from '@/components/products/ProductCard2.vue'
   import ProductCard from '@/components/products/ProductCard.vue'
+  import VSelect from '@/components/custom/vue-bootstrap-select.vue'
   import data from '@/assets/json/boracay.json'
   import moment from 'moment'
+
 
   export default {
     name: "product-catalog",
     components: {
       ProductCard2,
-      ProductCard
+      ProductCard,
+      VSelect
     },
     data() {
       return {
         products: data,
         myDate: "06/10/2019",
+        guests_list: [
+            1,2,3,4,5
+        ],
+        guests: '',
         options: {
           singleDatePicker: true,
           minYear: 2019,
-          maxYear: +moment().format("YYYY")
+          maxYear: +moment().format("YYYY"),
         } 
       }
     },
