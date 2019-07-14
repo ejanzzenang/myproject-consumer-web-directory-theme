@@ -136,46 +136,45 @@
 	                  <h5>Tourist's Information</h5>
 	                  <div class="profile-user-info">
 	                    <div class="profile-info-row">
-	                      <div class="profile-info-name">Email</div>
+	                      <div class="profile-info-name">Passport Number</div>
 	                      <div class="profile-info-value">
-	                        <span>john.doe@gmail.com</span>
+	                        <span>{{info['custom:passport_number']}}</span>
 	                      </div>
 	                    </div>
 	                    <div class="profile-info-row">
-	                      <div class="profile-info-name"> Location </div>
+	                      <div class="profile-info-name"> Place of Issue </div>
 	                      <div class="profile-info-value">
-	                        <span>Netherlands</span>
-	                        <span>Amsterdam</span>
+	                        <span>{{info['custom:passport_place_issue']}}</span>
 	                      </div>
 	                    </div>
 	                    <div class="profile-info-row">
-	                      <div class="profile-info-name">Gender</div>
+	                      <div class="profile-info-name">Expiry Date</div>
 	                      <div class="profile-info-value">
-	                        <span>Male</span>
+	                        <span>{{info['custom:passport_exp_date']}}</span>
 	                      </div>
 	                    </div>
 	                    <div class="profile-info-row">
-	                      <div class="profile-info-name">Birthdate</div>
+	                      <div class="profile-info-name">Country/Region</div>
 	                      <div class="profile-info-value">
-	                        <span>1990/06/20</span>
+	                        <span>{{info['custom:f_country_region']}}</span>
 	                      </div>
 	                    </div>
 	                    <div class="profile-info-row">
-	                      <div class="profile-info-name">Locality</div>
+	                      <div class="profile-info-name">City/State</div>
 	                      <div class="profile-info-value">
-	                        <span>Foreign</span>
+	                        <span>{{info['custom:f_city_state']}}</span>
 	                      </div>
 	                    </div>
 	                    <div class="profile-info-row">
-	                      <div class="profile-info-name">Country of Birth</div>
+	                      <div class="profile-info-name">Address 1</div>
 	                      <div class="profile-info-value">
-	                        <span>Spain</span>
+	                        <span>{{info['custom:f_address_1']}}</span>
 	                      </div>
 	                    </div>
 	                    <div class="profile-info-row">
-	                      <div class="profile-info-name">Occupation</div>
+	                      <div class="profile-info-name">Address 2</div>
 	                      <div class="profile-info-value">
-	                        <span>Business Man</span>
+	                        <span>{{info['custom:f_address_2']}}</span>
 	                      </div>
 	                    </div>
 	                  </div>
