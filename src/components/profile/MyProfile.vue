@@ -36,7 +36,7 @@
 	                      <div class="profile-info-row">
 	                        <div class="profile-info-name">Gender</div>
 	                        <div class="profile-info-value">
-	                          <span>{{info['custom:gender']}}</span>
+	                          <span>{{info['gender']}}</span>
 	                        </div>
 	                      </div>
 	                      <div class="profile-info-row">
@@ -72,7 +72,7 @@
 	                      <div class="profile-info-row">
 	                        <div class="profile-info-name">Status</div>
 	                        <div class="profile-info-value">
-	                          <span>{{info['custom:civil_status']}}</span>
+	                          <span>{{info['custom:status']}}</span>
 	                        </div>
 	                      </div>
 	                    </div>
@@ -189,6 +189,94 @@
 	    </div>
 	  </div>
 </template>
+
+
+<script>
+
+  import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
+  import * as AWS from 'aws-sdk';
+  var cognitoUserPoolId = 'ap-southeast-1_AQoxu5EIr'; 
+  var cognitoUserPoolClientId = '19mgjrlikq9nljgcfjo0k1ajja'; 
+  
+  
+  export default {
+    name: 'profile',
+      components: {
+      },
+      data() {
+          return {
+          	loaded: false,
+		      	info: {}
+          }
+      },
+      methods: {
+        setUserData(){
+
+        		function fetchUserData(cognitoUser){
+        			return new Promise(function(resolve, reject){
+        				cognitoUser.getSession(function(err, session) {
+                    if (err) {
+                        alert(err);
+                        return;
+                    }
+                    console.log('session validity: ' + session.isValid());
+
+                    cognitoUser.getUserAttributes(function(err, result) {
+				              if (err) {
+				                console.log(err)
+				                alert(err);
+				                return;
+				              }
+				              resolve(result)
+				            });
+                });
+        			});
+        		}
+
+
+        		var temp_info = {};
+
+            var data = { 
+              UserPoolId : cognitoUserPoolId,
+              ClientId : cognitoUserPoolClientId
+            }
+
+            
+            var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+            var cognitoUser = userPool.getCurrentUser();
+
+            if (cognitoUser != null) {
+                
+                var user_data = fetchUserData(cognitoUser)
+                .then(result=>{
+                	console.log("this is result")
+                	console.log(result)
+                	
+                	for (var i = 0; i < result.length; i++) {
+				                // console.log(result[i].getName() + ' has value ' + result[i].getValue());
+				                let name = result[i].getName()
+                        let val = result[i].getValue()   
+                        var obj = {
+                        	[name] : val
+                        }
+                        $.extend(temp_info, obj)
+                      }
+                      
+                }).then(res=>{
+                	 this.info = temp_info
+                })
+            }
+        }
+      },
+    	created(){
+    		
+    	},
+    	mounted(){
+    		this.setUserData()
+    	}
+  }
+</script>
+
 
 <style scoped>
   body {
@@ -315,88 +403,3 @@
     padding: 24px
   }
 </style>
-<script>
-
-  import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
-  import * as AWS from 'aws-sdk';
-  var cognitoUserPoolId = 'ap-southeast-1_jYdvhdSZb'; 
-  var cognitoUserPoolClientId = '5gn9uui9lqbgsioioen085cr56'; 
-  
-  
-  export default {
-    name: 'profile',
-      components: {
-      },
-      data() {
-          return {
-          	loaded: false,
-		      	info: {}
-          }
-      },
-      methods: {
-        setUserData(){
-
-        		function fetchUserData(cognitoUser){
-        			return new Promise(function(resolve, reject){
-        				cognitoUser.getSession(function(err, session) {
-                    if (err) {
-                        alert(err);
-                        return;
-                    }
-                    console.log('session validity: ' + session.isValid());
-
-                    cognitoUser.getUserAttributes(function(err, result) {
-				              if (err) {
-				                console.log(err)
-				                alert(err);
-				                return;
-				              }
-				              resolve(result)
-				            });
-                });
-        			});
-        		}
-
-
-        		var temp_info = {};
-
-            var data = { 
-              UserPoolId : cognitoUserPoolId,
-              ClientId : cognitoUserPoolClientId
-            }
-
-            
-            var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
-            var cognitoUser = userPool.getCurrentUser();
-
-            if (cognitoUser != null) {
-                
-                var user_data = fetchUserData(cognitoUser)
-                .then(result=>{
-                	console.log("this is result")
-                	console.log(result)
-                	
-                	for (var i = 0; i < result.length; i++) {
-				                // console.log(result[i].getName() + ' has value ' + result[i].getValue());
-				                let name = result[i].getName()
-                        let val = result[i].getValue()   
-                        var obj = {
-                        	[name] : val
-                        }
-                        $.extend(temp_info, obj)
-                      }
-                      
-                }).then(res=>{
-                	 this.info = temp_info
-                })
-            }
-        }
-      },
-    	created(){
-    		
-    	},
-    	mounted(){
-    		this.setUserData()
-    	}
-  }
-</script>

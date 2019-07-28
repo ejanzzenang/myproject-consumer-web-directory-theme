@@ -6,18 +6,15 @@
  			<form @submit.prevent="validateBeforeSubmit">
 		        <div class="form-group">
 		          <label for="email">Email Address</label>
-<!-- 		          <input type="text" class="form-control" id="email" placeholder="Enter email address" name="email" v-model="email" v-validate="'required|email'"> -->
+
 		          <input type="text" class="form-control" id="email" placeholder="Enter email address" name="email" v-model="email">
-<!--             	<div v-show="errors.has('email')" class="error-white" role="alert">
-      						{{"* " + errors.first('email') }}
-    					</div> -->
 
 		        </div>
 		        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#verfication_modal" @click="sendVerification">Confirm</button>
 		      </form>
 	      </div>
 	    </section>
-	    			<!-- Modal -->
+		<!-- Modal -->
 		  <div class="modal fade" id="verfication_modal" role="dialog">
 		    <div class="modal-dialog">
 		      <!-- Modal content-->
@@ -74,6 +71,8 @@
 
 <script>
 	import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
+	var cognitoUserPoolId = 'ap-southeast-1_AQoxu5EIr'; 
+	var cognitoUserPoolClientId = '19mgjrlikq9nljgcfjo0k1ajja';
   	export default {
     name: 'forgotPassword',
     data() {
@@ -88,9 +87,7 @@
 	    sendVerification: function(){
 	    	// works
 	    	console.log("works")
-	    	var navigate = this.$router
-        	var cognitoUserPoolId = 'ap-southeast-1_jYdvhdSZb'; 
-            var cognitoUserPoolClientId = '5gn9uui9lqbgsioioen085cr56'; 
+	    	var navigate = this.$router 
 
 	    	var poolData = {
 		      UserPoolId : cognitoUserPoolId,
@@ -118,9 +115,7 @@
 		    });
       },
       confirmNewPassword: function(){
-        	var cognitoUserPoolId = 'ap-southeast-1_jYdvhdSZb'; 
-            var cognitoUserPoolClientId = '5gn9uui9lqbgsioioen085cr56'; 
-
+      		var navigate = this.$router 
 	    	var poolData = {
 		      UserPoolId : cognitoUserPoolId,
 		      ClientId : cognitoUserPoolClientId
@@ -147,22 +142,25 @@
 	            },
 	        });
     		console.log("Password Confirmed")
+    		navigate.push("/")
 
       },
       validateBeforeSubmit: function(){
-			  this.$validator.validateAll().then((result) => {
-			    if (result) {
-
-			      // eslint-disable-next-line
-			      // this.sendVerification()
-			      return;
-			    }
-
-			    	alert('Correct the errors!');
-			  	});
-			}
+	    this.$validator.validateAll().then((result) => {
+		    if (result) {
+		      // eslint-disable-next-line
+		      // this.sendVerification()
+		      return;
+		    }
+		    	alert('Correct the errors!');
+		  	});
+		}
+	  	
+	  },
+	  validate: function(){
 	  	
 	  }
+
 		
 	}
 

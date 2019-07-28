@@ -29,8 +29,8 @@
      },
      methods: {
      	confirmUser: function(){
-        var cognitoUserPoolId = 'ap-southeast-1_jYdvhdSZb'; 
-        var cognitoUserPoolClientId = '5gn9uui9lqbgsioioen085cr56'; 
+        var cognitoUserPoolId = 'ap-southeast-1_AQoxu5EIr'; 
+        var cognitoUserPoolClientId = '19mgjrlikq9nljgcfjo0k1ajja'; 
   
   		var poolData = {
   			UserPoolId : cognitoUserPoolId,

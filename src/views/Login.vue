@@ -50,8 +50,8 @@
 <script>
   import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
   import * as AWS from 'aws-sdk';
-  var cognitoUserPoolId = 'ap-southeast-1_jYdvhdSZb';
-  var cognitoUserPoolClientId = '5gn9uui9lqbgsioioen085cr56';
+  var cognitoUserPoolId = 'ap-southeast-1_AQoxu5EIr'; 
+  var cognitoUserPoolClientId = '19mgjrlikq9nljgcfjo0k1ajja'; 
   var awsRegion = 'ap-southeast-1';
 
   export default {
@@ -182,20 +182,20 @@
             localStorage.setItem('awsConfig', JSON.stringify(AWS.config));
             localStorage.setItem('email', email);
 
-            cognitoUser.getUserAttributes(function(err, result) {
-              if (err) {
-                console.log(err)
-                alert(err);
-                return;
-              }
-              for (var i = 0; i < result.length; i++) {
-                console.log('attribute ' + result[i].getName() + ' has value ' + result[i].getValue());
-                if (result[i].getName() == 'sub') {
-                  console.log('Overwriting userId into local storage');
-                  localStorage.setItem('userId', result[i].getValue());
-                }
-              }
-            });
+            // cognitoUser.getUserAttributes(function(err, result) {
+            //   if (err) {
+            //     console.log(err)
+            //     alert(err);
+            //     return;
+            //   }
+            //   for (var i = 0; i < result.length; i++) {
+            //     console.log('attribute ' + result[i].getName() + ' has value ' + result[i].getValue());
+            //     if (result[i].getName() == 'sub') {
+            //       console.log('Overwriting userId into local storage');
+            //       localStorage.setItem('userId', result[i].getValue());
+            //     }
+            //   }
+            // });
 
             loggedInDisplay();
           },
