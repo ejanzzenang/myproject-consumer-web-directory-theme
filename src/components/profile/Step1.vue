@@ -128,19 +128,19 @@
                   <div class="form-group">
                     <label class="form-label">Status *</label>
                     <div class="custom-control custom-radio">
-                      <input type="radio" id="civil_status_0" name="civil_status" class="custom-control-input" v-model="civil_status" value="Senior Citizen" v-validate="'required'">
-                      <label for="civil_status_0" class="custom-control-label">Senior Citizen</label>
+                      <input type="radio" id="status_0" name="status" class="custom-control-input" v-model="status" value="Senior Citizen" v-validate="'required'">
+                      <label for="status_0" class="custom-control-label">Senior Citizen</label>
                     </div>
                     <div class="custom-control custom-radio">
-                      <input type="radio" id="civil_status_1" name="civil_status" class="custom-control-input" v-model="civil_status" value="Child of 12" v-validate="'required'">
-                      <label for="civil_status_1" class="custom-control-label">Child of 12 Years Old or Below</label>
+                      <input type="radio" id="status_1" name="status" class="custom-control-input" v-model="status" value="Child of 12" v-validate="'required'">
+                      <label for="status_1" class="custom-control-label">Child of 12 Years Old or Below</label>
                     </div>
                     <div class="custom-control custom-radio">
-                      <input type="radio" id="civil_status_2" name="civil_status" class="custom-control-input" v-model="civil_status" value="Other" v-validate="'required'">
-                      <label for="civil_status_2" class="custom-control-label">Other</label>
+                      <input type="radio" id="status_2" name="status" class="custom-control-input" v-model="status" value="Other" v-validate="'required'">
+                      <label for="status_2" class="custom-control-label">Other</label>
                     </div>
                   </div>
-                  <div v-show="errors.has('civil_status')" class="error">{{ errors.first('civil_status') }}</div>
+                  <div v-show="errors.has('status')" class="error">{{ errors.first('status') }}</div>
                 </div>
               </div>
             </div>
@@ -177,7 +177,7 @@
           last_name: '', 
           gender: '',
           locality: '',
-          civil_status: '',
+          status: '',
           country_list: [] ,
           country_of_birth: '',
           occupation: '',
@@ -208,7 +208,7 @@
                    Value : this.last_name
                 },
                 {
-                   Name : 'custom:gender',
+                   Name : 'gender',
                    Value : this.gender
                 },
                 {
@@ -232,8 +232,8 @@
                    Value : this.locality
                 },
                 {
-                   Name : 'custom:civil_status',
-                   Value : this.civil_status                
+                   Name : 'custom:status',
+                   Value : this.status                
                 }
               ]
                 
@@ -241,8 +241,8 @@
                 attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(element));
             });
   
-            var cognitoUserPoolId = 'ap-southeast-1_jYdvhdSZb'; 
-            var cognitoUserPoolClientId = '5gn9uui9lqbgsioioen085cr56'; 
+            var cognitoUserPoolId = 'ap-southeast-1_AQoxu5EIr'; 
+            var cognitoUserPoolClientId = '19mgjrlikq9nljgcfjo0k1ajja'; 
   
             var data = { 
               UserPoolId : cognitoUserPoolId,
@@ -282,7 +282,7 @@
             console.log(this.country_of_residence)
             console.log(this.occupation)
             console.log(this.locality)
-            console.log(this.civil_status)
+            console.log(this.status)
   
         },
         getCountriesList: function() {

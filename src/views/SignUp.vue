@@ -60,8 +60,10 @@
     },
     methods: {
       signUpUser: function(){
-        var cognitoUserPoolId = 'ap-southeast-1_jYdvhdSZb'; 
-        var cognitoUserPoolClientId = '5gn9uui9lqbgsioioen085cr56'; 
+
+        var cognitoUserPoolId = 'ap-southeast-1_AQoxu5EIr'; 
+        var cognitoUserPoolClientId = '19mgjrlikq9nljgcfjo0k1ajja'; 
+
         var navigate = this.$router;
 
         var poolData = {
@@ -83,14 +85,14 @@
             'family_name',
             'given_name',
             'middle_name',
-            'custom:gender',
+            'gender',
             'custom:birth_date',
             'custom:country_of_residence',
             'custom:country_of_birth',
             'custom:occupation',
             'custom:locality',
-            'custom:civil_status',
-            // Step2
+            'custom:status',
+            // // Step2
             'custom:mode_of_travel', 
             'custom:purpose_of_travel', 
             'custom:num_visits_bora', 
@@ -99,7 +101,7 @@
             'custom:address_bora', 
             'custom:place_vis_bef_bora', 
             'custom:dest_after_bora',
-            // Step3
+            // // Step3
             'custom:passport_number', 
             'custom:passport_place_issue', 
             'custom:passport_exp_date', 
