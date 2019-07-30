@@ -21,7 +21,7 @@
               </div>
               <button @click="signUpUser" id="signup" class="btn btn-lg btn-block btn-primary">Sign up</button>              
               <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
-              <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
+              <button @click="signUpFacebook" class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
               <p class="text-center"><small class="text-muted text-center">Have an account? <router-link to="/login">Log in</router-link></small></p>
               <hr class="my-4">
               <p class="text-sm text-muted">By signing up you agree to Directory's <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</p>
@@ -48,7 +48,8 @@
 
 <script>
   import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
-
+  var cognitoUserPoolId = 'ap-southeast-1_AQoxu5EIr'; 
+  var cognitoUserPoolClientId = '19mgjrlikq9nljgcfjo0k1ajja'; 
   export default {
     name: 'signup',
     data(){
@@ -59,11 +60,22 @@
       }
     },
     methods: {
+
+      signUpFacebook: function(){
+        // const baseURI = 'https://app-hetchly.auth.ap-southeast-1.amazoncognito.com/login?response_type=token&client_id=19mgjrlikq9nljgcfjo0k1ajja&redirect_uri=https%3A%2F%2Fdbfwr72c6o722.cloudfront.net'
+
+        // this.$http.get(baseURI)
+        // .then(result => {
+        //   console.log(result);
+        // })
+        // .catch(error =>{
+        //   alert(error);
+        // })
+
+        window.location.href='https://app-hetchly.auth.ap-southeast-1.amazoncognito.com//oauth2/authorize?identity_provider=Facebook&redirect_uri=https://dbfwr72c6o722.cloudfront.net&response_type=token&client_id=19mgjrlikq9nljgcfjo0k1ajja&scope=email openid profile'
+
+      },
       signUpUser: function(){
-
-        var cognitoUserPoolId = 'ap-southeast-1_AQoxu5EIr'; 
-        var cognitoUserPoolClientId = '19mgjrlikq9nljgcfjo0k1ajja'; 
-
         var navigate = this.$router;
 
         var poolData = {
