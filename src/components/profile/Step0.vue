@@ -39,27 +39,27 @@
 </template>
 <script>
   export default {
-   name: 'profile-step0',
-   components: {
-   },
-   data() {
-    return {
-      
-     }
-   },
-   methods: {
-     
-   },
-   beforeRouteLeave(to, from, next) {
-      //validates all fields
-        this.$validator.validateAll().then((result) => {
-         if (result) {
-            next();
-           return;
+      name: 'profile-step0',
+        components: {
+        },
+        data() {
+        return {
+          
          }
-         alert('Correct the errors!');
-       });
-   }
-  }
+        },
+        methods: {
+         
+        },
+        beforeRouteLeave(to, from, next) {
+          //validates all fields
+            this.$validator.validateAll().then((result) => {
+             if (result) {
+                next();
+               return;
+             }
+             alert('Correct the errors!');
+           });
+      }
+    }
       
 </script>
