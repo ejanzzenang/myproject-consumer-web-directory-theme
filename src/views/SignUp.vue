@@ -21,7 +21,7 @@
               </div>
               <button @click="signUpUser" id="signup" class="btn btn-lg btn-block btn-primary">Sign up</button>              
               <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
-              <button @click="signUpFacebook" class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
+              <button @click="signUpFacebook" id="signupfb" class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
               <p class="text-center"><small class="text-muted text-center">Have an account? <router-link to="/login">Log in</router-link></small></p>
               <hr class="my-4">
               <p class="text-sm text-muted">By signing up you agree to Directory's <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</p>
@@ -48,32 +48,27 @@
 
 <script>
   import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
+  import {CognitoAuth} from 'amazon-cognito-auth-js';
   var cognitoUserPoolId = 'ap-southeast-1_AQoxu5EIr'; 
   var cognitoUserPoolClientId = '19mgjrlikq9nljgcfjo0k1ajja'; 
+  var appclient_id  = '19mgjrlikq9nljgcfjo0k1ajja'
+
   export default {
     name: 'signup',
     data(){
       return {
         email_address: '',
         password: '',
-        confirmPw: ''
+        confirmPw: '',
+        auth: ''
       }
     },
     methods: {
-
-      signUpFacebook: function(){
-        // const baseURI = 'https://app-hetchly.auth.ap-southeast-1.amazoncognito.com/login?response_type=token&client_id=19mgjrlikq9nljgcfjo0k1ajja&redirect_uri=https%3A%2F%2Fdbfwr72c6o722.cloudfront.net'
-
-        // this.$http.get(baseURI)
-        // .then(result => {
-        //   console.log(result);
-        // })
-        // .catch(error =>{
-        //   alert(error);
-        // })
-
-        window.location.href='https://app-hetchly.auth.ap-southeast-1.amazoncognito.com//oauth2/authorize?identity_provider=Facebook&redirect_uri=https://dbfwr72c6o722.cloudfront.net&response_type=token&client_id=19mgjrlikq9nljgcfjo0k1ajja&scope=email openid profile'
-
+      initCognitoSDK: function() {
+        
+      },
+      signUpFacebook : function(){
+        this.auth.getSession();
       },
       signUpUser: function(){
         var navigate = this.$router;
@@ -157,8 +152,67 @@
           }
       }
     },
-    mounted() {
-      
+    created() {
+
+          var authData = {
+            ClientId : appclient_id, // Your client id here
+            AppWebDomain : 'app-hetchly.auth.ap-southeast-1.amazoncognito.com',
+            TokenScopesArray : ['email'], 
+            // RedirectUriSignIn : 'https://dbfwr72c6o722.cloudfront.net/',
+            // RedirectUriSignOut : 'https://dbfwr72c6o722.cloudfront.net/',
+            RedirectUriSignIn : 'http://localhost:8080',
+            RedirectUriSignOut : 'http://localhost:8080',
+            IdentityProvider : 'Facebook', // e.g. 'Facebook',
+            UserPoolId : cognitoUserPoolId, // Your user pool id here
+          };
+
+          this.auth = new CognitoAuth(authData)
+          console.log(this.auth)
+          
+          this.auth.userhandler = {
+            onSuccess: function (result) {
+              console.log('LoginCognitoAuth, onSuccess: login successful')
+              // getting tokens
+              let accessToken = result.getAccessToken().getJwtToken()
+              let idToken = result.getIdToken().getJwtToken()
+              let refreshToken = result.getRefreshToken().getToken()
+
+              //saving tokens to local storage
+              window.localStorage.setItem('accessToken', accessToken)
+              window.localStorage.setItem('idToken', idToken)
+              window.localStorage.setItem('refreshToken', refreshToken)
+
+              // getting information about the user from the token - using sjcl to decode from base64
+              let idTokenPayload = idToken.split('.')[1]
+              let payload = JSON.parse(sjcl.codec.utf8String.fromBits(sjcl.codec.base64url.toBits(idTokenPayload)))
+              console.log('id token decoded content, payload:')
+              console.log(payload)
+              let userGroup = payload['cognito:groups']
+              if (userGroup && userGroup.length > 0) {
+                window.localStorage.setItem('userGroup', userGroup)
+              } else {
+                userGroup = 'clientGroup'
+                window.localStorage.setItem('userGroup', userGroup)
+              }
+              let userSub = payload['sub']
+              console.log('setting local storage: userSub, userState, username')
+
+              // setting some parameters for my application - these are watched by Vue to verify if the use is signed in
+              window.localStorage.setItem('userSub', userSub)
+              window.localStorage.setItem('userState', 'signedIn')
+              window.localStorage.setItem('username', payload['cognito:username'])
+              window.location.assign(Config.BASE_URL)
+            },
+            onFailure: function (err) {
+              // not doing anytnig on failure - Vue will check 'userState' in localstorage and if not set to 'signIn' - will treat as user never signed in...
+              alert('Error!' + err)
+            }
+          }
+
+          console.log("authdata set")
+
+          var redirect_url = window.location.href;
+          this.auth.parseCognitoWebResponse(redirect_url);
     }
   }
 </script>
