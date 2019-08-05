@@ -144,43 +144,10 @@
             alert('Passwords do not match.')
           }
       },
-      initCognitoSDK: function() {
-          var authData = {
-              ClientId : appclient_id, 
-              AppWebDomain : 'app-hetchly.auth.ap-southeast-1.amazoncognito.com',
-              TokenScopesArray : ['email'], 
-              RedirectUriSignIn : 'http://localhost:8080',
-              RedirectUriSignOut : 'http://localhost:8080',
-              IdentityProvider : 'Facebook', 
-              UserPoolId : cognitoUserPoolId, 
-            };
-
-            var auth = new CognitoAuth(authData)
-            
-            auth.userhandler = {
-              // * E.g.
-              onSuccess: function(result) {
-                alert("Sign in success");
-                showSignedIn(result);
-              },
-              onFailure: function(err) {
-                alert("Error!" + err);
-              }          
-            }
-
-            return auth
-      },
       signUpFacebook: function(){
         alert("works!!")
         this.$store.state.auth.getSession()
       }
-    },
-    created(){
-      // this.$store.state.auth = this.initCognitoSDK()
-      // // this.auth = this.initCognitoSDK()
-
-      // var curUrl = window.location.href;
-      // this.$store.state.auth.parseCognitoWebResponse(curUrl);
     }
   }
 </script>
