@@ -8,7 +8,7 @@ export const store = new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
     loggedIn: false,
-    auth: null
+    auth: null,
   },
   mutations: {
     login(state){
@@ -17,9 +17,8 @@ export const store = new Vuex.Store({
     logout(state){
       state.loggedIn = false;
     },
-    
 
-    
+
   },
 
 });
