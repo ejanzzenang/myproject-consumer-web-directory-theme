@@ -59,17 +59,10 @@
       return {
         email_address: '',
         password: '',
-        confirmPw: '',
-        auth: ''
+        confirmPw: ''    
       }
     },
     methods: {
-      initCognitoSDK: function() {
-        
-      },
-      signUpFacebook : function(){
-        this.auth.getSession();
-      },
       signUpUser: function(){
         var navigate = this.$router;
 
@@ -150,69 +143,44 @@
           } else {
             alert('Passwords do not match.')
           }
+      },
+      initCognitoSDK: function() {
+          var authData = {
+              ClientId : appclient_id, 
+              AppWebDomain : 'app-hetchly.auth.ap-southeast-1.amazoncognito.com',
+              TokenScopesArray : ['email'], 
+              RedirectUriSignIn : 'http://localhost:8080',
+              RedirectUriSignOut : 'http://localhost:8080',
+              IdentityProvider : 'Facebook', 
+              UserPoolId : cognitoUserPoolId, 
+            };
+
+            var auth = new CognitoAuth(authData)
+            
+            auth.userhandler = {
+              // * E.g.
+              onSuccess: function(result) {
+                alert("Sign in success");
+                showSignedIn(result);
+              },
+              onFailure: function(err) {
+                alert("Error!" + err);
+              }          
+            }
+
+            return auth
+      },
+      signUpFacebook: function(){
+        alert("works!!")
+        this.$store.state.auth.getSession()
       }
     },
-    created() {
+    created(){
+      // this.$store.state.auth = this.initCognitoSDK()
+      // // this.auth = this.initCognitoSDK()
 
-          var authData = {
-            ClientId : appclient_id, // Your client id here
-            AppWebDomain : 'app-hetchly.auth.ap-southeast-1.amazoncognito.com',
-            TokenScopesArray : ['email'], 
-            // RedirectUriSignIn : 'https://dbfwr72c6o722.cloudfront.net/',
-            // RedirectUriSignOut : 'https://dbfwr72c6o722.cloudfront.net/',
-            RedirectUriSignIn : 'http://localhost:8080',
-            RedirectUriSignOut : 'http://localhost:8080',
-            IdentityProvider : 'Facebook', // e.g. 'Facebook',
-            UserPoolId : cognitoUserPoolId, // Your user pool id here
-          };
-
-          this.auth = new CognitoAuth(authData)
-          console.log(this.auth)
-          
-          this.auth.userhandler = {
-            onSuccess: function (result) {
-              console.log('LoginCognitoAuth, onSuccess: login successful')
-              // getting tokens
-              let accessToken = result.getAccessToken().getJwtToken()
-              let idToken = result.getIdToken().getJwtToken()
-              let refreshToken = result.getRefreshToken().getToken()
-
-              //saving tokens to local storage
-              window.localStorage.setItem('accessToken', accessToken)
-              window.localStorage.setItem('idToken', idToken)
-              window.localStorage.setItem('refreshToken', refreshToken)
-
-              // getting information about the user from the token - using sjcl to decode from base64
-              let idTokenPayload = idToken.split('.')[1]
-              let payload = JSON.parse(sjcl.codec.utf8String.fromBits(sjcl.codec.base64url.toBits(idTokenPayload)))
-              console.log('id token decoded content, payload:')
-              console.log(payload)
-              let userGroup = payload['cognito:groups']
-              if (userGroup && userGroup.length > 0) {
-                window.localStorage.setItem('userGroup', userGroup)
-              } else {
-                userGroup = 'clientGroup'
-                window.localStorage.setItem('userGroup', userGroup)
-              }
-              let userSub = payload['sub']
-              console.log('setting local storage: userSub, userState, username')
-
-              // setting some parameters for my application - these are watched by Vue to verify if the use is signed in
-              window.localStorage.setItem('userSub', userSub)
-              window.localStorage.setItem('userState', 'signedIn')
-              window.localStorage.setItem('username', payload['cognito:username'])
-              window.location.assign(Config.BASE_URL)
-            },
-            onFailure: function (err) {
-              // not doing anytnig on failure - Vue will check 'userState' in localstorage and if not set to 'signIn' - will treat as user never signed in...
-              alert('Error!' + err)
-            }
-          }
-
-          console.log("authdata set")
-
-          var redirect_url = window.location.href;
-          this.auth.parseCognitoWebResponse(redirect_url);
+      // var curUrl = window.location.href;
+      // this.$store.state.auth.parseCognitoWebResponse(curUrl);
     }
   }
 </script>
