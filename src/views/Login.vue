@@ -13,7 +13,7 @@
                 <use xlink:href="#close-1"> </use>
               </svg>
             </router-link>
-            <form class="form-validate" id="loginForm">
+            <div class="form-validate" id="loginForm">
               <div class="form-group">
                 <label for="loginUsername" class="form-label"> Email Address</label>
                 <input name="loginUsername" id="loginUsername" type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email" class="form-control" v-model="email">
@@ -29,9 +29,9 @@
                 </div>
                 <input name="loginPassword" id="loginPassword" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control" v-model="password">
               </div>
-              <button class="btn btn-lg btn-block btn-primary">Sign in</button>
+              <button @click="loginUser" class="btn btn-lg btn-block btn-primary">Sign in</button>
               <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
-            </form>
+            </div>
             <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
             <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="/signup">Sign Up</a></small></p>
           </div>
@@ -63,17 +63,6 @@
       }
     },
     methods: {
-      initializeStorage() {
-        var identityPoolId = cognitoUserPoolId;
-        var userPoolId = cognitoUserPoolId;
-        var clientId = cognitoUserPoolClientId;
-        var loginPrefix = 'cognito-idp.' + awsRegion + '.amazonaws.com/' + identityPoolId;
-
-        localStorage.setItem('identityPoolId', identityPoolId);
-        localStorage.setItem('userPoolId', userPoolId);
-        localStorage.setItem('clientId', clientId);
-        localStorage.setItem('loginPrefix', loginPrefix);
-      },
       refreshAWSCredentials() {
         var userPoolId = localStorage.getItem('userPoolId');
         var clientId = localStorage.getItem('clientId');
@@ -108,30 +97,17 @@
             }
           });
         }
-      }
-    },
-    mounted() {
+      },
+      loginUser() {
 
-      this.initializeStorage();
+        var navigate = this.$router;
+        var store = this.$store
 
-      var configString = localStorage.getItem("awsConfig");
-      var config = JSON.parse(configString);
-
-      var navigate = this.$router;
-      var store = this.$store
-
-      if (config != null) {
-        refreshAWSCredentials();
-        loggedInDisplay();
-      }
-
-      function loggedInDisplay() {
-        //changes the value of store to loggedIn
-        store.commit('login')
-        navigate.push('/')
-      }
-
-      function loginUser() {
+        function loggedInDisplay() {
+          //changes the value of store to loggedIn
+          store.commit('login')
+          navigate.push('/')
+        }
 
         var userPoolId = localStorage.getItem('userPoolId');
         var clientId = localStorage.getItem('clientId');
@@ -158,6 +134,7 @@
         };
 
         var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+        
         var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
         cognitoUser.authenticateUser(authenticationDetails, {
           onSuccess: function(result) {
@@ -182,21 +159,6 @@
             localStorage.setItem('awsConfig', JSON.stringify(AWS.config));
             localStorage.setItem('email', email);
 
-            // cognitoUser.getUserAttributes(function(err, result) {
-            //   if (err) {
-            //     console.log(err)
-            //     alert(err);
-            //     return;
-            //   }
-            //   for (var i = 0; i < result.length; i++) {
-            //     console.log('attribute ' + result[i].getName() + ' has value ' + result[i].getValue());
-            //     if (result[i].getName() == 'sub') {
-            //       console.log('Overwriting userId into local storage');
-            //       localStorage.setItem('userId', result[i].getValue());
-            //     }
-            //   }
-            // });
-
             loggedInDisplay();
           },
           onFailure: function(err) {
@@ -205,12 +167,15 @@
 
         });
       }
+    },
+    mounted() {
+      var configString = localStorage.getItem("awsConfig");
+      var config = JSON.parse(configString);
 
-      $("#loginForm").submit(function(event) {
-        event.preventDefault();
-        loginUser();
-      });
-
+      if (config != null) {
+        this.refreshAWSCredentials();
+        this.loggedInDisplay();
+      }
     }
   }
 </script>
