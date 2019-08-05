@@ -92,6 +92,13 @@ export default {
     // var auth = this.initCognitoSDK()
     // console.log("Initialized cognitoSDK in App.vue")
     // console.log(auth)
+
+
+    this.$store.state.auth = this.initCognitoSDK()
+    // this.auth = this.initCognitoSDK()
+
+    var curUrl = window.location.href;
+    this.$store.state.auth.parseCognitoWebResponse(curUrl);
   },
   mounted(){
 
