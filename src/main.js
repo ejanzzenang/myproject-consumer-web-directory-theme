@@ -1,9 +1,8 @@
 import Vue from 'vue';
 import App from './App.vue';
 
-//for Vuex Store
-import { store } from './store'
- 
+// for Vuex Store
+import { store } from './store';
 
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import 'swiper/dist/css/swiper.css';
