@@ -32,7 +32,7 @@
               <button @click="loginUser" class="btn btn-lg btn-block btn-primary">Sign in</button>
               <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
             </div>
-            <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
+            <button @click="signUpFacebook"class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
             <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="/signup">Sign Up</a></small></p>
           </div>
         </div>
@@ -63,41 +63,6 @@
       }
     },
     methods: {
-      refreshAWSCredentials() {
-        var userPoolId = localStorage.getItem('userPoolId');
-        var clientId = localStorage.getItem('clientId');
-        var identityPoolId = localStorage.getItem('identityPoolId');
-        var loginPrefix = localStorage.getItem('loginPrefix');
-
-        var poolData = {
-          UserPoolId: userPoolId, // Your user pool id here
-          ClientId: clientId // Your client id here
-        }
-        var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-        var cognitoUser = userPool.getCurrentUser();
-
-        if (cognitoUser != null) {
-          cognitoUser.getSession(function(err, result) {
-            if (result) {
-              console.log('You are now logged in.');
-              cognitoUser.refreshSession(result.getRefreshToken(), function(err, result) {
-
-                if (err) { //throw err;
-                  console.log('In the err: ' + err);
-                } else {
-                  localStorage.setItem('awsConfig', JSON.stringify(AWS.config));
-                  var sessionTokens = {
-                    IdToken: result.getIdToken(),
-                    AccessToken: result.getAccessToken(),
-                    RefreshToken: result.getRefreshToken()
-                  };
-                  localStorage.setItem("sessionTokens", JSON.stringify(sessionTokens));
-                }
-              });
-            }
-          });
-        }
-      },
       loginUser() {
 
         var navigate = this.$router;
@@ -138,17 +103,22 @@
         var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
         cognitoUser.authenticateUser(authenticationDetails, {
           onSuccess: function(result) {
-            console.log('access token + \n' + result.getAccessToken().getJwtToken());
+            
+            console.log('access token \n' + result.getAccessToken().getJwtToken());
 
             var sessionTokens = {
               IdToken: result.getIdToken(),
               AccessToken: result.getAccessToken(),
               RefreshToken: result.getRefreshToken()
             };
+            
+            console.log("Session tokens: ")
+            console.log(sessionTokens)
+
             localStorage.setItem('sessionTokens', JSON.stringify(sessionTokens));
 
             //POTENTIAL: Region needs to be set if not already set previously elsewhere.
-            AWS.config.region = 'ap-southeast-1';
+            AWS.config.region = awsRegion;
             AWS.config.credentials = new AWS.CognitoIdentityCredentials({
               IdentityPoolId: identityPoolId, // your identity pool id here
               Logins: {
@@ -166,16 +136,16 @@
           },
 
         });
+      },
+      signUpFacebook: function(){
+        
+        var store = this.$store;
+        alert("works!!")
+        store.commit('login')
+        this.$store.state.auth.getSession()
       }
     },
     mounted() {
-      var configString = localStorage.getItem("awsConfig");
-      var config = JSON.parse(configString);
-
-      if (config != null) {
-        this.refreshAWSCredentials();
-        this.loggedInDisplay();
-      }
     }
   }
 </script>
