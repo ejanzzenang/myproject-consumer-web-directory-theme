@@ -51,7 +51,6 @@
   import {CognitoAuth} from 'amazon-cognito-auth-js';
   var cognitoUserPoolId = 'ap-southeast-1_AQoxu5EIr'; 
   var cognitoUserPoolClientId = '19mgjrlikq9nljgcfjo0k1ajja'; 
-  var appclient_id  = '19mgjrlikq9nljgcfjo0k1ajja'
 
   export default {
     name: 'signup',
@@ -145,7 +144,10 @@
           }
       },
       signUpFacebook: function(){
+        
+        var store = this.$store;
         alert("works!!")
+        store.commit('login')
         this.$store.state.auth.getSession()
       }
     }
