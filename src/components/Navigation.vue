@@ -25,6 +25,12 @@
     </nav>  
 </template>
 <script>
+
+import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
+import {CognitoAuth} from 'amazon-cognito-auth-js';
+var cognitoUserPoolId = 'ap-southeast-1_AQoxu5EIr'; 
+var cognitoUserPoolClientId = '19mgjrlikq9nljgcfjo0k1ajja'; 
+
 export default {
   name: 'navigation',
   data(){
@@ -34,16 +40,28 @@ export default {
   },
   methods: {
     logOut: function(){
-      var store = this.$store
-
-      console.log("logged out")
+      var store = this.$store;
+      console.log("logged out");
       localStorage.clear();
-      store.commit('logout')
-      document.location.reload();
-    }
-  },
-  mounted(){
-   
+      store.commit('logout');
+
+      var data = {
+          UserPoolId : cognitoUserPoolId,
+          ClientId : cognitoUserPoolClientId
+      };
+      
+      var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+      var cognitoUser = userPool.getCurrentUser();
+      console.log(cognitoUser)
+
+      if (cognitoUser != null) {
+        console.log("global sign out!");
+        cognitoUser.globalSignOut();
+      }
+
+      window.location.reload();
+
+     }
   }
 } 
 
