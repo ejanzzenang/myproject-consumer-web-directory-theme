@@ -56,7 +56,15 @@
                   <div class="form-group">
                     <label for="birthdate" class="form-label">Birth Date *</label>
                     <div class="datepicker-container datepicker-container-right">
-                      <date-range-picker name="birth_date" v-model="birth_date" :options="options" id="bookingDate" placeholder="Choose your dates" required='required' class="form-control"/>
+                      <date-range-picker 
+                      name='birth_date' 
+                      v-model="birth_date" 
+                      :options="options" 
+                      id="birth_date" 
+                      placeholder="Choose your dates" 
+                      class="form-control"
+                      v-validate:birth_date="'required'"/>
+                      <div v-show="errors.has('birth_date')" class="error">{{ errors.first('birth_date') }}</div>
                     </div>
                   </div>
                 </div>
