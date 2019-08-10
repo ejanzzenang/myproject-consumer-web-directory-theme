@@ -208,7 +208,7 @@ export default {
     }
   },
   methods: {
-    setUserData() {
+    getUserData() {
 
       function fetchUserData(cognitoUser) {
         return new Promise(function(resolve, reject) {
@@ -248,9 +248,8 @@ export default {
 
         var user_data = fetchUserData(cognitoUser)
           .then(result => {
-            console.log("this is result")
-            console.log(result)
 
+            // transform user attribute data into a dict
             for (var i = 0; i < result.length; i++) {
               let name = result[i].getName()
               let val = result[i].getValue()
@@ -266,11 +265,8 @@ export default {
       }
     }
   },
-  created() {
-
-  },
   mounted() {
-    this.setUserData()
+    this.getUserData()
   }
 } 
 </script>
