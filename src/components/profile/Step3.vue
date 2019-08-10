@@ -30,7 +30,14 @@
                 <div class="form-group">
                   <label for="birthdate" class="form-label">Expiry Date *</label>
                   <div class="datepicker-container datepicker-container-right">
-                    <date-range-picker v-model="expiry_date" :options="options" id="expiry_date" placeholder="Choose your dates" required="required" class="form-control" v-validate:expiry_date="'required'"/>
+                    <date-range-picker 
+                    v-model="expiry_date" 
+                    :options="options" 
+                    id="expiry_date" 
+                    placeholder="Choose your dates"
+                    name='expiry_date' 
+                    class="form-control" 
+                    v-validate:expiry_date="'required'"/>
                     <div v-show="errors.has('expiry_date')" class="error">{{ errors.first('expiry_date') }}</div>
                   </div>
                 </div>
@@ -83,7 +90,7 @@
             <router-link to="step2" class="btn btn-link text-muted"><i class="fa-chevron-left fa mr-2"></i>Back</router-link>
           </div>
           <div class="col text-center text-sm-right">
-            <router-link to="step4"><button @click="updateUser  " class="btn btn-primary px-3">Next step<i class="fa-chevron-right fa ml-2"></i></button></router-link>
+            <button @click="validate" class="btn btn-primary px-3">Next step<i class="fa-chevron-right fa ml-2"></i></button>
           </div>
         </div>
       </div>
@@ -106,9 +113,9 @@
       },
       data() {
         return {
+          passport_number: '',
           expiry_date: '06/10/2019',
           country_region: '',
-          passport_number: '',
           place_of_issue: '',
           city_state: '',
           address_1: '',
@@ -196,8 +203,7 @@
             console.log(this.city_state)
             console.log(this.place_of_issue)
             console.log(this.address_1)
-            console.log(this.address_2)
-  
+            console.log(this.address_2) 
         },
         getCountriesList: function() {
           this.$http.get('https://restcountries.eu/rest/v1/all').then(result=> {
@@ -212,19 +218,89 @@
   
           })
         },
+        validate: function() {
+          //validates all fields
+          this.$validator.validateAll().then((result) => {
+            if (result) {
+              // update user if successful
+              this.updateUser()
+
+              var navigate = this.$router;
+              navigate.push('step4')
+              return;
+            }
+            alert(result);
+            alert('Correct the errors!');
+          });
+        },
+        getUserData() {
+
+          function fetchUserData(cognitoUser) {
+            return new Promise(function(resolve, reject) {
+              cognitoUser.getSession(function(err, session) {
+                if (err) {
+                  alert('Fetch user data: ' + err);
+                  return;
+                }
+                console.log('session validity: ' + session.isValid());
+
+                cognitoUser.getUserAttributes(function(err, result) {
+                  if (err) {
+                    console.log(err)
+                    alert(err);
+                    return;
+                  }
+                  resolve(result)
+                });
+              });
+            });
+          }
+
+          var temp_info = {};
+
+          var data = {
+            UserPoolId: cognitoUserPoolId,
+            ClientId: cognitoUserPoolClientId
+          }
+
+
+          var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+          var cognitoUser = userPool.getCurrentUser();
+          console.log(cognitoUser);
+
+          if (cognitoUser != null) {
+
+            var user_data = fetchUserData(cognitoUser)
+              .then(result => {
+
+                // transform user attribute data into a dict
+                for (var i = 0; i < result.length; i++) {
+                  let name = result[i].getName()
+                  let val = result[i].getValue()
+                  var obj = {
+                    [name]: val
+                  }
+                  $.extend(temp_info, obj)
+                }
+
+              }).then(res => {
+
+                  // *Note: cognito user attributes are not the same name as the v-model variables
+                  this.passport_number = temp_info['custom:passport_number']
+                  this.expiry_date = temp_info['custom:passport_exp_date']
+                  this.country_region = temp_info['custom:f_country_region']
+                  this.place_of_issue = temp_info['custom:passport_place_issue']
+                  this.city_state = temp_info['custom:f_city_state']
+                  this.address_1 = temp_info['custom:f_address_1']
+                  this.address_2 = temp_info['custom:f_address_2']
+
+              });
+          }
+        }  
       },
       created: function() {
-        this.getCountriesList()
-      },
-      beforeRouteLeave(to, from, next) {
-        //validates all fields
-        this.$validator.validateAll().then((result) => {
-          if (result) {
-            next();
-            return;
-          }
-        alert('Correct the errors!');
-        });
+        this.getCountriesList();
+        this.getUserData();
       }
     }
   
