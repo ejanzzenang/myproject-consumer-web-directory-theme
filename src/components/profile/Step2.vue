@@ -132,7 +132,7 @@
             <router-link to="step1" class="btn btn-link text-muted"><i class="fa-chevron-left fa mr-2"></i>Back</router-link>
           </div>
           <div class="col text-center text-sm-right">
-            <router-link to="step3"><button @click="updateUser" class="btn btn-primary px-3">Next step<i class="fa-chevron-right fa ml-2"></i></button></router-link>
+            <button @click="validate" class="btn btn-primary px-3">Next step<i class="fa-chevron-right fa ml-2"></i></button>
           </div>
         </div>
       </div>
@@ -248,17 +248,87 @@
             console.log(this.address_bora)
             console.log(this.place_vis_bef_bora)
             console.log(this.dest_after_bora)  
-        }
-      },
-      beforeRouteLeave(to, from, next) {
-        //validates all fields
-        this.$validator.validateAll().then((result) => {
-          if (result) {
-            next();
-            return;
+        },
+        validate: function() {
+          //validates all fields
+          this.$validator.validateAll().then((result) => {
+            if (result) {
+              // update user if successful
+              this.updateUser()
+
+              var navigate = this.$router;
+              navigate.push('step3')
+              return;
+            }
+            alert('Correct the errors!');
+          });
+        },
+        getUserData() {
+
+          function fetchUserData(cognitoUser) {
+            return new Promise(function(resolve, reject) {
+              cognitoUser.getSession(function(err, session) {
+                if (err) {
+                  alert('Fetch user data: ' + err);
+                  return;
+                }
+                console.log('session validity: ' + session.isValid());
+
+                cognitoUser.getUserAttributes(function(err, result) {
+                  if (err) {
+                    console.log(err)
+                    alert(err);
+                    return;
+                  }
+                  resolve(result)
+                });
+              });
+            });
           }
-        alert('Correct the errors!');
-        });
+
+          var temp_info = {};
+
+          var data = {
+            UserPoolId: cognitoUserPoolId,
+            ClientId: cognitoUserPoolClientId
+          }
+
+
+          var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+          var cognitoUser = userPool.getCurrentUser();
+          console.log(cognitoUser);
+
+          if (cognitoUser != null) {
+
+            var user_data = fetchUserData(cognitoUser)
+              .then(result => {
+
+                // transform user attribute data into a dict
+                for (var i = 0; i < result.length; i++) {
+                  let name = result[i].getName()
+                  let val = result[i].getValue()
+                  var obj = {
+                    [name]: val
+                  }
+                  $.extend(temp_info, obj)
+                }
+
+              }).then(res => {
+                  this.mode_of_travel = temp_info['custom:mode_of_travel']
+                  this.purpose_of_travel = temp_info['custom:purpose_of_travel']
+                  this.num_visits_bora = temp_info['custom:num_visits_bora']
+                  this.len_stay_bora = temp_info['custom:len_stay_bora']
+                  this.package_tour = temp_info['custom:package_tour']
+                  this.address_bora = temp_info['custom:address_bora']
+                  this.place_vis_bef_bora = temp_info['custom:place_vis_bef_bora']
+                  this.dest_after_bora = temp_info['custom:dest_after_bora']
+              })
+          }
+        }    
+      },
+      created(){
+        this.getUserData();
       }
+
     }
 </script>
