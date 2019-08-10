@@ -3,12 +3,14 @@
       <div class="container-fluid px-0">
         <div class="instagram-slider">
         <swiper v-bind:options="swiperOption">
-            <swiper-slide  v-for="photo in photos" v-bind:key="photo.image_url">
-              <img v-bind:src="photo.image_url" v-bind:alt='photo.image_url' class="img-fluid hover-scale">
+            <swiper-slide v-for="photo in photos" v-bind:key="photo.image_url">
+              <div>
+                <img v-bind:src="photo.image_url" v-bind:alt='photo.image_url' class="img-fluid hover-scale">
+              </div>
             </swiper-slide>
         </swiper>
         </div>
-    </div>
+      </div>
     </section>
 </template>
 

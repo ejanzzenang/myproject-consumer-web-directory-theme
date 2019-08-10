@@ -5,196 +5,194 @@
       <div class="navbar-margin"></div>
     </div>
     <router-view/>
-    <Footer v-if="!['signup', 'login'].includes(this.$route.name)"/>
+    <div>
+      <Footer v-if="!['signup', 'login'].includes(this.$route.name)"/>      
+    </div>
   </div>
 </template>
-
 <script>
+  import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
+  import * as AWS from 'aws-sdk';
+  import Navigation from '@/components/Navigation.vue'
+  import Footer from '@/components/Footer.vue'
+  import jwt_decode from 'jwt-decode';
+  import {CognitoAuth} from 'amazon-cognito-auth-js';
+  var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;
+  var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; 
+  var awsRegion = process.env.VUE_APP_AWS_REGION;
 
-import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
-import * as AWS from 'aws-sdk';
-import Navigation from '@/components/Navigation.vue'
-import Footer from '@/components/Footer.vue'
-import jwt_decode from 'jwt-decode';
-import {CognitoAuth} from 'amazon-cognito-auth-js';
-var cognitoUserPoolId = 'ap-southeast-1_AQoxu5EIr'; 
-var cognitoUserPoolClientId = '19mgjrlikq9nljgcfjo0k1ajja'; 
-var awsRegion = 'ap-southeast-1';
-
-export default {
-  name: 'home',
-  components: {
-    Navigation,
-    Footer
-  },
-  methods:{
-    refreshAWSCredentials() {
-      var userPoolId = localStorage.getItem('userPoolId');
-      var clientId = localStorage.getItem('clientId');
-      var identityPoolId = localStorage.getItem('identityPoolId');
-      var loginPrefix = localStorage.getItem('loginPrefix');
-
-      var poolData = {
-        UserPoolId: userPoolId, // Your user pool id here
-        ClientId: clientId // Your client id here
-      }
-      var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-      var cognitoUser = userPool.getCurrentUser();
-
-      if (cognitoUser != null) {
-        cognitoUser.getSession(function(err, result) {
-          if (result) {
-            console.log('You are now logged in.');
-            cognitoUser.refreshSession(result.getRefreshToken(), function(err, result) {
-
-              if (err) { //throw err;
-                console.log('In the err: ' + err);
-              } else {
-                localStorage.setItem('awsConfig', JSON.stringify(AWS.config));
-                var sessionTokens = {
-                  IdToken: result.getIdToken(),
-                  AccessToken: result.getAccessToken(),
-                  RefreshToken: result.getRefreshToken()
-                };
-                localStorage.setItem("sessionTokens", JSON.stringify(sessionTokens));
-              }
-            });
-          }
-        });
-      }
+  export default {
+    name: 'home',
+    components: {
+      Navigation,
+      Footer
     },
-    initializeStorage() {
-        var identityPoolId = cognitoUserPoolId;
-        var userPoolId = cognitoUserPoolId;
-        var clientId = cognitoUserPoolClientId;
-        var loginPrefix = 'cognito-idp.' + awsRegion + '.amazonaws.com/' + identityPoolId;
-
-        localStorage.setItem('identityPoolId', identityPoolId);
-        localStorage.setItem('userPoolId', userPoolId);
-        localStorage.setItem('clientId', clientId);
-        localStorage.setItem('loginPrefix', loginPrefix);
-    },
-    initCognitoSDK() {
-        var navigate = this.$router;
-        var store = this.$store;
-
-        //https://aws.amazon.com/blogs/mobile/understanding-amazon-cognito-user-pool-oauth-2-0-grants/
-        // Make sure to add openid to token scopes or else you'll never get an id token!!!
-        // Make sure to add 'aws.cognito.signin.user.admin' so your access token will be valid to access the cognito userpool api!! 
-
-        var authData = {
-            ClientId : cognitoUserPoolClientId, 
-            AppWebDomain : 'app-hetchly.auth.ap-southeast-1.amazoncognito.com',
-            TokenScopesArray : ['email', 'openid', 'aws.cognito.signin.user.admin'], 
-            RedirectUriSignIn : 'http://localhost:8080',
-            RedirectUriSignOut : 'http://localhost:8080',
-            IdentityProvider : 'Facebook', 
-            UserPoolId : cognitoUserPoolId, 
-          };
-
-        var auth = new CognitoAuth(authData)
-          
+    methods:{
+      refreshAWSCredentials() {
         var userPoolId = localStorage.getItem('userPoolId');
         var clientId = localStorage.getItem('clientId');
         var identityPoolId = localStorage.getItem('identityPoolId');
         var loginPrefix = localStorage.getItem('loginPrefix');
 
-        auth.userhandler = {
-          // * E.g.
-          onSuccess: function(result) {
+        var poolData = {
+          UserPoolId: userPoolId, // Your user pool id here
+          ClientId: clientId // Your client id here
+        }
+        var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+        var cognitoUser = userPool.getCurrentUser();
 
-            if(result.isValid()){
-                store.commit('login')
-                // window.location.replace('/');
-                alert("Sign in success!!")
-                console.log(result)
-                  // navigate.push('/')
-            } else {
+        if (cognitoUser != null) {
+          cognitoUser.getSession(function(err, result) {
+            if (result) {
+              console.log('You are now logged in.');
+              cognitoUser.refreshSession(result.getRefreshToken(), function(err, result) {
 
-                alert('session is invalid!!')
-
+                if (err) { //throw err;
+                  console.log('In the err: ' + err);
+                } else {
+                  localStorage.setItem('awsConfig', JSON.stringify(AWS.config));
+                  var sessionTokens = {
+                    IdToken: result.getIdToken(),
+                    AccessToken: result.getAccessToken(),
+                    RefreshToken: result.getRefreshToken()
+                  };
+                  localStorage.setItem("sessionTokens", JSON.stringify(sessionTokens));
+                }
+              });
             }
+          });
+        }
+      },
+      initializeStorage() {
+          var identityPoolId = cognitoUserPoolId;
+          var userPoolId = cognitoUserPoolId;
+          var clientId = cognitoUserPoolClientId;
+          var loginPrefix = 'cognito-idp.' + awsRegion + '.amazonaws.com/' + identityPoolId;
 
-            var userPoolId = localStorage.getItem('userPoolId');
-            var clientId = localStorage.getItem('clientId');
-            var identityPoolId = localStorage.getItem('identityPoolId');
-            var loginPrefix = localStorage.getItem('loginPrefix');
+          localStorage.setItem('identityPoolId', identityPoolId);
+          localStorage.setItem('userPoolId', userPoolId);
+          localStorage.setItem('clientId', clientId);
+          localStorage.setItem('loginPrefix', loginPrefix);
+      },
+      initCognitoSDK() {
+          var navigate = this.$router;
+          var store = this.$store;
 
-            var data = { 
+          //https://aws.amazon.com/blogs/mobile/understanding-amazon-cognito-user-pool-oauth-2-0-grants/
+          // Make sure to add openid to token scopes or else you'll never get an id token!!!
+          // Make sure to add 'aws.cognito.signin.user.admin' so your access token will be valid to access the cognito userpool api!! 
+
+          var authData = {
+              ClientId : cognitoUserPoolClientId, 
+              AppWebDomain : 'app-hetchly.auth.ap-southeast-1.amazoncognito.com',
+              TokenScopesArray : ['email', 'openid', 'aws.cognito.signin.user.admin'], 
+              RedirectUriSignIn : 'http://localhost:8080',
+              RedirectUriSignOut : 'http://localhost:8080',
+              IdentityProvider : 'Facebook', 
+              UserPoolId : cognitoUserPoolId, 
+            };
+
+          var auth = new CognitoAuth(authData)
+            
+          var userPoolId = localStorage.getItem('userPoolId');
+          var clientId = localStorage.getItem('clientId');
+          var identityPoolId = localStorage.getItem('identityPoolId');
+          var loginPrefix = localStorage.getItem('loginPrefix');
+
+          auth.userhandler = {
+            // * E.g.
+            onSuccess: function(result) {
+
+              if(result.isValid()){
+
+                  store.commit('login');
+                  alert("Sign in success!!");
+                  console.log(result);
+
+              } else {
+
+                  alert('session is invalid!!');
+
+              }
+
+              var userPoolId = localStorage.getItem('userPoolId');
+              var clientId = localStorage.getItem('clientId');
+              var identityPoolId = localStorage.getItem('identityPoolId');
+              var loginPrefix = localStorage.getItem('loginPrefix');
+
+              var data = { 
                 UserPoolId : cognitoUserPoolId,
                 ClientId : cognitoUserPoolClientId
-            };
+              };
 
-            console.log('access token \n' + result.getAccessToken().getJwtToken());
+              console.log('access token \n' + result.getAccessToken().getJwtToken());
 
-            var sessionTokens = {
-              IdToken: result.getIdToken(),
-              AccessToken: result.getAccessToken(),
-              RefreshToken: result.getRefreshToken()
-            };
-            
-            console.log("Session tokens: ")
-            console.log(sessionTokens)
+              var sessionTokens = {
+                IdToken: result.getIdToken(),
+                AccessToken: result.getAccessToken(),
+                RefreshToken: result.getRefreshToken()
+              };
+              
+              console.log("Session tokens: ")
+              console.log(sessionTokens)
 
-            localStorage.setItem('sessionTokens', JSON.stringify(sessionTokens));
+              localStorage.setItem('sessionTokens', JSON.stringify(sessionTokens));
 
-            //POTENTIAL: Region needs to be set if not already set previously elsewhere.
-            AWS.config.region = awsRegion;
-            AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-              IdentityPoolId: identityPoolId, // your identity pool id here
-              Logins: {
-                // Change the key below according to the specific region your user pool is in.
-                loginPrefix: sessionTokens.IdToken.jwtToken
-              }
-            });
-            localStorage.setItem('awsConfig', JSON.stringify(AWS.config));
+              //POTENTIAL: Region needs to be set if not already set previously elsewhere.
+              AWS.config.region = awsRegion;
+              AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+                IdentityPoolId: identityPoolId, // your identity pool id here
+                Logins: {
+                  // Change the key below according to the specific region your user pool is in.
+                  loginPrefix: sessionTokens.IdToken.jwtToken
+                }
+              });
+              localStorage.setItem('awsConfig', JSON.stringify(AWS.config));
 
-          },
-          onFailure: function(err) {
-            alert("Error on facebook auth handler: " + err);
-          }          
-        }
+            },
+            onFailure: function(err) {
 
-        auth.useCodeGrantFlow();
-
-        return auth
-    },
-    injectSvgSprite(path) {
-          var ajax = new XMLHttpRequest();
-          ajax.open("GET", path, true);
-          ajax.send();
-          ajax.onload = function(e) {
-            var div = document.createElement("div");
-            div.className = 'd-none';
-            div.innerHTML = ajax.responseText;
-            document.body.insertBefore(div, document.body.childNodes[0]);
+            }          
           }
-    }     
-  },
-  created(){
-    this.injectSvgSprite('https://demo.bootstrapious.com/directory/1-1/icons/orion-svg-sprite.svg');
 
-    // initialize login storage
-    this.initializeStorage()
-    console.log("Initialized local storage in App.vue")
+          auth.useCodeGrantFlow();
 
-    this.$store.state.auth = this.initCognitoSDK()
+          return auth
+      },
+      injectSvgSprite(path) {
+            var ajax = new XMLHttpRequest();
+            ajax.open("GET", path, true);
+            ajax.send();
+            ajax.onload = function(e) {
+              var div = document.createElement("div");
+              div.className = 'd-none';
+              div.innerHTML = ajax.responseText;
+              document.body.insertBefore(div, document.body.childNodes[0]);
+            }
+      }     
+    },
+    created(){
+      this.injectSvgSprite('https://demo.bootstrapious.com/directory/1-1/icons/orion-svg-sprite.svg');
 
-    var curUrl = window.location.href;
-    this.$store.state.auth.parseCognitoWebResponse(curUrl);
+      // initialize login storage
+      this.initializeStorage()
+      console.log("Initialized local storage in App.vue")
 
-    var configString = localStorage.getItem('awsConfig');
-    var config = JSON.parse(configString);
+      this.$store.state.auth = this.initCognitoSDK()
 
-    if (config != null) {
-      this.refreshAWSCredentials();
+      var curUrl = window.location.href;
+      this.$store.state.auth.parseCognitoWebResponse(curUrl);
+
+      var configString = localStorage.getItem('awsConfig');
+      var config = JSON.parse(configString);
+
+      if (config != null) {
+        this.refreshAWSCredentials();
+      }
     }
-
   }
-}
-
 </script>
-<style type="text/css">
+<style scoped>
   .navbar-margin {
     margin-bottom: 72px;
   }
@@ -203,6 +201,5 @@ export default {
   @import "https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700";
   @import "https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700";
   @import "https://use.fontawesome.com/releases/v5.8.1/css/all.css";
-
 </style>
 
