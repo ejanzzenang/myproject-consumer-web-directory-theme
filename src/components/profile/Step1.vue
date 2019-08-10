@@ -163,7 +163,10 @@
   import * as AWS from 'aws-sdk';
   import VSelect from '@/components/custom/vue-bootstrap-select.vue'
   import moment from 'moment'
-  
+  var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;
+  var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; 
+  var awsRegion = process.env.VUE_APP_AWS_REGION;
+
   export default {
       name: 'profile-step1',
       components: {
@@ -239,10 +242,7 @@
                 
             input_list.forEach(function(element){
                 attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(element));
-            });
-  
-            var cognitoUserPoolId = 'ap-southeast-1_AQoxu5EIr'; 
-            var cognitoUserPoolClientId = '19mgjrlikq9nljgcfjo0k1ajja'; 
+            }); 
   
             var data = { 
               UserPoolId : cognitoUserPoolId,

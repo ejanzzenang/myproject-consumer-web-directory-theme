@@ -6,7 +6,9 @@
         <h1 class="hero-heading">Enter the code sent to the email you provided. Then, login again on the home page.</h1>
         <div class="form-group">
           <label for="confirmCode">Confirmation Code:</label>
-          <input type="number" class="form-control" id="confirmCode" placeholder="Enter Confirmation Code" name="confirmCode" v-model="confirmCode">
+          <div>
+            <input type="number" class="form-control" id="confirmCode" placeholder="Enter Confirmation Code" name="confirmCode" v-model="confirmCode">
+          </div>
         </div>
         <button @click="confirmUser" class="btn btn-primary">Confirm</button>
       </div>
@@ -20,6 +22,10 @@
 </style>
 <script>
   import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
+  var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;
+  var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; 
+  var awsRegion = process.env.VUE_APP_AWS_REGION;
+
    	export default {
      name: 'confirm',
      data() {
@@ -29,9 +35,7 @@
      },
      methods: {
      	confirmUser: function(){
-        var cognitoUserPoolId = 'ap-southeast-1_AQoxu5EIr'; 
-        var cognitoUserPoolClientId = '19mgjrlikq9nljgcfjo0k1ajja'; 
-  
+      var store = this.$store
   		var poolData = {
   			UserPoolId : cognitoUserPoolId,
   			ClientId : cognitoUserPoolClientId
@@ -52,6 +56,7 @@
   			    return;
   			}
   			alert('You have successfully confirmed.')
+        store.commit('login')
   			window.location.replace('/');
   		});
   

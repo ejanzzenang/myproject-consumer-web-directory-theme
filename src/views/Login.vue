@@ -50,9 +50,9 @@
 <script>
   import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
   import * as AWS from 'aws-sdk';
-  var cognitoUserPoolId = 'ap-southeast-1_AQoxu5EIr'; 
-  var cognitoUserPoolClientId = '19mgjrlikq9nljgcfjo0k1ajja'; 
-  var awsRegion = 'ap-southeast-1';
+  var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;
+  var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; 
+  var awsRegion = process.env.VUE_APP_AWS_REGION;
 
   export default {
     name: 'login',
@@ -71,7 +71,7 @@
         function loggedInDisplay() {
           //changes the value of store to loggedIn
           store.commit('login')
-          navigate.push('/')
+          window.location.replace('/');
         }
 
         var userPoolId = localStorage.getItem('userPoolId');

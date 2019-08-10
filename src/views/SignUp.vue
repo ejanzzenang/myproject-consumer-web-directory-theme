@@ -49,8 +49,8 @@
 <script>
   import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
   import {CognitoAuth} from 'amazon-cognito-auth-js';
-  var cognitoUserPoolId = 'ap-southeast-1_AQoxu5EIr'; 
-  var cognitoUserPoolClientId = '19mgjrlikq9nljgcfjo0k1ajja'; 
+  var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;
+  var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID;
 
   export default {
     name: 'signup',
@@ -137,7 +137,7 @@
                 }
                 localStorage.setItem('email', email);
                 alert("Successfully signed up!!")
-                navigate.push('/confirm');
+                window.location.replace('/confirm');
             });
           } else {
             alert('Passwords do not match.')

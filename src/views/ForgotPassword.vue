@@ -71,8 +71,10 @@
 
 <script>
 	import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
-	var cognitoUserPoolId = 'ap-southeast-1_AQoxu5EIr'; 
-	var cognitoUserPoolClientId = '19mgjrlikq9nljgcfjo0k1ajja';
+	  var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;
+	  var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; 
+	  var awsRegion = process.env.VUE_APP_AWS_REGION;
+
   	export default {
     name: 'forgotPassword',
     data() {
