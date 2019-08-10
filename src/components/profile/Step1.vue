@@ -150,7 +150,7 @@
               <router-link to="step0" class="btn btn-link text-muted"><i class="fa-chevron-left fa mr-2"></i>Back</router-link>
             </div>
             <div class="col text-center text-sm-right">
-              <router-link to="step2"><button class="btn btn-primary px-3" @click="updateUser">Next step<i class="fa-chevron-right fa ml-2"></i></button></router-link>
+              <button class="btn btn-primary px-3" @click="validate">Next step<i class="fa-chevron-right fa ml-2"></i></button>
             </div>
           </div>
 
@@ -283,7 +283,6 @@
             console.log(this.occupation)
             console.log(this.locality)
             console.log(this.status)
-  
         },
         getCountriesList: function() {
           this.$http.get('https://restcountries.eu/rest/v1/all').then(result=> {
@@ -298,19 +297,88 @@
   
           })
         },
+        validate: function() {
+          //validates all fields
+          this.$validator.validateAll().then((result) => {
+            if (result) {
+              // update user if successful
+              this.updateUser()
+
+              var navigate = this.$router;
+              navigate.push('step2')
+              return;
+            }
+            alert('Correct the errors!');
+          });
+        },
+        getUserData() {
+
+          function fetchUserData(cognitoUser) {
+            return new Promise(function(resolve, reject) {
+              cognitoUser.getSession(function(err, session) {
+                if (err) {
+                  alert('Fetch user data: ' + err);
+                  return;
+                }
+                console.log('session validity: ' + session.isValid());
+
+                cognitoUser.getUserAttributes(function(err, result) {
+                  if (err) {
+                    console.log(err)
+                    alert(err);
+                    return;
+                  }
+                  resolve(result)
+                });
+              });
+            });
+          }
+
+          var temp_info = {};
+
+          var data = {
+            UserPoolId: cognitoUserPoolId,
+            ClientId: cognitoUserPoolClientId
+          }
+
+
+          var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+          var cognitoUser = userPool.getCurrentUser();
+          console.log(cognitoUser);
+
+          if (cognitoUser != null) {
+
+            var user_data = fetchUserData(cognitoUser)
+              .then(result => {
+
+                // transform user attribute data into a dict
+                for (var i = 0; i < result.length; i++) {
+                  let name = result[i].getName()
+                  let val = result[i].getValue()
+                  var obj = {
+                    [name]: val
+                  }
+                  $.extend(temp_info, obj)
+                }
+
+              }).then(res => {
+                  this.first_name = temp_info['given_name']
+                  this.last_name = temp_info['family_name']
+                  this.middle_name = temp_info['middle_name']
+                  this.gender = temp_info['gender']
+                  this.birth_date = temp_info['custom:birth_date']
+                  this.country_of_birth = temp_info['custom:country_of_birth']
+                  this.country_of_residence = temp_info['custom:country_of_residence']
+                  this.occupation = temp_info['custom:occupation']
+                  this.locality = temp_info['custom:locality']
+                  this.status = temp_info['custom:status']
+              })
+          }
+        }  
       },
       created: function() {
         this.getCountriesList()
-      },
-      beforeRouteLeave(to, from, next) {
-        //validates all fields
-        this.$validator.validateAll().then((result) => {
-          if (result) {
-            next();
-            return;
-          }
-        alert('Correct the errors!');
-        });
+        this.getUserData()
       }
     }
 </script>
