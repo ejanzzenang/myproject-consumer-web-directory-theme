@@ -28,7 +28,7 @@
               </div>
             </div>
             <p class="mb-5 mb-lg-0">
-              <router-link to="/profile/step1"><button class="btn btn-primary px-3">Next step<i class="fa-chevron-right fa ml-2"></i></button></router-link>
+              <button @click="validate" class="btn btn-primary px-3">Next step<i class="fa-chevron-right fa ml-2"></i></button>
             </p>
           </div>
           <div class="col-lg-5 ml-auto d-flex align-items-center"><img src="../../assets/img/illustration/undraw_celebration_0jvk.svg" alt="" style="width: 400px;" class="img-fluid"></div>
@@ -48,18 +48,20 @@
          }
         },
         methods: {
-         
-        },
-        beforeRouteLeave(to, from, next) {
+           validate: function() {
           //validates all fields
+
             this.$validator.validateAll().then((result) => {
-             if (result) {
-                next();
-               return;
-             }
-             alert('Correct the errors!');
-           });
-      }
+              if (result) {
+                var navigate = this.$router;
+                navigate.push('step1')
+                return;
+              }
+              alert('Correct the errors!');
+            });
+          }     
+        },
+       
     }
       
 </script>
