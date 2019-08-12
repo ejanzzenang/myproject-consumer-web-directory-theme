@@ -132,7 +132,7 @@
                   </div>
                 </div>
                 <hr>
-                <div class="row">
+                <div v-if="info['custom:is_filipino_resident'] != 'True'" class="row">
                   <h5>Tourist's Information</h5>
                   <div class="profile-user-info">
                     <div class="profile-info-row">
