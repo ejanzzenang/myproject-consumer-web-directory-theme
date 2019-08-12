@@ -86,8 +86,8 @@
               ClientId : cognitoUserPoolClientId, 
               AppWebDomain : 'app-hetchly.auth.ap-southeast-1.amazoncognito.com',
               TokenScopesArray : ['email', 'openid', 'aws.cognito.signin.user.admin'], 
-              RedirectUriSignIn : 'http://localhost:8080',
-              RedirectUriSignOut : 'http://localhost:8080',
+              RedirectUriSignIn : process.env.VUE_APP_REDIRECT_SIGNIN_URL,
+              RedirectUriSignOut : process.env.VUE_APP_REDIRECT_SIGNOUT_URL,
               IdentityProvider : 'Facebook', 
               UserPoolId : cognitoUserPoolId, 
             };
