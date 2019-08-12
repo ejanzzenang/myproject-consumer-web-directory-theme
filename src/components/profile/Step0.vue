@@ -14,11 +14,11 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="residency_0" name="residency" class="custom-control-input" v-validate="'required'">
+                    <input v-model="is_filipino_resident" type="radio" id="residency_0" name="residency" class="custom-control-input" v-validate="'required'" value="True">
                     <label for="residency_0" class="custom-control-label">I am a Philippine Resident</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input type="radio" id="residency_1" name="residency" class="custom-control-input" v-validate="'required'">
+                    <input v-model="is_filipino_resident" type="radio" id="residency_1" name="residency" class="custom-control-input" v-validate="'required'" value="False">
                     <label for="residency_1" class="custom-control-label">I am a Non-Philippine Resident</label>
                     <div v-show="errors.has('residency')" class="error" role="alert">
                       {{"* " + errors.first('residency') }}
@@ -38,28 +38,77 @@
   </div>
 </template>
 <script>
+  import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
+  var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;
+  var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; 
+  var awsRegion = process.env.VUE_APP_AWS_REGION;
+
   export default {
       name: 'profile-step0',
         components: {
         },
         data() {
         return {
-          
+          is_filipino_resident: ''
          }
         },
         methods: {
-           validate: function() {
+          validate: function() {
           //validates all fields
-
             this.$validator.validateAll().then((result) => {
               if (result) {
+                this.updateUser();
+
                 var navigate = this.$router;
                 navigate.push('step1')
                 return;
               }
               alert('Correct the errors!');
             });
-          }     
+          },
+          updateUser: function(){
+            var attributeList = []  
+  
+            var input_list = 
+              [
+                {
+                   Name : 'custom:is_filipino_resident',
+                   Value : this.is_filipino_resident
+                }
+              ]
+                
+            input_list.forEach(function(element){
+                attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(element));
+            }); 
+  
+            var data = { 
+              UserPoolId : cognitoUserPoolId,
+              ClientId : cognitoUserPoolClientId
+            };
+  
+            var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+            var cognitoUser = userPool.getCurrentUser();
+  
+  
+            if (cognitoUser != null) {
+                cognitoUser.getSession(function(err, session) {
+                    if (err) {
+                        alert(err);
+                        return;
+                    }
+                    console.log('session validity: ' + session.isValid());
+                });
+            }
+            
+            cognitoUser.updateAttributes(attributeList, function(err, result) {
+                if (err) {
+                    console.log(err);
+                    alert(err.message);
+                    return;
+                }
+                console.log('call result: ' + result);
+            });
+        },     
         },
        
     }
