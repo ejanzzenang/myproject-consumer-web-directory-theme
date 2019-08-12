@@ -160,7 +160,8 @@
           package_tour: '',
           address_bora: '',
           place_vis_bef_bora: '',
-          dest_after_bora: ''
+          dest_after_bora: '',
+          is_filipino_resident: ''
         }
       },
       methods: {
@@ -257,7 +258,12 @@
               this.updateUser()
 
               var navigate = this.$router;
-              navigate.push('step3')
+              if(this.is_filipino_resident === 'True'){
+                navigate.push('step4')
+              } else {
+                navigate.push('step3')
+              }
+
               return;
             }
             alert('Correct the errors!');
@@ -322,6 +328,7 @@
                   this.address_bora = temp_info['custom:address_bora']
                   this.place_vis_bef_bora = temp_info['custom:place_vis_bef_bora']
                   this.dest_after_bora = temp_info['custom:dest_after_bora']
+                  this.is_filipino_resident = temp_info['custom:is_filipino_resident']
               })
           }
         }    
