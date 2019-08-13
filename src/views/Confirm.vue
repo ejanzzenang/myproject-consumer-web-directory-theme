@@ -26,46 +26,40 @@
   var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; 
   var awsRegion = process.env.VUE_APP_AWS_REGION;
 
-   	export default {
-     name: 'confirm',
-     data() {
-       return { 
-       	confirmCode: ''
-       }
-     },
-     methods: {
-     	confirmUser: function(){
-      var store = this.$store
-  		var poolData = {
-  			UserPoolId : cognitoUserPoolId,
-  			ClientId : cognitoUserPoolClientId
-  		}; 
-  
-  		var userName = localStorage.getItem('email');
-  
-  		var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-  		var userData = {
-  			Username : userName,
-  			Pool : userPool
-  		};
-  
-  		var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-  		cognitoUser.confirmRegistration(this.confirmCode, true, function(err, result) {
-  			if (err) {
-  			    alert(err.message);
-  			    return;
-  			}
-  			alert('You have successfully confirmed.')
-        store.commit('login')
-  			window.location.replace('/');
-  		});
-  
-     	}
-     },
-     mounted() {
-       
-   		
-   	}
+ 	export default {
+    name: 'confirm',
+    data() {
+      return { 
+       	  confirmCode: ''
+        }
+      },
+      methods: {
+     	  confirmUser: function(){
+        var store = this.$store
+    		var poolData = {
+    			UserPoolId : cognitoUserPoolId,
+    			ClientId : cognitoUserPoolClientId
+    		}; 
+    
+    		var userName = localStorage.getItem('email');
+    
+    		var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+    		var userData = {
+    			Username : userName,
+    			Pool : userPool
+    		};
+    
+    		var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+    		cognitoUser.confirmRegistration(this.confirmCode, true, function(err, result) {
+    			if (err) {
+    			    alert(err.message);
+    			    return;
+    			}
+    			alert('You have successfully confirmed.')
+    			window.location.replace('/');
+    		});
+      }
+    }
   }
   
   
