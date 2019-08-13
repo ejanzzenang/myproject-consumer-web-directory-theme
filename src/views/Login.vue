@@ -66,7 +66,10 @@
       loginUser() {
 
         var navigate = this.$router;
-        var store = this.$store
+        var store = this.$store;
+        var email = this.email;
+        var password = this.password;
+
 
         function loggedInDisplay() {
           //changes the value of store to loggedIn
@@ -85,12 +88,9 @@
         };
         var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
-        var email = document.getElementById('loginUsername').value;
-        var pwd = document.getElementById('loginPassword').value;
-
         var authenticationData = {
           'UserName': email,
-          'Password': pwd
+          'Password': password
         }
 
         var userData = {
@@ -132,7 +132,21 @@
             loggedInDisplay();
           },
           onFailure: function(err) {
+            console.log(err);
             alert(err.message);
+
+            if(err.code === "UserNotConfirmedException"){
+              // perform resend confirmation
+              cognitoUser.resendConfirmationCode(function(err, result) {
+                if (err) {
+                    alert(err);
+                    return;
+                   }
+
+                   alert("confirmation resent!")
+                   window.location.replace('/confirm');
+              });
+            }
           },
 
         });
