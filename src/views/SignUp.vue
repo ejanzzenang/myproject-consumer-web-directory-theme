@@ -9,7 +9,7 @@
             </div>
               <div class="form-group">
                 <label for="loginUsername" class="form-label">Email Address</label>
-                <input name="loginUsername" id="loginUsername" type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email" class="form-control" v-model="email_address">
+                <input name="loginUsername" id="loginUsername" type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email" class="form-control" v-model="email">
               </div>
               <div class="form-group">
                 <label for="loginPassword" class="form-label">Password</label>
@@ -56,13 +56,39 @@
     name: 'signup',
     data(){
       return {
-        email_address: '',
+        email: '',
         password: '',
         confirmPw: ''    
       }
     },
     methods: {
       signUpUser: function(){
+
+        var email_address = this.email;
+        var password = this.password;
+
+        function signUp(userPool, attributeList){
+
+          return new Promise(function(resolve, reject){
+            userPool.signUp(email_address, password, attributeList, null, function(err, result){
+              
+              if (err) {
+                  console.log(err.message);
+                  alert(err.message);
+                  return;
+              }
+
+              localStorage.setItem('email', email_address);
+              alert("Successfully signed up!!")
+              
+              resolve(result);
+
+              });
+
+          });
+
+        }
+
         var navigate = this.$router;
 
         var poolData = {
@@ -76,7 +102,7 @@
         
         var dataEmail = {
             Name : 'email',
-            Value : this.email_address
+            Value : this.email
         };
 
         var custom_fields = [
@@ -123,33 +149,93 @@
           });
 
           if (this.password === this.confirmPw) {
-            console.log(this.email_address)
-            console.log(this.password)
+   
+            signUp(userPool, attributeList).then(res =>{
 
-            var email = this.email_address;
-            var password = this.password;
-
-            userPool.signUp(email, password, attributeList, null, function(err, result){
-                if (err) {
-                    console.log(err.message)
-                    alert(err.message);
-                    return;
-                }
-                localStorage.setItem('email', email);
-                alert("Successfully signed up!!")
-                window.location.replace('/confirm');
+              window.location.replace('/confirm');
+            
             });
+
           } else {
             alert('Passwords do not match.')
           }
       },
       signUpFacebook: function(){
-        
+
         var store = this.$store;
         alert("works!!")
         store.commit('login')
         this.$store.state.auth.getSession()
-      }
+      
+      },
+      loginUser() {
+
+        var navigate = this.$router;
+        var store = this.$store
+
+        var userPoolId = localStorage.getItem('userPoolId');
+        var clientId = localStorage.getItem('clientId');
+        var identityPoolId = localStorage.getItem('identityPoolId');
+        var loginPrefix = localStorage.getItem('loginPrefix');
+
+        var poolData = {
+          UserPoolId: userPoolId, // Your user pool id here
+          ClientId: clientId // Your client id here
+        };
+        var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+
+        var authenticationData = {
+          'UserName': this.email,
+          'Password': this.password
+        }
+
+        var userData = {
+          Username: this.email,
+          Pool: userPool
+        };
+
+        var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+        
+        var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+        cognitoUser.authenticateUser(authenticationDetails, {
+          onSuccess: function(result) {
+            
+            console.log('access token \n' + result.getAccessToken().getJwtToken());
+
+            var sessionTokens = {
+              IdToken: result.getIdToken(),
+              AccessToken: result.getAccessToken(),
+              RefreshToken: result.getRefreshToken()
+            };
+            
+            console.log("Session tokens: ")
+            console.log(sessionTokens)
+
+            localStorage.setItem('sessionTokens', JSON.stringify(sessionTokens));
+
+            //POTENTIAL: Region needs to be set if not already set previously elsewhere.
+            AWS.config.region = awsRegion;
+            AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+              IdentityPoolId: identityPoolId, // your identity pool id here
+              Logins: {
+                // Change the key below according to the specific region your user pool is in.
+                loginPrefix: sessionTokens.IdToken.jwtToken
+              }
+            });
+            localStorage.setItem('awsConfig', JSON.stringify(AWS.config));
+            localStorage.setItem('email', this.email);
+
+            store.commit('login')
+          },
+          onFailure: function(err) {
+
+
+            alert("Login failure: " + err.message);
+          },
+
+        });
+      },
+
     }
   }
 </script>
