@@ -152,7 +152,10 @@
    
             signUp(userPool, attributeList).then(res =>{
 
-              window.location.replace('/confirm');
+              console.log(res);
+
+              navigate.push({name: 'confirm', params: { username: this.email, password: this.password }})
+              // window.location.replace('/confirm');
             
             });
 
@@ -167,75 +170,7 @@
         store.commit('login')
         this.$store.state.auth.getSession()
       
-      },
-      loginUser() {
-
-        var navigate = this.$router;
-        var store = this.$store
-
-        var userPoolId = localStorage.getItem('userPoolId');
-        var clientId = localStorage.getItem('clientId');
-        var identityPoolId = localStorage.getItem('identityPoolId');
-        var loginPrefix = localStorage.getItem('loginPrefix');
-
-        var poolData = {
-          UserPoolId: userPoolId, // Your user pool id here
-          ClientId: clientId // Your client id here
-        };
-        var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-
-        var authenticationData = {
-          'UserName': this.email,
-          'Password': this.password
-        }
-
-        var userData = {
-          Username: this.email,
-          Pool: userPool
-        };
-
-        var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
-        
-        var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-        cognitoUser.authenticateUser(authenticationDetails, {
-          onSuccess: function(result) {
-            
-            console.log('access token \n' + result.getAccessToken().getJwtToken());
-
-            var sessionTokens = {
-              IdToken: result.getIdToken(),
-              AccessToken: result.getAccessToken(),
-              RefreshToken: result.getRefreshToken()
-            };
-            
-            console.log("Session tokens: ")
-            console.log(sessionTokens)
-
-            localStorage.setItem('sessionTokens', JSON.stringify(sessionTokens));
-
-            //POTENTIAL: Region needs to be set if not already set previously elsewhere.
-            AWS.config.region = awsRegion;
-            AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-              IdentityPoolId: identityPoolId, // your identity pool id here
-              Logins: {
-                // Change the key below according to the specific region your user pool is in.
-                loginPrefix: sessionTokens.IdToken.jwtToken
-              }
-            });
-            localStorage.setItem('awsConfig', JSON.stringify(AWS.config));
-            localStorage.setItem('email', this.email);
-
-            store.commit('login')
-          },
-          onFailure: function(err) {
-
-
-            alert("Login failure: " + err.message);
-          },
-
-        });
-      },
-
+      }
     }
   }
 </script>
