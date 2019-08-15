@@ -54,7 +54,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="birthdate" class="form-label">Birth Date *</label>
+                    <label for="birth_date" class="form-label">Birth Date *</label>
                     <div class="datepicker-container datepicker-container-right">
                       <date-range-picker 
                       name='birth_date' 

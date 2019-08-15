@@ -27,20 +27,20 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="form-group">
-                  <label for="birthdate" class="form-label">Expiry Date *</label>
-                  <div class="datepicker-container datepicker-container-right">
-                    <date-range-picker 
-                    v-model="expiry_date" 
-                    :options="options" 
-                    id="expiry_date" 
-                    placeholder="Choose your dates"
-                    name='expiry_date' 
-                    class="form-control" 
-                    v-validate:expiry_date="'required'"/>
-                    <div v-show="errors.has('expiry_date')" class="error">{{ errors.first('expiry_date') }}</div>
+                  <div class="form-group">
+                    <label for="expiry_date" class="form-label">Expiry Date *</label>
+                    <div class="datepicker-container datepicker-container-right">
+                      <date-range-picker 
+                      name='expiry_date' 
+                      v-model="expiry_date" 
+                      :options="options" 
+                      id="expiry_date" 
+                      placeholder="Choose your dates" 
+                      class="form-control"
+                      v-validate:expiry_date="'required'"/>
+                      <div v-show="errors.has('expiry_date')" class="error">{{ errors.first('expiry_date') }}</div>
+                    </div>
                   </div>
-                </div>
               </div>
             </div>
           </div>
@@ -113,8 +113,8 @@
       },
       data() {
         return {
-          passport_number: '',
           expiry_date: '06/10/2019',
+          passport_number: '',
           country_region: '',
           place_of_issue: '',
           city_state: '',
