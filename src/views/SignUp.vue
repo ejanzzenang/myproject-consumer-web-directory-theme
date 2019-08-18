@@ -166,9 +166,9 @@
       signUpFacebook: function(){
 
         var store = this.$store;
-        alert("works!!")
-        store.commit('login')
-        this.$store.state.auth.getSession()
+        alert("works!!");
+        store.commit('login');
+        this.$store.state.auth.getSession();
       
       }
     }
