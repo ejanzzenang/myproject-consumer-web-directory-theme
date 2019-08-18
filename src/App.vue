@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="show-nav" v-if="!['signup', 'login'].includes(this.$route.name)">
+    <div v-if="!['signup', 'login'].includes(this.$route.name)">
       <Navigation/>
       <div class="navbar-margin"></div>
     </div>
@@ -15,7 +15,6 @@
   import * as AWS from 'aws-sdk';
   import Navigation from '@/components/Navigation.vue'
   import Footer from '@/components/Footer.vue'
-  import jwt_decode from 'jwt-decode';
   import {CognitoAuth} from 'amazon-cognito-auth-js';
   var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;
   var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; 
@@ -26,6 +25,11 @@
     components: {
       Navigation,
       Footer
+    },
+    data(){
+      return {
+        loggedIn: this.$store.state.loggedIn 
+      }
     },
     methods:{
       refreshAWSCredentials() {
@@ -104,11 +108,8 @@
             onSuccess: function(result) {
 
               if(result.isValid()){
-
-                  store.commit('login');
                   alert("Sign in success!!");
-                  console.log(result);
-
+                  store.commit('login');   
               } else {
 
                   alert('session is invalid!!');
@@ -151,7 +152,7 @@
 
             },
             onFailure: function(err) {
-
+              alert(err);
             }          
           }
 
@@ -160,6 +161,7 @@
           return auth
       },
       injectSvgSprite(path) {
+
             var ajax = new XMLHttpRequest();
             ajax.open("GET", path, true);
             ajax.send();
@@ -172,6 +174,7 @@
       }     
     },
     created(){
+
       this.injectSvgSprite('https://demo.bootstrapious.com/directory/1-1/icons/orion-svg-sprite.svg');
 
       // initialize login storage
