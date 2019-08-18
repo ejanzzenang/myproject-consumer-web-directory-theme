@@ -11,7 +11,7 @@
         <div class="row">
           <swiper v-bind:options="swiperOption" class="guides-slider">
               <swiper-slide class="h-auto px-2" v-for="city in cities" v-bind:key="city.name">
-                <div class="card card-poster gradient-overlay mb-4 mb-lg-0"><a href="category.html" class="tile-link"></a>
+                <div class="card card-poster gradient-overlay mb-4 mb-lg-0"><a v-bind:href="city.url_route" class="tile-link"></a>
                   <img v-bind:src="city.image_url" v-bind:alt="city.name" class="bg-image">
                   <!-- <img src="../assets/img/photo/coron.jpg" class="bg-image"> -->
                   <div class="card-body overlay-content">
@@ -41,27 +41,32 @@
           {
             "name" : "Boracay",
             "image_url" :  require('../assets/img/photo/boracay.jpg'),
-            "description" : "Boracay is .." 
+            "description" : "Boracay is ..",
+            "url_route": "/products" 
           },
           {
             "name" : "Panglaw",
             "image_url" : require('../assets/img/photo/panglaw.jpg'),
-            "description" : "Panglaw is .." 
+            "description" : "Panglaw is ..",
+            "url_route": "#"  
           },
           {
             "name" : "Palawan",
             "image_url" : require('../assets/img/photo/coron.jpg'),
-            "description" : "Palawan is .." 
+            "description" : "Palawan is ..",
+            "url_route": "#"  
           },
           {
             "name" : "Batanes",
             "image_url" : require('../assets/img/photo/batanes.jpg'),
-            "description" : "Batanes is .." 
+            "description" : "Batanes is ..",
+            "url_route": "#"  
           },
           {
             "name" : "Bohol",
             "image_url" : require('../assets/img/photo/bohol.jpg'),
-            "description" : "Bohol is .." 
+            "description" : "Bohol is ..",
+            "url_route": "#" 
           }
         ]
       }
