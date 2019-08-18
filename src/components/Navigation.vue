@@ -15,9 +15,9 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item"><router-link id="homeDropdownMenuLink" to="/" class="nav-link">Home</router-link></li>
             <li class="nav-item"><router-link id="logInButton" to="/products" class="nav-link">Activities</router-link></li>
-            <li class="nav-item"><router-link id="logInButton" to="/profile/1" class="nav-link" v-if="loggedIn">My Profile</router-link></li>
+            <li class="nav-item" v-if="loggedIn"><router-link id="logInButton" to="/profile/1" class="nav-link">My Profile</router-link></li>
             <li class="nav-item"><router-link id="logInButton" to="/login" class="nav-link" v-if="!loggedIn">Sign in</router-link></li>
-            <li class="nav-item"><router-link to="/signup"><button id="logOutButton" class="btn btn-primary" v-if="!loggedIn">Register Here</button></router-link></li>
+            <li class="nav-item" v-if="!loggedIn"><router-link to="/signup"><button id="logOutButton" class="btn btn-primary">Register</button></router-link></li>
             <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block" v-if="loggedIn"><button id="logOutButton" class="btn btn-primary" v-on:click="logOut">Logout</button></li>
           </ul>
         </div>
