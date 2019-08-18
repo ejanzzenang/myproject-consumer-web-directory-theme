@@ -152,11 +152,12 @@
         });
       },
       signUpFacebook: function(){
-        
         var store = this.$store;
-        alert("works!!")
+        // this.$store.state.auth.getSession();
+        console.log(this.$store.state.auth);
         store.commit('login')
-        this.$store.state.auth.getSession()
+        console.log(this.$store.state.auth.getSession());
+        alert("works!!");
       }
     },
     mounted() {
