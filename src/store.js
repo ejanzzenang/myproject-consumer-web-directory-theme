@@ -17,8 +17,5 @@ export const store = new Vuex.Store({
     logout(state){
       state.loggedIn = false;
     },
-
-
   },
-
 });
