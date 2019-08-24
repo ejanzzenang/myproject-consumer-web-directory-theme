@@ -94,7 +94,7 @@
               RedirectUriSignOut : process.env.VUE_APP_REDIRECT_SIGNOUT_URL,
               IdentityProvider : 'Facebook', 
               UserPoolId : cognitoUserPoolId, 
-            };
+          };
 
           var auth = new CognitoAuth(authData)
             
@@ -103,91 +103,16 @@
           var identityPoolId = localStorage.getItem('identityPoolId');
           var loginPrefix = localStorage.getItem('loginPrefix');
 
-
-          auth.getSession = function() {
-            const tokenScopesInputSet = new Set(auth.TokenScopesArray);
-            const cachedScopesSet = new Set(auth.signInUserSession.tokenScopes.getScopes());
-            const URL = auth.getFQDNSignIn();
-            if (auth.signInUserSession != null && auth.signInUserSession.isValid()) {
-              // LOGIN FIRST BEFORE LAUNCHING URI
-              store.commit('login');
-              return auth.userhandler.onSuccess(auth.signInUserSession);
-            }
-            auth.signInUserSession = auth.getCachedSession();
-            // compare scopes
-            if (!auth.compareSets(tokenScopesInputSet, cachedScopesSet)) {
-              const tokenScopes = new CognitoTokenScopes(auth.TokenScopesArray);
-              const idToken = new CognitoIdToken();
-              const accessToken = new CognitoAccessToken();
-              const refreshToken = new CognitoRefreshToken();
-              auth.signInUserSession.setTokenScopes(tokenScopes);
-              auth.signInUserSession.setIdToken(idToken);
-              auth.signInUserSession.setAccessToken(accessToken);
-              auth.signInUserSession.setRefreshToken(refreshToken);
-              // LOGIN FIRST BEFORE LAUNCHING URI
-              store.commit('login');
-              auth.launchUri(URL);
-            } else if (auth.signInUserSession.isValid()) {
-              // LOGIN FIRST BEFORE LAUNCHING URI
-              store.commit('login')
-              return auth.userhandler.onSuccess(auth.signInUserSession);
-            } else if (!auth.signInUserSession.getRefreshToken()
-            || !auth.signInUserSession.getRefreshToken().getToken()) {
-              // LOGIN FIRST BEFORE LAUNCHING URI
-              store.commit('login');
-              auth.launchUri(URL);
-            } else {
-              auth.refreshSession(auth.signInUserSession.getRefreshToken().getToken());
-            }
-            return undefined;
-          }
-
-
           auth.userhandler = {
             // * E.g.
             onSuccess: function(result) {
-
-              var userPoolId = localStorage.getItem('userPoolId');
-              var clientId = localStorage.getItem('clientId');
-              var identityPoolId = localStorage.getItem('identityPoolId');
-              var loginPrefix = localStorage.getItem('loginPrefix');
-
-              var data = { 
-                UserPoolId : cognitoUserPoolId,
-                ClientId : cognitoUserPoolClientId
-              };
-
-              console.log('access token \n' + result.getAccessToken().getJwtToken());
-
-              var sessionTokens = {
-                IdToken: result.getIdToken(),
-                AccessToken: result.getAccessToken(),
-                RefreshToken: result.getRefreshToken()
-              };
-              
-              console.log("Session tokens: ")
-              console.log(sessionTokens)
-
-              localStorage.setItem('sessionTokens', JSON.stringify(sessionTokens));
-
-              //POTENTIAL: Region needs to be set if not already set previously elsewhere.
-              AWS.config.region = awsRegion;
-              AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-                IdentityPoolId: identityPoolId, // your identity pool id here
-                Logins: {
-                  // Change the key below according to the specific region your user pool is in.
-                  loginPrefix: sessionTokens.IdToken.jwtToken
-                }
-              });
-              
-              localStorage.setItem('awsConfig', JSON.stringify(AWS.config));
+              alert("successful!")
+              store.commit('login');
             },
             onFailure: function(err) {
-              // alert(err);
+              alert(err);
             }          
           }
-
-          auth.useCodeGrantFlow();
 
           return auth
       },
