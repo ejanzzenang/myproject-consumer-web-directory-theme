@@ -59,7 +59,7 @@ export default {
         cognitoUser.globalSignOut();
       }
 
-      window.location.reload();
+      window.location.replace("/")
 
      }
   }
