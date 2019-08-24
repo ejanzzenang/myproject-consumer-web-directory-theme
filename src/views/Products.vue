@@ -4,8 +4,7 @@
         <router-view/>	
 	</div>
 </template>
-
-<script type="text/javascript">
+<script>
     import ProductIndex from '@/components/products'
 
     export default {
