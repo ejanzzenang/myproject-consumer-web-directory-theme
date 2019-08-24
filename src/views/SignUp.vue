@@ -164,12 +164,9 @@
           }
       },
       signUpFacebook: function(){
-
         var store = this.$store;
         alert("works!!");
-        store.commit('login');
-        this.$store.state.auth.getSession();
-      
+        this.$store.state.auth.getSession();      
       }
     }
   }

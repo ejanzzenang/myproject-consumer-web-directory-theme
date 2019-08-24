@@ -153,11 +153,8 @@
       },
       signUpFacebook: function(){
         var store = this.$store;
-        // this.$store.state.auth.getSession();
-        console.log(this.$store.state.auth);
-        store.commit('login')
-        console.log(this.$store.state.auth.getSession());
-        alert("works!!");
+
+        this.$store.state.auth.getSession();
       }
     },
     mounted() {

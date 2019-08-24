@@ -5,8 +5,8 @@
       <div class="navbar-margin"></div>
     </div>
     <router-view/>
-    <div>
-      <Footer v-if="!['signup', 'login'].includes(this.$route.name)"/>      
+    <div v-if="!['signup', 'login'].includes(this.$route.name)">
+      <Footer/>      
     </div>
   </div>
 </template>
@@ -103,18 +103,49 @@
           var identityPoolId = localStorage.getItem('identityPoolId');
           var loginPrefix = localStorage.getItem('loginPrefix');
 
+
+          auth.getSession = function() {
+            const tokenScopesInputSet = new Set(auth.TokenScopesArray);
+            const cachedScopesSet = new Set(auth.signInUserSession.tokenScopes.getScopes());
+            const URL = auth.getFQDNSignIn();
+            if (auth.signInUserSession != null && auth.signInUserSession.isValid()) {
+              // LOGIN FIRST BEFORE LAUNCHING URI
+              store.commit('login');
+              return auth.userhandler.onSuccess(auth.signInUserSession);
+            }
+            auth.signInUserSession = auth.getCachedSession();
+            // compare scopes
+            if (!auth.compareSets(tokenScopesInputSet, cachedScopesSet)) {
+              const tokenScopes = new CognitoTokenScopes(auth.TokenScopesArray);
+              const idToken = new CognitoIdToken();
+              const accessToken = new CognitoAccessToken();
+              const refreshToken = new CognitoRefreshToken();
+              auth.signInUserSession.setTokenScopes(tokenScopes);
+              auth.signInUserSession.setIdToken(idToken);
+              auth.signInUserSession.setAccessToken(accessToken);
+              auth.signInUserSession.setRefreshToken(refreshToken);
+              // LOGIN FIRST BEFORE LAUNCHING URI
+              store.commit('login');
+              auth.launchUri(URL);
+            } else if (auth.signInUserSession.isValid()) {
+              // LOGIN FIRST BEFORE LAUNCHING URI
+              store.commit('login')
+              return auth.userhandler.onSuccess(auth.signInUserSession);
+            } else if (!auth.signInUserSession.getRefreshToken()
+            || !auth.signInUserSession.getRefreshToken().getToken()) {
+              // LOGIN FIRST BEFORE LAUNCHING URI
+              store.commit('login');
+              auth.launchUri(URL);
+            } else {
+              auth.refreshSession(auth.signInUserSession.getRefreshToken().getToken());
+            }
+            return undefined;
+          }
+
+
           auth.userhandler = {
             // * E.g.
             onSuccess: function(result) {
-
-              if(result.isValid()){
-                  alert("Sign in success!!");
-                  store.commit('login');   
-              } else {
-
-                  alert('session is invalid!!');
-
-              }
 
               var userPoolId = localStorage.getItem('userPoolId');
               var clientId = localStorage.getItem('clientId');
@@ -148,11 +179,11 @@
                   loginPrefix: sessionTokens.IdToken.jwtToken
                 }
               });
+              
               localStorage.setItem('awsConfig', JSON.stringify(AWS.config));
-
             },
             onFailure: function(err) {
-              alert(err);
+              // alert(err);
             }          
           }
 
@@ -181,7 +212,8 @@
       this.initializeStorage()
       console.log("Initialized local storage in App.vue")
 
-      this.$store.state.auth = this.initCognitoSDK()
+      this.$store.state.auth = this.initCognitoSDK();
+      console.log("Initialized cognitoSDK for login with fb");
 
       var curUrl = window.location.href;
       this.$store.state.auth.parseCognitoWebResponse(curUrl);
