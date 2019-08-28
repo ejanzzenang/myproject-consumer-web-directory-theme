@@ -55,17 +55,11 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="birth_date" class="form-label">Birth Date *</label>
-                    <div class="datepicker-container datepicker-container-right">
-                      <date-range-picker 
-                      name='birth_date' 
-                      v-model="birth_date" 
-                      :options="options" 
-                      id="birth_date" 
-                      placeholder="Choose your dates" 
-                      class="form-control"
-                      v-validate:birth_date="'required'"/>
+                      <datepicker v-model="birth_date" 
+                                  name="birth_date"
+                                  v-validate:birth_date="'required'"
+                                  :bootstrap-styling="true"/>
                       <div v-show="errors.has('birth_date')" class="error">{{ errors.first('birth_date') }}</div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -169,8 +163,8 @@
 <script>
   import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
   import * as AWS from 'aws-sdk';
-  import VSelect from '@/components/custom/vue-bootstrap-select.vue'
-  import moment from 'moment'
+  import VSelect from '@/components/custom/vue-bootstrap-select.vue';
+  import Datepicker from 'vuejs-datepicker';
   var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;
   var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; 
   var awsRegion = process.env.VUE_APP_AWS_REGION;
@@ -178,11 +172,12 @@
   export default {
       name: 'profile-step1',
       components: {
-        VSelect
+        VSelect,
+        Datepicker
       },
       data() {
         return {
-          birth_date: '06/10/2019',
+          birth_date: '',
           first_name: '',
           middle_name: '',
           last_name: '', 
@@ -192,13 +187,8 @@
           country_list: [] ,
           country_of_birth: '',
           occupation: '',
-          country_of_residence: '',
-          options: {
-              singleDatePicker: true,
-              minYear: 2019,
-              maxYear: +moment().format('YYYY')
-            }
-          }
+          country_of_residence: ''
+        }
       },
       methods: {
         updateUser: function(){
@@ -319,7 +309,7 @@
             alert('Correct the errors!');
           });
         },
-        getUserData() {
+        getUserData: function() {
 
           function fetchUserData(cognitoUser) {
             return new Promise(function(resolve, reject) {
@@ -382,7 +372,7 @@
                   this.status = temp_info['custom:status']
               })
           }
-        }  
+        }
       },
       created: function() {
         this.getCountriesList()

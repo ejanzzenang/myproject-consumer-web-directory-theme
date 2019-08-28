@@ -30,14 +30,10 @@
                   <div class="form-group">
                     <label for="expiry_date" class="form-label">Expiry Date *</label>
                     <div class="datepicker-container datepicker-container-right">
-                      <date-range-picker 
-                      name='expiry_date' 
-                      v-model="expiry_date" 
-                      :options="options" 
-                      id="expiry_date" 
-                      placeholder="Choose your dates" 
-                      class="form-control"
-                      v-validate:expiry_date="'required'"/>
+                      <datepicker v-model="expiry_date" 
+                                  name="expiry_date"
+                                  v-validate:expiry_date="'required'"
+                                  :bootstrap-styling="true"/>
                       <div v-show="errors.has('expiry_date')" class="error">{{ errors.first('expiry_date') }}</div>
                     </div>
                   </div>
@@ -101,7 +97,7 @@
   import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
   import * as AWS from 'aws-sdk';
   import VSelect from '@/components/custom/vue-bootstrap-select.vue'
-  import moment from 'moment'
+  import Datepicker from 'vuejs-datepicker';
   var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;
   var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; 
   var awsRegion = process.env.VUE_APP_AWS_REGION;
@@ -109,11 +105,12 @@
   export default {
       name: 'profile-step3',
       components: {
-        VSelect
+        VSelect,
+        Datepicker
       },
       data() {
         return {
-          expiry_date: '06/10/2019',
+          expiry_date: '',
           passport_number: '',
           country_region: '',
           place_of_issue: '',
@@ -121,17 +118,12 @@
           address_1: '',
           address_2: '',
           country_list: [],
-          options: {
-              singleDatePicker: true,
-              minYear: 2019,
-              maxYear: +moment().format('YYYY')
-          }
         }
       },
       methods: {
         updateUser: function(){
             var attributeList = []  
-  
+
             var input_list = 
               [
                 {
