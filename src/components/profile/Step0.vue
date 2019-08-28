@@ -108,9 +108,68 @@
                 }
                 console.log('call result: ' + result);
             });
-        },     
-        },
+          },
+            getUserData: function() {
+
+          function fetchUserData(cognitoUser) {
+            return new Promise(function(resolve, reject) {
+              cognitoUser.getSession(function(err, session) {
+                if (err) {
+                  alert('Fetch user data: ' + err);
+                  return;
+                }
+                console.log('session validity: ' + session.isValid());
+
+                cognitoUser.getUserAttributes(function(err, result) {
+                  if (err) {
+                    console.log(err)
+                    alert(err);
+                    return;
+                  }
+                  resolve(result)
+                });
+              });
+            });
+          }
+
+          var temp_info = {};
+
+          var data = {
+            UserPoolId: cognitoUserPoolId,
+            ClientId: cognitoUserPoolClientId
+          }
+
+
+          var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+          var cognitoUser = userPool.getCurrentUser();
+          console.log(cognitoUser);
+
+          if (cognitoUser != null) {
+
+            var user_data = fetchUserData(cognitoUser)
+              .then(result => {
+
+                // transform user attribute data into a dict
+                for (var i = 0; i < result.length; i++) {
+                  let name = result[i].getName()
+                  let val = result[i].getValue()
+                  var obj = {
+                    [name]: val
+                  }
+                  $.extend(temp_info, obj)
+                }
+
+              }).then(res => {
+                  this.is_filipino_resident = temp_info['custom:is_filipino_resident']
+              })
+          }
+        }
+
+      },
+      mounted(){
+        this.getUserData()
        
+      }
     }
       
 </script>
