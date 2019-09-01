@@ -30,12 +30,16 @@
                   <div class="form-group">
                     <label for="expiry_date" class="form-label">Expiry Date *</label>
                     <div class="datepicker-container datepicker-container-right">
+                      
+                      we need to format the date upon @input
+                      <!-- https://github.com/charliekassel/vuejs-datepicker/issues/692 -->
                       <datepicker v-model="expiry_date" 
                                   name="expiry_date"
                                   v-validate:expiry_date="'required'"
                                   :bootstrap-styling="true"
                                   format="yyyy-MM-dd"
                                   @input="expiry_date = fixDate($event)"/>
+                      
                       <div v-show="errors.has('expiry_date')" class="error">{{ errors.first('expiry_date') }}</div>
                     </div>
                   </div>

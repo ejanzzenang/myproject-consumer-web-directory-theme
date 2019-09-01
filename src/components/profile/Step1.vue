@@ -56,6 +56,9 @@
                   <div class="form-group">
                     <label for="birth_date" class="form-label">Birth Date *</label>
 
+                      <!-- need to format the date upon @input -->
+                      <!-- https://github.com/charliekassel/vuejs-datepicker/issues/692 -->
+                      
                       <datepicker v-model="birth_date" 
                                   name="birth_date"
                                   v-validate:birth_date="'required'"
