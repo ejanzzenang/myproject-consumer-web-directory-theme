@@ -13,16 +13,21 @@
           <form action="#" autocomplete="off" class="pr-xl-3">
             <div class="mb-4">
               <label for="form_dates" class="form-label">Date</label>
-               <date-range-picker v-model="myDate" :options="options" id="bookingDate" placeholder="Choose your dates" required="required" class="form-control"/>
+               <datepicker 
+                    name="form_dates"
+                    v-model="booking_date"
+                    :bootstrap-styling="true"
+                    format="yyyy-MM-dd"/>
             </div>
             <div class="mb-4">
               <label for="form_guests" class="form-label">Guests</label>
-              <vue-select 
-                      :options="guests_list"
-                      :searchable="false"
-                      :clearable="false"
-                      name='guests'
-                      />
+              <vue-select
+                v-model="guests" 
+                :options="guests_list"
+                :searchable="false"
+                :clearable="false"
+                name='guests'
+                />
             </div>
             <div class="pb-4">
               <div id="moreFilters" class="collapse">
@@ -86,6 +91,7 @@
   import vueSelect from 'vue-select'
   import data from '@/assets/json/boracay.json'
   import moment from 'moment'
+  import Datepicker from 'vuejs-datepicker';
 
 
   export default {
@@ -93,16 +99,17 @@
     components: {
       ProductCard2,
       ProductCard,
-      vueSelect
+      vueSelect,
+      Datepicker
     },
     data() {
       return {
         products: data,
-        myDate: "06/10/2019",
+        booking_date: moment().toString(),
         guests_list: [
             1,2,3,4,5
         ],
-        guests: '',
+        guests: 1,
         options: {
           singleDatePicker: true,
           minYear: 2019,
