@@ -73,25 +73,33 @@
             <div class="col-lg-7 ml-auto">
               <div class="form-group">
                 <label for="form_country_of_residence" class="form-label">Country of Residence *</label>
-                <v-select :options="country_list" 
-                  :searchable="true"
-                  :labelTitle="'<select a country>'" 
-                  v-model="country_of_residence"
+
+                <vue-select 
+                  v-model="country_of_residence" 
+                  :options="country_list"
+                  :clearable="false"
+                  placeholder="Choose a Country"
                   v-validate:country_of_residence="'required'"
-                  name='country_of_residence'/>
+                  name='country_of_residence'
+                  />
+
                 <div v-show="errors.has('country_of_residence')" class="error">{{ errors.first('country_of_residence') }}</div>
               </div>
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="form_country_of_birth" class="form-label">Country of Birth *</label>
-                    <v-select class="bootstrap-select"
-                      :options="country_list" 
-                      :searchable="true" 
-                      :labelTitle="'<select a country>'"
-                      v-model="country_of_birth"
+
+                    <vue-select 
+                      v-model="country_of_birth" 
+                      :options="country_list"
+                      :clearable="false"
+                      placeholder="Choose a Country"
                       v-validate:country_of_birth="'required'"
-                      name='country_of_birth'/>
+                      name='country_of_birth'
+                      />
+
+
                     <div v-show="errors.has('country_of_birth')" class="error">{{ errors.first('country_of_birth') }}</div>
                   </div>
                 </div>
@@ -163,7 +171,8 @@
 <script>
   import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
   import * as AWS from 'aws-sdk';
-  import VSelect from '@/components/custom/vue-bootstrap-select.vue';
+  // import VSelect from '@/components/custom/vue-bootstrap-select.vue';
+  import vueSelect from 'vue-select'
   import Datepicker from 'vuejs-datepicker';
   var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;
   var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; 
@@ -172,8 +181,8 @@
   export default {
       name: 'profile-step1',
       components: {
-        VSelect,
-        Datepicker
+        Datepicker,
+        vueSelect
       },
       data() {
         return {

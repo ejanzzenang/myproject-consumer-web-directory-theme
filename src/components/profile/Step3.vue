@@ -51,12 +51,14 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="country_region" class="form-label">Country / Region *</label>
-                  <v-select :options="country_list" 
-                    :searchable="true"
-                    :labelTitle="'<select a country>'" 
-                    v-model="country_region"
-                    name='country_region'
-                    v-validate:country_region="'required'"/>
+                    <vue-select 
+                      v-model="country_region" 
+                      :options="country_list"
+                      :clearable="false"
+                      placeholder="Choose a Country"
+                      v-validate:country_region="'required'"
+                      name='country_region'
+                      />
                     <div v-show="errors.has('country_region')" class="error">{{ errors.first('country_region') }}</div>
                 </div>
               </div>
@@ -98,6 +100,7 @@
   import * as AWS from 'aws-sdk';
   import VSelect from '@/components/custom/vue-bootstrap-select.vue'
   import Datepicker from 'vuejs-datepicker';
+  import vueSelect from 'vue-select'
   var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;
   var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; 
   var awsRegion = process.env.VUE_APP_AWS_REGION;
@@ -105,7 +108,7 @@
   export default {
       name: 'profile-step3',
       components: {
-        VSelect,
+        vueSelect,
         Datepicker
       },
       data() {

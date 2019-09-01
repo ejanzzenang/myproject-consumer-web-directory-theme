@@ -29,6 +29,9 @@ require('@/assets/vendor/magnific-popup/magnific-popup.css');
 require('@/assets/css/style.default.css');
 require('@/assets/css/custom.css');
 
+//import css for vue-select
+import 'vue-select/dist/vue-select.css';
+
 // As a global method
 // require('@/assets/vendor/object-fit-images/ofi.min.js');
 // require('@/assets/vendor/magnific-popup/jquery.magnific-popup.min.js');
