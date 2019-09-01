@@ -31,7 +31,7 @@
                     <label for="expiry_date" class="form-label">Expiry Date *</label>
                     <div class="datepicker-container datepicker-container-right">
                       
-                      we need to format the date upon @input
+                      <!-- need to format the date upon @input -->
                       <!-- https://github.com/charliekassel/vuejs-datepicker/issues/692 -->
                       <datepicker v-model="expiry_date" 
                                   name="expiry_date"
@@ -104,7 +104,6 @@
 <script>
   import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
   import * as AWS from 'aws-sdk';
-  import VSelect from '@/components/custom/vue-bootstrap-select.vue'
   import Datepicker from 'vuejs-datepicker';
   import vueSelect from 'vue-select'
   import moment from 'moment';
