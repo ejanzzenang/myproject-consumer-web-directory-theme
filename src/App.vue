@@ -8,6 +8,10 @@
     <div v-if="!['signup', 'login'].includes(this.$route.name)">
       <Footer/>      
     </div>
+
+    <!-- load this using the html loader -->
+    <!-- https://stackoverflow.com/questions/50834598/inline-svg-in-vuejs-component -->
+    <div v-html="require('!html-loader!@/assets/icons/orion-svg-sprite.svg')"></div>
   </div>
 </template>
 <script>
@@ -115,23 +119,9 @@
           }
 
           return auth
-      },
-      injectSvgSprite(path) {
-
-            var ajax = new XMLHttpRequest();
-            ajax.open("GET", path, true);
-            ajax.send();
-            ajax.onload = function(e) {
-              var div = document.createElement("div");
-              div.className = 'd-none';
-              div.innerHTML = ajax.responseText;
-              document.body.insertBefore(div, document.body.childNodes[0]);
-            }
-      }     
+      }
     },
     created(){
-
-      this.injectSvgSprite('https://demo.bootstrapious.com/directory/1-1/icons/orion-svg-sprite.svg');
 
       // initialize login storage
       this.initializeStorage()
