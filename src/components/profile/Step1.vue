@@ -55,10 +55,14 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="birth_date" class="form-label">Birth Date *</label>
+
                       <datepicker v-model="birth_date" 
                                   name="birth_date"
                                   v-validate:birth_date="'required'"
-                                  :bootstrap-styling="true"/>
+                                  :bootstrap-styling="true"
+                                  format="yyyy-MM-dd"
+                                  @input="birth_date = fixDate($event)"/>
+
                       <div v-show="errors.has('birth_date')" class="error">{{ errors.first('birth_date') }}</div>
                   </div>
                 </div>
@@ -171,9 +175,9 @@
 <script>
   import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
   import * as AWS from 'aws-sdk';
-  // import VSelect from '@/components/custom/vue-bootstrap-select.vue';
   import vueSelect from 'vue-select'
   import Datepicker from 'vuejs-datepicker';
+  import moment from 'moment';
   var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;
   var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; 
   var awsRegion = process.env.VUE_APP_AWS_REGION;
@@ -201,8 +205,8 @@
       },
       methods: {
         updateUser: function(){
-            var attributeList = []  
-  
+            var attributeList = [];  
+            
             var input_list = 
               [
                 {
@@ -381,6 +385,9 @@
                   this.status = temp_info['custom:status']
               })
           }
+        },
+        fixDate(event){
+          return moment(event).format('YYYY-MM-DD');
         }
       },
       created: function() {

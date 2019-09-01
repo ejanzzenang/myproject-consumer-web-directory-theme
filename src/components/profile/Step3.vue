@@ -33,7 +33,9 @@
                       <datepicker v-model="expiry_date" 
                                   name="expiry_date"
                                   v-validate:expiry_date="'required'"
-                                  :bootstrap-styling="true"/>
+                                  :bootstrap-styling="true"
+                                  format="yyyy-MM-dd"
+                                  @input="expiry_date = fixDate($event)"/>
                       <div v-show="errors.has('expiry_date')" class="error">{{ errors.first('expiry_date') }}</div>
                     </div>
                   </div>
@@ -101,6 +103,7 @@
   import VSelect from '@/components/custom/vue-bootstrap-select.vue'
   import Datepicker from 'vuejs-datepicker';
   import vueSelect from 'vue-select'
+  import moment from 'moment';
   var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;
   var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; 
   var awsRegion = process.env.VUE_APP_AWS_REGION;
@@ -291,6 +294,9 @@
 
               });
           }
+        },
+        fixDate(event){
+          return moment(event).format('YYYY-MM-DD');
         }  
       },
       created: function() {

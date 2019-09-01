@@ -42,7 +42,7 @@
                       <div class="profile-info-row">
                         <div class="profile-info-name">Birth Date</div>
                         <div class="profile-info-value">
-                          <span>{{info['custom:birth_date'].toString().split('T')[0]}}</span>
+                          <span>{{info['custom:birth_date']}}</span>
                         </div>
                       </div>
                       <div class="profile-info-row">
@@ -150,7 +150,7 @@
                     <div class="profile-info-row">
                       <div class="profile-info-name">Expiry Date</div>
                       <div class="profile-info-value">
-                        <span>{{info['custom:passport_exp_date'].toString().split('T')[0]}}</span>
+                        <span>{{info['custom:passport_exp_date']}}</span>
                       </div>
                     </div>
                     <div class="profile-info-row">
