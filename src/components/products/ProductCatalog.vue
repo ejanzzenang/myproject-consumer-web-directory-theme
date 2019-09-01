@@ -17,10 +17,12 @@
             </div>
             <div class="mb-4">
               <label for="form_guests" class="form-label">Guests</label>
-              <v-select class="bootstrap-select"
-                      :options="guests_list" 
-                      v-model="guests"
-                      name='guests'/>
+              <vue-select 
+                      :options="guests_list"
+                      :searchable="false"
+                      :clearable="false"
+                      name='guests'
+                      />
             </div>
             <div class="pb-4">
               <div id="moreFilters" class="collapse">
@@ -81,7 +83,7 @@
 <script>
   import ProductCard2 from '@/components/products/ProductCard2.vue'
   import ProductCard from '@/components/products/ProductCard.vue'
-  import VSelect from '@/components/custom/vue-bootstrap-select.vue'
+  import vueSelect from 'vue-select'
   import data from '@/assets/json/boracay.json'
   import moment from 'moment'
 
@@ -91,7 +93,7 @@
     components: {
       ProductCard2,
       ProductCard,
-      VSelect
+      vueSelect
     },
     data() {
       return {
