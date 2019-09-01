@@ -14,11 +14,6 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('./views/About.vue'),
-    },
-    {
       path: '/login',
       name: 'login',
       component: () => import('./views/Login.vue'),
@@ -27,6 +22,13 @@ export default new Router({
       path: '/signup',
       name: 'signup',
       component: () => import('./views/SignUp.vue'),
+    },
+    {
+      path: '/forgot',
+      name: 'forgot',
+      component: () => import('./views/ForgotPassword.vue'),
+      props: true,
+
     },
     {
       path: '/confirm',
@@ -110,13 +112,6 @@ export default new Router({
       component: () => import('./components/profile/MyProfile.vue'),
       props: true,
 
-    },
-    {
-      path: '/forgot',
-      name: 'forgot',
-      component: () => import('./views/ForgotPassword.vue'),
-      props: true,
-
-    },
+    }
   ],
 });
