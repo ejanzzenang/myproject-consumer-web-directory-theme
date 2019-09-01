@@ -31,17 +31,27 @@ $ vue --version
 - Provides basic CRUD functionality for products
 - The Service will be triggered by consumers via a web app
 ```
-| WEBPAGE      | URI                                     | ACTION                      |
-|--------------|-----------------------------------------|-----------------------------|
-| HOME         | http://[hostname]/                      | Landing Page                |
-| INDEX        | http://[hostname]/products              | Gets all products           |
-| DETAIL       | http://[hostname]/products/<product_id> | Gets one product            |
-| SIGNIN       | http://[hostname]/login                 | Logs the user in            |
-| SIGNUP       | http://[hostname]/signup                | Signs up the user           |
-| BOOK-1       | http://[hostname]/booking/step1         | Booking Step 1              |
-| BOOK-2       | http://[hostname]/booking/step1         | Booking Step 2              |
-| PAYMENT      | http://[hostname]/booking/payment       | Payment and Confirmation    |
-| CONFIRMATION | http://[hostname]/booking/confirmed     | Confirmed                   |
+| WEBPAGE        | URI                                     | ACTION                      |
+|----------------|-----------------------------------------|-----------------------------|
+| HOME           | http://[hostname]/                      | Landing Page                |
+| INDEX          | http://[hostname]/products              | Gets all products           |
+| DETAIL         | http://[hostname]/products/<product_id> | Gets one product            |
+| SIGNIN         | http://[hostname]/login                 | Logs the user in            |
+| SIGNUP         | http://[hostname]/signup                | Signs up the user           |
+| FORGOT PWD     | http://[hostname]/forgot                | Forgot password page        |
+| CONFIRM        | http://[hostname]/confirm               | Confirms the user           |
+
+| BOOK-1         | http://[hostname]/booking/step1         | Booking Step 1              |
+| BOOK-2         | http://[hostname]/booking/step2         | Booking Step 2              |         
+| PAYMENT        | http://[hostname]/booking/payment       | Payment and Confirmation    |
+| CONFIRMATION   | http://[hostname]/booking/confirmed     | Confirmed                   |
+
+| PROFILE        | http://[hostname]/profile/<user_id>     | View and update profile     |
+| PROFILE-0      | http://[hostname]/profile/step0         | Update profile step 0       |
+| PROFILE-1      | http://[hostname]/profile/step1         | Update profile step 1       |
+| PROFILE-2      | http://[hostname]/profile/step2         | Update profile step 2       |
+| PROFILE-3      | http://[hostname]/profile/step3         | Update profile step 3       |
+| PROFILE-4      | http://[hostname]/profile/step4         | Update profile success      |
 ```
 
 ### Step 1.1: Initialize Vue Project
