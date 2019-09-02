@@ -28,7 +28,6 @@ export default new Router({
       name: 'forgot',
       component: () => import('./views/ForgotPassword.vue'),
       props: true,
-
     },
     {
       path: '/confirm',
