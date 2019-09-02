@@ -1,6 +1,7 @@
 
+
 # Set up Vue.js Frontend using a Theme
-## Prerequsites
+## Prerequisites
 
 
 - Git
@@ -34,17 +35,18 @@ $ vue --version
 | WEBPAGE        | URI                                     | ACTION                      |
 |----------------|-----------------------------------------|-----------------------------|
 | HOME           | http://[hostname]/                      | Landing Page                |
-| INDEX          | http://[hostname]/products              | Gets all products           |
-| DETAIL         | http://[hostname]/products/<product_id> | Gets one product            |
 | SIGNIN         | http://[hostname]/login                 | Logs the user in            |
 | SIGNUP         | http://[hostname]/signup                | Signs up the user           |
 | FORGOT PWD     | http://[hostname]/forgot                | Forgot password page        |
 | CONFIRM        | http://[hostname]/confirm               | Confirms the user           |
 
+| INDEX          | http://[hostname]/products              | Gets all products           |
+| DETAIL         | http://[hostname]/products/<product_id> | Gets one product            |
+
 | BOOK-1         | http://[hostname]/booking/step1         | Booking Step 1              |
 | BOOK-2         | http://[hostname]/booking/step2         | Booking Step 2              |         
 | PAYMENT        | http://[hostname]/booking/payment       | Payment and Confirmation    |
-| CONFIRMATION   | http://[hostname]/booking/confirmed     | Confirmed                   |
+| CONFIRMATION   | http://[hostname]/booking/confirmed     | Booking successful          |
 
 | PROFILE        | http://[hostname]/profile/<user_id>     | View and update profile     |
 | PROFILE-0      | http://[hostname]/profile/step0         | Update profile step 0       |
@@ -94,6 +96,8 @@ $ cd myproject-consumer-web/src/assets
 $ cp -R <source_dir>/assets/ myproject-consumer-web/src/assets
 ```
 
+*You can find the assets folder in the src directory of this repository
+
 ### Step 2.2:  Install theme dependencies and node modules
 Install dependencies:
 In `myproject-consumer-web` add the following dependencies into `package.json`
@@ -108,11 +112,21 @@ In `myproject-consumer-web` add the following dependencies into `package.json`
 ```
 Install module: vue-awesome-swiper
 In the terminal run the following: 
-```
+```bash
+# vuejs swiper for card components
 $ npm install vue-awesome-swiper --save
+
+# a vuejs dropdown selection library
+$ npm install vue-select --save
+
+# a vuejs datepicker library
+$ npm install vuejs-datepicker --save
+
+# will be used later for SVG rendering
+$ npm install html-loader --save
 ```
 after, run:
-```
+```bash
 $ npm install
 ```
 
@@ -121,175 +135,101 @@ $ npm install
 In `myproject-vuejs-web/src/main.js` add the following lines of code: 
 
 ```js
-/* eslint-disable */
-
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-import 'swiper/dist/css/swiper.css'
-Vue.use(VueAwesomeSwiper)
+// for Vue Swiper
+import VueAwesomeSwiper from 'vue-awesome-swiper';
+import 'swiper/dist/css/swiper.css';
+Vue.use(VueAwesomeSwiper);
 
 // jQuery
-require("@/assets/vendor/jquery/jquery.min.js")
+require('@/assets/vendor/jquery/jquery.min.js');
 
 // bootstrap
 import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 // css
-require('@/assets/vendor/nouislider/nouislider.css')
-require('@/assets/vendor/magnific-popup/magnific-popup.css')
-require('@/assets/css/style.default.css')
-require('@/assets/css/custom.css')
-require('@/assets/img/favicon.png')
+require('@/assets/vendor/nouislider/nouislider.css');
+require('@/assets/vendor/magnific-popup/magnific-popup.css');
+require('@/assets/css/style.default.css');
+require('@/assets/css/custom.css');
 
-// As a global method
-require("@/assets/vendor/object-fit-images/ofi.min.js")
-require("@/assets/vendor/bootstrap/js/bootstrap.bundle.min.js")
-require("@/assets/vendor/magnific-popup/jquery.magnific-popup.min.js")
-require("@/assets/vendor/smooth-scroll/smooth-scroll.polyfills.min.js")
-require("@/assets/vendor/bootstrap-select/js/bootstrap-select.min.js")
+//import css for vue-select
+import 'vue-select/dist/vue-select.css';
 ```
 
 Final Version of `main.js`:
 
 ```js
-import Vue from 'vue'
-import App from './App.vue'
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-import 'swiper/dist/css/swiper.css'
-Vue.use(VueAwesomeSwiper)
+import Vue from 'vue';
+import App from './App.vue';
+
+// for Vue Swiper
+import VueAwesomeSwiper from 'vue-awesome-swiper';
+import 'swiper/dist/css/swiper.css';
+Vue.use(VueAwesomeSwiper);
 
 // jQuery
-require("@/assets/vendor/jquery/jquery.min.js")
+require('@/assets/vendor/jquery/jquery.min.js');
 
 // bootstrap
 import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 // css
-require('@/assets/vendor/nouislider/nouislider.css')
-require('@/assets/vendor/magnific-popup/magnific-popup.css')
-require('@/assets/css/style.default.css')
-require('@/assets/css/custom.css')
-require('@/assets/img/favicon.png')
+require('@/assets/vendor/nouislider/nouislider.css');
+require('@/assets/vendor/magnific-popup/magnific-popup.css');
+require('@/assets/css/style.default.css');
+require('@/assets/css/custom.css');
 
-// As a global method
-require("@/assets/vendor/object-fit-images/ofi.min.js")
-require("@/assets/vendor/bootstrap/js/bootstrap.bundle.min.js")
-require("@/assets/vendor/magnific-popup/jquery.magnific-popup.min.js")
-require("@/assets/vendor/smooth-scroll/smooth-scroll.polyfills.min.js")
-require("@/assets/vendor/bootstrap-select/js/bootstrap-select.min.js")
+//import css for vue-select
+import 'vue-select/dist/vue-select.css';
 
-import router from './router'
 
-Vue.config.productionTip = false
+import router from './router';
+
+Vue.config.productionTip = false;
 
 new Vue({
   router,
-  render: h => h(App)
-}).$mount('#app')
+  render: h => h(App),
+}).$mount('#app');
 
 ```
 
 ### Step 2.4: Import CSS dependencies to `App.vue`
 
 Add the following stylesheet imports inside the `<style>` tag of `App.vue`
-```css
- /*extra css*/
- @import "https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700";
- @import "https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700";
- @import "https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css";
- @import "https://use.fontawesome.com/releases/v5.8.1/css/all.css";
-```
-
-Add svg rendering to `App.vue`
-In the `<script>` tag of `App.vue` add the following code"
-```js
-
-export default {
-  name: 'home',
-  components: {
-  }
-}
-... start ...
-,
-  created(){
-     function injectSvgSprite(path) {
-          var ajax = new XMLHttpRequest();
-          ajax.open("GET", path, true);
-          ajax.send();
-          ajax.onload = function(e) {
-            var div = document.createElement("div");
-            div.className = 'd-none';
-            div.innerHTML = ajax.responseText;
-            document.body.insertBefore(div, document.body.childNodes[0]);
-          }
-      }    
-      // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
-      // use your own URL in production, please :)
-      // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
-      //- injectSvgSprite('icons/orion-svg-sprite.svg'); 
-      injectSvgSprite('https://demo.bootstrapious.com/directory/1-1/icons/orion-svg-sprite.svg'); 
-  }
-... end ...
-```
-
-Final version of `App.vue`:
-
 ```html
-<template>
-  <div id="app">
-    <div class="show-nav" v-if="!['signup', 'login'].includes(this.$route.name)">
-      <Navigation/>
-      <div class="navbar-margin"></div>
-    </div>
-    <router-view/>
-    <Footer v-if="!['signup', 'login'].includes(this.$route.name)"/>
-  </div>
-</template>
-
-<script type="text/javascript">
-  // @ is an alias to /src
-import Navigation from '@/components/Navigation.vue'
-import Footer from '@/components/Footer.vue'
-
-export default {
-  name: 'home',
-  components: {
-  },
-  created(){
-     function injectSvgSprite(path) {
-          var ajax = new XMLHttpRequest();
-          ajax.open("GET", path, true);
-          ajax.send();
-          ajax.onload = function(e) {
-            var div = document.createElement("div");
-            div.className = 'd-none';
-            div.innerHTML = ajax.responseText;
-            document.body.insertBefore(div, document.body.childNodes[0]);
-          }
-      }    
-      // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
-      // use your own URL in production, please :)
-      // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
-      //- injectSvgSprite('icons/orion-svg-sprite.svg'); 
-      injectSvgSprite('https://demo.bootstrapious.com/directory/1-1/icons/orion-svg-sprite.svg'); 
+<style scoped>
+  .navbar-margin {
+    margin-bottom: 72px;
   }
-}
 
-</script>
-<style type="text/css">
   /*extra css*/
   @import "https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700";
   @import "https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700";
   @import "https://use.fontawesome.com/releases/v5.8.1/css/all.css";
-
 </style>
 ```
 
+Add SVG rendering to `App.vue`
+In the bottom most portion inside the`<template>` tag of `App.vue` add the following code
+```html
+<template>
+  <div id="app">
+   ...START...
+    <!-- load this using the html loader -->
+    <!-- https://stackoverflow.com/questions/50834598/inline-svg-in-vuejs-component -->
+    <div v-html="require('!html-loader!@/assets/icons/orion-svg-sprite.svg')"></div>
+    ...END...
+  </div>
+</template>
+```
+
+In this portion we use `v-html`  to load .svg file: `orion-svg-sprite.svg` into the div tag, using the `html-loader`.
+ 
 ### Step 2.5:  Set up ESLint for code consistency linting
 In the terminal run the following: 
 ```
-$ npm install --save-dev eslint eslint-config-strongloop
+$ npm install eslint eslint-config-strongloop --save
 ```
 
 In `myproject-vuejs-web/src` create  a file called: `.eslintrc.json`
@@ -302,7 +242,10 @@ In `.eslintrc.json` add following:
 ```
 
 In `myproject-vuejs-web/src` create a file called:  `.eslintignore`
-In the `.eslintignore` we specify directories we don't want to lint. In this case,  we don't need to lint our `assets` and `pages` folders.
+
+In the `.eslintignore` we specify directories we don't want to lint. In this case,  we don't need to lint our `assets` and `pages` folders because they contain the templates we modified for the purposes of this project. 
+
+We also ignore `dist`, which contains the packaged form of the project to be used in production
 
 In `.eslintignore` add following relative paths:
 ```json
@@ -385,164 +328,24 @@ Add the following code in `Navigation.vue`:
 <template>
    <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
       <div class="container-fluid">
-        <div class="d-flex align-items-center"><a href="/" class="navbar-brand py-1"><img src="../assets/img/logo.svg" alt="Directory logo"></a>
-          <form action="#" id="search" class="form-inline d-none d-sm-flex">
-            <div class="input-label-absolute input-label-absolute-left input-reset input-expand ml-lg-2 ml-xl-3"> 
-              <label for="search_search" class="label-absolute"><i class="fa fa-search"></i><span class="sr-only">What are you looking for?</span></label>
-              <input id="search_search" placeholder="Search" aria-label="Search" class="form-control form-control-sm border-0 shadow-0 bg-gray-200">
-              <button type="reset" class="btn btn-reset btn-sm"><i class="fa-times fas"></i></button>
-            </div>
-          </form>
+        <div class="d-flex align-items-center"><a href="/" class="navbar-brand py-1"><img src="../assets/img/hetchly-logo.svg" alt="Hetchly logo"></a>
         </div>
         <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
-        <!-- Navbar Collapse -->
         <div id="navbarCollapse" class="collapse navbar-collapse">
           <form action="#" id="searchcollapsed" class="form-inline mt-4 mb-2 d-sm-none">
             <div class="input-label-absolute input-label-absolute-left input-reset w-100">
               <label for="searchcollapsed_search" class="label-absolute"><i class="fa fa-search"></i><span class="sr-only">What are you looking for?</span></label>
               <input id="searchcollapsed_search" placeholder="Search" aria-label="Search" class="form-control form-control-sm border-0 shadow-0 bg-gray-200">
-              <button type="reset" class="btn btn-reset btn-sm"><i class="fa-times fas">           </i></button>
+              <button type="reset" class="btn btn-reset btn-sm"><i class="fa-times fas"></i></button>
             </div>
           </form>
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown"><a id="homeDropdownMenuLink" href="/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle active">
-                 
-                Home</a>
-              <div aria-labelledby="homeDropdownMenuLink" class="dropdown-menu"><a href="index.html" class="dropdown-item">Rooms</a><a href="index-2.html" class="dropdown-item">Restaurants</a></div>
-            </li>
-            <!-- Megamenu-->
-            <li class="nav-item dropdown position-static"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Template</a>
-              <div class="dropdown-menu megamenu py-lg-0">
-                <div class="row">
-                  <div class="col-lg-9">
-                    <div class="row p-3 pr-lg-0 pl-lg-5 pt-lg-5">
-                      <div class="col-lg-3">
-                        <!-- Megamenu list-->
-                        <h6 class="text-uppercase">Homepage</h6>
-                        <ul class="megamenu-list list-unstyled">
-                          <li class="megamenu-list-item"><a href="index.html" class="megamenu-list-link">Rooms   </a></li>
-                          <li class="megamenu-list-item"><a href="index-2.html" class="megamenu-list-link">Restaurants   </a></li>
-                        </ul>
-                        <!-- Megamenu list-->
-                        <h6 class="text-uppercase">Restaurants</h6>
-                        <ul class="megamenu-list list-unstyled">
-                          <li class="megamenu-list-item"><a href="category.html" class="megamenu-list-link">Category - Map on the top   </a></li>
-                          <li class="megamenu-list-item"><a href="category-2.html" class="megamenu-list-link">Category - Map on the right   </a></li>
-                          <li class="megamenu-list-item"><a href="category-3.html" class="megamenu-list-link">Category - no map   </a></li>
-                          <li class="megamenu-list-item"><a href="detail.html" class="megamenu-list-link">Restaurant detail   </a></li>
-                        </ul>
-                      </div>
-                      <div class="col-lg-3">
-                        <!-- Megamenu list-->
-                        <h6 class="text-uppercase">Rooms</h6>
-                        <ul class="megamenu-list list-unstyled">
-                          <li class="megamenu-list-item"><a href="category-rooms.html" class="megamenu-list-link">Category - Map on the top   </a></li>
-                          <li class="megamenu-list-item"><a href="category-2-rooms.html" class="megamenu-list-link">Category - Map on the right   </a></li>
-                          <li class="megamenu-list-item"><a href="category-3-rooms.html" class="megamenu-list-link">Category - no map   </a></li>
-                          <li class="megamenu-list-item"><a href="detail-rooms.html" class="megamenu-list-link">Room detail   </a></li>
-                        </ul>
-                        <!-- Megamenu list-->
-                        <h6 class="text-uppercase">Blog</h6>
-                        <ul class="megamenu-list list-unstyled">
-                          <li class="megamenu-list-item"><a href="blog.html" class="megamenu-list-link">Blog   </a></li>
-                          <li class="megamenu-list-item"><a href="post.html" class="megamenu-list-link">Post   </a></li>
-                        </ul>
-                      </div>
-                      <div class="col-lg-3">
-                        <!-- Megamenu list-->
-                        <h6 class="text-uppercase">Pages</h6>
-                        <ul class="megamenu-list list-unstyled">
-                          <li class="megamenu-list-item"><a href="contact.html" class="megamenu-list-link">Contact   </a></li>
-                          <li class="megamenu-list-item"><a href="pricing.html" class="megamenu-list-link">Pricing   </a></li>
-                          <li class="megamenu-list-item"><a href="text.html" class="megamenu-list-link">Text page   </a></li>
-                          <li class="megamenu-list-item"><a href="faq.html" class="megamenu-list-link">F.A.Q.s  <span class="badge badge-info ml-1">New</span>   </a></li>
-                          <li class="megamenu-list-item"><a href="coming-soon.html" class="megamenu-list-link">Coming soon   </a></li>
-                        </ul>
-                      </div>
-                      <div class="col-lg-3">
-                        <!-- Megamenu list-->
-                        <h6 class="text-uppercase">User</h6>
-                        <ul class="megamenu-list list-unstyled">
-                          <li class="megamenu-list-item"><a href="/login" class="megamenu-list-link">Sign in   </a></li>
-                          <li class="megamenu-list-item"><a href="/signup" class="megamenu-list-link">Sign up   </a></li>
-                          <li class="megamenu-list-item"><a href="user-booking-1.html" class="megamenu-list-link">Booking process - 4 pages <span class="badge badge-warning ml-1">New</span>   </a></li>
-                          <li class="megamenu-list-item"><a href="user-grid.html" class="megamenu-list-link">Bookings &mdash; grid view <span class="badge badge-warning ml-1">New</span>   </a></li>
-                          <li class="megamenu-list-item"><a href="user-booking-detail.html" class="megamenu-list-link">Booking detail <span class="badge badge-warning ml-1">New</span>   </a></li>
-                        </ul>
-                        <!-- Megamenu list-->
-                        <h6 class="text-uppercase">Host</h6>
-                        <ul class="megamenu-list list-unstyled">
-                          <li class="megamenu-list-item"><a href="user-add-0.html" class="megamenu-list-link">Add new listing - 6 pages   </a></li>
-                          <li class="megamenu-list-item"><a href="user-list.html" class="megamenu-list-link">Bookings &mdash; list view <span class="badge badge-warning ml-1">New</span>   </a></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="row megamenu-services d-none d-lg-flex pl-lg-5">
-                      <div class="col-xl-3 col-lg-6 d-flex">
-                        <div class="megamenu-services-item">
-                          <svg class="svg-icon megamenu-services-icon">
-                            <use xlink:href="#destination-map-1"> </use>
-                          </svg>
-                          <div>
-                            <h6 class="text-uppercase">Best rentals</h6>
-                            <p class="mb-0 text-muted text-sm">Find the perfect place</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-xl-3 col-lg-6 d-flex">
-                        <div class="megamenu-services-item">
-                          <svg class="svg-icon megamenu-services-icon">
-                            <use xlink:href="#money-box-1"> </use>
-                          </svg>
-                          <div>
-                            <h6 class="text-uppercase">Earn points</h6>
-                            <p class="mb-0 text-muted text-sm">And get great rewards</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-xl-3 col-lg-6 d-flex">
-                        <div class="megamenu-services-item">
-                          <svg class="svg-icon megamenu-services-icon">
-                            <use xlink:href="#customer-support-1"> </use>
-                          </svg>
-                          <div>
-                            <h6 class="text-uppercase">020-800-456-747</h6>
-                            <p class="mb-0 text-muted text-sm">24/7 Available Support</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-xl-3 col-lg-6 d-flex">
-                        <div class="megamenu-services-item">
-                          <svg class="svg-icon megamenu-services-icon">
-                            <use xlink:href="#secure-payment-1"> </use>
-                          </svg>
-                          <div>
-                            <h6 class="text-uppercase">Secure Payment</h6>
-                            <p class="mb-0 text-muted text-sm">Secure Payment</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 d-none d-lg-block"><img src="img/photo/photo-1521170665346-3f21e2291d8b.jpg" alt="" class="bg-image"></div>
-                </div>
-              </div>
-            </li>
-            <!-- /Megamenu end-->
-            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a>
-            </li>
-            <li class="nav-item dropdown"><a id="docsDropdownMenuLink" href="index.html" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle ">
-                 
-                Docs</a>
-              <div aria-labelledby="docsDropdownMenuLink" class="dropdown-menu dropdown-menu-right">
-                <h6 class="dropdown-header font-weight-normal">Documentation</h6><a href="docs/docs-introduction.html" class="dropdown-item">Introduction </a><a href="docs/docs-directory-structure.html" class="dropdown-item">Directory structure </a><a href="docs/docs-gulp.html" class="dropdown-item">Gulp </a><a href="docs/docs-customizing-css.html" class="dropdown-item">Customizing CSS </a><a href="docs/docs-credits.html" class="dropdown-item">Credits </a><a href="docs/docs-changelog.html" class="dropdown-item">Changelog </a>
-                <div class="dropdown-divider"></div>
-                <h6 class="dropdown-header font-weight-normal">Components</h6><a href="docs/components-bootstrap.html" class="dropdown-item">Bootstrap </a><a href="docs/components-directory.html" class="dropdown-item">Theme </a>
-              </div>
-            </li>
-            <li class="nav-item"><a href="/login" class="nav-link">Sign in</a></li>
-            <li class="nav-item"><a href="/signup" class="nav-link">Sign up</a></li>
-            <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block"><a href="user-add-0.html" class="btn btn-primary">Add a listing</a></li>
+            <li class="nav-item"><router-link id="homeDropdownMenuLink" to="/" class="nav-link">Home</router-link></li>
+            <li class="nav-item"><router-link id="logInButton" to="/products" class="nav-link">Activities</router-link></li>
+            <li class="nav-item" v-if="loggedIn"><router-link id="logInButton" to="/profile/1" class="nav-link">My Profile</router-link></li>
+            <li class="nav-item"><router-link id="logInButton" to="/login" class="nav-link" v-if="!loggedIn">Sign in</router-link></li>
+            <li class="nav-item" v-if="!loggedIn"><router-link to="/signup"><button id="logOutButton" class="btn btn-primary">Register</button></router-link></li>
+            <li class="nav-item mt-3 mt-lg-0 ml-lg-3 d-lg-none d-xl-inline-block" v-if="loggedIn"><button id="logOutButton" class="btn btn-primary" v-on:click="logOut">Logout</button></li>
           </ul>
         </div>
       </div>
@@ -552,23 +355,21 @@ Add the following code in `Navigation.vue`:
 
 Add the following code into the `<template>` tag of `App.vue`
 ```html
-
 <div id="app">
-... start ...
-<div class="show-nav" v-if="!['signup', 'login'].includes(this.$route.name)">
-  <Navigation/>
-  <div class="navbar-margin"></div>
-</div>
-<router-view/>
-... end ...
+... START ...
+    <div v-if="!['signup', 'login'].includes(this.$route.name)">
+      <Navigation/>
+      <div class="navbar-margin"></div>
+    </div>
+... END...
 </div>
 ```
 
 In the `<script>` tag of `App.vue` add the following code: 
 
 ```html
-<script type="text/javascript">
-... start ...
+<script>
+...START...
 import Navigation from '@/components/Navigation.vue' <--- We import the Navigation from our components
 
 export default {
@@ -577,16 +378,15 @@ export default {
     Navigation <--- We add Navigation as a component
   }
 }
-... end ...
+...END...
 </script>
 ```
 
-```
 Add the following code inside the `<style>` tag of `App.vue`
 ```css
- .navbar-margin {
-     margin-bottom: 70px;
- }
+.navbar-margin {
+   margin-bottom: 72px;
+}
 ```
 
 ### Step 4.2 : Set up Global Footer Component
@@ -597,12 +397,11 @@ Add the following code in `Footer.vue`:
 ```html
 <template>
    <footer class="position-relative z-index-10 d-print-none">
-      <!-- Main block - menus, subscribe form-->
       <div class="py-6 bg-gray-200 text-muted"> 
         <div class="container">
           <div class="row">
             <div class="col-lg-4 mb-5 mb-lg-0">
-              <div class="font-weight-bold text-uppercase text-dark mb-3">Directory</div>
+              <div class="font-weight-bold text-uppercase text-dark mb-3">Hetchly</div>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
               <ul class="list-inline">
                 <li class="list-inline-item"><a href="#" target="_blank" title="twitter" class="text-muted text-hover-primary"><i class="fab fa-twitter"></i></a></li>
@@ -613,23 +412,23 @@ Add the following code in `Footer.vue`:
               </ul>
             </div>
             <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
-              <h6 class="text-uppercase text-dark mb-3">Rentals</h6>
+              <h6 class="text-uppercase text-dark mb-3">Destinations</h6>
               <ul class="list-unstyled">
-                <li><a href="index.html" class="text-muted">Rooms     </a></li>
-                <li><a href="category-rooms.html" class="text-muted">Map on top     </a></li>
-                <li><a href="category-2-rooms.html" class="text-muted">Side map     </a></li>
-                <li><a href="category-3-rooms.html" class="text-muted">No map     </a></li>
-                <li><a href="detail-rooms.html" class="text-muted">Room detail     </a></li>
+                <li><a href="/" class="text-muted">Boracay</a></li>
+                <li><a href="/" class="text-muted">Coron</a></li>
+                <li><a href="/" class="text-muted">La Union</a></li>
+                <li><a href="/" class="text-muted">Tagaytay</a></li>
+                <li><a href="/" class="text-muted">Baguio</a></li>
               </ul>
             </div>
             <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
               <h6 class="text-uppercase text-dark mb-3">Pages</h6>
               <ul class="list-unstyled">
-                <li><a href="contact.html" class="text-muted">Contact                                   </a></li>
-                <li><a href="pricing.html" class="text-muted">Pricing                                   </a></li>
-                <li><a href="text.html" class="text-muted">Text page                                   </a></li>
-                <li><a href="faq.html" class="text-muted">F.A.Q.s  <span class="badge badge-info ml-1">New</span>                                   </a></li>
-                <li><a href="coming-soon.html" class="text-muted">Coming soon                                   </a></li>
+                <li><a href="/" class="text-muted">Contact</a></li>
+                <li><a href="/" class="text-muted">Pricing</a></li>
+                <li><a href="/" class="text-muted">Text page</a></li>
+                <li><a href="/" class="text-muted">F.A.Q.s<span class="badge badge-info ml-1">New</span></a></li>
+                <li><a href="/" class="text-muted">Coming soon</a></li>
               </ul>
             </div>
             <div class="col-lg-4">
@@ -647,12 +446,11 @@ Add the following code in `Footer.vue`:
           </div>
         </div>
       </div>
-      <!-- Copyright section of the footer-->
       <div class="py-4 font-weight-light bg-gray-800 text-gray-300">
         <div class="container">
           <div class="row align-items-center">
             <div class="col-md-6 text-center text-md-left">
-              <p class="text-sm mb-md-0">&copy; 2019 Your company.  All rights reserved.</p>
+              <p class="text-sm mb-md-0">&copy; 2019 Hetchly.  All rights reserved.</p>
             </div>
             <div class="col-md-6">
               <ul class="list-inline mb-0 mt-2 mt-md-0 text-center text-md-right">
@@ -673,10 +471,11 @@ Add the following code into the `<template>` tag of `App.vue`
 ```html
 ...
 <div class="navbar-margin"></div>
-  ... start ...
   <router-view/>
-  <Footer v-if="!['signup', 'login'].includes(this.$route.name)"/>
-  ... end ...
+  ... START...
+  <div v-if="!['signup', 'login'].includes(this.$route.name)">
+     <Footer/>      
+  </div>
 </div>
 ...
 ```
@@ -685,7 +484,7 @@ In the `<script>` tag of `App.vue` add the following code:
 ```html
 <script type="text/javascript">
 // @ is an alias to /src
-... start ...
+... START ...
 import Navigation from '@/components/Navigation.vue'
 import Footer from '@/components/Footer.vue' <--- We import the footer from our components
 
@@ -696,7 +495,7 @@ export default {
     Footer <--- We add footer as a component
   }
 }
-... end ...
+... END...
 </script>
 ```
 
@@ -704,17 +503,22 @@ Final Version of `App.vue`
 ```html
 <template>
   <div id="app">
-    <div class="show-nav" v-if="!['signup', 'login'].includes(this.$route.name)">
+    <div v-if="!['signup', 'login'].includes(this.$route.name)">
       <Navigation/>
       <div class="navbar-margin"></div>
     </div>
     <router-view/>
-    <Footer v-if="!['signup', 'login'].includes(this.$route.name)"/>
+    <div v-if="!['signup', 'login'].includes(this.$route.name)">
+      <Footer/>      
+    </div>
+
+    <!-- load this using the html loader -->
+    <!-- https://stackoverflow.com/questions/50834598/inline-svg-in-vuejs-component -->
+    <div v-html="require('!html-loader!@/assets/icons/orion-svg-sprite.svg')"></div>
   </div>
 </template>
-
-<script type="text/javascript">
-  // @ is an alias to /src
+<script>
+// @ is an alias to /src
 import Navigation from '@/components/Navigation.vue'
 import Footer from '@/components/Footer.vue'
 
@@ -723,43 +527,21 @@ export default {
   components: {
     Navigation,
     Footer
-  },
-  created(){
-     function injectSvgSprite(path) {
-          var ajax = new XMLHttpRequest();
-          ajax.open("GET", path, true);
-          ajax.send();
-          ajax.onload = function(e) {
-            var div = document.createElement("div");
-            div.className = 'd-none';
-            div.innerHTML = ajax.responseText;
-            document.body.insertBefore(div, document.body.childNodes[0]);
-          }
-      }    
-      // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
-      // use your own URL in production, please :)
-      // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
-      //- injectSvgSprite('icons/orion-svg-sprite.svg'); 
-      injectSvgSprite('https://demo.bootstrapious.com/directory/1-1/icons/orion-svg-sprite.svg'); 
-  }
+  } 
+ }
 }
-
 </script>
-<style type="text/css">
+<style scoped>
   .navbar-margin {
-    margin-bottom: 70px;
+    margin-bottom: 72px;
   }
 
   /*extra css*/
   @import "https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700";
   @import "https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700";
   @import "https://use.fontawesome.com/releases/v5.8.1/css/all.css";
-
 </style>
-
-
 ```
-
 ## Step 5: Set up Home Page
 Set up the individual components for our home page.  
 
