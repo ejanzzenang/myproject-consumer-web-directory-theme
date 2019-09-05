@@ -54,7 +54,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .pic_1 {
-    background: url('../assets/img/photo/banner-2.jpg') center;
+    background: url('../../assets/img/photo/banner-2.jpg') center;
     background-size: cover
   }
 

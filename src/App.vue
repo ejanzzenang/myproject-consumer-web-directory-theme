@@ -15,11 +15,13 @@
   </div>
 </template>
 <script>
-  import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
-  import * as AWS from 'aws-sdk';
   import Navigation from '@/components/Navigation.vue'
   import Footer from '@/components/Footer.vue'
+
+  import * as AmazonCognitoIdentity from 'amazon-cognito-identity-js';
+  import * as AWS from 'aws-sdk';
   import {CognitoAuth} from 'amazon-cognito-auth-js';
+  
   var cognitoUserPoolId = process.env.VUE_APP_USER_POOL_ID;
   var cognitoUserPoolClientId = process.env.VUE_APP_USER_POOL_CLIENT_ID; 
   var awsRegion = process.env.VUE_APP_AWS_REGION;

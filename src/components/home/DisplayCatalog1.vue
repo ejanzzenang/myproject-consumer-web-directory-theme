@@ -40,31 +40,31 @@
         cities: [
           {
             "name" : "Boracay",
-            "image_url" :  require('../assets/img/photo/boracay.jpg'),
+            "image_url" :  require('../../assets/img/photo/boracay.jpg'),
             "description" : "Boracay is ..",
             "url_route": "/products" 
           },
           {
             "name" : "Panglaw",
-            "image_url" : require('../assets/img/photo/panglaw.jpg'),
+            "image_url" : require('../../assets/img/photo/panglaw.jpg'),
             "description" : "Panglaw is ..",
             "url_route": "#"  
           },
           {
             "name" : "Palawan",
-            "image_url" : require('../assets/img/photo/coron.jpg'),
+            "image_url" : require('../../assets/img/photo/coron.jpg'),
             "description" : "Palawan is ..",
             "url_route": "#"  
           },
           {
             "name" : "Batanes",
-            "image_url" : require('../assets/img/photo/batanes.jpg'),
+            "image_url" : require('../../assets/img/photo/batanes.jpg'),
             "description" : "Batanes is ..",
             "url_route": "#"  
           },
           {
             "name" : "Bohol",
-            "image_url" : require('../assets/img/photo/bohol.jpg'),
+            "image_url" : require('../../assets/img/photo/bohol.jpg'),
             "description" : "Bohol is ..",
             "url_route": "#" 
           }
