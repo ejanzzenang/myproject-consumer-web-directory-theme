@@ -248,7 +248,7 @@ In the `.eslintignore` we specify directories we don't want to lint. In this cas
 We also ignore `dist`, which contains the packaged form of the project to be used in production
 
 In `.eslintignore` add following relative paths:
-```json
+```bash
 src/assets/**
 src/pages/**
 dist/**
@@ -545,28 +545,36 @@ export default {
 ## Step 5: Set up Home Page
 Set up the individual components for our home page.  
 
-### Step 5.1: Set up Search Bar Component
+### Step 5.1: Create a folder: `home` in `components`:
 In `myproject-consumer-web/src/components/`
+create a folder called  `home`
+```bash
+$ cd myproject-consumer-web/src/components/
+$ mkdir home
+$ cd home
+```
+
+**Note:** There are already pre-built components available located in the `home` directory of this repository. (please see `myproject-consumer-web/src/components/home`) You follow the steps below to set up an example home page. You may also make use of the other available components when creating your webpage. 
+
+### Step 5.1: Set up Search Bar Component
+In `myproject-consumer-web/src/components/home`
 create a file called : `SearchBar.vue`
 Add the following code:
 ```html
 <template>
   <div class="searchbar">
     <section class="hero-home">
-      <swiper :options="swiperOption" class="hero-slider">
+      <swiper v-bind:options="swiperOption" class="hero-slider">
         <div class="swiper-wrapper dark-overlay">
           <swiper-slide class="swiper-slide pic_1"></swiper-slide>
-          <swiper-slide class="swiper-slide pic_2"></swiper-slide>
-          <swiper-slide class="swiper-slide pic_3"></swiper-slide>
-          <swiper-slide class="swiper-slide pic_4"></swiper-slide>
         </div>
       </swiper>
       <div class="container py-6 py-md-7 text-white z-index-20">
         <div class="row">
           <div class="col-xl-10">
             <div class="text-center text-lg-left">
-              <p class="subtitle letter-spacing-4 mb-2 text-secondary text-shadow">The best holiday experience</p>
-              <h1 class="display-3 font-weight-bold text-shadow">Stay like a local</h1>
+              <p class="subtitle letter-spacing-4 mb-2 text-secondary text-shadow">Philippine Tourists</p>
+              <h1 class="display-3 font-weight-bold text-shadow">Register Here</h1>
             </div>
             <div class="search-bar mt-5 p-3 p-lg-1 pl-lg-4">
               <form action="#">
@@ -577,19 +585,24 @@ Add the following code:
                   <div class="col-lg-3 d-flex align-items-center form-group">
                     <div class="input-label-absolute input-label-absolute-right w-100">
                       <label for="location" class="label-absolute"><i class="fa fa-crosshairs"></i><span class="sr-only">City</span></label>
-                      <input type="text" name="location" placeholder="Location" id="location" class="form-control border-0 shadow-0">
+                      <input type="text" name="location" placeholder="Boracay" id="location" class="form-control border-0 shadow-0">
                     </div>
                   </div>
-                  <div class="col-lg-3 d-flex align-items-center form-group no-divider">
-                    <select title="Categories" data-style="btn-form-control" class="selectpicker">
-                      <option value="small">Restaurants</option>
-                      <option value="medium">Hotels</option>
-                      <option value="large">Cafes</option>
-                      <option value="x-large">Garages</option>
-                    </select>
-                  </div>
-                  <div class="col-lg-2">
-                    <button type="submit" class="btn btn-primary btn-block rounded-xl h-100">Search </button>
+
+                  <div class="col-lg-5">
+                    <div class="row">
+                       <div class="col-lg-5">
+                        <button type="submit" class="btn btn-primary btn-block rounded-xl h-100">Search</button>
+                      </div>
+
+                      <div class="or justify-content-center col-lg-1">or</div>
+
+                     <div class="col-lg-6">
+                      <a href="/signup">
+                       <button  type=button class="btn btn-primary btn-block rounded-xl h-100">Register</button>
+                      </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </form>
@@ -604,20 +617,14 @@ Add the following code:
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .pic_1 {
-    background: url('../assets/img/photo/photo-1501621965065-c6e1cf6b53e2.jpg') center;
+    background: url('../../assets/img/photo/banner-2.jpg') center;
     background-size: cover
   }
-  .pic_2 {
-    background: url('../assets/img/photo/photo-1519974719765-e6559eac2575.jpg') center;
-    background-size: cover
-  }
-  .pic_3 {
-    background: url('../assets/img/photo/photo-1490578474895-699cd4e2cf59.jpg') center;
-    background-size: cover
-  }
-  .pic_4 {
-    background: url('../assets/img/photo/photo-1534850336045-c6c6d287f89e.jpg') center;
-    background-size: cover
+
+  .or {
+    color:#868E96;
+    margin-bottom:0px;
+    text-align: center;
   }
 
 </style>
@@ -641,62 +648,107 @@ Add the following code:
   }
 </script>
 ```
-### Step 5.2: Set up AboutProduct Component
-In `myproject-consumer-web/src/components/`
-create a file called : `AboutProduct.vue`
+### Step 5.2: Set up Services Component
+In `myproject-consumer-web/src/components/home`
+create a file called : `Services.vue`
 Add the following code:
 ```html
 <template>
-    <div class="about-product">
+    <div class="services">
      <section class="py-6 bg-gray-100">
       <div class="container">
         <div class="text-center pb-lg-4">
-          <p class="subtitle text-secondary">One-of-a-kind vacation rentals </p>
-          <h2 class="mb-5">Booking with us is easy</h2>
+          <p class="subtitle text-secondary">Choose from a variety of services</p>
+          <h2 class="mb-5">Available Services</h2>
         </div>
         <div class="row">
-          <div class="col-lg-4 mb-3 mb-lg-0 text-center">
-            <div class="px-0 px-lg-3">
-              <div class="icon-rounded bg-primary-light mb-3">
+          <div class="col-lg-4 mb-4 mb-lg-0 text-center" v-for="service in services" v-bind:key="service.id">
+            <div class="px-0 px-lg-4 icon-box">
+              <div class="icon-rounded bg-primary-light mb-4">
                 <svg class="svg-icon text-primary w-2rem h-2rem">
-                  <use xlink:href="#destination-map-1"> </use>
+                  <use v-bind:xlink:href="service.icon"></use>
                 </svg>
               </div>
-              <h3 class="h5">Find the perfect rental</h3>
-              <p class="text-muted">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed in</p>
-            </div>
-          </div>
-          <div class="col-lg-4 mb-3 mb-lg-0 text-center">
-            <div class="px-0 px-lg-3">
-              <div class="icon-rounded bg-primary-light mb-3">
-                <svg class="svg-icon text-primary w-2rem h-2rem">
-                  <use xlink:href="#pay-by-card-1"> </use>
-                </svg>
-              </div>
-              <h3 class="h5">Book with confidence</h3>
-              <p class="text-muted">The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pit</p>
-            </div>
-          </div>
-          <div class="col-lg-4 mb-3 mb-lg-0 text-center">
-            <div class="px-0 px-lg-3">
-              <div class="icon-rounded bg-primary-light mb-3">
-                <svg class="svg-icon text-primary w-2rem h-2rem">
-                  <use xlink:href="#heart-1"> </use>
-                </svg>
-              </div>
-              <h3 class="h5">Enjoy your vacation</h3>
-              <p class="text-muted">His room, a proper human room although a little too small, lay peacefully between its four familiar </p>
+              <h3 class="h5">{{service.name}}</h3>
             </div>
           </div>
         </div>
+        <div style="margin-top:5%"></div>
       </div>
     </section>
   </div>
 </template>
+<script>
+  export default {
+  name: 'services',
+  data(){
+    return {
+      services: [
+        { 
+          "id" : 1,
+          "name": "Activities",
+          "icon": "#beach-1"
+        },
+        { 
+          "id" : 2,
+          "name": "Accommodations",
+          "icon": "#real-estate-1"
+        },
+        {
+          "id" : 3,
+          "name": "Eats",
+          "icon": "#dinner-1"
+        },
+        {
+          "id" : 4,
+          "name": "Local Transport",
+          "icon": "#bus-1"
+        },
+        {
+          "id" : 5,
+          "name": "Airport Transfer",
+          "icon": "#airplane-mode-1"
+        },
+        {
+          "id" : 6,
+          "name": "Wifi + Data Packages",
+          "icon": "#world-map-1"
+        },
+        {
+          "id" : 7,
+          "name": "Insurance",
+          "icon": "#shield-security-1"
+        },
+        {
+          "id" : 8,
+          "name": "Payments",
+          "icon": "#pay-1"
+        },
+        {
+          "id" : 9,
+          "name": "Emergency",
+          "icon": "#medical-emergency-1"
+        }
+      ]
+    }
+  },
+  methods: {
+  }  
+} 
+</script>
+<style scoped>
+  .icon-box {
+    padding:2rem;
+
+  }
+
+
+
+</style>
 ```
 
 ### Step 5.3: Set up DisplayCatalog1 Component
-In `myproject-consumer-web/src/components/`
+In `myproject-consumer-web/src/components/home`
 create a file called : `DisplayCatalog1.vue`
 Add the following code:
 ```html
@@ -709,44 +761,19 @@ Add the following code:
             <p class="subtitle text-primary">Stay and eat like a local</p>
             <h2>Our guides</h2>
           </div>
-          <div class="col-md-4 d-lg-flex align-items-center justify-content-end"><a href="category.html" class="text-muted text-sm">
-               
-              See all guides<i class="fas fa-angle-double-right ml-2"></i></a></div>
         </div>
         <div class="row">
-          <swiper :options="swiperOption" class="guides-slider">
-              <swiper-slide class="h-auto px-2">
-                <div class="card card-poster gradient-overlay mb-4 mb-lg-0"><a href="category.html" class="tile-link"></a><img src="../assets/img/photo/new-york.jpg" alt="Card image" class="bg-image">
+          <swiper v-bind:options="swiperOption" class="guides-slider">
+              <swiper-slide class="h-auto px-2" v-for="city in cities" v-bind:key="city.name">
+                <div class="card card-poster gradient-overlay mb-4 mb-lg-0"><a v-bind:href="city.url_route" class="tile-link"></a>
+                  <img v-bind:src="city.image_url" v-bind:alt="city.name" class="bg-image">
+                  <!-- <img src="../assets/img/photo/coron.jpg" class="bg-image"> -->
                   <div class="card-body overlay-content">
-                    <h6 class="card-title text-shadow text-uppercase">New York</h6>
-                    <p class="card-text text-sm">The big apple</p>
+                    <h6 class="card-title text-shadow text-uppercase">{{city.name}}</h6>
+                    <p class="card-text text-sm">{{city.description}}</p>
                   </div>
                 </div>
               </swiper-slide>
-              <swiper-slide class="h-auto px-2">
-                <div class="card card-poster gradient-overlay mb-4 mb-lg-0"><a href="category.html" class="tile-link"></a><img src="../assets/img/photo/paris.jpg" alt="Card image" class="bg-image">
-                  <div class="card-body overlay-content">
-                    <h6 class="card-title text-shadow text-uppercase">Paris</h6>
-                    <p class="card-text text-sm">Artist capital of Europe</p>
-                  </div>
-                </div>
-              </swiper-slide>
-              <swiper-slide class="h-auto px-2">
-                <div class="card card-poster gradient-overlay mb-4 mb-lg-0"><a href="category.html" class="tile-link"></a><img src="../assets/img/photo/barcelona.jpg" alt="Card image" class="bg-image">
-                  <div class="card-body overlay-content">
-                    <h6 class="card-title text-shadow text-uppercase">Barcelona</h6>
-                    <p class="card-text text-sm">Dalí, Gaudí, Barrio Gotico</p>
-                  </div>
-                </div>
-              </swiper-slide >
-              <swiper-slide class="h-auto px-2">
-                <div class="card card-poster gradient-overlay mb-4 mb-lg-0"><a href="category.html" class="tile-link"></a><img src="../assets/img/photo/prague.jpg" alt="Card image" class="bg-image">
-                  <div class="card-body overlay-content">
-                    <h6 class="card-title text-shadow text-uppercase">Prague</h6>
-                    <p class="card-text text-sm">City of hundred towers</p>
-                  </div>
-                </div>
-              </swiper-slide >
           </swiper>
         </div>
       </div>
@@ -755,312 +782,55 @@ Add the following code:
 </template>
 
 <script scoped>
+
   export default {
     data() {
       return {
         swiperOption: {
-          slidesPerView: 7,
-          spaceBetween: 20,
+          slidesPerView: 5,
+          spaceBetween: 15,
           loop: true
-        }
-      }
-    }
-  }
-</script>
-```
-
-### Step 5.4: Set up DisplayCatalog2 Component
-In `myproject-consumer-web/src/components/`
-create a file called : `DisplayCatalog2.vue`
-Add the following code:
-```html
-<template>
-  <div class="display-catalog-2">
-  <section class="py-6 bg-gray-100"> 
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-md-8">
-            <p class="subtitle text-secondary">Hurry up, these are expiring soon.        </p>
-            <h2>Last minute deals</h2>
-          </div>
-          <div class="col-md-4 d-lg-flex align-items-center justify-content-end"><a href="category.html" class="text-muted text-sm">
-               
-              See all deals<i class="fas fa-angle-double-right ml-2"></i></a></div>
-        </div>
-        <!-- Slider main container-->
-        <swiper :options="swiperOption">
-            <!-- Slides-->
-            <swiper-slide class="h-auto px-2">
-              <!-- place item-->
-              <div data-marker-id="59c0c8e33b1527bfe2abaf92" class="w-100 h-100">
-                <div class="card h-100 border-0 shadow">
-                  <div class="card-img-top overflow-hidden gradient-overlay"> <img src="../assets/img/photo/photo-1484154218962-a197022b5858.jpg" alt="Modern, Well-Appointed Room" class="img-fluid"/><a href="detail-rooms.html" class="tile-link"></a>
-                    <div class="card-img-overlay-bottom z-index-20">
-                      <div class="media text-white text-sm align-items-center"><img src="../assets/img/avatar/avatar-0.jpg" alt="Pamela" class="avatar avatar-border-white mr-2"/>
-                        <div class="media-body">Pamela</div>
-                      </div>
-                    </div>
-                    <div class="card-img-overlay-top text-right"><a href="javascript: void();" class="card-fav-icon position-relative z-index-40"> 
-                        <svg class="svg-icon text-white">
-                          <use xlink:href="#heart-1"> </use>
-                        </svg></a></div>
-                  </div>
-                  <div class="card-body d-flex align-items-center">
-                    <div class="w-100">
-                      <h6 class="card-title"><a href="detail-rooms.html" class="text-decoration-none text-dark">Modern, Well-Appointed Room</a></h6>
-                      <div class="d-flex card-subtitle mb-3">
-                        <p class="flex-grow-1 mb-0 text-muted text-sm">Private room</p>
-                        <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i>
-                        </p>
-                      </div>
-                      <p class="card-text text-muted"><span class="h4 text-primary">$80</span> per night</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide class="h-auto px-2">
-              <!-- place item-->
-              <div data-marker-id="59c0c8e322f3375db4d89128" class="w-100 h-100">
-                <div class="card h-100 border-0 shadow">
-                  <div class="card-img-top overflow-hidden gradient-overlay"> <img src="../assets/img/photo/photo-1426122402199-be02db90eb90.jpg" alt="Cute Quirky Garden apt, NYC adjacent" class="img-fluid"/><a href="detail-rooms.html" class="tile-link"></a>
-                    <div class="card-img-overlay-bottom z-index-20">
-                      <div class="media text-white text-sm align-items-center"><img src="../assets/img/avatar/avatar-7.jpg" alt="John" class="avatar avatar-border-white mr-2"/>
-                        <div class="media-body">John</div>
-                      </div>
-                    </div>
-                    <div class="card-img-overlay-top text-right"><a href="javascript: void();" class="card-fav-icon position-relative z-index-40"> 
-                        <svg class="svg-icon text-white">
-                          <use xlink:href="#heart-1"> </use>
-                        </svg></a></div>
-                  </div>
-                  <div class="card-body d-flex align-items-center">
-                    <div class="w-100">
-                      <h6 class="card-title"><a href="detail-rooms.html" class="text-decoration-none text-dark">Cute Quirky Garden apt, NYC adjacent</a></h6>
-                      <div class="d-flex card-subtitle mb-3">
-                        <p class="flex-grow-1 mb-0 text-muted text-sm">Entire apartment</p>
-                        <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-gray-300">                                  </i>
-                        </p>
-                      </div>
-                      <p class="card-text text-muted"><span class="h4 text-primary">$121</span> per night</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide class="h-auto px-2">
-              <!-- place item-->
-              <div data-marker-id="59c0c8e3a31e62979bf147c9" class="w-100 h-100">
-                <div class="card h-100 border-0 shadow">
-                  <div class="card-img-top overflow-hidden gradient-overlay"> <img src="../assets/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="Modern Apt - Vibrant Neighborhood!" class="img-fluid"/><a href="detail-rooms.html" class="tile-link"></a>
-                    <div class="card-img-overlay-bottom z-index-20">
-                      <div class="media text-white text-sm align-items-center"><img src="../assets/img/avatar/avatar-8.jpg" alt="Julie" class="avatar avatar-border-white mr-2"/>
-                        <div class="media-body">Julie</div>
-                      </div>
-                    </div>
-                    <div class="card-img-overlay-top text-right"><a href="javascript: void();" class="card-fav-icon position-relative z-index-40"> 
-                        <svg class="svg-icon text-white">
-                          <use xlink:href="#heart-1"> </use>
-                        </svg></a></div>
-                  </div>
-                  <div class="card-body d-flex align-items-center">
-                    <div class="w-100">
-                      <h6 class="card-title"><a href="detail-rooms.html" class="text-decoration-none text-dark">Modern Apt - Vibrant Neighborhood!</a></h6>
-                      <div class="d-flex card-subtitle mb-3">
-                        <p class="flex-grow-1 mb-0 text-muted text-sm">Entire apartment</p>
-                        <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-gray-300">                                  </i><i class="fa fa-star text-gray-300">                                  </i>
-                        </p>
-                      </div>
-                      <p class="card-text text-muted"><span class="h4 text-primary">$75</span> per night</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide class="h-auto px-2">
-              <!-- place item-->
-              <div data-marker-id="59c0c8e3503eb77d487e8082" class="w-100 h-100">
-                <div class="card h-100 border-0 shadow">
-                  <div class="card-img-top overflow-hidden gradient-overlay"> <img src="../assets/img/photo/photo-1494526585095-c41746248156.jpg" alt="Sunny Private Studio-Apartment" class="img-fluid"/><a href="detail-rooms.html" class="tile-link"></a>
-                    <div class="card-img-overlay-bottom z-index-20">
-                      <div class="media text-white text-sm align-items-center"><img src="../assets/img/avatar/avatar-9.jpg" alt="Barbora" class="avatar avatar-border-white mr-2"/>
-                        <div class="media-body">Barbora</div>
-                      </div>
-                    </div>
-                    <div class="card-img-overlay-top text-right"><a href="javascript: void();" class="card-fav-icon position-relative z-index-40"> 
-                        <svg class="svg-icon text-white">
-                          <use xlink:href="#heart-1"> </use>
-                        </svg></a></div>
-                  </div>
-                  <div class="card-body d-flex align-items-center">
-                    <div class="w-100">
-                      <h6 class="card-title"><a href="detail-rooms.html" class="text-decoration-none text-dark">Sunny Private Studio-Apartment</a></h6>
-                      <div class="d-flex card-subtitle mb-3">
-                        <p class="flex-grow-1 mb-0 text-muted text-sm">Shared room</p>
-                        <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-gray-300">                                  </i>
-                        </p>
-                      </div>
-                      <p class="card-text text-muted"><span class="h4 text-primary">$93</span> per night</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide class="h-auto px-2">
-              <!-- place item-->
-              <div data-marker-id="59c0c8e39aa2eed0626e485d" class="w-100 h-100">
-                <div class="card h-100 border-0 shadow">
-                  <div class="card-img-top overflow-hidden gradient-overlay"> <img src="../assets/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="Mid-Century Modern Garden Paradise" class="img-fluid"/><a href="detail-rooms.html" class="tile-link"></a>
-                    <div class="card-img-overlay-bottom z-index-20">
-                      <div class="media text-white text-sm align-items-center"><img src="../assets/img/avatar/avatar-10.jpg" alt="Jack" class="avatar avatar-border-white mr-2"/>
-                        <div class="media-body">Jack</div>
-                      </div>
-                    </div>
-                    <div class="card-img-overlay-top text-right"><a href="javascript: void();" class="card-fav-icon position-relative z-index-40"> 
-                        <svg class="svg-icon text-white">
-                          <use xlink:href="#heart-1"> </use>
-                        </svg></a></div>
-                  </div>
-                  <div class="card-body d-flex align-items-center">
-                    <div class="w-100">
-                      <h6 class="card-title"><a href="detail-rooms.html" class="text-decoration-none text-dark">Mid-Century Modern Garden Paradise</a></h6>
-                      <div class="d-flex card-subtitle mb-3">
-                        <p class="flex-grow-1 mb-0 text-muted text-sm">Entire house</p>
-                        <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i>
-                        </p>
-                      </div>
-                      <p class="card-text text-muted"><span class="h4 text-primary">$115</span> per night</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide class="h-auto px-2">
-              <!-- place item-->
-              <div data-marker-id="59c0c8e39aa2edasd626e485d" class="w-100 h-100">
-                <div class="card h-100 border-0 shadow">
-                  <div class="card-img-top overflow-hidden gradient-overlay"> <img src="../assets/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" alt="Brooklyn Life, Easy to Manhattan" class="img-fluid"/><a href="detail-rooms.html" class="tile-link"></a>
-                    <div class="card-img-overlay-bottom z-index-20">
-                      <div class="media text-white text-sm align-items-center"><img src="../assets/img/avatar/avatar-11.jpg" alt="Stuart" class="avatar avatar-border-white mr-2"/>
-                        <div class="media-body">Stuart</div>
-                      </div>
-                    </div>
-                    <div class="card-img-overlay-top text-right"><a href="javascript: void();" class="card-fav-icon position-relative z-index-40"> 
-                        <svg class="svg-icon text-white">
-                          <use xlink:href="#heart-1"> </use>
-                        </svg></a></div>
-                  </div>
-                  <div class="card-body d-flex align-items-center">
-                    <div class="w-100">
-                      <h6 class="card-title"><a href="detail-rooms.html" class="text-decoration-none text-dark">Brooklyn Life, Easy to Manhattan</a></h6>
-                      <div class="d-flex card-subtitle mb-3">
-                        <p class="flex-grow-1 mb-0 text-muted text-sm">Private room</p>
-                        <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-gray-300">                                  </i>
-                        </p>
-                      </div>
-                      <p class="card-text text-muted"><span class="h4 text-primary">$123</span> per night</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
-        </swiper>
-
-      </div>
-    </section>    
-  </div>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        swiperOption: {
-          slidesPerView: 4,
-          spaceBetween: 20,
-          roundLengths :true,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-            dynamicBullets: true
+        },
+        cities: [
+          {
+            "name" : "Boracay",
+            "image_url" :  require('../../assets/img/photo/boracay.jpg'),
+            "description" : "Boracay is ..",
+            "url_route": "/products" 
           },
-          loop: true,
-          breakpoints: {  
-             1200 :{  
-               slidesPerView: 3
-            },
-             991 :{  
-              slidesPerView : 2
-            },
-             565 :{  
-              slidesPerView :1
-            }
-         },
-        }
+          {
+            "name" : "Panglaw",
+            "image_url" : require('../../assets/img/photo/panglaw.jpg'),
+            "description" : "Panglaw is ..",
+            "url_route": "#"  
+          },
+          {
+            "name" : "Palawan",
+            "image_url" : require('../../assets/img/photo/coron.jpg'),
+            "description" : "Palawan is ..",
+            "url_route": "#"  
+          },
+          {
+            "name" : "Batanes",
+            "image_url" : require('../../assets/img/photo/batanes.jpg'),
+            "description" : "Batanes is ..",
+            "url_route": "#"  
+          },
+          {
+            "name" : "Bohol",
+            "image_url" : require('../../assets/img/photo/bohol.jpg'),
+            "description" : "Bohol is ..",
+            "url_route": "#" 
+          }
+        ]
       }
     }
   }
 </script>
 ```
 
-### Step 5.4: Set up DisplayCatalog3 Component
-In `myproject-consumer-web/src/components/`
-create a file called : `DisplayCatalog3.vue`
-Add the following code:
-```html
-<template>
-    <section class="py-6 bg-gray-100"> 
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-md-8">
-            <p class="subtitle text-secondary">Stories from around the globe</p>
-            <h2>From our travel blog</h2>
-          </div>
-          <div class="col-md-4 d-md-flex align-items-center justify-content-end"><a href="blog.html" class="text-muted text-sm">
-               
-              See all articles<i class="fas fa-angle-double-right ml-2"></i></a></div>
-        </div>
-        <div class="row">
-          <!-- blog item-->
-          <div class="col-lg-4 col-sm-6 mb-4">
-            <div class="card shadow border-0 h-100"><a href="post.html"><img src="../assets/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="..." class="img-fluid card-img-top"/></a>
-              <div class="card-body"><a href="#" class="text-uppercase text-muted text-sm letter-spacing-2">Travel </a>
-                <h5 class="my-2"><a href="post.html" class="text-dark">Autumn fashion tips and tricks          </a></h5>
-                <p class="text-gray-500 text-sm my-3"><i class="far fa-clock mr-2"></i>January 16, 2016</p>
-                <p class="my-2 text-muted text-sm">Pellentesque habitant morbi tristique senectus. Vestibulum tortor quam, feugiat vitae, ultricies ege...</p><a href="post.html" class="btn btn-link pl-0">Read more<i class="fa fa-long-arrow-alt-right ml-2"></i></a>
-              </div>
-            </div>
-          </div>
-          <!-- blog item-->
-          <div class="col-lg-4 col-sm-6 mb-4">
-            <div class="card shadow border-0 h-100"><a href="post.html"><img src="../assets/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="..." class="img-fluid card-img-top"/></a>
-              <div class="card-body"><a href="#" class="text-uppercase text-muted text-sm letter-spacing-2">Living </a>
-                <h5 class="my-2"><a href="post.html" class="text-dark">Newest photo apps          </a></h5>
-                <p class="text-gray-500 text-sm my-3"><i class="far fa-clock mr-2"></i>January 16, 2016</p>
-                <p class="my-2 text-muted text-sm">ellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibu...</p><a href="post.html" class="btn btn-link pl-0">Read more<i class="fa fa-long-arrow-alt-right ml-2"></i></a>
-              </div>
-            </div>
-          </div>
-          <!-- blog item-->
-          <div class="col-lg-4 col-sm-6 mb-4">
-            <div class="card shadow border-0 h-100"><a href="post.html"><img src="../assets/img/photo/photo-1482463084673-98272196658a.jpg" alt="..." class="img-fluid card-img-top"/></a>
-              <div class="card-body"><a href="#" class="text-uppercase text-muted text-sm letter-spacing-2">Travel </a>
-                <h5 class="my-2"><a href="post.html" class="text-dark">Best books about Photography          </a></h5>
-                <p class="text-gray-500 text-sm my-3"><i class="far fa-clock mr-2"></i>January 16, 2016</p>
-                <p class="my-2 text-muted text-sm">Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.  Mauris placerat eleif...</p><a href="post.html" class="btn btn-link pl-0">Read more<i class="fa fa-long-arrow-alt-right ml-2"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-</template>
-
-```
-
-### Step 5.5: Set up PhotoWheel Component
-In `myproject-consumer-web/src/components/`
+### Step 5.4: Set up PhotoWheel Component
+In `myproject-consumer-web/src/components/home`
 create a file called : `PhotoWheel.vue`
 Add the following code:
 ```html
@@ -1068,24 +838,15 @@ Add the following code:
     <section>
       <div class="container-fluid px-0">
         <div class="instagram-slider">
-        <swiper :options="swiperOption">
-            <swiper-slide><img src="../assets/img/instagram/instagram-1.jpg" alt="" class="img-fluid hover-scale"></swiper-slide>
-            <swiper-slide><img src="../assets/img/instagram/instagram-2.jpg" alt="" class="img-fluid hover-scale"></swiper-slide>
-            <swiper-slide><img src="../assets/img/instagram/instagram-3.jpg" alt="" class="img-fluid hover-scale"></swiper-slide>
-            <swiper-slide><img src="../assets/img/instagram/instagram-4.jpg" alt="" class="img-fluid hover-scale"></swiper-slide>
-            <swiper-slide><img src="../assets/img/instagram/instagram-5.jpg" alt="" class="img-fluid hover-scale"></swiper-slide>
-            <swiper-slide><img src="../assets/img/instagram/instagram-6.jpg" alt="" class="img-fluid hover-scale"></swiper-slide>
-            <swiper-slide><img src="../assets/img/instagram/instagram-7.jpg" alt="" class="img-fluid hover-scale"></swiper-slide>
-            <swiper-slide><img src="../assets/img/instagram/instagram-8.jpg" alt="" class="img-fluid hover-scale"></swiper-slide>
-            <swiper-slide><img src="../assets/img/instagram/instagram-9.jpg" alt="" class="img-fluid hover-scale"></swiper-slide>
-            <swiper-slide><img src="../assets/img/instagram/instagram-10.jpg" alt="" class="img-fluid hover-scale"></swiper-slide>
-            <swiper-slide><img src="../assets/img/instagram/instagram-11.jpg" alt="" class="img-fluid hover-scale"></swiper-slide>
-            <swiper-slide><img src="../assets/img/instagram/instagram-12.jpg" alt="" class="img-fluid hover-scale"></swiper-slide>
-            <swiper-slide><img src="../assets/img/instagram/instagram-13.jpg" alt="" class="img-fluid hover-scale"></swiper-slide>
-            <swiper-slide><img src="../assets/img/instagram/instagram-14.jpg" alt="" class="img-fluid hover-scale"></swiper-slide>
+        <swiper v-bind:options="swiperOption">
+            <swiper-slide v-for="photo in photos" v-bind:key="photo.image_url">
+              <div>
+                <img v-bind:src="photo.image_url" v-bind:alt='photo.image_url' class="img-fluid hover-scale">
+              </div>
+            </swiper-slide>
         </swiper>
         </div>
-    </div>
+      </div>
     </section>
 </template>
 
@@ -1096,214 +857,76 @@ Add the following code:
         swiperOption: {
           slidesPerView: 10,
           spaceBetween: 0,
-        }
-      }
-    }
-  }
-</script>
-```
-
-### Step 5.6: Set up Testimonials Component
-In `myproject-consumer-web/src/components/`
-create a file called : `Testimonials.vue`
-Add the following code:
-```html
-<template>
-  <div class="testimonials">
-    <section class="py-7">
-      <div class="container">
-        <div class="text-center">
-          <p class="subtitle text-primary">Testimonials</p>
-          <h2 class="mb-5">Our dear customers said about us</h2>
-        </div>
-        <!-- Slider main container-->
-        <swiper :options="swiperOption" class="testimonials-slider testimonials">
-          <!-- Additional required wrapper-->
-            <!-- Slides-->
-            <swiper-slide class="px-3">
-              <div class="testimonial card rounded-lg shadow border-0">
-                <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                <div class="text">
-                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide class="px-3">
-              <div class="testimonial card rounded-lg shadow border-0">
-                <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                <div class="text">
-                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide class="px-3">
-              <div class="testimonial card rounded-lg shadow border-0">
-                <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                <div class="text">
-                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide class="px-3">
-              <div class="testimonial card rounded-lg shadow border-0">
-                <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                <div class="text">
-                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide class="px-3">
-              <div class="testimonial card rounded-lg shadow border-0">
-                <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                <div class="text">
-                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide class="px-3">
-              <div class="testimonial card rounded-lg shadow border-0">
-                <div class="testimonial-avatar"><img src="../assets/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
-                <div class="text">
-                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
-                </div>
-              </div>
-            </swiper-slide>
-          <div class="swiper-pagination"></div>
-        </swiper>
-      </div>
-    </section>
-  </div>
-</template>
-
-<script scoped>
-    export default {
-    data() {
-      return {
-        swiperOption:  {
-        slidesPerView: 2,
-        spaceBetween: 20,
-        loop: true,
-        roundLengths: true,
-        breakpoints: {
-            1200: {
-                slidesPerView: 3,
-                spaceBetween: 0
-            },
-            991: {
-                slidesPerView: 2,
-                spaceBetween: 0
-            },
-            565: {
-                slidesPerView: 1
-            }
         },
-          // If we need pagination
-          pagination: {
-              el: '.swiper-pagination',
-              clickable: true,
-              dynamicBullets: true
+        photos: [
+          {
+            "image_url" :  require('../../assets/img/instagram/image-1.jpg')
           },
+          {
+            "image_url" : require('../../assets/img/instagram/image-2.jpg'),
+          },
+          {
+            "image_url" : require('../../assets/img/instagram/image-3.jpg'),
+          },
+          {
+            "image_url" : require('../../assets/img/instagram/image-4.jpg'),
+          },
+          {
+            "image_url" : require('../../assets/img/instagram/image-5.jpg'),
+          },
+          {
+            "image_url" : require('../../assets/img/instagram/image-6.jpg'),
+          },
+          {
+            "image_url" : require('../../assets/img/instagram/image-7.jpg'),
+          },
+          {
+            "image_url" : require('../../assets/img/instagram/image-8.jpg'),
+          },
+          {
+            "image_url" : require('../../assets/img/instagram/image-9.jpg'),
+          },
+          {
+            "image_url" : require('../../assets/img/instagram/image-10.jpg'),
+          }
+        ]
       }
-      }
+
     }
   }
 </script>
 ```
 
-### Step 5.7: Import Components into `Home.vue`
-Import the individual components we made in steps `5.1` - `5.6`:
-In `myproject-consumer-web/src/views`
-
-In the `<template>` tag of `Home.vue` 
- Add the following code:
+Copy the following code snippet into `Home.vue` 
 ```html
 <template>
   <div class="home">
-   ... start ...
     <SearchBar/>
-    <AboutProduct/>
+    <Services/>
     <DisplayCatalog1/>
-    <DisplayCatalog2/>
-    <Testimonials/>
-    <DisplayCatalog3/>
+    <DisplayProducts/>
     <PhotoWheel/> 
-    ... end ...
   </div>
 </template>
-```
-
-In the `<script>` tag of `Home.vue` 
- Add the following code:
-```html
 <script>
 // @ is an alias to /src
-... start ...
-import SearchBar from '@/components/SearchBar.vue'
-import AboutProduct from '@/components/AboutProduct.vue'
-import DisplayCatalog1 from '@/components/DisplayCatalog1.vue'
-import DisplayCatalog2 from '@/components/DisplayCatalog2.vue'
-import Testimonials from '@/components/Testimonials.vue'
-import DisplayCatalog3 from '@/components/DisplayCatalog3.vue'
-import PhotoWheel from '@/components/PhotoWheel.vue'
+import SearchBar from '@/components/home/SearchBar.vue'
+import Services from '@/components/home/Services.vue'
+import DisplayCatalog1 from '@/components/home/DisplayCatalog1.vue'
+import DisplayProducts from '@/components/products/DisplayProduct.vue'
+import PhotoWheel from '@/components/home/PhotoWheel.vue'
 
 export default {
   name: 'home',
   components: {
     SearchBar, 
-    AboutProduct,
+    Services,
     DisplayCatalog1,
-    DisplayCatalog2,
-    Testimonials,
-    DisplayCatalog3,
+    DisplayProducts,
     PhotoWheel
   }
 }
-... end ...
-</script>
-```
 
-Final Version of `Home.vue`
-```html
-<template>
-  <div class="home">
-    <SearchBar/>
-    <AboutProduct/>
-    <DisplayCatalog1/>
-    <DisplayCatalog2/>
-    <Testimonials/>
-    <DisplayCatalog3/>
-    <PhotoWheel/> 
-  </div>
-</template>
-
-<script>
-// @ is an alias to /src
-import SearchBar from '@/components/SearchBar.vue'
-import AboutProduct from '@/components/AboutProduct.vue'
-import DisplayCatalog1 from '@/components/DisplayCatalog1.vue'
-import DisplayCatalog2 from '@/components/DisplayCatalog2.vue'
-import Testimonials from '@/components/Testimonials.vue'
-import DisplayCatalog3 from '@/components/DisplayCatalog3.vue'
-import PhotoWheel from '@/components/PhotoWheel.vue'
-
-export default {
-  name: 'home',
-  components: {
-    SearchBar, 
-    AboutProduct,
-    DisplayCatalog1,
-    DisplayCatalog2,
-    Testimonials,
-    DisplayCatalog3,
-    PhotoWheel
-  }
-}
 </script>
 ```
 
@@ -1326,11 +949,6 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: () => import('./views/About.vue')
     }
   ]
 })
