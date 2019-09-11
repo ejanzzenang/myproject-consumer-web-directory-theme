@@ -87,7 +87,6 @@
 </template>
 <script>
   import ProductCard2 from '@/components/products/ProductCard2.vue'
-  import ProductCard from '@/components/products/ProductCard.vue'
   import vueSelect from 'vue-select'
   import data from '@/assets/json/boracay.json'
   import moment from 'moment'
@@ -98,7 +97,6 @@
     name: "product-catalog",
     components: {
       ProductCard2,
-      ProductCard,
       vueSelect,
       Datepicker
     },
@@ -109,12 +107,7 @@
         guests_list: [
             1,2,3,4,5
         ],
-        guests: 1,
-        options: {
-          singleDatePicker: true,
-          minYear: 2019,
-          maxYear: +moment().format("YYYY"),
-        } 
+        guests: 1
       }
     },
     methods: {

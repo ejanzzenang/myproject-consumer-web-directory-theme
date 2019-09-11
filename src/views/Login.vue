@@ -32,7 +32,7 @@
               <button @click="loginUser" class="btn btn-lg btn-block btn-primary">Sign in</button>
               <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
             </div>
-            <button @click="signUpFacebook"class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
+            <button @click="signUpFacebook" class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
             <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="/signup">Sign Up</a></small></p>
           </div>
         </div>
