@@ -1,5 +1,6 @@
 
 
+
 # Set up Vue.js Frontend using a Theme
 ## Prerequisites
 
@@ -228,7 +229,7 @@ In this portion we use `v-html`  to load .svg file: `orion-svg-sprite.svg` into 
  
 ### Step 2.5:  Set up ESLint for code consistency linting
 In the terminal run the following: 
-```
+```bash
 $ npm install eslint eslint-config-strongloop --save
 ```
 
@@ -922,7 +923,6 @@ export default {
     SearchBar, 
     Services,
     DisplayCatalog1,
-    DisplayProducts,
     PhotoWheel
   }
 }
@@ -962,78 +962,65 @@ create a file called : `Login.vue`
 Add the following snippet
 ```html
 <template>
-    <div class="login">
-        <div class="container-fluid px-3">
-          <div class="row min-vh-100">
-            <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
-              <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
-                <div class="mb-5"><img src="../assets/img/logo-square.svg" alt="..." style="max-width: 4rem;" class="img-fluid mb-3">
-                  <h2>Welcome back</h2>
-                </div>
-                <a href="/" class="close-absolute mr-md-5 mr-xl-6 pt-5"> 
-                  <svg class="svg-icon w-3rem h-3rem">
-                    <use xlink:href="#close-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" id="close-1" width="100%" height="100%">
-                      <path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10" d="M41.999 20.002l-22 22m22 0L20 20" stroke-linejoin="round" stroke-linecap="round" style="stroke:var(--layer1, #202020)"></path>
-                    </svg>
-                    </use>
-                  </svg></a>
-                <form class="form-validate">
-                  <div class="form-group">
-                    <label for="loginUsername" class="form-label"> Email Address</label>
-                    <input name="loginUsername" id="loginUsername" type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email" class="form-control">
-                  </div>
-                  <div class="form-group mb-4">
-                    <div class="row">
-                      <div class="col">
-                        <label for="loginPassword" class="form-label"> Password</label>
-                      </div>
-                      <div class="col-auto"><a href="#" class="form-text small">Forgot password?</a></div>
-                    </div>
-                    <input name="loginPassword" id="loginPassword" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control">
-                  </div>
-                  <div class="form-group mb-4">
-                    <div class="custom-control custom-checkbox">
-                      <input id="loginRemember" type="checkbox" class="custom-control-input">
-                      <label for="loginRemember" class="custom-control-label text-muted"> <span class="text-sm">Remember me for 30 days</span></label>
-                    </div>
-                  </div>
-                  <!-- Submit-->
-                  <button class="btn btn-lg btn-block btn-primary">Sign in</button>
-                  <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
-                  <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
-                  <button class="btn btn btn-outline-muted btn-block btn-social mb-3"><i class="fa-2x fa-google fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Google</span></button>
-                  <hr class="my-4">
-                  <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="signup.html">Sign Up                </a></small></p>
-                </form>
+  <div class="login">
+    <div class="container-fluid px-3">
+      <div class="row min-vh-100">
+        <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
+          <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
+            <div class="mb-5">
+              <img src="../assets/img/hetchly-logo.svg" alt="..." style="max-width: 10rem;" class="img-fluid mb-3">
+              <h2>Welcome back</h2>
+            </div>
+            <router-link to="/" class="close-absolute mr-md-5 mr-xl-6 pt-5">
+              <svg class="svg-icon w-3rem h-3rem">
+                <use xlink:href="#close-1"> </use>
+              </svg>
+            </router-link>
+            <div class="form-validate" id="loginForm">
+              <div class="form-group">
+                <label for="loginUsername" class="form-label"> Email Address</label>
+                <input name="loginUsername" id="loginUsername" type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email" class="form-control" v-model="email">
               </div>
+              <div class="form-group mb-4">
+                <div class="row">
+                  <div class="col">
+                    <label for="loginPassword" class="form-label"> Password</label>
+                  </div>
+                  <div class="col-auto">
+                    <router-link to="forgot" class="form-text small">Forgot password?</router-link>
+                  </div>
+                </div>
+                <input name="loginPassword" id="loginPassword" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control" v-model="password">
+              </div>
+              <button class="btn btn-lg btn-block btn-primary">Sign in</button>
+              <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
             </div>
-            <div class="col-md-4 col-lg-6 col-xl-7 bG">
-              <!-- Image-->
-              
-            </div>
+            <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
+            <p class="text-center"><small class="text-muted text-center">Don't have an account yet? <a href="/signup">Sign Up</a></small></p>
           </div>
         </div>
+        <div class="col-md-4 col-lg-6 col-xl-7 bG"></div>
+      </div>
     </div>
+  </div>
 </template>
-
-
-<script>
-export default {
-  name: 'login',
-  props: {
-    msg: String
-  }
-}
-</script>
-
 <style>
-    .bG {
-      background: url(../assets/img/photo/photo-1497436072909-60f360e1d4b1.jpg) center center;
-      background-size: cover;
-    }
-    
+  .bG {
+  background: url(../assets/img/photo/photo-1497436072909-60f360e1d4b1.jpg) center center;
+  background-size: cover;
+  }
 </style>
+<script>
+  export default {
+    name: 'login',
+    data(){
+      return {
+        email: '',
+        password: ''
+      }
+    } 
+  }
+</script>
 ```
 
 In `myproject-consumer-web/src/`
@@ -1041,16 +1028,7 @@ In `myproject-consumer-web/src/`
 Add the following snippet in `router.js`:
 
 ```js
-{
-   path: '/about',
-   name: 'about',
-   // route level code-splitting
-   // this generates a separate chunk (about.[hash].js) for this route
-   // which is lazy-loaded when the route is visited.
-   component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-},
-
-... start ...
+... START ...
 { 
    //Added a route for login
    path: '/login',
@@ -1058,7 +1036,7 @@ Add the following snippet in `router.js`:
    component: () => import('./views/Login.vue')
 }
 
-... end ...
+... END...
 ```
 
 ## Step 7: Set up Signup Page
@@ -1074,38 +1052,31 @@ Add the following snippet
       <div class="row min-vh-100">
         <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
           <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
-            <div class="mb-4"><img src="../assets/img/logo-square.svg" alt="..." style="max-width: 4rem;" class="img-fluid mb-4">
+            <div class="mb-4"><img src="../assets/img/hetchly-logo.svg" alt="..." style="max-width: 10rem;" class="img-fluid mb-4">
               <h2>Sign up</h2>
-              <p class="text-muted">His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table.</p>
             </div>
-            <form class="form-validate">
               <div class="form-group">
-                <label for="loginUsername" class="form-label"> Email Address</label>
-                <input name="loginUsername" id="loginUsername" type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email" class="form-control">
+                <label for="loginUsername" class="form-label">Email Address</label>
+                <input name="loginUsername" id="loginUsername" type="email" placeholder="name@address.com" autocomplete="off" required data-msg="Please enter your email" class="form-control" v-model="email">
               </div>
               <div class="form-group">
-                <label for="loginPassword" class="form-label"> Password</label>
-                <input name="loginPassword" id="loginPassword" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control">
+                <label for="loginPassword" class="form-label">Password</label>
+                <input name="loginPassword" id="loginPassword" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control" v-model="password">
               </div>
               <div class="form-group mb-4">
-                <label for="loginPassword2" class="form-label"> Confirm your password</label>
-                <input name="loginPassword2" id="loginPassword2" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control">
+                <label for="loginPassword2" class="form-label">Confirm your password</label>
+                <input name="loginPassword2" id="loginPassword2" placeholder="Password" type="password" required data-msg="Please enter your password" class="form-control" v-model="confirmPw">
               </div>
-              <button type="submit" class="btn btn-lg btn-block btn-primary">Sign up</button>
+              <button id="signup" class="btn btn-lg btn-block btn-primary">Sign up</button>              
               <hr data-content="OR" class="my-3 hr-text letter-spacing-2">
-              <button class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
-              <button class="btn btn btn-outline-muted btn-block btn-social mb-3"><i class="fa-2x fa-google fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Google</span></button>
+              <button id="signupfb" class="btn btn btn-outline-primary btn-block btn-social mb-3"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
+              <p class="text-center"><small class="text-muted text-center">Have an account? <router-link to="/login">Log in</router-link></small></p>
               <hr class="my-4">
               <p class="text-sm text-muted">By signing up you agree to Directory's <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</p>
-            </form><a href="index.html" class="close-absolute mr-md-5 mr-xl-6 pt-5"> 
+              <router-link to="/" class="close-absolute mr-md-5 mr-xl-6 pt-5"> 
               <svg class="svg-icon w-3rem h-3rem">
-                <use xlink:href="#close-1"> 
-
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" id="close-1" width="100%" height="100%">
-                      <path data-name="layer1" fill="none" stroke="#202020" stroke-miterlimit="10" d="M41.999 20.002l-22 22m22 0L20 20" stroke-linejoin="round" stroke-linecap="round" style="stroke:var(--layer1, #202020)"></path>
-                    </svg>
-                </use>
-              </svg>
+                <use xlink:href="#close-1"></use>
+              </svg></router-link>
             </a>
           </div>
         </div>
@@ -1115,14 +1086,27 @@ Add the following snippet
     </div>
   </div>
 </template>
+
 <style scoped>
-  
   .bG {
       background: url(../assets/img/photo/photo-1497436072909-60f360e1d4b1.jpg) center center;
       background-size: cover;
     } 
-
 </style>
+
+<script>
+ export default {
+    name: 'signup',
+    data(){
+      return {
+        email: '',
+        password: '',
+        confirmPw: ''    
+      }
+    }
+  }
+</script>
+
 ```
 
 In `myproject-consumer-web/src/`
@@ -1131,12 +1115,9 @@ Add the following snippet in `router.js`:
 
 ```js
 {
-   path: '/about',
-   name: 'about',
-   // route level code-splitting
-   // this generates a separate chunk (about.[hash].js) for this route
-   // which is lazy-loaded when the route is visited.
-   component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+  path: '/',
+  name: 'home',
+  component: Home,
 },
 { 
    //Added a route for login
@@ -1144,19 +1125,348 @@ Add the following snippet in `router.js`:
    name: 'login',
    component: () => import('./views/Login.vue')
 },
-... start ...
+... START...
 {
   path: '/signup',
   name: 'sigup',
   component: () => import('./views/SignUp.vue')
 },
 
-... end ...
+... END ...
 ```
 
 ## Step 8: Set up Product Page
+In this step, we try to set up our product page. We create a products folder where we store all the components related to `products`. Outlined here will be the steps to create:
 
-### Step 8.1: Set up `Products.vue` Component
+8A. **DisplayProduct Component**
+8B. **ProductIndex Component**
+8C. **ProductDetail Component**
+
+### Step 8.1: Set up `products` Folder
+In  `myproject-consumer-web/src/components`  folder create a folder called  `products`
+
+```bash
+$ cd src/components
+$ mkdir products
+$ cd products
+```
+
+## Step 8A: `DisplayProduct` Component
+
+### Step 8A.1 `Product Card` Component
+Create a product card component that will represent each product as a card.
+
+In  `myproject-consumer-web/src/components/products`, create a file called `ProductCard.vue`:
+
+Add ff code snippet: 
+```html
+<template class="product-card">
+    <div data-marker-id="59c0c8e33b1527bfe2abaf92" class="w-100 h-100">
+      <div class="card h-100 border-0 shadow">
+        <div class="card-img-top overflow-hidden gradient-overlay"> <img v-bind:src="product.image_url" v-bind:alt="product.name" class="img-fluid"/>
+          <router-link v-bind:to="{name: 'product_detail', params: {product_id: product.id}}" class="tile-link">
+          </router-link>
+        </div>
+        <div class="card-body d-flex align-items-center">
+          <div class="w-100">
+            <h6 class="card-title">
+              <router-link v-bind:to="{name: 'product_detail', params: {product_id: product.id}}" class="tile-link">
+              </router-link>
+            {{product.name}}
+            </h6>
+            <div class="d-flex card-subtitle mb-3">
+              <p class="flex-grow-1 mb-0 text-muted text-sm ellipsis">{{product.description}}</p>
+              <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i>
+              </p>
+            </div>
+            <p class="card-text text-muted"><span class="h4 text-primary">Php. {{product.price}} </span>person</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</template>
+
+<script>
+ export default {
+  name: 'product-card',
+  props: ['product'], 
+  data(){
+    return {
+      obj: this.product,    
+    } 
+  }
+}
+</script>
+
+<style scoped>
+    .ellipsis {
+    text-overflow: ellipsis;
+    /* Required for text-overflow to do anything */
+    white-space: nowrap;
+    overflow: hidden;
+  }
+</style>
+```
+
+### Step 8A.2: Create sample product data:
+In `myproject-consumer-web/src/assets`, create a folder called `json`:
+```bash
+$ cd src/assets
+$ mkdir json
+$ cd json
+```
+in the `json` folder, create a file called `boracay.json`:
+```bash
+$ cd touch boracay.json
+```
+
+Add the ff data: 
+```json
+[
+  {
+      "id":"4d196c50-aabf-4df2-afb3-fd21481259d6",
+      "name":"Boracay Sunset Cruise",
+      "description":"The Boracay sunset is a spectacular site to see and what better way than cruising on the ocean with an icy cold beverage!  Tour along White Beach and take in all the tropical sights and sounds while you enjoy the spectacular arrays of color of the Boracay sunset.  Stop off for a quick swim, stand up paddle and snorkel or chill out in tube before heading back to enjoy your dinner in paradise.",
+      "image_url":"https://cdn5.myboracayguide.com/2019/02/Boracay-Sunset-Cruise-00-400x267.jpg",
+      "price":"800"
+  },
+  {
+      "id":"6b3c211a-53f3-4c2a-a4f3-dc1fd5d42bfc",
+      "name":"Group Island Hopping",
+      "description":"Make new friends by joining a shared boat cruise where you will cruise the shores of Boracay in a traditional Banka boat. Visit the famous Puka shell beach and take a stroll on the beach, swim in the azure waters or just relax with a fresh coconut enjoying the sun. Stop off for a snorkel and see Boracay\u2019s beautiful tropical fish and corals.  Finish the trip with a delicious buffet lunch.",
+      "image_url":"https://cdn5.myboracayguide.com/2019/03/Boracay-Group-Island-Hopping-Boracay-Activities-01-400x267.jpg",
+      "price":"1500"
+  },
+  {
+      "id":"91e759dc-f385-42e1-8098-a44399bebce8",
+      "name":"Ultimate Cliff Jumping Island Hopping Adventure",
+      "description":"Experience a day of fun on Magic Island and have the thrill of a lifetime with 5 different levels of cliff jumping. Relax and swim or go snorkeling around the Island.",
+      "image_url":"https://cdn5.myboracayguide.com/2016/06/Island-Hopping-Boracay-Activities-400x267-400x267.jpg",
+      "price":"2200"
+  },
+  {
+      "id":"2178bb44-32f1-4d22-bc95-05cd039a3067",
+      "name":"4 Hour Private Boracay Island Hopping Package",
+      "description":"Your Boracay adventure experience will not be complete without this trip! The island is home to more than a dozen undeveloped beaches, turquoise waters and colorful coral reefs! Feast your eyes on the amazing scenery, snorkel and get a glimpse of the thriving sea life!The boat trip includes stopover at some amazing places in Boracay where you can go snorkeling and swimming. Snorkeling gears will be provided for you.",
+      "image_url":"https://cdn5.myboracayguide.com/2016/09/Private-Island-Hopping-Boracay-Activity-8-400x267.jpg",
+      "price":"2900"
+  },
+  {
+      "id":"8f086c95-df7d-4914-98b5-e3378663e967",
+      "name":"Paraw Sailing",
+      "description":"Paraw Sailing is a local sail boat\u00a0activity. The boats use two outriggers and two sails. Experience the traditional way of sailing and discover the best sites around the island, perfect for photography \u2013 though do note on days with heavier waves the water can kick up a bit (exciting!). If you schedule your activity for later in the afternoon you can take advantage of the incredible sunset while relaxing on the boat for half an hour. Sea sickness? usually not a problem as the boats tend to stay closer into the shore and cut through the waves very well. \u00a0Paraw sailing around Boracay is probably a really good way to ease yourself into the sea and find out how much you like it.",
+      "image_url":"https://cdn5.myboracayguide.com/2016/03/Paraw-Sailing-Boracay-Activities-400x267.jpg",
+      "price":"3000"
+  },
+  {
+      "id":"6aa0ed0f-ddcc-42ff-8059-eea5ee40496d",
+      "name":"Parasailing",
+      "description":"Parasailing on Boracay is a great experience for a few adventure-minded individuals. Imagine being whisked into the sky while strapped in a seat covered by a colorful parachute! This is a popular activity where riders can view the beautiful shoreline of white beach from above while being pulled by a boat. This is a fun and exciting experience for those who love heights and want a birds-eye-view of the whole island. Up to two guests can occupy the same canopy.",
+      "image_url":"https://cdn5.myboracayguide.com/2016/04/Parasailing-Boracay-Activities-400x267.jpg",
+      "price":"2500"
+  },
+  {
+      "id":"c5f7878a-70cd-49da-9a24-ca0b86beb71c",
+      "name":"Boracay Pub Crawl",
+      "description":"Boracay Pub Crawl is the biggest, hippest and most happening bar-hopping event on Boracay! Meet amazing people from around the world, play get to know you games to break the ice, drink welcome shooters with your free shooter glass, get discounts on drinks, free entrance in bars, and wear your iconic pub crawl shirt! This is definitely one of the most awesome ways to experience the island\u2019s famous nightlife and also a great chance to take pictures. Boracay PubCrawl is the first of its kind to offer both travelers and locals the chance to party as one big, wild group. Discover the best night spots and make new friends over the course of a great evening out.",
+      "image_url":"https://cdn5.myboracayguide.com/2016/04/Boracay-Pub-Crawl-Activities-400x267.jpeg",
+      "price":"990"
+  },
+  {
+      "id":"0c3b6e63-9a92-4662-8a44-d3d9adc334c2",
+      "name":"Sunset Party Cruise Booty",
+      "description":"Aside from its amazing parties, Boracay is world famous for its breath-taking sunset. Hop on the island\u2019s 40 passenger party vessel, Booty, and jam with other travelers as you listen to great music! Definitely a memorable party at sundown!",
+      "image_url":"https://cdn5.myboracayguide.com/2016/04/Sunset-Party-Cruise-Booty-400x267.jpg",
+      "price":"2500"
+  },
+  {
+      "id":"36b74f58-084d-4b67-9daa-a046296604e6",
+      "name":"Ariels Point",
+      "description":"Let us help you experience everything good about Ariel\u2019s Point. Many guests come for the 5 different levels of cliff diving; the cliff diving levels are generally suitable for all types of adventurers. Those that want a great photo in a naturally beautiful place\u00a0while having a bit of a jump, won\u2019t be disappointed or terrified. Similarly, hardcore guests that want to jump from the top of a volcanically hewn outcrop into the deep blue arms of the sea won\u2019t be let down either. \u00a0Ariel\u2019s Point is located near the rustic fishing town of Buruanga, a half hour boat ride from Boracay\u2019s white beach. Gather with other travelers as you snorkel, paddle in a native canoe, or just laze under the sun while enjoying the uniquely rough, &\u00a0comfortable environment.",
+      "image_url":"https://cdn5.myboracayguide.com/2016/04/Ariels-Point-Boracay-Activities-1-400x267.jpg",
+      "price":"2800"
+  },
+  {
+      "id":"420cb55b-99cb-45b1-a860-d079cc1d2cea",
+      "name":"Stand Up Paddle on the Beach",
+      "description":"Experience how it\u2019s like to glide on the water surface from a Stand-Up Paddle Board. Paddling on a Stand-Up Paddle board for lets you commune with the current of the sea, either by standing up, kneeling or sitting down. It also provides a good exercise to maintain your balance and to strengthen your core, while you paddle into the water to workout your arms and upper body.",
+      "image_url":"https://cdn5.myboracayguide.com/2016/10/Stand-Up-Paddle-Boracay-Activity-01-400x267.jpg",
+      "price":"1000"
+  },
+  {
+      "id":"778bad3e-6fb4-4deb-8ff2-120bcbc5f27e",
+      "name":"Segway Tours",
+      "description":"Surrender to the freedom of gliding along Boracay\u2019s scenic spots on a Segway. For an exhilarating hour, you will be able to feel a gratifying oneness with the Segway and surrender to its awesome mechanism, giving you a relaxed and confident exploration into the island\u2019s diverse sceneries. This eco-freindly joyride kicks off with a short video presentation at its booth inside the panoramic grounds of Fairways and Blue Water. A routine trial thence follows, and after, the actual Segway ride takes place. The first leg encompasses a comfortable descent on the pavement, where beginners",
+      "image_url":"https://cdn5.myboracayguide.com/2016/08/Segway-Tours-Boracay-Activities-01-400x267.jpg",
+      "price":"2300"
+  },
+  {
+      "id":"7c72e357-7228-4b6c-bdd0-d9aab71512ac",
+      "name":"Helicopter Beach Tour",
+      "description":"Boracay Helicopter Beach Tour \u2013 It\u2019s never been better. Have a 10-minute adrenaline-filled experience of touring the island by helicopter! See Boracay\u2019s white sands, blue green waters, and reefs from above! This is the ultimate chance to snap birds-eye-view photographs!",
+      "image_url":"https://cdn5.myboracayguide.com/2010/01/Boracay-Helicopter-Tours-Boracay-Activity-07-400x267.jpg",
+      "price":"5200"
+  }
+]
+```
+
+### Step 8A.2 `Display Product` Component
+
+In  `myproject-consumer-web/src/components/products`, create a file called `DisplayProduct.vue`:
+
+Add ff code snippet: 
+```html
+<template>
+  <div class="display-catalog-2">
+  <h1></h1>
+  <section class="py-6 bg-gray-100"> 
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-8">
+            <p class="subtitle text-secondary">Hurry up, these are expiring soon.</p>
+            <h2>Last minute deals</h2>
+          </div>
+        </div>
+        <swiper v-bind:options="swiperOption">
+            <swiper-slide class="h-auto px-2" v-for="product in products" v-bind:key="product.id">
+              <ProductCard v-bind:product="product"/>
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
+      </div>
+    </section>    
+  </div>
+</template>
+
+<script>
+
+  import ProductCard from '@/components/products/ProductCard.vue'
+  import data from '@/assets/json/boracay.json'
+  export default {
+    name: "display-product",
+    components: {
+      ProductCard
+    },
+    data() {
+      return {
+        products: data, 
+        swiperOption: {
+          slidesPerView: 3,
+          spaceBetween: 20,
+          roundLengths :true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            dynamicBullets: true
+          },
+          loop: true,
+          breakpoints: {  
+             1200 :{  
+               slidesPerView: 3
+            },
+             991 :{  
+              slidesPerView : 2
+            },
+             565 :{  
+              slidesPerView :1
+            }
+         },
+        }
+      }
+    }
+  }
+</script>
+```
+**Explanations:**
+Notice ff line in the snippet above: 
+```js
+import data from '@/assets/json/boracay.json'
+```
+we are importing the json `data` from `boracay.json` and equating this to a variable in in the `data`  called `products`
+
+this will return to us a list of all products.
+```js
+ data() {
+      return {
+        products: data, 
+      ....
+```
+
+we then use the `v-for`  directive to loop through each product in the products list as seen in this part:
+
+```html
+<swiper-slide class="h-auto px-2" v-for="product in products" v-bind:key="product.id">
+  <ProductCard v-bind:product="product"/>
+</swiper-slide>
+```
+this will then create an individual `ProductCard` component for each element in the list, where `ProductCard` will take the individual `product` as a `prop` as seen in this snippet in `ProductCard.vue`
+
+```html
+<ProductCard v-bind:product="product"/>
+```
+*the value of product is binded with the product in the `products` list 
+
+### Step 8A.3: Add  `Display Product` Component into `Home.vue`
+
+In `myproject-consumer-web/src/views/Home.vue`
+Add the ff snippets:
+
+In `<template>` 
+```html
+...START...
+<DisplayProducts/>
+...END...
+```
+In `<scripts>` 
+```html
+<script>
+...START...
+import DisplayProducts from '@/components/products/DisplayProduct.vue'
+...END...
+export default {
+  name: 'home',
+  components: {
+  ...START...
+    DisplayProducts,
+    ...END...
+  }
+}
+</script>
+```
+
+Final Version of ```Home.vue```:
+```html
+<template>
+  <div class="home">
+    <SearchBar/>
+    <Services/>
+    <DisplayCatalog1/>
+    <DisplayProducts/>
+    <PhotoWheel/> 
+  </div>
+</template>
+<script>
+// @ is an alias to /src
+import SearchBar from '@/components/home/SearchBar.vue'
+import Services from '@/components/home/Services.vue'
+import DisplayCatalog1 from '@/components/home/DisplayCatalog1.vue'
+import DisplayProducts from '@/components/products/DisplayProduct.vue'
+import PhotoWheel from '@/components/home/PhotoWheel.vue'
+
+export default {
+  name: 'home',
+  components: {
+    SearchBar, 
+    Services,
+    DisplayCatalog1,
+    DisplayProducts,
+    PhotoWheel
+  }
+}
+</script>
+```
+
+### Step 8.3: Set up `Products.vue` Component
 In  `myproject-consumer-web/src/views`  create a file called `Products.vue`
 Add the following code:
 
@@ -1177,55 +1487,6 @@ Add the following code:
             ProductIndex
         }
     }
-</script>
-
-```
-
-### Step 8.2: Set up `products` Folder
-In  `myproject-consumer-web/src/components`  folder create a folder called  `products`
-
-```bash
-$ cd src/components
-$ mkdir products
-$ cd products
-```
-
-### Step 8.3: Product `index` Component
-Create a product index page by re-using `<DisplayCatalog2/>` and `<DisplayCatalog3/>` 
-
-In `myproject-consumer-web/src/views/products`
-create a file called : `index.vue`
-
-Add the following code:
-```html
-<template>
-  <div class="products">
-    <h1>Product Catalog</h1>
-    <DisplayCatalog2/>
-    <DisplayCatalog3/>
-  </div>
-</template>
-
-<style scoped>
-  h1 {
-    margin-top: 100px;
-    text-align: center;
-  } 
-</style>
-
-<script type="text/javascript">
-import DisplayCatalog2 from '@/components/DisplayCatalog2.vue'
-import DisplayCatalog3 from '@/components/DisplayCatalog3.vue'
-
-
-export default {
-name: 'products',
-  components: {
-    DisplayCatalog2,
-    DisplayCatalog3
-  }
-}
-
 </script>
 ```
 
