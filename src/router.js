@@ -111,6 +111,6 @@ export default new Router({
       component: () => import('./components/profile/MyProfile.vue'),
       props: true,
 
-    }
+    },
   ],
 });
